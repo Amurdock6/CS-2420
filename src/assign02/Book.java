@@ -1,5 +1,6 @@
 package assign02;
 
+
 /**
  * This class represents a book, in which the ISBN, author, and title cannot
  * change once the book is created.  Note that ISBNs are unique.
@@ -64,8 +65,19 @@ public class Book {
 	 */
 	public boolean equals(Object other) {
 		// FILL IN -- do not return false unless appropriate
+		if (!(other instanceof Book)) {
+			return false;
+		} else if (other instanceof Book) {
+			Book b = (Book) other;
+			if (b.isbn == this.isbn && b.author == this.author && b.title == this.title) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 
-		return false;
 	}
 
 	/**

@@ -1,16 +1,15 @@
 package assign02;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 /**
  * This class contains tests for Library.
@@ -78,10 +77,31 @@ public class LibraryTester {
 		assertEquals(new Book(9780330351690L, "Jon Krakauer", "Into the Wild"), booksCheckedOut.get(0));
 		assertEquals("Jane Doe", booksCheckedOut.get(0).getHolder());
 	}
+	
+	@Test
+	public void testSmallLibraryLookup3BooksCheckedOut() {
+		// Checks out 3 books
+		smallLib.checkout(9780374292799L, "Jane Doe", 1, 1, 2008);
+		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
+		smallLib.checkout(9780446580342L, "Jane Doe", 1, 1, 2008);
+		
+		// Checks to see how many books Jane Doe has checked out
+		ArrayList<LibraryBook> booksCheckedOut = smallLib.lookup("Jane Doe");
+		
+		assertEquals("Jane Doe", booksCheckedOut.get(0).getHolder());
+		assertEquals("Jane Doe", booksCheckedOut.get(1).getHolder());
+		assertEquals("Jane Doe", booksCheckedOut.get(2).getHolder());
+	}
 
 	@Test
 	public void testSmallLibraryCheckout() {
 		assertTrue(smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008));
+	}
+	
+	@Test
+	public void testSmallLibraryCheckOutTwice() {
+		assertTrue(smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008));
+		assertFalse(smallLib.checkout(9780330351690L, "Jone Doe", 1, 1, 2008));
 	}
 
 	@Test
@@ -89,9 +109,32 @@ public class LibraryTester {
 		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
 		assertTrue(smallLib.checkin(9780330351690L));
 	}
+	
+	@Test
+	public void testSmallLibraryCheckInISBNMismatchedISBN() {
+		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
+		assertFalse(smallLib.checkin(223342111L));
+	}
+	
+	@Test
+	public void testSmallLibraryCheckInISBNFail() {
+		smallLib.checkout(69, "Jane Doe", 2, 4, 2003);
+		assertFalse(smallLib.checkin(9780330351690L));
+	}
 
 	@Test
 	public void testSmallLibraryCheckinHolder() {
 		assertFalse(smallLib.checkin("Jane Doe"));
+	}
+	
+	@Test
+	public void testSmallLibraryCheckinRealHolder() {
+		smallLib.checkout(9780330351690L, "John Doe", 1, 1, 2009);
+		assertTrue(smallLib.checkin("John Doe"));
+	}
+	
+	@Test
+	public void testHolderNotInLibrary() {
+		assertFalse(smallLib.checkin("John Doe"));
 	}
 }

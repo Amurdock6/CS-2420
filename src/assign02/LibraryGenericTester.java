@@ -2,11 +2,10 @@ package assign02;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterEach;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 /**
  * This class contains tests for LibraryGeneric.
@@ -15,7 +14,6 @@ import java.util.ArrayList;
  * @version September 2, 2020
  */
 public class LibraryGenericTester {
-	
 	private LibraryGeneric<String> nameLib;  // library that uses names to identify patrons (holders)
 	private LibraryGeneric<PhoneNumber> phoneLib;  // library that uses phone numbers to identify patrons
 	

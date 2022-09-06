@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class Library {
 
 	private ArrayList<LibraryBook> library;
+	private ArrayList<LibraryBook> holderBooks;
 
 	/**
 	 * Creates an empty library.
@@ -115,6 +117,11 @@ public class Library {
 	 */
 	public String lookup(long isbn) {
 		// FILL IN -- do not return null unless appropriate
+		for (int i = 0; i < library.size(); i++) {
+			if (isbn == library.get(i).getIsbn()) {
+				return library.get(i).getHolder();
+			}
+		}
 		return null;
 	}
 
@@ -127,7 +134,15 @@ public class Library {
 	 */
 	public ArrayList<LibraryBook> lookup(String holder) {
 		// FILL IN -- do not return null
-		return null;
+		holderBooks = new ArrayList<LibraryBook>();
+		
+		for (int i = 0; i < library.size(); i++) {
+			if (holder == library.get(i).getHolder()) {
+				holderBooks.add(library.get(i));
+			}
+		}
+		
+		return holderBooks;
 	}
 
 	/**
@@ -149,6 +164,22 @@ public class Library {
 	 */
 	public boolean checkout(long isbn, String holder, int month, int day, int year) {
 		// FILL IN -- do not return false unless appropriate
+		
+		// Checks to see if the book is already checked out
+		String isBookCheckedOut = lookup(isbn);
+
+		// Checks to see if ISBN exist and if it does it will check out the book
+		for (int i = 0; i < library.size(); i++) {
+			if (isbn == library.get(i).getIsbn()) {
+				if (isBookCheckedOut != null)
+					return false;
+
+				else
+					library.get(i).bookCheckOut(isbn, holder, month, day, year);
+				return true;
+			}
+
+		}
 		return false;
 	}
 
@@ -165,6 +196,22 @@ public class Library {
 	 */
 	public boolean checkin(long isbn) {
 		// FILL IN -- do not return false unless appropriate
+		
+		// Checks to see if the book is already checked in
+		String isBookCheckedIn = lookup(isbn);
+
+		// Checks to see if ISBN exist and if it does it will check in the book
+		for (int i = 0; i < library.size(); i++) {
+			if (isbn == library.get(i).getIsbn()) {
+				if (isBookCheckedIn == null)
+					return false;
+
+				else
+					library.get(i).bookCheckIn(isbn, isBookCheckedIn);
+				return true;
+			}
+
+		}
 		return false;
 	}
 
@@ -180,6 +227,14 @@ public class Library {
 	 */
 	public boolean checkin(String holder) {
 		// FILL IN -- do not return false unless appropriate
+		
+		for (int i = 0; i < library.size(); i++) {
+			if (holder == library.get(i).getHolder()) {
+				library.get(i).bookCheckIn(library.get(i).getIsbn(), holder);
+				return true;
+			}
+		}
+		
 		return false;
 	}
 }

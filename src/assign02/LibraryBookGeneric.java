@@ -11,13 +11,16 @@ package assign02;
 
 import java.util.GregorianCalendar;
 
-public class LibraryBookGeneric<Type> extends Book {
+public class LibraryBookGeneric<Type> extends Book 
+{
 
-
+	// add a book holder and a due date
 	private Type holder;
 	private GregorianCalendar duedate;
 
-	public LibraryBookGeneric(long isbn, String author, String title){
+	// constructor for library book
+	public LibraryBookGeneric(long isbn, String author, String title)
+	{
 		super(isbn, author, title);
 	}
 	
@@ -25,7 +28,9 @@ public class LibraryBookGeneric<Type> extends Book {
 	/*
 	 * Holder and due date should be set to null if checked in
 	 */
-	public Object bookCheckIn(long isbn, Type holder) {
+	public Object bookCheckIn(long isbn, Type holder)
+	{
+		// set holder and due date to null
 		this.holder.equals(null) ;
 		this.duedate.equals(null);
 		return this;
@@ -35,7 +40,9 @@ public class LibraryBookGeneric<Type> extends Book {
 	/*
 	 * Holder and due date should be set if checked out
 	 */
-	public Object bookCheckOut(long isbn, Type newHolder, int month, int day, int year) {
+	public Object bookCheckOut(long isbn, Type newHolder, int month, int day, int year)
+	{
+		// set holder and due date equal to the input information
 		this.holder = newHolder;
 		this.duedate = new GregorianCalendar(year, month, day);
 		return this;
@@ -45,7 +52,8 @@ public class LibraryBookGeneric<Type> extends Book {
 	/*
 	 * Returns the current holder for the book
 	 */
-	public Type getHolder() {
+	public Type getHolder()
+	{
 		return this.holder;
 	}
 	
@@ -53,7 +61,8 @@ public class LibraryBookGeneric<Type> extends Book {
 	/*
 	 * Returns the due date for the book
 	 */
-	public GregorianCalendar getDueDate() {
+	public GregorianCalendar getDueDate()
+	{
 		return this.duedate;
 	}
 }

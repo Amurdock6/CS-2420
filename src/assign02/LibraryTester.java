@@ -17,12 +17,14 @@ import org.junit.jupiter.api.Test;
  * @author Erin Parker and Todd Oldham and Alex Murdock
  * @version September 6, 2022
  */
-public class LibraryTester {
+public class LibraryTester 
+{
 
 	private Library emptyLib, smallLib, mediumLib;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception 
+	{
 		emptyLib = new Library();
 		
 		smallLib = new Library();
@@ -36,39 +38,46 @@ public class LibraryTester {
 	}
 
 	@Test
-	public void testEmptyLookupISBN() {
+	public void testEmptyLookupISBN() 
+	{
 		assertNull(emptyLib.lookup(978037429279L));
 	}
 	
 	@Test
-	public void testEmptyLookupHolder() {
+	public void testEmptyLookupHolder() 
+	{
 		ArrayList<LibraryBook> booksCheckedOut = emptyLib.lookup("Jane Doe");
 		assertNotNull(booksCheckedOut);
 		assertEquals(0, booksCheckedOut.size());
 	}
 	
 	@Test
-	public void testEmptyCheckout() {
+	public void testEmptyCheckout() 
+	{
 		assertFalse(emptyLib.checkout(978037429279L, "Jane Doe", 1, 1, 2008));
 	}
 
 	@Test
-	public void testEmptyCheckinISBN() {
+	public void testEmptyCheckinISBN() 
+	{
 		assertFalse(emptyLib.checkin(978037429279L));
 	}
 	
 	@Test
-	public void testEmptyCheckinHolder() {
+	public void testEmptyCheckinHolder() 
+	{
 		assertFalse(emptyLib.checkin("Jane Doe"));
 	}
 
 	@Test
-	public void testSmallLibraryLookupISBN() {
+	public void testSmallLibraryLookupISBN() 
+	{
 		assertNull(smallLib.lookup(9780330351690L));
 	}
 	
 	@Test
-	public void testSmallLibraryLookupHolder() {
+	public void testSmallLibraryLookupHolder() 
+	{
 		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
 		ArrayList<LibraryBook> booksCheckedOut = smallLib.lookup("Jane Doe");
 		
@@ -79,7 +88,8 @@ public class LibraryTester {
 	}
 	
 	@Test
-	public void testSmallLibraryLookup3BooksCheckedOut() {
+	public void testSmallLibraryLookup3BooksCheckedOut() 
+	{
 		// Checks out 3 books
 		smallLib.checkout(9780374292799L, "Jane Doe", 1, 1, 2008);
 		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
@@ -94,47 +104,55 @@ public class LibraryTester {
 	}
 
 	@Test
-	public void testSmallLibraryCheckout() {
+	public void testSmallLibraryCheckout() 
+	{
 		assertTrue(smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008));
 	}
 	
 	@Test
-	public void testSmallLibraryCheckOutTwice() {
+	public void testSmallLibraryCheckOutTwice() 
+	{
 		assertTrue(smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008));
 		assertFalse(smallLib.checkout(9780330351690L, "Jone Doe", 1, 1, 2008));
 	}
 
 	@Test
-	public void testSmallLibraryCheckinISBN() {
+	public void testSmallLibraryCheckinISBN() 
+	{
 		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
 		assertTrue(smallLib.checkin(9780330351690L));
 	}
 	
 	@Test
-	public void testSmallLibraryCheckInISBNMismatchedISBN() {
+	public void testSmallLibraryCheckInISBNMismatchedISBN() 
+	{
 		smallLib.checkout(9780330351690L, "Jane Doe", 1, 1, 2008);
 		assertFalse(smallLib.checkin(223342111L));
 	}
 	
 	@Test
-	public void testSmallLibraryCheckInISBNFail() {
+	public void testSmallLibraryCheckInISBNFail() 
+	{
 		smallLib.checkout(69, "Jane Doe", 2, 4, 2003);
 		assertFalse(smallLib.checkin(9780330351690L));
 	}
 
 	@Test
-	public void testSmallLibraryCheckinHolder() {
+	public void testSmallLibraryCheckinHolder() 
+	{
 		assertFalse(smallLib.checkin("Jane Doe"));
 	}
 	
 	@Test
-	public void testSmallLibraryCheckinRealHolder() {
+	public void testSmallLibraryCheckinRealHolder() 
+	{
 		smallLib.checkout(9780330351690L, "John Doe", 1, 1, 2009);
 		assertTrue(smallLib.checkin("John Doe"));
 	}
 	
 	@Test
-	public void testHolderNotInLibrary() {
+	public void testHolderNotInLibrary() 
+	{
 		assertFalse(smallLib.checkin("John Doe"));
 	}
 }

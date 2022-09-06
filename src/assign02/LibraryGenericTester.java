@@ -13,12 +13,14 @@ import org.junit.jupiter.api.Test;
  * @author Erin Parker and Todd Oldham and Alex Murdock
  * @version September 6, 2022
  */
-public class LibraryGenericTester {
+public class LibraryGenericTester 
+{
 	private LibraryGeneric<String> nameLib;  // library that uses names to identify patrons (holders)
 	private LibraryGeneric<PhoneNumber> phoneLib;  // library that uses phone numbers to identify patrons
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception 
+	{
 		nameLib = new LibraryGeneric<String>();
 		nameLib.add(9780374292799L, "Thomas L. Friedman", "The World is Flat");
 		nameLib.add(9780330351690L, "Jon Krakauer", "Into the Wild");
@@ -31,14 +33,16 @@ public class LibraryGenericTester {
 	}
 	
 	@Test
-	public void testNameLibCheckout() {
+	public void testNameLibCheckout() 
+	{
 		String patron = "Jane Doe";
 		assertTrue(nameLib.checkout(9780330351690L, patron, 1, 1, 2008));
 		assertTrue(nameLib.checkout(9780374292799L, patron, 1, 1, 2008));
 	}
 
 	@Test
-	public void testNameLibLookup() {
+	public void testNameLibLookup() 
+	{
 		String patron = "Jane Doe";
 		nameLib.checkout(9780330351690L, patron, 1, 1, 2008);
 		nameLib.checkout(9780374292799L, patron, 1, 1, 2008);
@@ -53,7 +57,8 @@ public class LibraryGenericTester {
 	}
 	
 	@Test
-	public void testNameLibCheckin() {
+	public void testNameLibCheckin() 
+	{
 		String patron = "Jane Doe";
 		nameLib.checkout(9780330351690L, patron, 1, 1, 2008);
 		nameLib.checkout(9780374292799L, patron, 1, 1, 2008);
@@ -68,7 +73,8 @@ public class LibraryGenericTester {
 	}
 
 	@Test
-	public void testPhoneLibLookup() {
+	public void testPhoneLibLookup() 
+	{
 		PhoneNumber patron = new PhoneNumber("801.555.1234");
 		phoneLib.checkout(9780330351690L, patron, 1, 1, 2008);
 		phoneLib.checkout(9780374292799L, patron, 1, 1, 2008);
@@ -83,7 +89,8 @@ public class LibraryGenericTester {
 	}
 
 	@Test
-	public void testPhoneLibCheckin() {
+	public void testPhoneLibCheckin() 
+	{
 		PhoneNumber patron = new PhoneNumber("801.555.1234");
 		phoneLib.checkout(9780330351690L, patron, 1, 1, 2008);
 		phoneLib.checkout(9780374292799L, patron, 1, 1, 2008);

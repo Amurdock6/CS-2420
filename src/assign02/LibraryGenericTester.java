@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * This class contains tests for LibraryGeneric.
  * 
- * @author Erin Parker and ??
+ * @author Erin Parker and Todd Oldham and Alex Murdock
  * @version September 2, 2020
  */
 public class LibraryGenericTester {

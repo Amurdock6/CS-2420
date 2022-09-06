@@ -1,5 +1,14 @@
 package assign02;
 
+/**
+ * This class represents a library book, which extends book, in which the ISBN, author, and title cannot
+ * change once the book is created.  Note that ISBNs are unique.
+ * A holder and due date are also added to the book
+ * 
+ * @author Todd Oldham and Alex Murdock
+ * @version September 6, 2022
+ */
+
 import java.util.GregorianCalendar;
 
 public class LibraryBook extends Book {

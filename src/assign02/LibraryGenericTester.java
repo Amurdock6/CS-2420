@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * This class contains tests for LibraryGeneric.
  * 
  * @author Erin Parker and Todd Oldham and Alex Murdock
- * @version September 2, 2020
+ * @version September 6, 2022
  */
 public class LibraryGenericTester {
 	private LibraryGeneric<String> nameLib;  // library that uses names to identify patrons (holders)

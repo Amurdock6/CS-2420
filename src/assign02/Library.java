@@ -11,7 +11,7 @@ import java.util.Scanner;
  * This class represents a library, which is a collection of library books.
  * 
  * @author Erin Parker and Todd Oldham and Alex Murdock
- * @version September 2, 2020
+ * @version September 6, 2022
  */
 public class Library {
 

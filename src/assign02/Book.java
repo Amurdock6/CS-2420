@@ -6,7 +6,7 @@ package assign02;
  * change once the book is created.  Note that ISBNs are unique.
  * 
  * @author Erin Parker and Todd Oldham and Alex Murdock
- * @version September 2, 2020
+ * @version September 6, 2022
  */
 public class Book {
 

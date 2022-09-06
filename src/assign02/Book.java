@@ -8,7 +8,8 @@ package assign02;
  * @author Erin Parker and Todd Oldham and Alex Murdock
  * @version September 6, 2022
  */
-public class Book {
+public class Book 
+{
 
 	private long isbn;
 
@@ -23,7 +24,8 @@ public class Book {
 	 * @param author
 	 * @param title
 	 */
-	public Book(long isbn, String author, String title) {
+	public Book(long isbn, String author, String title) 
+	{
 		this.isbn = isbn;
 		this.author = author;
 		this.title = title;
@@ -34,7 +36,8 @@ public class Book {
 	 * 
 	 * @return the author
 	 */
-	public String getAuthor() {
+	public String getAuthor() 
+	{
 		return this.author;
 	}
 
@@ -43,7 +46,8 @@ public class Book {
 	 * 
 	 * @return the ISBN
 	 */
-	public long getIsbn() {
+	public long getIsbn() 
+	{
 		return this.isbn;
 	}
 
@@ -52,7 +56,8 @@ public class Book {
 	 * 
 	 * @return the title
 	 */
-	public String getTitle() {
+	public String getTitle() 
+	{
 		return this.title;
 	}
 
@@ -63,18 +68,36 @@ public class Book {
 	 * @param other - the object begin compared with this book
 	 * @return true if other object is a Book type and is equal to this book, false otherwise
 	 */
-	public boolean equals(Object other) {
+	public boolean equals(Object other)
+	{
 		// FILL IN -- do not return false unless appropriate
-		if (!(other instanceof Book)) {
+		// If other isn't a book return false
+		if (!(other instanceof Book)) 
+		{
 			return false;
-		} else if (other instanceof Book) {
+		} 
+		
+		// if other is a book check to see if it is the same author title and isbn
+		else if (other instanceof Book) 
+		{
+			// set other as a book
 			Book b = (Book) other;
-			if (b.isbn == this.isbn && b.author == this.author && b.title == this.title) {
+			
+			// if book is equal return true
+			if (b.isbn == this.isbn && b.author == this.author && b.title == this.title) 
+			{
 				return true;
-			} else {
+			}
+			
+			else 
+			{
+				// book is not equal
 				return false;
 			}
-		} else {
+		}
+		
+		else 
+		{
 			return false;
 		}
 
@@ -83,7 +106,8 @@ public class Book {
 	/**
 	 * Returns a textual representation of this book.
 	 */
-	public String toString() {
+	public String toString() 
+	{
 		return isbn + ", " + author + ", \"" + title + "\"";
 	}
 }

@@ -11,12 +11,16 @@ package assign02;
 
 import java.util.GregorianCalendar;
 
-public class LibraryBook extends Book {
+public class LibraryBook extends Book 
+{
 	
+	// create holder and due date for library books
 	private String holder;
 	private GregorianCalendar duedate;
-
-	public LibraryBook(long isbn, String author, String title){
+	
+	// constructor for library book
+	public LibraryBook(long isbn, String author, String title)
+	{
 		super(isbn, author, title);
 	}
 	
@@ -24,7 +28,9 @@ public class LibraryBook extends Book {
 	/*
 	 * Holder and due date should be set to null if checked in
 	 */
-	public Object bookCheckIn(long isbn, String holder) {
+	public Object bookCheckIn(long isbn, String holder) 
+	{
+		// set holder and due date to null
 		this.holder.equals(null) ;
 		this.duedate.equals(null);
 		return this;
@@ -34,7 +40,9 @@ public class LibraryBook extends Book {
 	/*
 	 * Holder and due date should be set if checked out
 	 */
-	public Object bookCheckOut(long isbn, String newHolder, int month, int day, int year) {
+	public Object bookCheckOut(long isbn, String newHolder, int month, int day, int year) 
+	{
+		// set holder and due date based on given information
 		this.holder = newHolder;
 		this.duedate = new GregorianCalendar(year, month, day);
 		return this;
@@ -44,7 +52,8 @@ public class LibraryBook extends Book {
 	/*
 	 * Returns the current holder for the book
 	 */
-	public String getHolder() {
+	public String getHolder() 
+	{
 		return this.holder;
 	}
 	
@@ -52,7 +61,8 @@ public class LibraryBook extends Book {
 	/*
 	 * Returns the due date for the book
 	 */
-	public GregorianCalendar getDueDate() {
+	public GregorianCalendar getDueDate() 
+	{
 		return this.duedate;
 	}
 }

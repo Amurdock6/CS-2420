@@ -275,11 +275,16 @@ public class LibraryGeneric<Type>
 		// Go through all the books in the library
 		for (int i = 0; i < library.size(); i++) 
 		{
-			// check if the specified holder has the book
-			if (holder == library.get(i).getHolder()) 
+			// Checks if the holder is in the library
+			if (holder == library.get(i).getHolder())
 			{
-				// check the book in
-				library.get(i).bookCheckIn(library.get(i).getIsbn(), holder);
+				// Goes through all the books in the library again and checks in all the books with that holder
+				for (int j = 0; j < library.size(); j++)
+				{
+					if(holder == library.get(j).getHolder())
+						library.get(j).bookCheckIn(library.get(j).getIsbn(), holder);
+				}
+				
 				return true;
 			}
 		}

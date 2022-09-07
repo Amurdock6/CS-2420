@@ -251,7 +251,7 @@ public class Library
 	}
 
 	/**
-	 * Unsets the holder and due date for all library books checked out be the
+	 * Unsets the holder and due date for all library books checked out by the
 	 * specified holder.
 	 * 
 	 * If no books with the specified holder are in the library, returns false;
@@ -266,11 +266,16 @@ public class Library
 		// Go through all the books in the library
 		for (int i = 0; i < library.size(); i++) 
 		{
-			// Checks if the holder matches the provided holder
+			// Checks if the holder is in the library
 			if (holder == library.get(i).getHolder())
 			{
-				// Checks in the book
-				library.get(i).bookCheckIn(library.get(i).getIsbn(), holder);
+				// Goes through all the books in the library again and checks in all the books with that holder
+				for (int j = 0; j < library.size(); j++)
+				{
+					if(holder == library.get(j).getHolder())
+						library.get(j).bookCheckIn(library.get(j).getIsbn(), holder);
+				}
+				
 				return true;
 			}
 		}

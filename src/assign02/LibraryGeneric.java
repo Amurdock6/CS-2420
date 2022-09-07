@@ -282,13 +282,15 @@ public class LibraryGeneric<Type>
 				for (int j = 0; j < library.size(); j++)
 				{
 					if(holder == library.get(j).getHolder())
+					{
 						library.get(j).bookCheckIn(library.get(j).getIsbn(), holder);
+						System.out.println("Book Checked in");
+					}
 				}
 				
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	

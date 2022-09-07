@@ -31,8 +31,8 @@ public class LibraryBookGeneric<Type> extends Book
 	public Object bookCheckIn(long isbn, Type holder)
 	{
 		// set holder and due date to null
-		this.holder.equals(null) ;
-		this.duedate.equals(null);
+		this.holder = null;
+		this.duedate = null;
 		return this;
 	}
 	

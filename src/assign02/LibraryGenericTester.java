@@ -64,6 +64,20 @@ public class LibraryGenericTester
 		nameLib.checkout(9780374292799L, patron, 1, 1, 2008);
 		assertTrue(nameLib.checkin(patron));
 	}
+	
+	@Test
+	public void testMultipleCheckin()
+	{
+		String patron = "Jane Doe";
+		// check out three books
+		nameLib.checkout(9780330351690L, patron, 1, 1, 2008);
+		nameLib.checkout(9780374292799L, patron, 1, 1, 2008);
+		nameLib.checkout(9780446580342L, patron, 1, 1, 2008);
+		// all three should be checked in
+		assertTrue(nameLib.checkin(patron));
+		// no books are checked out
+		assertFalse(nameLib.checkin(patron));
+	}
 
 	@Test
 	public void testPhoneLibCheckout() {

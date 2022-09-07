@@ -340,7 +340,7 @@ public class LibraryGeneric<Type>
 	 * 
 	 * 1. Finds the smallest item in the list. 
 	 * 2. Swaps the smallest item with the first item in the list. 
-	 * 3. Reconsiders the list be the remaining unsorted portion (second item to Nth item) and 
+	 * 3. Reconsiders the list by the remaining unsorted portion (second item to Nth item) and 
 	 *    repeats steps 1, 2, and 3.
 	 */
 	private static <ListType> void sort(ArrayList<ListType> list, Comparator<ListType> c) 

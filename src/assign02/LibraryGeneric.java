@@ -319,10 +319,27 @@ public class LibraryGeneric<Type>
 	public ArrayList<LibraryBookGeneric<Type>> getOverdueList(int month, int day, int year) 
 	{
 		// FILL IN -- do not return null
+		GregorianCalendar dateDue = new GregorianCalendar(month, day, year);
+		// Create a new array list
 		ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
-//		libraryCopy.addAll(libraryCopy)
 		
-		return null;
+		// add a new comparator
+		OrderByDueDate comparator = new OrderByDueDate();
+		
+		// Run through library and find all the overdue books
+		for (int i = 0; i < library.size(); i++)
+		{
+			// If the time in milliseconds of the due date is less than the given date then the book is over due
+			// and it's added to the list
+			if(library.get(i).getDueDate().getTimeInMillis() < dateDue.getTimeInMillis())
+				libraryCopy.add(library.get(i));
+		}
+		
+		// sort the due dates by the oldest date
+		sort(libraryCopy, comparator);
+		
+		return libraryCopy;
+
 	}
 
 	/**
@@ -383,7 +400,7 @@ public class LibraryGeneric<Type>
 		// FILL IN
 		public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs) 
 		{
-			return lhs.getIsbn() > rhs.getIsbn() ? 1 : (lhs.getIsbn() < rhs.getIsbn() ? -1 : 0);
+			return lhs.getDueDate().getTimeInMillis() > rhs.getDueDate().getTimeInMillis() ? 1 : (lhs.getDueDate().getTimeInMillis() < rhs.getDueDate().getTimeInMillis() ? -1 : 0);
 		}
 		
 	}

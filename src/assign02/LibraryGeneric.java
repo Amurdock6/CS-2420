@@ -357,30 +357,13 @@ public class LibraryGeneric<Type>
 		
 		// Create a new array list
 		ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+		libraryCopy.addAll(library);
 		
-		// Add a new comparator
-		OrderLexicographically comparator = new OrderLexicographically();
-		
-//		ArrayList<String> names = new ArrayList<String>();
-//		names.add("seetha");
-//		names.add("sudhin");
-//		names.add("Swetha");
-//		names.add("Neethu");
-//		names.add("AAname");
-//		names.add("zzZ");
-//		names.add("ananya");
-//		names.add("Athira");
-//		names.add("bala");
-//		names.add("Tony");
-//		names.add("Karthika");
-//		names.add("Nithin");
-//		names.add("Vinod");
-//		names.add("jeena");
-//		Collections.sort(names);
-		
-		
-		Collections.sort(library.get(1).getTitle());
-		System.out.println(libraryCopy);
+		// Sort library lexicographically using lambda expression
+		sort(libraryCopy, (title1, title2) -> 
+		{
+		         return title1.getTitle().compareTo(title2.getTitle()); 
+		});
 		
 		return libraryCopy;
 	}
@@ -438,9 +421,5 @@ public class LibraryGeneric<Type>
 		}
 		
 	}
-	
-	/**
-	 * Comparator that defines an ordering among library books Lexicographically.
-	 */
 
 }

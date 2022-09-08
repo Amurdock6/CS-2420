@@ -1,5 +1,7 @@
 package assign02;
 
+import java.util.GregorianCalendar;
+
 /**
  * This class represents a generic library book, which extends book, in which the ISBN, author, and title cannot
  * change once the book is created.  Note that ISBNs are unique.
@@ -8,9 +10,6 @@ package assign02;
  * @author Todd Oldham and Alex Murdock
  * @version September 6, 2022
  */
-
-import java.util.GregorianCalendar;
-
 public class LibraryBookGeneric<Type> extends Book 
 {
 

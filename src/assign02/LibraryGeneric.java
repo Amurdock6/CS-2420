@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -348,39 +349,39 @@ public class LibraryGeneric<Type>
 	/**
 	 * Returns the list of library books, sorted by title
 	 */
-	public ArrayList<LibraryBookGeneric<Type>> getOrderedByTitle() 
+
+	
+	public ArrayList<LibraryBookGeneric<Type>> getOrderedByTitle()
 	{
 		// FILL IN -- do not return null
 		
 		// Create a new array list
 		ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
 		
-		// add a new comparator
-//		OrderLexicographically comparator = new OrderLexicographically();
+		// Add a new comparator
+		OrderLexicographically comparator = new OrderLexicographically();
 		
-		// Run through library and find all the book titles
-//		for (int i = 0; i < library.size(); i++)
-//		{
-//			System.out.println(library.get(i).getTitle());
-//			libraryCopy.add(library.get(i));
-//		}
+//		ArrayList<String> names = new ArrayList<String>();
+//		names.add("seetha");
+//		names.add("sudhin");
+//		names.add("Swetha");
+//		names.add("Neethu");
+//		names.add("AAname");
+//		names.add("zzZ");
+//		names.add("ananya");
+//		names.add("Athira");
+//		names.add("bala");
+//		names.add("Tony");
+//		names.add("Karthika");
+//		names.add("Nithin");
+//		names.add("Vinod");
+//		names.add("jeena");
+//		Collections.sort(names);
 		
 		
-//		 for (int i = 0; i < libraryCopy.size(); i++) {
-//	            for (int j = i + 1; j < libraryCopy.size(); j++) {
-//	                if (libraryCopy[i].compareToIgnoreCase(libraryCopy[j])
-//	                    > 0) {
-//	                    String temp = libraryCopy[i];
-//	                    libraryCopy[i] = libraryCopy[j];
-//	                    libraryCopy[j] = temp;
-//	                }
-//	            }
-//	        }
-		
-		(<Type> library, <TypeOfObject> libraryCopy) -> object1.compareTo(object2);
-		
-		// sort the titles lexicographically
+		Collections.sort(library.get(1).getTitle());
 		System.out.println(libraryCopy);
+		
 		return libraryCopy;
 	}
 
@@ -433,7 +434,7 @@ public class LibraryGeneric<Type>
 		// FILL IN
 		public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs) 
 		{
-			return lhs.getDueDate().getTimeInMillis() > rhs.getDueDate().getTimeInMillis() ? 1 : (lhs.getDueDate().getTimeInMillis() < rhs.getDueDate().getTimeInMillis() ? -1 : 0);
+			return lhs.getDueDate().getTimeInMillis() < rhs.getDueDate().getTimeInMillis() ? 1 : (lhs.getDueDate().getTimeInMillis() > rhs.getDueDate().getTimeInMillis() ? -1 : 0);
 		}
 		
 	}
@@ -441,11 +442,5 @@ public class LibraryGeneric<Type>
 	/**
 	 * Comparator that defines an ordering among library books Lexicographically.
 	 */
-//	protected class OrderLexicographically implements Comparator<LibraryBookGeneric<Type>>
-//	{
-//		public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs) 
-//		{
-//			return lhs.getTitle() rhs.getTitle() ? 1 : (lhs.getTitle() < rhs.getTitle() ? -1 : 0);
-//		}
-//	}
+
 }

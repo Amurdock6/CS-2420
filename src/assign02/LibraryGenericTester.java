@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 public class LibraryGenericTester 
 {
 	private LibraryGeneric<String> nameLib;  // library that uses names to identify patrons (holders)
+	private LibraryGeneric<String> books;
 	private LibraryGeneric<PhoneNumber> phoneLib;  // library that uses phone numbers to identify patrons
 	
 	@BeforeEach
@@ -137,4 +138,46 @@ public class LibraryGenericTester
 		assertTrue(SortedDueDate.get(2).getIsbn() == 9780330351690L);
 	}
 	
+	
+	@Test
+	public void getOrderedByTitle()
+	{
+		nameLib = new LibraryGeneric<String>();
+		nameLib.add(9780374292719L, "Thomas L. Friedman", "Adventure Book");
+		nameLib.add(9780374292729L, "Thomas L. Friedman", "Aaddventure");
+		nameLib.add(9780374292749L, "Thomas L. Friedman", "Zaxaphone Book");
+		nameLib.add(9780374292759L, "Thomas L. Friedman", "Biology Book");
+		nameLib.add(9780374292789L, "Thomas L. Friedman", "ZedBook");
+
+
+		books = new LibraryGeneric<String>();
+		books.add(9780374292729L, "Thomas L. Friedman", "Aaddventure");
+		books.add(9780374292719L, "Thomas L. Friedman", "Adventure Book");
+		books.add(9780374292759L, "Thomas L. Friedman", "Biology Book");
+		books.add(9780374292749L, "Thomas L. Friedman", "Zaxaphone Book");
+		books.add(9780374292789L, "Thomas L. Friedman", "ZedBook");
+		
+		assertEquals(books.getOrderedByTitle(), nameLib.getOrderedByTitle());
+	}
+	
+	@Test
+	public void getOrderedByTitleError()
+	{
+		nameLib = new LibraryGeneric<String>();
+		nameLib.add(9780374292719L, "Thomas L. Friedman", "Adventure Book");
+		nameLib.add(9780374292729L, "Thomas L. Friedman", "Aaddventure");
+		nameLib.add(9780374292749L, "Thomas L. Friedman", "Zaxaphone Book");
+		nameLib.add(9780374292759L, "Thomas L. Friedman", "Biology Book");
+		nameLib.add(9780374292789L, "Thomas L. Friedman", "ZedBook");
+
+
+		books = new LibraryGeneric<String>();
+		books.add(9780374292729L, "Thomas L. Friedman", "Aaddventure");
+		books.add(9780374292729L, "Thomas L. Friedman", "Not in other array");
+		books.add(9780374292749L, "Thomas L. Friedman", "Zaxaphone Book");
+		books.add(9780374292759L, "Thomas L. Friedman", "Biology Book");
+		books.add(9780374292789L, "Thomas L. Friedman", "ZedBook");
+		
+		assertFalse(books.getOrderedByTitle().equals(nameLib.getOrderedByTitle()));
+	}
 }

@@ -3,6 +3,7 @@ package assign02;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -112,8 +113,28 @@ public class LibraryGenericTester
 	}
 	
 	@Test
-	public void getOrderedByTitle()
+	public void testISBNsorting()
 	{
-		nameLib.getOrderedByTitle();
+		ArrayList<LibraryBookGeneric<String>> SortedIsbn = nameLib.getInventoryList();
+		assertTrue(SortedIsbn.get(0).getIsbn() == 9780330351690L);
+		assertTrue(SortedIsbn.get(1).getIsbn() == 9780374292799L);
+		assertTrue(SortedIsbn.get(2).getIsbn() == 9780446580342L);
 	}
+	
+	@Test
+	public void testOrderByDueDate()
+	{
+		
+		String patron = "Jane Doe";
+		// check out three books
+		nameLib.checkout(9780330351690L, patron, 1, 1, 2008);
+		nameLib.checkout(9780374292799L, patron, 1, 5, 2007);
+		nameLib.checkout(9780446580342L, patron, 1, 1, 2007);
+		
+		ArrayList<LibraryBookGeneric<String>> SortedDueDate = nameLib.getOverdueList(1, 1, 2000);
+		assertTrue(SortedDueDate.get(0).getIsbn() == 9780446580342L);
+		assertTrue(SortedDueDate.get(1).getIsbn() == 9780374292799L);
+		assertTrue(SortedDueDate.get(2).getIsbn() == 9780330351690L);
+	}
+	
 }

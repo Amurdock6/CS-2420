@@ -239,8 +239,27 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean removeAll(Collection<?> arg0) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// create a variable to check if any new elements were removed
+		boolean itemRemoved = false;
+				
+		// create next item variable
+		T nextRemoveItem = arg0.iterator().next();
+		
+		// while the collection to be removed has more items
+		while(arg0.iterator().hasNext())
+			
+			// check if our collection has that item if it does have that item 
+			//remove it and change our variable to true
+			if(this.contains(nextRemoveItem))
+			{
+				this.remove(nextRemoveItem);
+				itemRemoved = true;
+			}
+		
+			// set next item
+			nextRemoveItem = arg0.iterator().next();
+			
+		return itemRemoved;
 	}
 
 	/**

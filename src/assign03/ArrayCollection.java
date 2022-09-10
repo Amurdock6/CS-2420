@@ -191,10 +191,47 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Removes a single instance of the specified element from this collection, if it is present
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean remove(Object arg0) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// New variable for the location of the item to remove
+		int location = 0;
+		
+		// if our collection does not contain the item return false
+		if(!this.contains(arg0))
+			return false;
+		
+		else
+		{
+			// find the location of the item in our collection
+			while(this.iterator().hasNext())
+			{
+				// when we find the location leave the loop
+				if(this.iterator().next().equals(arg0))
+					break;
+				
+				location ++;
+			}
+			
+			// move all the data from the right of the item one to the left
+			for(int i = location; i < this.size() - 1; i++)
+				data[i] = data[i + 1];
+			
+			// create a new array one smaller than the original
+			T removeData[] = (T[]) new Object[(this.size()) - 1];
+			
+			// copy the data from the old array to the new one
+			for(int i = 0; i < this.size() - 1; i++)
+				removeData[i] = data[i];
+			
+			// create a new array for data
+			data = (T[]) new Object[ (this.size()) - 1];
+			
+			// assign the the copied array back to data
+			data = removeData;
+			
+			return true;
+		}
 	}
 
 	/**

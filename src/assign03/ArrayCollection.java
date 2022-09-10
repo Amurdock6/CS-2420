@@ -271,23 +271,33 @@ public class ArrayCollection<T> implements Collection<T>
 		boolean itemNotRetained = false;
 		
 		// create next item
-		Object nextRetainItem = arg0.iterator().next();
+		Object nextRetainItem = this.iterator().next();
 		
 		// while the collection we are checking still has items
-		while(arg0.iterator().hasNext())
+		while(this.iterator().hasNext())
 		{
-			if(this.contains(nextRetainItem))
+			// if the input collection contains the item in our collection
+			if(arg0.contains(nextRetainItem))
 			{
-				arg0.iterator().next();
+				// go to the next item
+				nextRetainItem = arg0.iterator().next();
 			}
 			
 			else
 			{
-				this.iterator().remove();		
+				// if the input collection does not contain the item in our collection
+				// remove that item
+				this.iterator().remove();
+				
+				// an item was removed, so the method returns true
 				itemNotRetained = true;
+				
+				// go to the next item
+				nextRetainItem = arg0.iterator().next();
 			}
 				
 		}
+		
 		return itemNotRetained;
 	}
 

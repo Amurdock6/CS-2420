@@ -50,8 +50,15 @@ public class ArrayCollection<T> implements Collection<T>
 		// Creates a new array twice the size of the old one
 		T dataGrow[] = (T[]) new Object[this.size() * 2];
 		
-		// Add the data from the old array to the new one
+		// copy the data from the old array to the new one
+		for(int i = 0; i < this.size(); i++)
+			dataGrow[i] = data[i];
 		
+		// create a new array for data
+		data = (T[]) new Object[this.size() * 2];
+		
+		// assign the the copied array back to data
+		data = dataGrow;
 	}
 
 	/**
@@ -60,7 +67,25 @@ public class ArrayCollection<T> implements Collection<T>
 	public boolean add(T arg0) 
 	{
 		// TODO Auto-generated method stub
-		return false;
+		
+		// if the collection already has the element return false
+		if (this.contains(arg0))
+			return false;
+		
+		else
+		{
+			// if the collection does not have an empty spot the collection needs to grow
+			if(!this.iterator().hasNext())
+				this.grow();
+			
+			// add the new element to the collection
+			data[size()] = arg0;
+			
+			// increase the value of size
+			size++;
+			
+			return true;
+		}
 	}
 	
 	/**
@@ -148,8 +173,8 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public int size() 
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		// This returns the value of size which would be the number of elements in the collection
+		return size;
 	}
 
 	/**

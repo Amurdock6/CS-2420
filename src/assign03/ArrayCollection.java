@@ -22,7 +22,8 @@ import java.util.NoSuchElementException;
  *
  * @param <T> - generic type placeholder
  */
-public class ArrayCollection<T> implements Collection<T> {
+public class ArrayCollection<T> implements Collection<T> 
+{
 
 	private T data[]; // Storage for the items in the collection
 	private int size; // Keep track of how many items this collection holds
@@ -45,64 +46,117 @@ public class ArrayCollection<T> implements Collection<T> {
 	{
 		// TODO fill in
 		// You will need to use something similar to the code in the constructor above to create a new array.
+		
+		// Creates a new array twice the size of the old one
+		T dataGrow[] = (T[]) new Object[this.size() * 2];
+		
+		// Add the data from the old array to the new one
+		
 	}
 
-
-	public boolean add(T arg0) {
+	/**
+	 * Ensures that this collection contains the specified element
+	 */
+	public boolean add(T arg0) 
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * Adds all of the elements in the specified collection to this collection
+	 */
+	public boolean addAll(Collection<? extends T> arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean addAll(Collection<? extends T> arg0) {
+	/**
+	 * Removes all of the elements from this collection
+	 */
+	public void clear() 
+	{
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Returns true if this collection contains the specified element.
+	 */
+	public boolean contains(Object arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void clear() {
-		// TODO Auto-generated method stub
-	}
-
-	public boolean contains(Object arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean containsAll(Collection<?> arg0) {
+	/**
+	 * Returns true if this collection contains all of the elements in the specified collection.
+	 */
+	public boolean containsAll(Collection<?> arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isEmpty() {
+	/**
+	 * Returns true if this collection contains no elements.
+	 */
+	public boolean isEmpty() 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public Iterator<T> iterator() {
+	/**
+	 * Returns an iterator over the elements in this collection.
+	 */
+	public Iterator<T> iterator() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean remove(Object arg0) {
+	/**
+	 * Removes a single instance of the specified element from this collection, if it is present
+	 */
+	public boolean remove(Object arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean removeAll(Collection<?> arg0) {
+	/**
+	 * Removes all of this collection's elements that are also contained in the specified collection
+	 */
+	public boolean removeAll(Collection<?> arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean retainAll(Collection<?> arg0) {
+	/**
+	 * Retains only the elements in this collection that are contained in the specified collection
+	 */
+	public boolean retainAll(Collection<?> arg0) 
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public int size() {
+	/**
+	 * Returns the number of elements in this collection.
+	 */
+	public int size() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public Object[] toArray() {
+	/**
+	 * Returns an array containing all of the elements in this collection.
+	 */
+	public Object[] toArray() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,28 +191,47 @@ public class ArrayCollection<T> implements Collection<T> {
 
 	/**
 	 * 
-	 * @author ??
+	 * @author Todd Oldham and Alex Murdock
 	 * Describe your ArrayCollectionIterator class here.
 	 *
 	 */
 	private class ArrayCollectionIterator implements Iterator<T>
 	{
+		/**
+		 * Iterator for going through items in a collection
+		 */
 		public ArrayCollectionIterator()
 		{
 			// TODO Auto-generated method stub
 		}
 
-		public boolean hasNext() {
+		/**
+		 * Returns true if there are any more items in the collection to iterate through, false otherwise.
+		 */
+		public boolean hasNext() 
+		{
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		public T next() {
+		/**
+		 * Must throw a NoSuchElementException if there are no more items to iterate through, 
+		 * otherwise, returns the next item in the collection
+		 */
+		public T next() 
+		{
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		public void remove() {
+		/**
+		 * This method removes the last item that was returned by next. 
+		 * It can therefore only be called once per call to next. 
+		 * If next has not been called since the last call to remove, or if it hasn't been called at all, 
+		 * throws an IllegalStateException.
+		 */
+		public void remove() 
+		{
 			// TODO Auto-generated method stub
 		}
 

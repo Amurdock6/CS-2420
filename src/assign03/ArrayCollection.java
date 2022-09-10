@@ -152,8 +152,16 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean containsAll(Collection<?> arg0) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// while the collection we are checking has more items
+		while(arg0.iterator().hasNext())
+		{
+			// if our collection does not have that item return false
+			if(!this.contains(arg0.iterator().next()))
+					return false;
+		}
+		
+		// only returns true if our collection has all the items
+		return true;
 	}
 
 	/**

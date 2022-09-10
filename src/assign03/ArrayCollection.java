@@ -48,14 +48,14 @@ public class ArrayCollection<T> implements Collection<T>
 		// You will need to use something similar to the code in the constructor above to create a new array.
 		
 		// Creates a new array twice the size of the old one
-		T dataGrow[] = (T[]) new Object[ (this.size()) * 2];
+		T dataGrow[] = (T[]) new Object[this.size() * 2];
 		
 		// copy the data from the old array to the new one
 		for(int i = 0; i < this.size(); i++)
 			dataGrow[i] = data[i];
 		
 		// create a new array for data
-		data = (T[]) new Object[ (this.size()) * 2];
+		data = (T[]) new Object[this.size() * 2];
 		
 		// assign the the copied array back to data
 		data = dataGrow;
@@ -267,8 +267,28 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean retainAll(Collection<?> arg0) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// item removed variable
+		boolean itemNotRetained = false;
+		
+		// create next item
+		Object nextRetainItem = arg0.iterator().next();
+		
+		// while the collection we are checking still has items
+		while(arg0.iterator().hasNext())
+		{
+			if(this.contains(nextRetainItem))
+			{
+				arg0.iterator().next();
+			}
+			
+			else
+			{
+				this.iterator().remove();		
+				itemNotRetained = true;
+			}
+				
+		}
+		return itemNotRetained;
 	}
 
 	/**
@@ -283,10 +303,17 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Returns an array containing all of the elements in this collection.
 	 */
+	@SuppressWarnings("unchecked")
 	public Object[] toArray() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// Creates a new array the same size as data
+		T dataCopy[] = (T[]) new Object[this.size()];
+		
+		// copy the data from data to the new one
+		for(int i = 0; i < this.size(); i++)
+			dataCopy[i] = data[i];
+		
+		return dataCopy;
 	}
 
 	/* 

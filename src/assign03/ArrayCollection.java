@@ -242,8 +242,8 @@ public class ArrayCollection<T> implements Collection<T>
 		// create a variable to check if any new elements were removed
 		boolean itemRemoved = false;
 				
-		// create next item variable
-		T nextRemoveItem = arg0.iterator().next();
+		// create next item remove variable
+		Object nextRemoveItem = arg0.iterator().next();
 		
 		// while the collection to be removed has more items
 		while(arg0.iterator().hasNext())

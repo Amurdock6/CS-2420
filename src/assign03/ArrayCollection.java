@@ -169,8 +169,12 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean isEmpty() 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// if the size of our collection is zero return true
+		if(this.size() == 0)
+			return true;
+		
+		else
+			return false;
 	}
 
 	/**
@@ -178,8 +182,10 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public Iterator<T> iterator() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// Create a new iterator
+		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
+		
+		return collectionIterator;
 	}
 
 	/**

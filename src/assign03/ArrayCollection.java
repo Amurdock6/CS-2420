@@ -48,14 +48,14 @@ public class ArrayCollection<T> implements Collection<T>
 		// You will need to use something similar to the code in the constructor above to create a new array.
 		
 		// Creates a new array twice the size of the old one
-		T dataGrow[] = (T[]) new Object[this.size() * 2];
+		T dataGrow[] = (T[]) new Object[ (this.size()) * 2];
 		
 		// copy the data from the old array to the new one
 		for(int i = 0; i < this.size(); i++)
 			dataGrow[i] = data[i];
 		
 		// create a new array for data
-		data = (T[]) new Object[this.size() * 2];
+		data = (T[]) new Object[ (this.size()) * 2];
 		
 		// assign the the copied array back to data
 		data = dataGrow;
@@ -93,8 +93,21 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean addAll(Collection<? extends T> arg0) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// create a variable to check if any new elements were added
+		boolean itemAdded = false;
+		
+		// while the collection to be added has more items
+		while(arg0.iterator().hasNext())
+			
+			// check if our collection has that item if it doesn't have that item 
+			//add it and change our variable to true
+			if(!this.contains(arg0.iterator().next()))
+			{
+				this.add(arg0.iterator().next());
+				itemAdded = true;
+			}
+				
+		return itemAdded;
 	}
 
 	/**

@@ -66,7 +66,6 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean add(T arg0) 
 	{
-		// TODO Auto-generated method stub
 		
 		// if the collection already has the element return false
 		if (this.contains(arg0))
@@ -90,6 +89,7 @@ public class ArrayCollection<T> implements Collection<T>
 	
 	/**
 	 * Adds all of the elements in the specified collection to this collection
+	 * Only add items that do not already exist in this ArrayCollection
 	 */
 	public boolean addAll(Collection<? extends T> arg0) 
 	{
@@ -115,7 +115,14 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public void clear() 
 	{
-		// TODO Auto-generated method stub
+		// while there are still items in the collection
+		while(this.iterator().hasNext())
+		{
+			// go to the next item
+			this.iterator().next();
+			// remove that item
+			this.iterator().remove();
+		}
 	}
 
 	/**

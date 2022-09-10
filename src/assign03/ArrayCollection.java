@@ -96,16 +96,22 @@ public class ArrayCollection<T> implements Collection<T>
 		// create a variable to check if any new elements were added
 		boolean itemAdded = false;
 		
+		// create next item variable
+		T nextItem = arg0.iterator().next();
+		
 		// while the collection to be added has more items
 		while(arg0.iterator().hasNext())
 			
 			// check if our collection has that item if it doesn't have that item 
 			//add it and change our variable to true
-			if(!this.contains(arg0.iterator().next()))
+			if(!this.contains(nextItem))
 			{
-				this.add(arg0.iterator().next());
+				this.add(nextItem);
 				itemAdded = true;
 			}
+		
+			// set next item
+			nextItem = arg0.iterator().next();
 				
 		return itemAdded;
 	}
@@ -130,7 +136,14 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean contains(Object arg0) 
 	{
-		// TODO Auto-generated method stub
+		// while there are still items in the collection
+		while(this.iterator().hasNext())
+		{
+			
+			// if the next item equals the input item return true
+			if(this.iterator().next().equals(arg0))
+				return true;
+		}
 		return false;
 	}
 

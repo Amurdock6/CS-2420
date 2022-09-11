@@ -1,6 +1,7 @@
 package assign03;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -359,10 +360,12 @@ public class ArrayCollection<T> implements Collection<T>
 			for(j = i + 1, minIndex = i; j < this.size(); j++)
 				if(cmp.compare( (T)this.toArray()[j], (T)this.toArray()[minIndex]) < 0)
 					minIndex = j;
-			T temp = (T) this.toArray()[i];
-			this.set(i, (T)this.toArray()[minIndex]);
-			this.set(minIndex, temp);
+			T[] temp = (T[]) this.toArray()[i];
+			this.toArray()[i] = (T[])this.toArray()[minIndex];
+			this.toArray()[minIndex] = temp;
 		}
+		
+		return (ArrayList<T>) Arrays.asList(this.toArray());
 	}
 
 

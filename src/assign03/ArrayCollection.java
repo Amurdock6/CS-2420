@@ -378,11 +378,11 @@ public class ArrayCollection<T> implements Collection<T>
 	private class ArrayCollectionIterator implements Iterator<T>
 	{
 		/**
-		 * Iterator for going through items in a collection
+		 * Iterator for going through items in a collection takes in a collection to iterate through
 		 */
 		public ArrayCollectionIterator()
 		{
-			// TODO Auto-generated method stub
+			// ArrayCollectionIterator
 		}
 
 		/**
@@ -390,7 +390,7 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public boolean hasNext() 
 		{
-			// TODO Auto-generated method stub
+			int numOfItems = ArrayCollection.this.size();
 			return false;
 		}
 

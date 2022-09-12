@@ -390,7 +390,7 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public boolean hasNext() 
 		{
-			int numOfItems = ArrayCollection.this.size();
+			int numOfItems = ArrayCollection.this.size(); // write next method first
 			return false;
 		}
 

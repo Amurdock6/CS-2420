@@ -63,19 +63,29 @@ public class ArrayCollection<T> implements Collection<T>
 	}
 
 	private ArrayCollection<T> arrayCollection;
+	private ArrayCollection<T> addAllFromCollect;
 	
 	@SuppressWarnings("unchecked")
 	public void test() {
 		arrayCollection = new ArrayCollection<T>();
-//		library = new ArrayList<LibraryBookGeneric<T>>();
+		addAllFromCollect = new ArrayCollection<T>();
+		
 		Object testobj = 123;
 		Object testobj1 = "test";
 		
-		// Converts Objects to T
+		// Casts Objects to T
 		T myTestString = (T) testobj1;
-		T myTestNum = (T) testobj; // Automatic casting: Object to T
+		T myTestNum = (T) testobj;
 		
 		arrayCollection.add(myTestString);
+		arrayCollection.add(myTestNum);
+		
+		for (T u : arrayCollection) {
+			  System.out.println(u);
+			}
+	
+		
+		addAllFromCollect.addAll(arrayCollection);
 		
 	}
 	
@@ -94,11 +104,11 @@ public class ArrayCollection<T> implements Collection<T>
 			if (!this.iterator().hasNext())
 				this.grow();
 
-			// add the new element to the collection
-			data[size()] = arg0;
-
 			// increase the value of size
 			size++;
+			
+			// add the new element to the collection
+			data[size()] = arg0;
 
 			return true;
 		}
@@ -113,22 +123,26 @@ public class ArrayCollection<T> implements Collection<T>
 		// create a variable to check if any new elements were added
 		boolean itemAdded = false;
 		
+		int i = 0;
+		
 		// create next item variable
 		T nextItem = arg0.iterator().next();
 		
 		// while the collection to be added has more items
-		while(arg0.iterator().hasNext())
-			
-			// check if our collection has that item if it doesn't have that item 
-			//add it and change our variable to true
-			if(!this.contains(nextItem))
-			{
+		while (arg0.iterator().hasNext() == true && data.length > i) {
+//			System.out.println(nextItem);
+			i++;
+//			System.out.println(i);
+			// check if our collection has that item if it doesn't have that item
+			// add it and change our variable to true
+			if (this.contains(nextItem) == false) {
 				this.add(nextItem);
 				itemAdded = true;
 			}
-		
+			
 			// set next item
 			nextItem = arg0.iterator().next();
+		}
 				
 		return itemAdded;
 	}

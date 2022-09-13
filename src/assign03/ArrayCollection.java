@@ -393,15 +393,20 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public boolean hasNext() 
 		{
-			int numOfItems = ArrayCollection.this.size(); // write next method first
+			// number of items in collection
+			int numOfItems = ArrayCollection.this.size(); 
 			
-			System.out.println(next());
-			
+			// get the value of next
 			int hasNext = (int) next();
 			
-			if(hasNext <= numOfItems) {
+			// if next is less than the number of items then there are more items in the collection
+			if(hasNext < numOfItems) 
+			{
 				return true;
-			} else {
+			} 
+			
+			else 
+			{
 				return false;
 			}
 			
@@ -418,14 +423,16 @@ public class ArrayCollection<T> implements Collection<T>
 			
 			// Checks to see if there is a next item in ArrayCollection
 			if(counter < numOfItems) {
+				
 				// Grabs the next item in ArrayCollection
 				int nextItem = counter++;
 				
-				System.out.println(data[nextItem]);
+				
 				// Returns next item of ArrayCollection
-				return data[nextItem];
+				return data[nextItem - 1];
 				
 			} else {
+				
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();
 			}

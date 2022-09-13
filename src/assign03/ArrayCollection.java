@@ -61,24 +61,24 @@ public class ArrayCollection<T> implements Collection<T>
 		data = dataGrow;
 	}
 
-//	private ArrayCollection<T> arrayCollection;
+	private ArrayCollection<T> arrayCollection;
 	
-//	@SuppressWarnings("unchecked")
-//	public void test() {
-//		arrayCollection = new ArrayCollection<T>();
-////		library = new ArrayList<LibraryBookGeneric<T>>();
-//		Object testobj = 123;
-//		Object testobj1 = "test";
-//		
-//		// Converts Objects to T
-//		T myTestString = (T) testobj1;
-//		T myTestNum = (T) testobj; // Automatic casting: Object to T
-//		
+	@SuppressWarnings("unchecked")
+	public void test() {
+		arrayCollection = new ArrayCollection<T>();
+//		library = new ArrayList<LibraryBookGeneric<T>>();
+		Object testobj = 123;
+		Object testobj1 = "test";
+		
+		// Converts Objects to T
+		T myTestString = (T) testobj1;
+		T myTestNum = (T) testobj; // Automatic casting: Object to T
+		
+		arrayCollection.add(myTestString);
+		System.out.println(arrayCollection);
 //		arrayCollection.add(myTestString);
-//		System.out.println(arrayCollection);
-////		arrayCollection.add(myTestString);
-//		
-//	}
+		
+	}
 	
 	/**
 	 * Ensures that this collection contains the specified element
@@ -87,6 +87,7 @@ public class ArrayCollection<T> implements Collection<T>
 	{
 		
 		// if the collection already has the element return false
+		System.out.println(this.contains(arg0));
 		if (this.contains(arg0))
 			return false;
 		
@@ -155,6 +156,7 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean contains(Object arg0) 
 	{
+		
 		// while there are still items in the collection
 		while(this.iterator().hasNext())
 		{
@@ -204,11 +206,10 @@ public class ArrayCollection<T> implements Collection<T>
 		// Create a new iterator
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
 
-		// Test functionality of ArrayCollectionIterator
-		collectionIterator.remove();
-		collectionIterator.hasNext();
-		collectionIterator.next();
-
+//		// Test functionality of ArrayCollectionIterator
+//		collectionIterator.remove();
+//		collectionIterator.hasNext();
+//		collectionIterator.next(); 
 		
 		return collectionIterator;
 	}
@@ -403,6 +404,7 @@ public class ArrayCollection<T> implements Collection<T>
 	{
 		boolean hasNextBeenCalled = false;
 		boolean hasRemovedBeenCalled = false;
+		int counter = 0;
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
 		 */
@@ -416,16 +418,18 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public boolean hasNext() {
 			// number of items in collection
-			int numOfItems = ArrayCollection.this.size();
+			int numOfItems = ArrayCollection.this.data.length;
 
 			// get the value of next
-			int hasNext = (int) next();
+			int hasNext = counter;
 
 			// if next is less than the number of items then there are more items in the
 			// collection
 			if (hasNext < numOfItems) {
+				System.out.println("Has next number");
 				return true;
 			} else {
+				System.out.println("no next num");
 				return false;
 			}
 
@@ -436,18 +440,24 @@ public class ArrayCollection<T> implements Collection<T>
 		 * otherwise, returns the next item in the collection
 		 */
 		public T next() {
-			int counter = 0;
-			int numOfItems = ArrayCollection.this.size();
+			int numOfItems = ArrayCollection.this.data.length;
 
 			// Checks to see if there is a next item in ArrayCollection
-			if (counter < numOfItems) {
-					int nextItem = counter++;
+			if (counter <= numOfItems) {
+				System.out.println("made it");
+					counter++;
 
 					// Tells are program that we can not call next() again
 					hasNextBeenCalled = true;
 
 					// Returns next item of ArrayCollection
-					return data[nextItem - 1];
+					T checkForNull = data[counter - 1];
+					
+					
+//					if () {
+//						
+//					}
+					return data[counter - 1];
 			} else {
 
 				// If there is no next item we will throw a NoSuchElementException

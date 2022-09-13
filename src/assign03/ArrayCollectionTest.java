@@ -75,5 +75,11 @@ class ArrayCollectionTest {
 	void testToSortedList() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	void testForIterator() {
+		ArrayCollection arrayCollection = new ArrayCollection();
+		arrayCollection.iterator();
+	}
 
 }

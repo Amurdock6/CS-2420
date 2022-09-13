@@ -185,6 +185,9 @@ public class ArrayCollection<T> implements Collection<T>
 	{
 		// Create a new iterator
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
+
+		collectionIterator.next();
+		collectionIterator.hasNext();
 		
 		return collectionIterator;
 	}
@@ -391,7 +394,17 @@ public class ArrayCollection<T> implements Collection<T>
 		public boolean hasNext() 
 		{
 			int numOfItems = ArrayCollection.this.size(); // write next method first
-			return false;
+			
+			System.out.println(next());
+			
+			int hasNext = (int) next();
+			
+			if(hasNext <= numOfItems) {
+				return true;
+			} else {
+				return false;
+			}
+			
 		}
 
 		/**
@@ -400,8 +413,22 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public T next() 
 		{
-			// TODO Auto-generated method stub
-			return null;
+			int counter = 0;
+			int numOfItems = ArrayCollection.this.size();
+			
+			// Checks to see if there is a next item in ArrayCollection
+			if(counter < numOfItems) {
+				// Grabs the next item in ArrayCollection
+				int nextItem = counter++;
+				
+				System.out.println(data[nextItem]);
+				// Returns next item of ArrayCollection
+				return data[nextItem];
+				
+			} else {
+				// If there is no next item we will throw a NoSuchElementException
+				throw new NoSuchElementException();
+			}
 		}
 
 		/**
@@ -412,7 +439,18 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public void remove() 
 		{
-			// TODO Auto-generated method stub
+			
+//			if () {
+//				throw new IllegalStateException();
+//			} else {
+				// Grabs Value and converts it to int then subtracts one from returned value of next() which will give us the correct value to delete
+				int nextValue = (int) next();
+				int itemToDelete = nextValue - 1;
+				
+				ArrayCollection.this.remove(itemToDelete);
+//			}
+
+			
 		}
 
 	}

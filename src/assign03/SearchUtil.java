@@ -25,8 +25,27 @@ public class SearchUtil {
 	 */
 	public static <T> boolean binarySearch(ArrayList<T> list, T item, Comparator<? super T> cmp)
 	{
-	
-		//TODO: Fill in with a correct binary search implementation
+		
+		// create max, min, middle variables
+		int min = 0;
+		int max = list.size();
+		int middle = 0;
+		
+		// while our min is less than or equal to our max
+		while(min <= max) 
+		{
+			// get the average value to be the middle
+			middle = (min + max) / 2;
+			
+			if(item.equals(list.get(middle)))
+				return true;
+			
+			else if(cmp.compare(item, list.get(middle)) < 1) 
+				max = middle - 1;
+			
+			else 
+				min = middle + 1;
+		}
 		return false;
 	}	
 }

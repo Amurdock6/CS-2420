@@ -186,8 +186,10 @@ public class ArrayCollection<T> implements Collection<T>
 		// Create a new iterator
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
 
-		collectionIterator.next();
+		// Test functionality of ArrayCollectionIterator
 		collectionIterator.hasNext();
+		collectionIterator.next();
+		
 		
 		return collectionIterator;
 	}
@@ -380,6 +382,8 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	private class ArrayCollectionIterator implements Iterator<T>
 	{
+		boolean hasNextBeenCalled = false;
+		boolean hasRemovedBeenCalled = false;
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
 		 */
@@ -391,48 +395,42 @@ public class ArrayCollection<T> implements Collection<T>
 		/**
 		 * Returns true if there are any more items in the collection to iterate through, false otherwise.
 		 */
-		public boolean hasNext() 
-		{
+		public boolean hasNext() {
 			// number of items in collection
-			int numOfItems = ArrayCollection.this.size(); 
-			
+			int numOfItems = ArrayCollection.this.size();
+
 			// get the value of next
 			int hasNext = (int) next();
-			
-			// if next is less than the number of items then there are more items in the collection
-			if(hasNext < numOfItems) 
-			{
+
+			// if next is less than the number of items then there are more items in the
+			// collection
+			if (hasNext < numOfItems) {
 				return true;
-			} 
-			
-			else 
-			{
+			} else {
 				return false;
 			}
-			
+
 		}
 
 		/**
 		 * Must throw a NoSuchElementException if there are no more items to iterate through, 
 		 * otherwise, returns the next item in the collection
 		 */
-		public T next() 
-		{
+		public T next() {
 			int counter = 0;
 			int numOfItems = ArrayCollection.this.size();
-			
+
 			// Checks to see if there is a next item in ArrayCollection
-			if(counter < numOfItems) {
-				
-				// Grabs the next item in ArrayCollection
-				int nextItem = counter++;
-				
-				
-				// Returns next item of ArrayCollection
-				return data[nextItem - 1];
-				
+			if (counter < numOfItems) {
+					int nextItem = counter++;
+
+					// Tells are program that we can not call next() again
+					hasNextBeenCalled = true;
+
+					// Returns next item of ArrayCollection
+					return data[nextItem - 1];
 			} else {
-				
+
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();
 			}
@@ -444,20 +442,23 @@ public class ArrayCollection<T> implements Collection<T>
 		 * If next has not been called since the last call to remove, or if it hasn't been called at all, 
 		 * throws an IllegalStateException.
 		 */
-		public void remove() 
-		{
-			
-//			if () {
-//				throw new IllegalStateException();
-//			} else {
-				// Grabs Value and converts it to int then subtracts one from returned value of next() which will give us the correct value to delete
-				int nextValue = (int) next();
-				int itemToDelete = nextValue - 1;
-				
-				ArrayCollection.this.remove(itemToDelete);
-//			}
+		public void remove() {
 
+			if (hasNextBeenCalled == false) {
+				throw new IllegalStateException();
+			} else if (hasRemovedBeenCalled == false) {
+			// Grabs Value and converts it to int then subtracts one from returned value of
+			// next() which will give us the correct value to delete
+			int nextValue = (int) next();
+			int itemToDelete = nextValue - 1;
 			
+			hasNextBeenCalled = false;
+
+			ArrayCollection.this.remove(itemToDelete);
+			} else {
+				throw new IllegalStateException();
+			}
+
 		}
 
 	}

@@ -27,6 +27,7 @@ public class ArrayCollection<T> implements Collection<T>
 {	
 	private T data[]; // Storage for the items in the collection
 	private int size; // Keep track of how many items this collection holds
+	int counter = 0;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
 	@SuppressWarnings("unchecked")
@@ -48,14 +49,14 @@ public class ArrayCollection<T> implements Collection<T>
 		// You will need to use something similar to the code in the constructor above to create a new array.
 		
 		// Creates a new array twice the size of the old one
-		T dataGrow[] = (T[]) new Object[this.size() * 2];
+		T dataGrow[] = (T[]) new Object[this.data.length * 2];
 		
 		// copy the data from the old array to the new one
-		for(int i = 0; i < this.size(); i++)
+		for(int i = 0; i < this.data.length; i++)
 			dataGrow[i] = data[i];
 		
 		// create a new array for data
-		data = (T[]) new Object[this.size() * 2];
+		data = (T[]) new Object[this.data.length * 2];
 		
 		// assign the copied array back to data
 		data = dataGrow;
@@ -75,34 +76,30 @@ public class ArrayCollection<T> implements Collection<T>
 		T myTestNum = (T) testobj; // Automatic casting: Object to T
 		
 		arrayCollection.add(myTestString);
-		System.out.println(arrayCollection);
-//		arrayCollection.add(myTestString);
 		
 	}
 	
 	/**
 	 * Ensures that this collection contains the specified element
 	 */
-	public boolean add(T arg0) 
-	{
-		
+	public boolean add(T arg0) {
+
 		// if the collection already has the element return false
-		System.out.println(this.contains(arg0));
-		if (this.contains(arg0))
+		if (this.contains(arg0) == true) {
 			return false;
-		
-		else
-		{
+		}
+
+		else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if(!this.iterator().hasNext())
+			if (!this.iterator().hasNext())
 				this.grow();
-			
+
 			// add the new element to the collection
 			data[size()] = arg0;
-			
+
 			// increase the value of size
 			size++;
-			
+
 			return true;
 		}
 	}
@@ -161,9 +158,11 @@ public class ArrayCollection<T> implements Collection<T>
 		while(this.iterator().hasNext())
 		{
 			
+			
 			// if the next item equals the input item return true
-			if(this.iterator().next().equals(arg0))
+			if(this.iterator().next() == arg0)
 				return true;
+			
 		}
 		return false;
 	}
@@ -404,7 +403,6 @@ public class ArrayCollection<T> implements Collection<T>
 	{
 		boolean hasNextBeenCalled = false;
 		boolean hasRemovedBeenCalled = false;
-		int counter = 0;
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
 		 */
@@ -426,10 +424,8 @@ public class ArrayCollection<T> implements Collection<T>
 			// if next is less than the number of items then there are more items in the
 			// collection
 			if (hasNext < numOfItems) {
-				System.out.println("Has next number");
 				return true;
 			} else {
-				System.out.println("no next num");
 				return false;
 			}
 
@@ -444,19 +440,11 @@ public class ArrayCollection<T> implements Collection<T>
 
 			// Checks to see if there is a next item in ArrayCollection
 			if (counter <= numOfItems) {
-				System.out.println("made it");
 					counter++;
 
 					// Tells are program that we can not call next() again
 					hasNextBeenCalled = true;
 
-					// Returns next item of ArrayCollection
-					T checkForNull = data[counter - 1];
-					
-					
-//					if () {
-//						
-//					}
 					return data[counter - 1];
 			} else {
 

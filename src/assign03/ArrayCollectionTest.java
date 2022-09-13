@@ -2,6 +2,9 @@ package assign03;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 class ArrayCollectionTest {
@@ -76,10 +79,23 @@ class ArrayCollectionTest {
 		fail("Not yet implemented");
 	}
 	
-	@Test
-	void testForIterator() {
-		ArrayCollection arrayCollection = new ArrayCollection();
-		arrayCollection.iterator();
-	}
+	
+//	public abstract class ArrayCollection<T> implements Collection<T> {	
+//	@Test
+//	void testForIterator() {
+//		ArrayCollection arrayCollection = new ArrayCollection();
+//		Object testobj = 123;
+//		Object testobj1 = "test";
+//		Object myInt = 9;
+////		T myTestString = (T) testobj1;
+////		T myTestNum = (T) myInt; // Automatic casting: Object to T
+////		arrayCollection.add(myTestNum);
+////		arrayCollection.add(myTestString);
+//		arrayCollection.test();
+//		arrayCollection.iterator();
+//
+//		fail("Not yet implemented");
+//	}
+//	}
 
 }

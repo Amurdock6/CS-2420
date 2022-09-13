@@ -24,13 +24,12 @@ import java.util.NoSuchElementException;
  * @param <T> - generic type placeholder
  */
 public class ArrayCollection<T> implements Collection<T> 
-{
-
+{	
 	private T data[]; // Storage for the items in the collection
 	private int size; // Keep track of how many items this collection holds
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
-	@SuppressWarnings("unchecked")  
+	@SuppressWarnings("unchecked")
 	public ArrayCollection()
 	{
 		size = 0;
@@ -58,10 +57,29 @@ public class ArrayCollection<T> implements Collection<T>
 		// create a new array for data
 		data = (T[]) new Object[this.size() * 2];
 		
-		// assign the the copied array back to data
+		// assign the copied array back to data
 		data = dataGrow;
 	}
 
+//	private ArrayCollection<T> arrayCollection;
+	
+//	@SuppressWarnings("unchecked")
+//	public void test() {
+//		arrayCollection = new ArrayCollection<T>();
+////		library = new ArrayList<LibraryBookGeneric<T>>();
+//		Object testobj = 123;
+//		Object testobj1 = "test";
+//		
+//		// Converts Objects to T
+//		T myTestString = (T) testobj1;
+//		T myTestNum = (T) testobj; // Automatic casting: Object to T
+//		
+//		arrayCollection.add(myTestString);
+//		System.out.println(arrayCollection);
+////		arrayCollection.add(myTestString);
+//		
+//	}
+	
 	/**
 	 * Ensures that this collection contains the specified element
 	 */
@@ -187,9 +205,10 @@ public class ArrayCollection<T> implements Collection<T>
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
 
 		// Test functionality of ArrayCollectionIterator
+		collectionIterator.remove();
 		collectionIterator.hasNext();
 		collectionIterator.next();
-		
+
 		
 		return collectionIterator;
 	}

@@ -3,6 +3,7 @@ package assign03;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -27,6 +28,7 @@ public class ArrayCollection<T> implements Collection<T>
 {	
 	private T data[]; // Storage for the items in the collection
 	private int size; // Keep track of how many items this collection holds
+	private int realItemsInArray = 0; // Keeps track of how many items we have that aren't null
 	private int counter = 0;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
@@ -45,7 +47,6 @@ public class ArrayCollection<T> implements Collection<T>
 	@SuppressWarnings("unchecked")
 	private void grow()
 	{
-		// TODO fill in
 		// You will need to use something similar to the code in the constructor above to create a new array.
 		
 		// Creates a new array twice the size of the old one
@@ -103,16 +104,16 @@ public class ArrayCollection<T> implements Collection<T>
 			// if the collection does not have an empty spot the collection needs to grow
 			if (this.iterator().hasNext() == false)
 			{
-				//System.out.println("I grew");
 				this.grow();
 			}
 			
-			// add the new element to the collection
-			data[size()] = arg0;
+			// increase the value of realItemsInArray
+			realItemsInArray++;
 			
-			// increase the value of size
-			System.out.println(data[size()]);
-			size++;
+			// add the new element to the collection
+			data[realItemsInArray] = arg0;
+			
+
 			
 			return true;
 		}
@@ -127,27 +128,54 @@ public class ArrayCollection<T> implements Collection<T>
 		// create a variable to check if any new elements were added
 		boolean itemAdded = false;
 		
-		int i = 0;
-		
-		// create next item variable
-		T nextItem = arg0.iterator().next();
-		
-		// while the collection to be added has more items
-		while (arg0.iterator().hasNext() == true && data.length >= i) {
-//			System.out.println(nextItem);
-			i++;
-//			System.out.println(i);
-			// check if our collection has that item if it doesn't have that item
-			// add it and change our variable to true
-			if (this.contains(nextItem) == false) 
-			{
-				this.add(nextItem);
+		for (Object u : arg0) {
+			if (this.contains(u) == false) {
+				if (this.iterator().hasNext() == false) {
+					this.grow();
+					System.out.println("it grew");
+				}
+
+				this.add((T) u);
+//				realItemsInArray++;
+
 				itemAdded = true;
+			} else if (this.contains(u) == true) {
+				// If u is null it will be added to our array because it is a place holder.
+				int occurrences = Collections.frequency(this, u);
+				
+				if (occurrences <= 2)
+					// Checks to see how many times the current item is in our array if it is only in there once it will be added to array
+					this.add((T) u);
 			}
-			
-			// set next item
-			nextItem = arg0.iterator().next();
 		}
+		
+		
+//		while (arg0.iterator().hasNext() == true && data.length >= i) {
+//			i++;
+//			// check if our collection has that item if it doesn't have that item
+//			// add it and change our variable to true
+//			if (this.contains(nextItem) == false) 
+//			{
+//				if (this.iterator().hasNext() == false) {
+//					this.grow();
+//				}
+//				
+////				this.add(arg0.iterator().next());
+//				
+//				data[size()] = arg0.iterator().next();
+//				
+//				// Increases size of real items in the array meaning values that aren't null
+//				size++;
+//				
+//				itemAdded = true;
+//				
+//			}
+//			
+//			// set next item
+//			nextItem = arg0.iterator().next();
+//			System.out.println(arg0.iterator().next());
+		
+		
 				
 		return itemAdded;
 	}
@@ -172,14 +200,14 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	public boolean contains(Object arg0) 
 	{
-		
 		// while there are still items in the collection
 		while(this.iterator().hasNext())
 		{
 			
-			
+//			int occurrences = Collections.frequency(arg0, "u");
 			// if the next item equals the input item return true
 			if(this.iterator().next() == arg0)
+//				System.out.println(arg0);
 				return true;
 			
 		}
@@ -209,7 +237,7 @@ public class ArrayCollection<T> implements Collection<T>
 	public boolean isEmpty() 
 	{
 		// if the size of our collection is zero return true
-		if(this.size() == 0)
+		if(this.realItemsInArray == 0)
 			return true;
 		
 		else
@@ -277,6 +305,9 @@ public class ArrayCollection<T> implements Collection<T>
 			// decrease size
 			size --;
 			
+			// Decreases size of real items in the array meaning values that aren't null
+			realItemsInArray--;
+			
 			return true;
 		}
 	}
@@ -301,6 +332,7 @@ public class ArrayCollection<T> implements Collection<T>
 			{
 				this.remove(nextRemoveItem);
 				itemRemoved = true;
+				realItemsInArray--;
 			}
 		
 			// set next item
@@ -335,6 +367,7 @@ public class ArrayCollection<T> implements Collection<T>
 				// if the input collection does not contain the item in our collection
 				// remove that item
 				this.iterator().remove();
+				realItemsInArray--;
 				
 				// an item was removed, so the method returns true
 				itemNotRetained = true;
@@ -354,7 +387,7 @@ public class ArrayCollection<T> implements Collection<T>
 	public int size() 
 	{
 		// This returns the value of size which would be the number of elements in the collection
-		return size;
+		return realItemsInArray;
 	}
 
 	/**
@@ -459,26 +492,19 @@ public class ArrayCollection<T> implements Collection<T>
 		 * Must throw a NoSuchElementException if there are no more items to iterate through, 
 		 * otherwise, returns the next item in the collection
 		 */
-		public T next() 
-		{
+		public T next() {
 			// get number of items in the array
 			int numOfItems = ArrayCollection.this.data.length;
 
 			// Checks to see if there is a next item in ArrayCollection
-			if (counter <= numOfItems) 
-			{
-				
-					counter++;
+			if (counter <= numOfItems) {
+				counter++;
 
-					// Tells are program that we can not call next() again
-					hasNextBeenCalled = true;
+				// Tells are program that we can not call next() again
+				hasNextBeenCalled = true;
 
-					return data[counter - 1];
-			} 
-			
-			else 
-			{
-
+				return data[counter - 1];
+			} else {
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();
 			}

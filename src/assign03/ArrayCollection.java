@@ -124,6 +124,7 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Adds all of the elements in the specified collection to this collection
 	 * Only add items that do not already exist in this ArrayCollection
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean addAll(Collection<? extends T> arg0) 
 	{
 		// create a variable to check if any new elements were added
@@ -137,7 +138,6 @@ public class ArrayCollection<T> implements Collection<T>
 				}
 
 				this.add((T) u);
-//				realItemsInArray++;
 
 				itemAdded = true;
 			} else if (this.contains(u) == true) {
@@ -148,35 +148,7 @@ public class ArrayCollection<T> implements Collection<T>
 					// Checks to see how many times the current item is in our array if it is only in there once it will be added to array
 					this.add((T) u);
 			}
-		}
-		
-		
-//		while (arg0.iterator().hasNext() == true && data.length >= i) {
-//			i++;
-//			// check if our collection has that item if it doesn't have that item
-//			// add it and change our variable to true
-//			if (this.contains(nextItem) == false) 
-//			{
-//				if (this.iterator().hasNext() == false) {
-//					this.grow();
-//				}
-//				
-////				this.add(arg0.iterator().next());
-//				
-//				data[size()] = arg0.iterator().next();
-//				
-//				// Increases size of real items in the array meaning values that aren't null
-//				size++;
-//				
-//				itemAdded = true;
-//				
-//			}
-//			
-//			// set next item
-//			nextItem = arg0.iterator().next();
-//			System.out.println(arg0.iterator().next());
-		
-		
+		}		
 				
 		return itemAdded;
 	}
@@ -185,17 +157,13 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Removes all of the elements from this collection
 	 */
 	public void clear() {
-		// while there are still items in the collection
-		while (this.iterator().hasNext() == true) {
-			// go to the next item
-			this.iterator().next();
-
-			// remove that item
-			hasNextBeenCalled = true;
-			this.iterator().remove();
+			// a simple loop to set all items in the collection to null
+			for (int i = 0; i < data.length; i++) {
+				data[i] = null;
+			}
+			
+			realItemsInArray = 0;
 		}
-		System.out.println("made it through loop");
-	}
 
 	/**
 	 * Returns true if this collection contains the specified element.
@@ -521,6 +489,7 @@ public class ArrayCollection<T> implements Collection<T>
 			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
 			
+			System.out.println(itemToDelete);
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			

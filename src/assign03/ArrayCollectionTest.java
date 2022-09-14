@@ -5,73 +5,116 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ArrayCollectionTest {
+	
+	private ArrayCollection arrayCollection;
+	private ArrayCollection bigArray;
 
-	@Test
-	void testArrayCollection() {
-		fail("Not yet implemented");
+	@SuppressWarnings({ "rawtypes" })
+	@BeforeEach
+	void setUp() throws Exception 
+	{ 
+		// create collection
+		arrayCollection = new ArrayCollection();
+		bigArray = new ArrayCollection();
 	}
-
-	@SuppressWarnings("unchecked")
+	
+	@SuppressWarnings({ "unchecked" })
 	@Test
-	void testAdd() {
+	void testAdd() 
+	{
 		
-		ArrayCollection arrayCollection = new ArrayCollection();
-		ArrayCollection addAllFromCollect = new ArrayCollection();
-		ArrayCollection bigArray = new ArrayCollection();
-		
-		
+		// create a bunch of stuff to put in collection
 		Object testobj1 = "test1";
 		Object testobj2 = "test2";
 		Object testobj3 = "test3";
 		Object testobj4 = "test4";
 		Object testobj5 = "test5";
 		Object testobj6 = 123;
-
+		Object testobj7 = 223;
+		Object testobj8 = 323;
+		Object testobj9 = 423;
+		Object testobj10 = 523;
+		Object testobj11 = 623;
+		
+		// add stuff to collection
 		bigArray.add(testobj1);
 		bigArray.add(testobj2);
 		bigArray.add(testobj3);
 		bigArray.add(testobj4);
 		bigArray.add(testobj5);
 		bigArray.add(testobj6);
-		
+		bigArray.add(testobj7);
+		bigArray.add(testobj8);
+		bigArray.add(testobj9);
+		bigArray.add(testobj10);
+		bigArray.add(testobj11);
 		
 		arrayCollection.add(testobj1);
+		
+		// check the number of items in the collections
+		assertTrue(bigArray.size() == 11);
+		assertTrue(arrayCollection.size() == 1);
+		
+		// try adding items that are already in the array
 		arrayCollection.add(testobj1);
 		bigArray.add(testobj1);
 		
+		// make sure those items didn't get added
+		assertTrue(bigArray.size() == 11);
+		assertTrue(arrayCollection.size() == 1);
+		
+	}
+
+	@Test
+	void testAddAll() 
+	{
+		// create objects
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add objects
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		arrayCollection.add(testobj1);
+		
+		// add all objects
 		arrayCollection.addAll(bigArray);
 		
-		// Test work up to here
-		arrayCollection.size();
-//		System.out.println(arrayCollection.size());
-		arrayCollection.toArray();
+		assertTrue(arrayCollection.size() == 5);
 		
-		arrayCollection.clear();
-		for (Object u : arrayCollection) {
-		  System.out.println(u);
-		}
-		
-
-		
-//		System.out.println(arrayCollection.toArray());
-//		System.out.println();
-
-//		System.out.println(arrayCollection.size());
-		
-		fail("Not yet implemented");
 	}
 
 	@Test
-	void testAddAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testClear() {
-		fail("Not yet implemented");
+	void testClear() 
+	{
+		
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		bigArray.clear();
+		
+		assertTrue(bigArray.size() == 0);
+		
 	}
 
 	@Test

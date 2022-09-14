@@ -396,10 +396,10 @@ public class ArrayCollection<T> implements Collection<T>
 	public Object[] toArray() 
 	{
 		// Creates a new array the same size as data
-		T dataCopy[] = (T[]) new Object[size()];
+		T dataCopy[] = (T[]) new Object[realItemsInArray];
 		
 		// copy the data from data to the new one
-		for(int i = 0; i < size(); i++)
+		for(int i = 0; i < realItemsInArray; i++)
 			dataCopy[i] = data[i];
 		
 		return dataCopy;
@@ -425,15 +425,16 @@ public class ArrayCollection<T> implements Collection<T>
 	@SuppressWarnings("unchecked")
 	public ArrayList<T> toSortedList(Comparator<? super T> cmp)
 	{
-		for(int i = 0; i < data.length - 1; i++) 
+		
+		for(int i = 0; i < realItemsInArray; i++) 
 		{
 			int j, minIndex;
-			for(j = i + 1, minIndex = i; j < data.length; j++)
-				if(cmp.compare( (T)this.toArray()[j], (T)this.toArray()[minIndex]) < 0)
+			for(j = i + 1, minIndex = i; j < realItemsInArray; j++)
+				if(cmp.compare(data[j], data[minIndex]) < 0)
 					minIndex = j;
-			T[] temp = (T[]) this.toArray()[i];
-			this.toArray()[i] = (T[])this.toArray()[minIndex];
-			this.toArray()[minIndex] = temp;
+			T temp = data[i];
+			data[i] = data[minIndex];
+			data[minIndex] =  temp;
 		}
 		
 		return (ArrayList<T>) Arrays.asList(this.toArray());

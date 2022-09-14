@@ -30,6 +30,7 @@ public class ArrayCollection<T> implements Collection<T>
 	private int size; // Keep track of how many items this collection holds
 	private int realItemsInArray = 0; // Keeps track of how many items we have that aren't null
 	private int counter = 0;
+	boolean hasNextBeenCalled = false;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
 	@SuppressWarnings("unchecked")
@@ -183,16 +184,17 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Removes all of the elements from this collection
 	 */
-	public void clear() 
-	{
+	public void clear() {
 		// while there are still items in the collection
-		while(this.iterator().hasNext())
-		{
+		while (this.iterator().hasNext() == true) {
 			// go to the next item
 			this.iterator().next();
+
 			// remove that item
+			hasNextBeenCalled = true;
 			this.iterator().remove();
 		}
+		System.out.println("made it through loop");
 	}
 
 	/**
@@ -203,14 +205,11 @@ public class ArrayCollection<T> implements Collection<T>
 		// while there are still items in the collection
 		while(this.iterator().hasNext())
 		{
-			
-//			int occurrences = Collections.frequency(arg0, "u");
 			// if the next item equals the input item return true
 			if(this.iterator().next() == arg0)
-//				System.out.println(arg0);
 				return true;
-			
 		}
+		
 		return false;
 	}
 
@@ -416,10 +415,6 @@ public class ArrayCollection<T> implements Collection<T>
 	}
 
 
-
-	/*
-     
-	*/
 	/**
 	 * Sorting method specific to ArrayCollection - not part of the Collection interface.
      	Must implement a selection sort (see Assignment 2 for code).
@@ -453,7 +448,6 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	private class ArrayCollectionIterator implements Iterator<T>
 	{
-		boolean hasNextBeenCalled = false;
 		boolean hasRemovedBeenCalled = false;
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
@@ -466,8 +460,7 @@ public class ArrayCollection<T> implements Collection<T>
 		/**
 		 * Returns true if there are any more items in the collection to iterate through, false otherwise.
 		 */
-		public boolean hasNext() 
-		{
+		public boolean hasNext() {
 			// number of items in collection
 			int numOfItems = ArrayCollection.this.data.length;
 
@@ -478,10 +471,7 @@ public class ArrayCollection<T> implements Collection<T>
 			// collection
 			if (hasNext < numOfItems) {
 				return true;
-			} 
-			
-			else 
-			{
+			} else {
 				counter = 0;
 				return false;
 			}
@@ -523,12 +513,18 @@ public class ArrayCollection<T> implements Collection<T>
 			} else if (hasRemovedBeenCalled == false) {
 			// Grabs Value and converts it to int then subtracts one from returned value of
 			// next() which will give us the correct value to delete
-			int nextValue = (int) next();
-			int itemToDelete = nextValue - 1;
+			next();
 			
+			int itemToDelete = counter - 1;
+			
+			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
-
-			ArrayCollection.this.remove(itemToDelete);
+			
+			data[itemToDelete] = null;
+			realItemsInArray--;
+			
+			// return our index to zero since we have found the place in the collection we want do remove
+			counter = 0;
 			} else {
 				throw new IllegalStateException();
 			}

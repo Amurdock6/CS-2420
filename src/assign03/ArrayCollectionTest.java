@@ -49,13 +49,16 @@ class ArrayCollectionTest {
 //		System.out.println(arrayCollection.size());
 		arrayCollection.toArray();
 		
+		arrayCollection.clear();
+		for (Object u : arrayCollection) {
+		  System.out.println(u);
+		}
+		
 
 		
 //		System.out.println(arrayCollection.toArray());
 //		System.out.println();
-//		for (Object u : arrayCollection) {
-//		  System.out.println(u);
-//		}
+
 //		System.out.println(arrayCollection.size());
 		
 		fail("Not yet implemented");

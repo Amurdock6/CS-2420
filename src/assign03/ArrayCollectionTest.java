@@ -29,26 +29,33 @@ class ArrayCollectionTest {
 		Object testobj4 = "test4";
 		Object testobj5 = "test5";
 		Object testobj6 = 123;
-		
+
+		bigArray.add(testobj1);
 		bigArray.add(testobj2);
 		bigArray.add(testobj3);
 		bigArray.add(testobj4);
 		bigArray.add(testobj5);
 		bigArray.add(testobj6);
 		
-		// add is working
+		
 		arrayCollection.add(testobj1);
 		arrayCollection.add(testobj1);
 		bigArray.add(testobj1);
+		
 		arrayCollection.addAll(bigArray);
+		
+		// Test work up to here
+		arrayCollection.size();
+//		System.out.println(arrayCollection.size());
+		arrayCollection.toArray();
 		
 
 		
 //		System.out.println(arrayCollection.toArray());
 //		System.out.println();
-		for (Object u : arrayCollection) {
-		  System.out.println(u);
-		}
+//		for (Object u : arrayCollection) {
+//		  System.out.println(u);
+//		}
 //		System.out.println(arrayCollection.size());
 		
 		fail("Not yet implemented");

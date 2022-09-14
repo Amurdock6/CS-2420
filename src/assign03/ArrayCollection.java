@@ -397,10 +397,10 @@ public class ArrayCollection<T> implements Collection<T>
 	public Object[] toArray() 
 	{
 		// Creates a new array the same size as data
-		T dataCopy[] = (T[]) new Object[data.length];
+		T dataCopy[] = (T[]) new Object[size()];
 		
 		// copy the data from data to the new one
-		for(int i = 0; i < data.length; i++)
+		for(int i = 0; i < size(); i++)
 			dataCopy[i] = data[i];
 		
 		return dataCopy;

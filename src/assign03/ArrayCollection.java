@@ -27,7 +27,7 @@ public class ArrayCollection<T> implements Collection<T>
 {	
 	private T data[]; // Storage for the items in the collection
 	private int size; // Keep track of how many items this collection holds
-	int counter = 0;
+	private int counter = 0;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
 	@SuppressWarnings("unchecked")
@@ -133,13 +133,14 @@ public class ArrayCollection<T> implements Collection<T>
 		T nextItem = arg0.iterator().next();
 		
 		// while the collection to be added has more items
-		while (arg0.iterator().hasNext() == true && data.length > i) {
+		while (arg0.iterator().hasNext() == true && data.length >= i) {
 //			System.out.println(nextItem);
 			i++;
 //			System.out.println(i);
 			// check if our collection has that item if it doesn't have that item
 			// add it and change our variable to true
-			if (this.contains(nextItem) == false) {
+			if (this.contains(nextItem) == false) 
+			{
 				this.add(nextItem);
 				itemAdded = true;
 			}
@@ -432,7 +433,8 @@ public class ArrayCollection<T> implements Collection<T>
 		/**
 		 * Returns true if there are any more items in the collection to iterate through, false otherwise.
 		 */
-		public boolean hasNext() {
+		public boolean hasNext() 
+		{
 			// number of items in collection
 			int numOfItems = ArrayCollection.this.data.length;
 
@@ -445,7 +447,9 @@ public class ArrayCollection<T> implements Collection<T>
 				return true;
 			} 
 			
-			else {
+			else 
+			{
+				counter = 0;
 				return false;
 			}
 
@@ -455,18 +459,25 @@ public class ArrayCollection<T> implements Collection<T>
 		 * Must throw a NoSuchElementException if there are no more items to iterate through, 
 		 * otherwise, returns the next item in the collection
 		 */
-		public T next() {
+		public T next() 
+		{
+			// get number of items in the array
 			int numOfItems = ArrayCollection.this.data.length;
 
 			// Checks to see if there is a next item in ArrayCollection
-			if (counter <= numOfItems) {
+			if (counter <= numOfItems) 
+			{
+				
 					counter++;
 
 					// Tells are program that we can not call next() again
 					hasNextBeenCalled = true;
 
 					return data[counter - 1];
-			} else {
+			} 
+			
+			else 
+			{
 
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();

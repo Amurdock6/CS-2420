@@ -16,6 +16,30 @@ class ArrayCollectionTest {
 
 	@Test
 	void testAdd() {
+		
+		ArrayCollection arrayCollection = new ArrayCollection();
+		ArrayCollection addAllFromCollect = new ArrayCollection();
+		ArrayCollection bigArray = new ArrayCollection();
+		
+		Object testobj = 123;
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		arrayCollection.add(testobj1);
+		//arrayCollection.add(testobj2);
+		arrayCollection.addAll(bigArray);
+		
+		System.out.println(arrayCollection.toArray());
+		System.out.println(arrayCollection.size());
+		
 		fail("Not yet implemented");
 	}
 

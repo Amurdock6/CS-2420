@@ -77,15 +77,15 @@ public class ArrayCollection<T> implements Collection<T>
 		T myTestString = (T) testobj1;
 		T myTestNum = (T) testobj;
 		
-		arrayCollection.add(myTestString);
-		arrayCollection.add(myTestNum);
+//		arrayCollection.add(myTestString);
+//		arrayCollection.add(myTestNum);
 		
-		for (T u : arrayCollection) {
-			  System.out.println(u);
-			}
-	
-		
-		addAllFromCollect.addAll(arrayCollection);
+//		for (T u : arrayCollection) {
+//			  System.out.println(u);
+//			}
+//	
+//		
+//		addAllFromCollect.addAll(arrayCollection);
 		
 	}
 	
@@ -101,15 +101,19 @@ public class ArrayCollection<T> implements Collection<T>
 
 		else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (!this.iterator().hasNext())
+			if (this.iterator().hasNext() == false)
+			{
+				//System.out.println("I grew");
 				this.grow();
-
-			// increase the value of size
-			size++;
+			}
 			
 			// add the new element to the collection
 			data[size()] = arg0;
-
+			
+			// increase the value of size
+			System.out.println(data[size()]);
+			size++;
+			
 			return true;
 		}
 	}
@@ -253,18 +257,18 @@ public class ArrayCollection<T> implements Collection<T>
 			}
 			
 			// move all the data from the right of the item one to the left
-			for(int i = location; i < this.size() - 1; i++)
+			for(int i = location; i < data.length - 1; i++)
 				data[i] = data[i + 1];
 			
 			// create a new array one smaller than the original
-			T removeData[] = (T[]) new Object[(this.size()) - 1];
+			T removeData[] = (T[]) new Object[(data.length) - 1];
 			
 			// copy the data from the old array to the new one
-			for(int i = 0; i < this.size() - 1; i++)
+			for(int i = 0; i < data.length - 1; i++)
 				removeData[i] = data[i];
 			
 			// create a new array for data
-			data = (T[]) new Object[ (this.size()) - 1];
+			data = (T[]) new Object[ data.length - 1];
 			
 			// assign the the copied array back to data
 			data = removeData;
@@ -359,10 +363,10 @@ public class ArrayCollection<T> implements Collection<T>
 	public Object[] toArray() 
 	{
 		// Creates a new array the same size as data
-		T dataCopy[] = (T[]) new Object[this.size()];
+		T dataCopy[] = (T[]) new Object[data.length];
 		
 		// copy the data from data to the new one
-		for(int i = 0; i < this.size(); i++)
+		for(int i = 0; i < data.length; i++)
 			dataCopy[i] = data[i];
 		
 		return dataCopy;
@@ -392,10 +396,10 @@ public class ArrayCollection<T> implements Collection<T>
 	@SuppressWarnings("unchecked")
 	public ArrayList<T> toSortedList(Comparator<? super T> cmp)
 	{
-		for(int i = 0; i < this.size() - 1; i++) 
+		for(int i = 0; i < data.length - 1; i++) 
 		{
 			int j, minIndex;
-			for(j = i + 1, minIndex = i; j < this.size(); j++)
+			for(j = i + 1, minIndex = i; j < data.length; j++)
 				if(cmp.compare( (T)this.toArray()[j], (T)this.toArray()[minIndex]) < 0)
 					minIndex = j;
 			T[] temp = (T[]) this.toArray()[i];
@@ -439,7 +443,9 @@ public class ArrayCollection<T> implements Collection<T>
 			// collection
 			if (hasNext < numOfItems) {
 				return true;
-			} else {
+			} 
+			
+			else {
 				return false;
 			}
 

@@ -366,19 +366,17 @@ class ArrayCollectionTest {
 	@Test
 	void testForIterator() {
 		ArrayCollection arrayCollection = new ArrayCollection();
-//		Object testobj = 123;
-//		Object testobj1 = "test";
-//		Object myInt = 9;
-//		T myTestString = (T) testobj1;
-//		T myTestNum = (T) myInt; // Automatic casting: Object to T
-//		arrayCollection.add(myTestNum);
-//		arrayCollection.add(myTestString);
-//		
-//		arrayCollection.add();
-//		arrayCollection.iterator();
-		arrayCollection.test();
+		
+		Object testobj = 123;
+		Object testobj1 = "test";
+		Object myInt = 9;
+		
+		arrayCollection.add(0);
+		
+//		arrayCollection.iterator().next();
+		System.out.println(arrayCollection.iterator().next());
 
-		fail("Not yet implemented");
+		
 	}
 
 }

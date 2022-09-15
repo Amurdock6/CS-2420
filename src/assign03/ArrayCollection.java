@@ -464,6 +464,7 @@ public class ArrayCollection<T> implements Collection<T>
 				hasNextBeenCalled = true;
 
 				return data[counter - 1];
+
 			} else {
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();
@@ -490,7 +491,7 @@ public class ArrayCollection<T> implements Collection<T>
 			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
 			
-			System.out.println(itemToDelete);
+//			System.out.println(itemToDelete);
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			

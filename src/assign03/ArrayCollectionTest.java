@@ -2,6 +2,7 @@ package assign03;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -342,41 +343,32 @@ class ArrayCollectionTest {
 	void testToSortedList() 
 	{
 		// create object
-		Object testobj1 = "test1";
-		Object testobj2 = "test2";
-		Object testobj3 = "test3";
-		Object testobj4 = "test4";
-		Object testobj5 = "test5";
+		Object testobj6 = 123;
+		Object testobj7 = 223;
+		Object testobj8 = 323;
+		Object testobj9 = 423;
+		Object testobj10 = 523;
 		
 		// add the objects to the collections
-		arrayCollection.add(testobj1);
-		arrayCollection.add(testobj2);
-		arrayCollection.add(testobj3);
-		arrayCollection.add(testobj4);
-		arrayCollection.add(testobj5);
+		arrayCollection.add(testobj7);
+		arrayCollection.add(testobj8);
+		arrayCollection.add(testobj9);
+		arrayCollection.add(testobj10);
+		arrayCollection.add(testobj6);
 		
 		// create comparator
 		IntegerComparator testSort = new IntegerComparator();
 		
-		arrayCollection.toSortedList(testSort);
+		ArrayList sortedList = arrayCollection.toSortedList(testSort);
+		
+		assertTrue(sortedList.indexOf(testobj6) == 0);
 	}
 	
 	
 //	public abstract class ArrayCollection<T> implements Collection<T> {	
 	@Test
 	void testForIterator() {
-		ArrayCollection arrayCollection = new ArrayCollection();
-//		Object testobj = 123;
-//		Object testobj1 = "test";
-//		Object myInt = 9;
-//		T myTestString = (T) testobj1;
-//		T myTestNum = (T) myInt; // Automatic casting: Object to T
-//		arrayCollection.add(myTestNum);
-//		arrayCollection.add(myTestString);
-//		
-//		arrayCollection.add();
-//		arrayCollection.iterator();
-		arrayCollection.test();
+
 
 		fail("Not yet implemented");
 	}

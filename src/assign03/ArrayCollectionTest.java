@@ -43,6 +43,8 @@ class ArrayCollectionTest {
 		bigArray.add(testobj1);
 		
 		arrayCollection.addAll(bigArray);
+		arrayCollection.containsAll(bigArray);
+		System.out.println(arrayCollection.containsAll(bigArray));
 		
 		// Test work up to here
 		arrayCollection.size();

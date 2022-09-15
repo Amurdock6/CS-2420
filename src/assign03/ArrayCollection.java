@@ -482,19 +482,10 @@ public class ArrayCollection<T> implements Collection<T>
 			} else if (hasRemovedBeenCalled == false) {
 			// Grabs Value and converts it to int then subtracts one from returned value of
 			// next() which will give us the correct value to delete
-			next();
-			
-			int itemToDelete = counter - 1;
-			
-			// Tells are program that we can call next() again
-			hasNextBeenCalled = false;
-			
-			System.out.println(itemToDelete);
-			data[itemToDelete] = null;
-			realItemsInArray--;
-			
-			// return our index to zero since we have found the place in the collection we want do remove
-			counter = 0;
+				int nextValue = (int) next();
+				int itemToDelete = nextValue - 1;
+				
+				ArrayCollection.this.remove(itemToDelete);
 			} else {
 				throw new IllegalStateException();
 			}

@@ -357,67 +357,19 @@ class ArrayCollectionTest {
 		arrayCollection.add("Test");
 		arrayCollection.add(69);
 		
-//		System.out.println(testobj7.getClass().getName());
 
 		resultArray.add(0.5);
 		resultArray.add(665);
+		resultArray.add(false);
 		
-//		resultArray.add();
-//		resultArray.add("Test");
-
-		
-		
-//		addToArray.addAll(arrayCollection);
-		
-//		for (Object u : arrayCollection) {
-//			System.out.println(u);
-//		}
-		
-//		System.out.println();
-//		
-
-
-//		System.out.println(resultArray.remove(69));
-//		System.out.println(resultArray.remove(665));
-//		System.out.println(resultArray.remove("Test"));
+		addToArray.add(0.5);
+		addToArray.add(665);
+		addToArray.add("Test");
+		addToArray.add(69);
+		addToArray.add(false);
 		
 		System.out.println(resultArray.addAll(arrayCollection));
-		System.out.println(resultArray.contains(0.5));
-		System.out.println(resultArray.contains(69));
-		System.out.println(resultArray.contains(665));
-		System.out.println(resultArray.contains("Test"));
-			
-//		// create comparator
-//		IntegerComparator testSort = new IntegerComparator();
-//		
-//		ArrayList sortedList = arrayCollection.toSortedList(testSort);
-//		
-//		assertTrue(sortedList.indexOf(testobj6) == 0);
+		System.out.println(resultArray.containsAll(addToArray));
+		
 	}
-	
-	
-//	public abstract class ArrayCollection<T> implements Collection<T> {	
-//	@Test
-//	void testForIterator() {
-//		ArrayCollection arrayCollection = new ArrayCollection();
-//		
-//		Object testobj = 123;
-//		Object testobj1 = "test";
-//		Object myInt = 9;
-//		
-//		arrayCollection.add(0);
-//		arrayCollection.add(69);
-//		arrayCollection.add(420);
-//		arrayCollection.add("Test");
-//		
-//
-////		System.out.println(arrayCollection.remove(0));
-////		System.out.println(arrayCollection.remove(69));
-////		System.out.println(arrayCollection.remove(69));
-//		
-//	
-////		System.out.println(arrayCollection.iterator().next());
-//
-//	}
-
 }

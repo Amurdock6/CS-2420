@@ -63,33 +63,6 @@ public class ArrayCollection<T> implements Collection<T>
 		// assign the copied array back to data
 		data = dataGrow;
 	}
-
-	private ArrayCollection<T> arrayCollection;
-	private ArrayCollection<T> addAllFromCollect;
-	
-	@SuppressWarnings("unchecked")
-	public void test() {
-		arrayCollection = new ArrayCollection<T>();
-		addAllFromCollect = new ArrayCollection<T>();
-		
-		Object testobj = 123;
-		Object testobj1 = "test";
-		
-		// Casts Objects to T
-		T myTestString = (T) testobj1;
-		T myTestNum = (T) testobj;
-		
-//		arrayCollection.add(myTestString);
-//		arrayCollection.add(myTestNum);
-		
-//		for (T u : arrayCollection) {
-//			  System.out.println(u);
-//			}
-//	
-//		
-//		addAllFromCollect.addAll(arrayCollection);
-		
-	}
 	
 	/**
 	 * Ensures that this collection contains the specified element
@@ -128,7 +101,6 @@ public class ArrayCollection<T> implements Collection<T>
 			if (this.contains(u) == false) {
 				if (this.iterator().hasNext() == false) {
 					this.grow();
-					System.out.println("it grew");
 				}
 
 				this.add((T) u);
@@ -144,10 +116,6 @@ public class ArrayCollection<T> implements Collection<T>
 					this.add((T) u);
 			}
 		}
-		
-//		for (Object u : data) {
-//			System.out.println(u);
-//		}
 		
 		return itemAdded;
 	}
@@ -187,27 +155,18 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Returns true if this collection contains all of the elements in the specified collection.
 	 */
 	public boolean containsAll(Collection<?> arg0) {
-//		for (Object u : data) {
-//			System.out.println(u);
-//		}
-		
-//		System.out.println();
-		
-//		for (Object x : arg0) {
-//			System.out.println(x);
-//		}
-		
-		
-		// while the collection we are checking has more items
-		while (arg0.iterator().hasNext() == true) {
-			// if our collection does not have that item return false
-//			System.out.println(arg0.iterator().next());
-			if (this.contains(arg0.iterator().next()) == false) {
-//				System.out.println("failed");
-				return false;
+		// double for each loop that will check to see if the valuse in our parameter collection those in our main collection
+		for (Object x : arg0) {
+			for (Object c : data) {
+				if (x == null) {
+					return true;
+				} else if (c.equals(x)) {
+					return true;
+				}
 			}
+
+			return false;
 		}
-		// changes
 
 		// only returns true if our collection has all the items
 		return true;
@@ -250,7 +209,6 @@ public class ArrayCollection<T> implements Collection<T>
 
 		// if our collection does not contain the item return false
 		if (this.contains(arg0) == false) {
-			System.out.println("not in collection");
 			return false;
 
 		} else {
@@ -503,7 +461,6 @@ public class ArrayCollection<T> implements Collection<T>
 			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
 			
-//			System.out.println(itemToDelete);
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			

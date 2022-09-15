@@ -170,15 +170,17 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Returns true if this collection contains the specified element.
 	 */
 	public boolean contains(Object arg0) {
-		// while there are still items in the collection
-		while (this.iterator().hasNext() == true) {
-			// if the next item equals the input item return true
-			if (this.iterator().next() == arg0)
+		for (Object c : data) {
+			if (arg0 == null) {
 				return true;
+			} else if (arg0.equals(c)) {
+				return true;
+			}
 		}
 
 		return false;
 	}
+
 
 	
 	/**
@@ -243,10 +245,6 @@ public class ArrayCollection<T> implements Collection<T>
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object arg0) {
-		for (Object c : data) {
-			System.out.println(c);
-			}
-		System.out.println(arg0.getClass().getName());
 		// New variable for the location of the item to remove
 		int location = 0;
 
@@ -268,7 +266,6 @@ public class ArrayCollection<T> implements Collection<T>
 			
 			// tells our code where we should delete the item from
 			int whereToDelete = data.length - location - 1;
-			System.out.println(whereToDelete);
 
 			// move all the data from the right of the item one to the left
 			for (int i = whereToDelete; i < data.length - 1; i++)

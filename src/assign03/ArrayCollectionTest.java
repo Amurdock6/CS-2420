@@ -350,21 +350,18 @@ class ArrayCollectionTest {
 		Object testobj6 = 123;
 		Object testobj7 = 6655;
 		Object testobj8 = 323;
-		Object testobj9 = 423;
-		Object testobj10 = 523;
+		Object testobj9 = 0.5;
+		Object testobj10 = 772;
 		
 		// add the objects to the collections
-		arrayCollection.add(testobj7);
-		arrayCollection.add(testobj8);
-		arrayCollection.add(testobj9);
-		arrayCollection.add(testobj10);
-		arrayCollection.add("test69");
-		arrayCollection.add(123458);
-		arrayCollection.add(665);
+		arrayCollection.add("Test");
+		arrayCollection.add(69);
 		
-		System.out.println(testobj7.getClass().getName());
+//		System.out.println(testobj7.getClass().getName());
 
+		resultArray.add(0.5);
 		resultArray.add(665);
+		
 //		resultArray.add();
 //		resultArray.add("Test");
 
@@ -378,18 +375,18 @@ class ArrayCollectionTest {
 		
 //		System.out.println();
 //		
-//		for (Object u : resultArray) {
-//			System.out.println(u);
-//		}
+
 
 //		System.out.println(resultArray.remove(69));
-		System.out.println(resultArray.remove(665));
+//		System.out.println(resultArray.remove(665));
 //		System.out.println(resultArray.remove("Test"));
 		
-		System.out.println(resultArray.contains(6));
-//		System.out.println(resultArray.containsAll(addToArray));
-		
-		
+		System.out.println(resultArray.addAll(arrayCollection));
+		System.out.println(resultArray.contains(0.5));
+		System.out.println(resultArray.contains(69));
+		System.out.println(resultArray.contains(665));
+		System.out.println(resultArray.contains("Test"));
+			
 //		// create comparator
 //		IntegerComparator testSort = new IntegerComparator();
 //		
@@ -400,27 +397,27 @@ class ArrayCollectionTest {
 	
 	
 //	public abstract class ArrayCollection<T> implements Collection<T> {	
-	@Test
-	void testForIterator() {
-		ArrayCollection arrayCollection = new ArrayCollection();
-		
-		Object testobj = 123;
-		Object testobj1 = "test";
-		Object myInt = 9;
-		
-		arrayCollection.add(0);
-		arrayCollection.add(69);
-		arrayCollection.add(420);
-		arrayCollection.add("Test");
-		
-
-//		System.out.println(arrayCollection.remove(0));
-//		System.out.println(arrayCollection.remove(69));
-//		System.out.println(arrayCollection.remove(69));
-		
-	
-//		System.out.println(arrayCollection.iterator().next());
-
-	}
+//	@Test
+//	void testForIterator() {
+//		ArrayCollection arrayCollection = new ArrayCollection();
+//		
+//		Object testobj = 123;
+//		Object testobj1 = "test";
+//		Object myInt = 9;
+//		
+//		arrayCollection.add(0);
+//		arrayCollection.add(69);
+//		arrayCollection.add(420);
+//		arrayCollection.add("Test");
+//		
+//
+////		System.out.println(arrayCollection.remove(0));
+////		System.out.println(arrayCollection.remove(69));
+////		System.out.println(arrayCollection.remove(69));
+//		
+//	
+////		System.out.println(arrayCollection.iterator().next());
+//
+//	}
 
 }

@@ -166,6 +166,7 @@ class ArrayCollectionTest {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	void testIsEmpty() 
 	{
@@ -192,39 +193,172 @@ class ArrayCollectionTest {
 		assertTrue(bigArray.isEmpty());
 	}
 
+
+	@SuppressWarnings("unchecked")
 	@Test
-	void testIterator() {
-		fail("Not yet implemented");
+	void testRemove() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		// remove the object
+		arrayCollection.remove(testobj1);
+		bigArray.remove(testobj3);
+		
+		// check that the collection contains the object
+		assertTrue(arrayCollection.size() == 0);
+		assertTrue(bigArray.size() == 4);
+		
+		
+	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	void testRemove() {
-		fail("Not yet implemented");
+	void testRemoveAll() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		// remove all the objects
+		arrayCollection.removeAll(bigArray);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	void testRemoveAll() {
-		fail("Not yet implemented");
+	void testRetainAll() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		
+		// retain only the objects that bigArray has
+		arrayCollection.retainAll(bigArray);
+		
+		assertTrue(arrayCollection.size() == 3);
+
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	void testRetainAll() {
-		fail("Not yet implemented");
+	void testSize() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		// test size of collection after specific methods
+		assertTrue(arrayCollection.size() == 5);
+	
+		arrayCollection.remove(testobj3);
+		
+		assertTrue(arrayCollection.size() == 4);
+		
+		arrayCollection.clear();
+		
+		assertTrue(arrayCollection.size() == 0);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	void testSize() {
-		fail("Not yet implemented");
+	void testToArray() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		Object[] arrayCollectionToArray = arrayCollection.toArray();
+		
+		Object[] testToArray = {testobj1, testobj2, testobj3, testobj4, testobj5};
+		
+		assertTrue(arrayCollectionToArray.equals(testToArray));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	void testToArray() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testToSortedList() {
-		fail("Not yet implemented");
+	void testToSortedList() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		// create comparator
+		IntegerComparator testSort = new IntegerComparator();
+		
+		arrayCollection.toSortedList(testSort);
 	}
 	
 	

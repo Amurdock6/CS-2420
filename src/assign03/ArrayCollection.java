@@ -52,6 +52,7 @@ public class ArrayCollection<T> implements Collection<T>
 		
 		// Creates a new array twice the size of the old one
 		T dataGrow[] = (T[]) new Object[this.data.length * 2];
+		System.out.println(dataGrow.length);
 		
 		// copy the data from the old array to the new one
 		for(int i = 0; i < this.data.length; i++)
@@ -62,35 +63,10 @@ public class ArrayCollection<T> implements Collection<T>
 		
 		// assign the copied array back to data
 		data = dataGrow;
+		
+		System.out.println("size grew");
 	}
 
-	private ArrayCollection<T> arrayCollection;
-	private ArrayCollection<T> addAllFromCollect;
-	
-	@SuppressWarnings("unchecked")
-	public void test() {
-		arrayCollection = new ArrayCollection<T>();
-		addAllFromCollect = new ArrayCollection<T>();
-		
-		Object testobj = 123;
-		Object testobj1 = "test";
-		
-		// Casts Objects to T
-		T myTestString = (T) testobj1;
-		T myTestNum = (T) testobj;
-		
-//		arrayCollection.add(myTestString);
-//		arrayCollection.add(myTestNum);
-		
-//		for (T u : arrayCollection) {
-//			  System.out.println(u);
-//			}
-//	
-//		
-//		addAllFromCollect.addAll(arrayCollection);
-		
-	}
-	
 	/**
 	 * Ensures that this collection contains the specified element
 	 */
@@ -99,23 +75,18 @@ public class ArrayCollection<T> implements Collection<T>
 		// if the collection already has the element return false
 		if (this.contains(arg0) == true) {
 			return false;
-		}
-
-		else {
+		} else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (this.iterator().hasNext() == false)
-			{
+			if (this.iterator().hasNext() == false) {
 				this.grow();
 			}
-			
+
 			// increase the value of realItemsInArray
 			realItemsInArray++;
-			
-			// add the new element to the collection
-			data[realItemsInArray] = arg0;
-			
 
-			
+			// add the new element to the collection
+			data[realItemsInArray - 1] = (T) arg0;
+
 			return true;
 		}
 	}
@@ -134,7 +105,6 @@ public class ArrayCollection<T> implements Collection<T>
 			if (this.contains(u) == false) {
 				if (this.iterator().hasNext() == false) {
 					this.grow();
-					System.out.println("it grew");
 				}
 
 				this.add((T) u);
@@ -168,32 +138,33 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Returns true if this collection contains the specified element.
 	 */
-	public boolean contains(Object arg0) 
-	{
+	public boolean contains(Object arg0) {
 		// while there are still items in the collection
-		while(this.iterator().hasNext())
-		{
+		counter = 0;
+
+		while (this.iterator().hasNext()) {
+
 			// if the next item equals the input item return true
-			if(this.iterator().next() == arg0)
+			if (this.iterator().next() == arg0) {
 				return true;
+			}
 		}
-		
+
 		return false;
 	}
 
 	/**
 	 * Returns true if this collection contains all of the elements in the specified collection.
 	 */
-	public boolean containsAll(Collection<?> arg0) 
-	{
+	public boolean containsAll(Collection<?> arg0) {
 		// while the collection we are checking has more items
-		while(arg0.iterator().hasNext())
-		{
+		while (arg0.iterator().hasNext()) {
 			// if our collection does not have that item return false
-			if(!this.contains(arg0.iterator().next()))
-					return false;
+			System.out.println(this.contains(arg0.iterator().next()) == false);
+			if (this.contains(arg0.iterator().next()) == false)
+				return false;
 		}
-		
+
 		// only returns true if our collection has all the items
 		return true;
 	}
@@ -453,20 +424,21 @@ public class ArrayCollection<T> implements Collection<T>
 		 */
 		public T next() {
 			// get number of items in the array
-			int numOfItems = ArrayCollection.this.data.length;
+			int numOfItems = data.length;
 
 			// Checks to see if there is a next item in ArrayCollection
 			if (counter <= numOfItems) {
 				counter++;
 
-				// Tells are program that we can not call next() again
+				// Tells are program that we can call remove
 				hasNextBeenCalled = true;
-
+				
 				return data[counter - 1];
 			} else {
 				// If there is no next item we will throw a NoSuchElementException
 				throw new NoSuchElementException();
 			}
+
 		}
 
 		/**

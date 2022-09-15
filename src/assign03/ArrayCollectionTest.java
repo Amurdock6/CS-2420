@@ -69,6 +69,7 @@ class ArrayCollectionTest {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	void testAddAll() 
 	{
@@ -91,20 +92,94 @@ class ArrayCollectionTest {
 		// add all objects
 		arrayCollection.addAll(bigArray);
 		
+		// make sure that it adds objects not already in the collection
 		assertTrue(arrayCollection.size() == 5);
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	void testClear() 
 	{
-		
+		// create objects
 		Object testobj1 = "test1";
 		Object testobj2 = "test2";
 		Object testobj3 = "test3";
 		Object testobj4 = "test4";
 		Object testobj5 = "test5";
 		
+		// add objects
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		// clear objects
+		bigArray.clear();
+		
+		// make sure there are no objects
+		assertTrue(bigArray.size() == 0);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	void testContains() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		
+		// add the object to the collection
+		arrayCollection.add(testobj1);
+		
+		// check that the collection contains the object
+		assertTrue(arrayCollection.contains(testobj1));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	void testContainsAll() 
+	{
+		// create objects
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add objects
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		// test that big array contains all the same objects as array collection
+		assertTrue(bigArray.containsAll(arrayCollection));
+		
+	}
+
+	@Test
+	void testIsEmpty() 
+	{
+		// test that bigArray is empty to start
+		assertTrue(bigArray.isEmpty());
+		
+		// create objects
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add objects
 		bigArray.add(testobj1);
 		bigArray.add(testobj2);
 		bigArray.add(testobj3);
@@ -113,23 +188,8 @@ class ArrayCollectionTest {
 		
 		bigArray.clear();
 		
-		assertTrue(bigArray.size() == 0);
-		
-	}
-
-	@Test
-	void testContains() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testContainsAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testIsEmpty() {
-		fail("Not yet implemented");
+		//test that bigArray is empty after clearing items
+		assertTrue(bigArray.isEmpty());
 	}
 
 	@Test

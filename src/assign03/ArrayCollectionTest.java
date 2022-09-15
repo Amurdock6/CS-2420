@@ -368,7 +368,6 @@ class ArrayCollectionTest {
 //	public abstract class ArrayCollection<T> implements Collection<T> {	
 	@Test
 	void testForIterator() {
-<<<<<<< HEAD
 		ArrayCollection arrayCollection = new ArrayCollection();
 		
 		Object testobj = 123;
@@ -379,9 +378,6 @@ class ArrayCollectionTest {
 		
 //		arrayCollection.iterator().next();
 		System.out.println(arrayCollection.iterator().next());
-=======
-
->>>>>>> 3b9737ceece6b6fe7c8e1b3a6ae64a2e5ce9b659
 
 		
 	}

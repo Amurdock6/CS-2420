@@ -193,6 +193,7 @@ public class ArrayCollection<T> implements Collection<T>
 			if(!this.contains(arg0.iterator().next()))
 					return false;
 		}
+		//changes
 		
 		// only returns true if our collection has all the items
 		return true;

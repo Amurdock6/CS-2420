@@ -99,37 +99,31 @@ public class ArrayCollection<T> implements Collection<T>
 		// if the collection already has the element return false
 		if (this.contains(arg0) == true) {
 			return false;
-		}
-
-		else {
+		} else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (this.iterator().hasNext() == false)
-			{
+			if (this.iterator().hasNext() == false) {
 				this.grow();
 			}
-			
+
 			// increase the value of realItemsInArray
 			realItemsInArray++;
-			
-			// add the new element to the collection
-			data[realItemsInArray] = arg0;
-			
 
-			
+			data[realItemsInArray - 1] = arg0;
+
 			return true;
 		}
 	}
+
 	
 	/**
 	 * Adds all of the elements in the specified collection to this collection
 	 * Only add items that do not already exist in this ArrayCollection
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean addAll(Collection<? extends T> arg0) 
-	{
+	public boolean addAll(Collection<? extends T> arg0) {
 		// create a variable to check if any new elements were added
 		boolean itemAdded = false;
-		
+
 		for (Object u : arg0) {
 			if (this.contains(u) == false) {
 				if (this.iterator().hasNext() == false) {
@@ -143,16 +137,22 @@ public class ArrayCollection<T> implements Collection<T>
 			} else if (this.contains(u) == true) {
 				// If u is null it will be added to our array because it is a place holder.
 				int occurrences = Collections.frequency(this, u);
-				
+
 				if (occurrences <= 2)
-					// Checks to see how many times the current item is in our array if it is only in there once it will be added to array
+					// Checks to see how many times the current item is in our array if it is only
+					// in there once it will be added to array
 					this.add((T) u);
 			}
-		}		
-				
+		}
+		
+//		for (Object u : data) {
+//			System.out.println(u);
+//		}
+		
 		return itemAdded;
 	}
 
+	
 	/**
 	 * Removes all of the elements from this collection
 	 */
@@ -165,36 +165,48 @@ public class ArrayCollection<T> implements Collection<T>
 			realItemsInArray = 0;
 		}
 
+	
 	/**
 	 * Returns true if this collection contains the specified element.
 	 */
-	public boolean contains(Object arg0) 
-	{
+	public boolean contains(Object arg0) {
 		// while there are still items in the collection
-		while(this.iterator().hasNext())
-		{
+		while (this.iterator().hasNext() == true) {
 			// if the next item equals the input item return true
-			if(this.iterator().next() == arg0)
+			if (this.iterator().next() == arg0)
 				return true;
 		}
-		
+
 		return false;
 	}
 
+	
 	/**
 	 * Returns true if this collection contains all of the elements in the specified collection.
 	 */
-	public boolean containsAll(Collection<?> arg0) 
-	{
-		// while the collection we are checking has more items
-		while(arg0.iterator().hasNext())
-		{
-			// if our collection does not have that item return false
-			if(!this.contains(arg0.iterator().next()))
-					return false;
-		}
-		//changes
+	public boolean containsAll(Collection<?> arg0) {
+//		for (Object u : data) {
+//			System.out.println(u);
+//		}
 		
+//		System.out.println();
+		
+//		for (Object x : arg0) {
+//			System.out.println(x);
+//		}
+		
+		
+		// while the collection we are checking has more items
+		while (arg0.iterator().hasNext() == true) {
+			// if our collection does not have that item return false
+//			System.out.println(arg0.iterator().next());
+			if (this.contains(arg0.iterator().next()) == false) {
+//				System.out.println("failed");
+				return false;
+			}
+		}
+		// changes
+
 		// only returns true if our collection has all the items
 		return true;
 	}
@@ -202,12 +214,11 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Returns true if this collection contains no elements.
 	 */
-	public boolean isEmpty() 
-	{
+	public boolean isEmpty() {
 		// if the size of our collection is zero return true
-		if(this.realItemsInArray == 0)
+		if (this.realItemsInArray == 0)
 			return true;
-		
+
 		else
 			return false;
 	}
@@ -215,8 +226,7 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Returns an iterator over the elements in this collection.
 	 */
-	public Iterator<T> iterator() 
-	{
+	public Iterator<T> iterator() {
 		// Create a new iterator
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
 
@@ -224,7 +234,7 @@ public class ArrayCollection<T> implements Collection<T>
 //		collectionIterator.remove();
 //		collectionIterator.hasNext();
 //		collectionIterator.next(); 
-		
+
 		return collectionIterator;
 	}
 
@@ -232,50 +242,58 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Removes a single instance of the specified element from this collection, if it is present
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean remove(Object arg0) 
-	{
+	public boolean remove(Object arg0) {
+		for (Object c : data) {
+			System.out.println(c);
+			}
+		System.out.println(arg0.getClass().getName());
 		// New variable for the location of the item to remove
 		int location = 0;
-		
+
 		// if our collection does not contain the item return false
-		if(!this.contains(arg0))
+		if (this.contains(arg0) == false) {
+			System.out.println("not in collection");
 			return false;
-		
-		else
-		{
+
+		} else {
 			// find the location of the item in our collection
-			while(this.iterator().hasNext())
-			{
+			while (this.iterator().hasNext() == true) {
 				// when we find the location leave the loop
-				if(this.iterator().next().equals(arg0))
+				if (this.iterator().next() == arg0) {
 					break;
-				
-				location ++;
+				}
+
+				location++;
 			}
 			
+			// tells our code where we should delete the item from
+			int whereToDelete = data.length - location - 1;
+			System.out.println(whereToDelete);
+
 			// move all the data from the right of the item one to the left
-			for(int i = location; i < data.length - 1; i++)
+			for (int i = whereToDelete; i < data.length - 1; i++)
 				data[i] = data[i + 1];
-			
+
 			// create a new array one smaller than the original
 			T removeData[] = (T[]) new Object[(data.length) - 1];
 			
 			// copy the data from the old array to the new one
-			for(int i = 0; i < data.length - 1; i++)
+			for (int i = 0; i < data.length - 1; i++)
 				removeData[i] = data[i];
-			
+
+
 			// create a new array for data
-			data = (T[]) new Object[ data.length - 1];
-			
+			data = (T[]) new Object[data.length - 1];
+
 			// assign the the copied array back to data
 			data = removeData;
-			
+
 			// decrease size
-			size --;
-			
+			size--;
+
 			// Decreases size of real items in the array meaning values that aren't null
 			realItemsInArray--;
-			
+
 			return true;
 		}
 	}
@@ -459,9 +477,6 @@ public class ArrayCollection<T> implements Collection<T>
 			// Checks to see if there is a next item in ArrayCollection
 			if (counter <= numOfItems) {
 				counter++;
-
-				// Tells are program that we can not call next() again
-				hasNextBeenCalled = true;
 
 				return data[counter - 1];
 

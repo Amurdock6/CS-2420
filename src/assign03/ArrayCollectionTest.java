@@ -53,6 +53,7 @@ class ArrayCollectionTest {
 		arrayCollection.add(testobj1);
 		
 		// check the number of items in the collections
+		System.out.println(bigArray.retainAll(arrayCollection));
 		assertTrue(bigArray.size() == 9);
 		assertTrue(arrayCollection.size() == 1);
 		
@@ -264,13 +265,23 @@ class ArrayCollectionTest {
 		Object testobj5 = "test5";
 		
 		// add the objects to the collections
-		arrayCollection.add(testobj1);
-		arrayCollection.add(testobj2);
-		arrayCollection.add(testobj3);
-		arrayCollection.add(testobj4);
-		arrayCollection.add(testobj5);
+		arrayCollection.add(1);
+		arrayCollection.add(2);
+		arrayCollection.add(3);
+		arrayCollection.add(4);
+		arrayCollection.add(5);
+		arrayCollection.add(6);
+		arrayCollection.add(8);
+		arrayCollection.add(7);
+		arrayCollection.add(9);
+		arrayCollection.add(10);
+		arrayCollection.add(11);
+		arrayCollection.add(12);
+		arrayCollection.add(13);
+		arrayCollection.add(14);
+		arrayCollection.add(15);
 		
-		bigArray.add(testobj1);
+		bigArray.add(1);
 		
 		// retain only the objects that bigArray has
 		assertTrue(arrayCollection.retainAll(bigArray));
@@ -333,38 +344,38 @@ class ArrayCollectionTest {
 //		assertTrue(arrayCollectionToArray.equals(testToArray));
 //	}
 
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	void testToSortedList() 
-//	{
-//		ArrayCollection arrayCollection = new ArrayCollection();
-//		ArrayCollection addToArray = new ArrayCollection();
-//		ArrayCollection resultArray = new ArrayCollection();
-//		
-//		// create object
-//		Object testobj6 = 123;
-//		Object testobj7 = 6655;
-//		Object testobj8 = 323;
-//		Object testobj9 = 0.5;
-//		Object testobj10 = 772;
-//		
-//		// add the objects to the collections
-//		arrayCollection.add("Test");
-//		arrayCollection.add(69);
-//		
-//
-//		resultArray.add(0.5);
-//		resultArray.add(665);
-//		resultArray.add(false);
-//		
-//		addToArray.add(0.5);
-//		addToArray.add(665);
-//		addToArray.add("Test");
-//		addToArray.add(69);
-//		addToArray.add(false);
-//		
-//		System.out.println(resultArray.addAll(arrayCollection));
-//		System.out.println(resultArray.containsAll(addToArray));
-//		
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	void testToSortedList() 
+	{
+		ArrayCollection arrayCollection = new ArrayCollection();
+		ArrayCollection addToArray = new ArrayCollection();
+		ArrayCollection resultArray = new ArrayCollection();
+		
+		// create object
+		Object testobj6 = 123;
+		Object testobj7 = 6655;
+		Object testobj8 = 323;
+		Object testobj9 = 0.5;
+		Object testobj10 = 772;
+		
+		// add the objects to the collections
+		arrayCollection.add("Test");
+		arrayCollection.add(69);
+		
+
+		resultArray.add(0.5);
+		resultArray.add(665);
+		resultArray.add(false);
+		
+		addToArray.add(0.5);
+		addToArray.add(665);
+		addToArray.add("Test");
+		addToArray.add(69);
+		addToArray.add(false);
+		
+		System.out.println(resultArray.addAll(arrayCollection));
+		System.out.println(resultArray.containsAll(addToArray));
+		
+	}
 }

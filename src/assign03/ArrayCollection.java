@@ -30,7 +30,7 @@ public class ArrayCollection<T> implements Collection<T>
 	private int size; // Keep track of how many items this collection holds
 	private int realItemsInArray = 0; // Keeps track of how many items we have that aren't null
 	private int counter = 0;
-	private int retainCounter = 0;
+//	private int retainCounter = 0;
 	boolean hasNextBeenCalled = false;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
@@ -69,13 +69,12 @@ public class ArrayCollection<T> implements Collection<T>
 	 * Ensures that this collection contains the specified element
 	 */
 	public boolean add(T arg0) {
-
 		// if the collection already has the element return false
 		if (this.contains(arg0) == true) {
 			return false;
 		} else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (this.iterator().hasNext() == false) {
+			if (data.length - 1 == realItemsInArray) {
 				this.grow();
 			}
 
@@ -282,56 +281,9 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Retains only the elements in this collection that are contained in the specified collection
 	 */
-	@SuppressWarnings("unused")
 	public boolean retainAll(Collection<?> arg0) {
-		// Compare to list one elment at a time. If there elments are diffrent delete it from the data collection. If they are the same skip.
 		
-		// item removed variable
-		boolean itemNotRetained = false;
-
-		// create next item and grab the current parameters item
-		Object nextRetainItem = this.iterator().next();
-		Object nextParamItem = arg0.iterator().next();
-
-//		for (Object u : data) {
-//			System.out.println(u);
-//		}
-//		System.out.println();
-		// while the collection we are checking still has items
-		while (this.iterator().hasNext() == true && arg0.iterator().hasNext() == true) {
-//			System.out.println(nextRetainItem + " reatian");
-//			System.out.println(nextRetainItem + " RetainItem Before if");
-			if (nextRetainItem == null) {
-
-			} else if (!nextRetainItem.equals(nextParamItem)) {
-				// if the input collection does not contain the item in our collection
-				// remove that item
-				hasNextBeenCalled = true;
-				
-				System.out.println(retainCounter);
-				this.iterator().remove();
-				
-				// an item was removed, so the method returns true
-				itemNotRetained = true;
-			}
-			
-			// go to next item 
-			retainCounter++;
-			System.out.println("loops deep in dis bitch " + retainCounter);
-			nextRetainItem = this.iterator().next();
-			nextParamItem = arg0.iterator().next();
-		}
-		
-		// sets the counter back to zero so it does not screw up future remove methods
-		
-
-		System.out.println();
-		for (Object u : data) {
-			System.out.println(u);
-		}
-		
-		retainCounter = 0;
-		return itemNotRetained;
+		return false;
 	}
 
 	
@@ -446,11 +398,11 @@ public class ArrayCollection<T> implements Collection<T>
 
 			// Checks to see if there is a next item in ArrayCollection
 			// This if statment will only work when calling retainAll
-			if (retainCounter > 0) {
-				System.out.println("called " + retainCounter );
-				
-				return data[retainCounter];
-			} else if (counter <= numOfItems) {
+//			if (retainCounter > 0) {
+//				System.out.println("called " + retainCounter );
+//				
+//				return data[retainCounter];
+			if (counter <= numOfItems) {
 
 				counter++;
 
@@ -471,19 +423,19 @@ public class ArrayCollection<T> implements Collection<T>
 		public void remove() {
 			if (hasNextBeenCalled == false) {
 				throw new IllegalStateException();
-			} else if (hasRemovedBeenCalled == false && retainCounter > 0) {
-				next();
-				
-				int itemToDelete = retainCounter;
-				
-				// Tells are program that we can call next() again
-				hasNextBeenCalled = false;
-				
-				System.out.println("deleteing " + data[itemToDelete]);
-				data[itemToDelete] = null;
-				realItemsInArray--;
-				
-				retainCounter = retainCounter - 1;
+//			} else if (hasRemovedBeenCalled == false && retainCounter > 0) {
+//				next();
+//				
+//				int itemToDelete = retainCounter;
+//				
+//				// Tells are program that we can call next() again
+//				hasNextBeenCalled = false;
+//				
+//				System.out.println("deleteing " + data[itemToDelete]);
+//				data[itemToDelete] = null;
+//				realItemsInArray--;
+//				
+//				retainCounter = retainCounter - 1;
 			} else if (hasRemovedBeenCalled == false) {
 			// Grabs Value and converts it to int then subtracts one from returned value of
 			// next() which will give us the correct value to delete

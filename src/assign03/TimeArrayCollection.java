@@ -24,7 +24,7 @@ public class TimeArrayCollection {
 		IntegerComparator testComparator = new IntegerComparator();
 		
 			// Do 10000 lookups and use the average running time.
-			int timesToLoop = 10;
+			int timesToLoop = 100000000;
 			
 			int[] searchNums;
 			searchNums = new int[timesToLoop];
@@ -116,6 +116,7 @@ public class TimeArrayCollection {
 				// Average it over the number of runs.
 				double averageTime2 = ((midpointTime2 - startTime2) - (stopTime2 - midpointTime2)) / (double) timesToLoop;
 				System.out.println(n + "\t" + averageTime2);
+				
 				}
 	}
 		

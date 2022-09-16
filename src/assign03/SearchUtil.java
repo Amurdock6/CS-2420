@@ -28,7 +28,7 @@ public class SearchUtil {
 		
 		// create max, min, middle variables
 		int min = 0;
-		int max = list.size();
+		int max = list.size() - 1;
 		int middle = 0;
 		
 		// while our min is less than or equal to our max
@@ -37,7 +37,7 @@ public class SearchUtil {
 			// get the average value to be the middle
 			middle = (min + max) / 2;
 			
-			if(item.equals(list.get(middle)))
+			if(cmp.compare(item, list.get(middle)) == 0)
 				return true;
 			
 			else if(cmp.compare(item, list.get(middle)) < 1) 

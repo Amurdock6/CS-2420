@@ -75,7 +75,7 @@ public class ArrayCollection<T> implements Collection<T>
 			return false;
 		} else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (this.iterator().hasNext() == false) {
+			if (data.length - 1 ==  realItemsInArray) {
 				this.grow();
 			}
 

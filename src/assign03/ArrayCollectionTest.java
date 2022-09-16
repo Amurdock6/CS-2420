@@ -50,11 +50,13 @@ class ArrayCollectionTest {
 		bigArray.add(testobj7);
 		bigArray.add(testobj8);
 		bigArray.add(testobj9);
+		bigArray.add(1375);
+		bigArray.add(2046);
 		
 		arrayCollection.add(testobj1);
 		
 		// check the number of items in the collections
-		assertTrue(bigArray.size() == 9);
+		assertTrue(bigArray.size() == 11);
 		assertTrue(arrayCollection.size() == 1);
 		
 		// try adding items that are already in the array
@@ -62,7 +64,7 @@ class ArrayCollectionTest {
 		bigArray.add(testobj1);
 		
 		// make sure those items didn't get added
-		assertTrue(bigArray.size() == 9);
+		assertTrue(bigArray.size() == 11);
 		assertTrue(arrayCollection.size() == 1);
 		
 	}

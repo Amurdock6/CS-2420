@@ -363,8 +363,8 @@ class ArrayCollectionTest {
 		addToArray.add(69);
 		addToArray.add(false);
 		
-		System.out.println(resultArray.addAll(arrayCollection));
-		System.out.println(resultArray.containsAll(addToArray));
+		resultArray.addAll(arrayCollection);
+		resultArray.containsAll(addToArray);
 		
 		bigArray.add(testobj6);
 		bigArray.add(testobj7);

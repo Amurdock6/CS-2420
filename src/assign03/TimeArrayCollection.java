@@ -14,6 +14,9 @@ public class TimeArrayCollection {
 	
 		//TODO: Write code to time your toSortedList, contains, and SearchUtil.binarySearch methods so you can plot the results.
 	
+		ArrayCollection testToSortedList = new ArrayCollection();
+		
+		for(int i = 0; i < )
 	}
 
 	

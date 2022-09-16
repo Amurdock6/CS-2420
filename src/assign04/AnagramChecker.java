@@ -1,5 +1,7 @@
 package assign04;
 
+import java.util.Comparator;
+
 /**
  * This class contains our anagram checker which sorts the anagrams 
  * and finds the largest group of anagrams in a provided list of words
@@ -8,19 +10,23 @@ package assign04;
  * @version September 16, 2022
  */
 
-public class AnagramChecker {
+public class AnagramChecker 
+{
 
    /**
 	*This method returns the lexicographically-sorted version of the input string. 
 	*The sorting must be accomplished using an insertion sort
 	*
 	*@param String
-	*@return sorted String 
+	*@return sorted 
 	*
 	*/
-	public static String sort(String)
+	public static String sort(String unsorted)
 	{
-		return String;
+		
+		String sorted = "abc";
+		
+		return sorted;
 	}
 	
 	
@@ -28,7 +34,7 @@ public class AnagramChecker {
 	 * This generic method sorts the input array using an insertion sort and the input Comparator object.
 	 * @param <T>
 	 */
-	public static <T> void insertionSort(T[], Comparator<? super T>)
+	public static <T> void insertionSort(T[] toBeSorted, Comparator<? super T> comp)
 	{
 		
 	}
@@ -36,11 +42,11 @@ public class AnagramChecker {
 	/**This method returns true if the two input strings are anagrams of each other, otherwise returns false.  
 	 * This method must call your sort(String) method.
 	 * 
-	 * @param String
-	 * @param String
-	 * @return if the two strings are anagrams
+	 * @param firstWord
+	 * @param secondWord
+	 * @return boolean
 	 */
-	public static boolean areAnagrams(String, String)
+	public static boolean areAnagrams(String firstWord, String secondWord)
 	{
 		return false;
 	}
@@ -54,9 +60,12 @@ public class AnagramChecker {
 	*@return largest group of anagrams
 	*
 	*/
-	public static String[] getLargestAnagramGroup(String[])
+	public static String[] getLargestAnagramGroup(String[] wordArray)
 	{
-		return String[];
+		
+		String[] largestAnagram = {"abc"};
+		
+		return largestAnagram;
 	}
 	
    /**This method behaves the same as the previous method, but reads the list of words from the input filename.  
@@ -65,12 +74,14 @@ public class AnagramChecker {
 	*This method must call your getLargestAnagramGroup(String[]) method.
 	*
 	*@param filename
-	*@return largest group of anagrams
+	*@return largestAnagram
 	*
 	*/
 	public static String[] getLargestAnagramGroup(String filename)
 	{
 		
+		String[] largestAnagram = {"abc"};
+		return largestAnagram;
 	}
 }
 

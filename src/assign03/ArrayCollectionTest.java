@@ -366,7 +366,6 @@ class ArrayCollectionTest {
 			counter++;
 			
 		}
-		System.out.println(Arrays.toString(testObjectArray));
 		assertTrue(testObjectArray[0].equals(testobj9));
 	}
 }

@@ -18,21 +18,17 @@ public class TimeArrayCollection {
 		//TODO: Write code to time your toSortedList, contains, and SearchUtil.binarySearch methods so you can plot the results.
 	
 		ArrayCollection testToSortedList = new ArrayCollection();
+		IntegerComparator sortedListComparator = new IntegerComparator();
 		
-		for(int i = 0; i < ) {
-			
-		}
-		
-		{
 			// Do 10000 lookups and use the average running time.
 			int timesToLoop = 10000;
 			
 			// For each problem size n . . .
-			for (int n = 1000; n <= 10000; n += 1000) 
+			for (int n = 1000; n <= 20000; n += 1000) 
 			{
-				// Generate a new "random" library of size n.
-				Library randLib = new Library();
-				randLib.addAll(generateLibrary(n));
+				for(int t = 0; t < n; t++)
+					testToSortedList.add(randomInt());
+				
 				long startTime, midpointTime, stopTime;
 				
 				// First, spin computing stuff until one second has gone by.
@@ -47,7 +43,7 @@ public class TimeArrayCollection {
 				startTime = System.nanoTime();
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					randLib.lookup(generateIsbn());
+					testToSortedList.toSortedList(sortedListComparator);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -55,7 +51,7 @@ public class TimeArrayCollection {
 				// Run a loop to capture the cost of running the "timesToLoop" loop and generating a random ISBN.
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					generateIsbn();
+					
 				}
 				
 				stopTime = System.nanoTime();
@@ -68,42 +64,9 @@ public class TimeArrayCollection {
 			}
 		}
 		
-		/**
-		 * Returns a library of "dummy" books (random ISBN and placeholders for author and title).
-		 *
-		 * Useful for collecting running times for operations on libraries of varying size.
-		 *
-		 * @param size -- size of the library to be generated
-		 */
-		private static ArrayList<LibraryBook> generateLibrary(int size) 
-		{
-			ArrayList<LibraryBook> result = new 
-			ArrayList<LibraryBook>();
-			for(int i = 0; i < size; i++) 
-			{
-				result.add(new LibraryBook(generateIsbn(), "An author", "A title"));
-			}
-			
-			return result;
-		}
+
 		
-		/**
-		 * Returns a randomly-generated ISBN (a long with 13 digits).
-		 *
-		 * Useful for collecting running times for operations on libraries of varying size.
-		 */
-		private static long generateIsbn() 
-		{
-			Random randomNumGen = new Random();
-			
-			String isbn = "";
-			
-			for(int j = 0; j < 13; j++)
-				isbn += randomNumGen.nextInt(10);
-			
-			return Long.parseLong(isbn);
-		}
-	}
+
 
 	
 

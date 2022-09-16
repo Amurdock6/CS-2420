@@ -30,7 +30,10 @@ public class ArrayCollection<T> implements Collection<T>
 	private int size; // Keep track of how many items this collection holds
 	private int realItemsInArray = 0; // Keeps track of how many items we have that aren't null
 	private int counter = 0;
+<<<<<<< HEAD
 //	private int retainCounter = 0;
+=======
+>>>>>>> parent of e6b276b (retain all works on our test array but not for bigger collections)
 	boolean hasNextBeenCalled = false;
 
 	// There is no clean way to convert between T and Object, so we suppress the warning.
@@ -191,6 +194,11 @@ public class ArrayCollection<T> implements Collection<T>
 		// Create a new iterator
 		ArrayCollectionIterator collectionIterator = new ArrayCollectionIterator();
 
+//		// Test functionality of ArrayCollectionIterator
+//		collectionIterator.remove();
+//		collectionIterator.hasNext();
+//		collectionIterator.next(); 
+
 		return collectionIterator;
 	}
 
@@ -277,16 +285,52 @@ public class ArrayCollection<T> implements Collection<T>
 		return itemRemoved;
 	}
 
-	
 	/**
 	 * Retains only the elements in this collection that are contained in the specified collection
 	 */
+<<<<<<< HEAD
 	public boolean retainAll(Collection<?> arg0) {
 		
 		return false;
+=======
+	public boolean retainAll(Collection<?> arg0) 
+	{
+		// item removed variable
+		boolean itemNotRetained = false;
+		
+		// create next item
+		Object nextRetainItem = this.iterator().next();
+		
+		// while the collection we are checking still has items
+		while(this.iterator().hasNext())
+		{
+			// if the input collection contains the item in our collection
+			if(arg0.contains(nextRetainItem))
+			{
+				// go to the next item
+				nextRetainItem = arg0.iterator().next();
+			}
+			
+			else
+			{
+				// if the input collection does not contain the item in our collection
+				// remove that item
+				this.iterator().remove();
+				realItemsInArray--;
+				
+				// an item was removed, so the method returns true
+				itemNotRetained = true;
+				
+				// go to the next item
+				nextRetainItem = arg0.iterator().next();
+			}
+				
+		}
+		
+		return itemNotRetained;
+>>>>>>> parent of e6b276b (retain all works on our test array but not for bigger collections)
 	}
 
-	
 	/**
 	 * Returns the number of elements in this collection.
 	 */
@@ -296,7 +340,6 @@ public class ArrayCollection<T> implements Collection<T>
 		return realItemsInArray;
 	}
 
-	
 	/**
 	 * Returns an array containing all of the elements in this collection.
 	 */
@@ -313,7 +356,6 @@ public class ArrayCollection<T> implements Collection<T>
 		return dataCopy;
 	}
 
-	
 	/* 
 	 * Don't implement this method (unless you want to).
 	 * It must be here to complete the Collection interface.
@@ -397,6 +439,7 @@ public class ArrayCollection<T> implements Collection<T>
 			int numOfItems = ArrayCollection.this.data.length;
 
 			// Checks to see if there is a next item in ArrayCollection
+<<<<<<< HEAD
 			// This if statment will only work when calling retainAll
 //			if (retainCounter > 0) {
 //				System.out.println("called " + retainCounter );
@@ -404,6 +447,9 @@ public class ArrayCollection<T> implements Collection<T>
 //				return data[retainCounter];
 			if (counter <= numOfItems) {
 
+=======
+			if (counter <= numOfItems) {
+>>>>>>> parent of e6b276b (retain all works on our test array but not for bigger collections)
 				counter++;
 
 				return data[counter - 1];
@@ -421,8 +467,10 @@ public class ArrayCollection<T> implements Collection<T>
 		 * throws an IllegalStateException.
 		 */
 		public void remove() {
+
 			if (hasNextBeenCalled == false) {
 				throw new IllegalStateException();
+<<<<<<< HEAD
 //			} else if (hasRemovedBeenCalled == false && retainCounter > 0) {
 //				next();
 //				
@@ -436,6 +484,8 @@ public class ArrayCollection<T> implements Collection<T>
 //				realItemsInArray--;
 //				
 //				retainCounter = retainCounter - 1;
+=======
+>>>>>>> parent of e6b276b (retain all works on our test array but not for bigger collections)
 			} else if (hasRemovedBeenCalled == false) {
 			// Grabs Value and converts it to int then subtracts one from returned value of
 			// next() which will give us the correct value to delete
@@ -446,7 +496,6 @@ public class ArrayCollection<T> implements Collection<T>
 			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
 			
-			System.out.println("deleteing " + data[itemToDelete]);
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			

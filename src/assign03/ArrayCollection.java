@@ -379,22 +379,31 @@ public class ArrayCollection<T> implements Collection<T>
 	 * @param cmp - the comparator that defines item ordering
 	 * @return - the sorted list
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<T> toSortedList(Comparator<? super T> cmp)
 	{
-		
+		ArrayList<T> sortedArrayList = new ArrayList<T>();
+		// for loop should run through all the items starting at zero
 		for(int i = 0; i < realItemsInArray; i++) 
 		{
+			// j is every item after i and i is the min index
 			int j, minIndex;
+			// loop through all items 
 			for(j = i + 1, minIndex = i; j < realItemsInArray; j++)
+				// check j against i (min index) if j is less than i we want j to be minINdez
 				if(cmp.compare(data[j], data[minIndex]) < 0)
 					minIndex = j;
+			// create temporary storage
 			T temp = data[i];
+			// i data goes into min index spot
 			data[i] = data[minIndex];
+			// min index spot is what we stored in temp
 			data[minIndex] =  temp;
+			
+			sortedArrayList.addAll(this);
 		}
 		
-		return (ArrayList<T>) Arrays.asList(this.toArray());
+		return sortedArrayList;
 	}
 
 

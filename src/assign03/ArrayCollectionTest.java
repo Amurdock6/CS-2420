@@ -333,38 +333,60 @@ class ArrayCollectionTest {
 //		assertTrue(arrayCollectionToArray.equals(testToArray));
 //	}
 
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	void testToSortedList() 
-//	{
-//		ArrayCollection arrayCollection = new ArrayCollection();
-//		ArrayCollection addToArray = new ArrayCollection();
-//		ArrayCollection resultArray = new ArrayCollection();
-//		
-//		// create object
-//		Object testobj6 = 123;
-//		Object testobj7 = 6655;
-//		Object testobj8 = 323;
-//		Object testobj9 = 0.5;
-//		Object testobj10 = 772;
-//		
-//		// add the objects to the collections
-//		arrayCollection.add("Test");
-//		arrayCollection.add(69);
-//		
-//
-//		resultArray.add(0.5);
-//		resultArray.add(665);
-//		resultArray.add(false);
-//		
-//		addToArray.add(0.5);
-//		addToArray.add(665);
-//		addToArray.add("Test");
-//		addToArray.add(69);
-//		addToArray.add(false);
-//		
-//		System.out.println(resultArray.addAll(arrayCollection));
-//		System.out.println(resultArray.containsAll(addToArray));
-//		
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	void testToSortedList() 
+	{
+		ArrayCollection arrayCollection = new ArrayCollection();
+		ArrayCollection addToArray = new ArrayCollection();
+		ArrayCollection resultArray = new ArrayCollection();
+		
+		// create object
+		Object testobj6 = 123;
+		Object testobj7 = 6655;
+		Object testobj8 = 323;
+		Object testobj9 = 0.5;
+		Object testobj10 = 772;
+		
+		// add the objects to the collections
+		arrayCollection.add("Test");
+		arrayCollection.add(69);
+		
+
+		resultArray.add(0.5);
+		resultArray.add(665);
+		resultArray.add(false);
+		
+		addToArray.add(0.5);
+		addToArray.add(665);
+		addToArray.add("Test");
+		addToArray.add(69);
+		addToArray.add(false);
+		
+		System.out.println(resultArray.addAll(arrayCollection));
+		System.out.println(resultArray.containsAll(addToArray));
+		
+		bigArray.add(testobj6);
+		bigArray.add(testobj7);
+		bigArray.add(testobj8);
+		bigArray.add(testobj9);
+		bigArray.add(testobj10);
+		
+		IntegerComparator toSorted = new IntegerComparator();
+		
+		ArrayList sortTestList = new ArrayList();
+		sortTestList = bigArray.toSortedList(toSorted);
+		Object[] testObjectArray;
+		testObjectArray = new Object[30];
+		int counter = 0;
+		
+		for(Object t : sortTestList) {
+			
+			testObjectArray[counter] = t;
+			
+			counter++;
+		}
+		System.out.println(testObjectArray);
+		assertTrue(testObjectArray[0].equals(testobj9));
+	}
 }

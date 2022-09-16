@@ -37,7 +37,7 @@ public class SearchUtil {
 			// get the average value to be the middle
 			middle = (min + max) / 2;
 			
-			if(item.equals(list.get(middle)))
+			if(cmp.compare(item, list.get(middle)) == 0)
 				return true;
 			
 			else if(cmp.compare(item, list.get(middle)) < 1) 

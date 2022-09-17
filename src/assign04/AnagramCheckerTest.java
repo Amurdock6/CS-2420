@@ -14,8 +14,16 @@ import org.junit.jupiter.api.Test;
 class AnagramCheckerTest {
 
 	@Test
-	void testSort() {
-		fail("Not yet implemented");
+	void testSort() 
+	{
+		// create a string
+		String unsorted = "sort";
+		
+		// sort the string
+		String sorted = AnagramChecker.sort(unsorted);
+		
+		// make sure the string is sorted
+		assertTrue(sorted.equals("orst"));
 	}
 
 	@Test
@@ -24,8 +32,16 @@ class AnagramCheckerTest {
 	}
 
 	@Test
-	void testAreAnagrams() {
-		fail("Not yet implemented");
+	void testAreAnagrams() 
+	{
+		// create some strings
+		String word1 = "play";
+		String word2 = "bat";
+		String word3 = "tab";
+		
+		// test to make sure are anagrams can tell if they are anagrams or not
+		assertFalse(AnagramChecker.areAnagrams(word1, word2));
+		assertTrue(AnagramChecker.areAnagrams(word3, word2));
 	}
 
 	@Test

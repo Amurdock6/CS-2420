@@ -45,13 +45,28 @@ class AnagramCheckerTest {
 	}
 
 	@Test
-	void testGetLargestAnagramGroupStringArray() {
-		fail("Not yet implemented");
+	void testGetLargestAnagramGroupStringArray() 
+	{
+		// create test array
+		String[] testArray = {"carets", "Caters", "caster", "play", "bat", "tab"};
+		String[] answer = {"carets", "Caters", "caster"};
+		String[] noAnagram = {"carets", "play", "bat"};
+		
+		// test if the correct array is returned
+		assertTrue(AnagramChecker.getLargestAnagramGroup(testArray).equals(answer));
+		
+		assertTrue(AnagramChecker.getLargestAnagramGroup(noAnagram).length == 0);
+
 	}
 
 	@Test
-	void testGetLargestAnagramGroupString() {
-		fail("Not yet implemented");
+	void testGetLargestAnagramGroupString() 
+	{
+		// File array of strings
+		String [] testAnswer = {"carets", "Caters", "caster", "crates", "Reacts", "recast", "traces"};
+		
+		// Test if the get largest returns the correct array
+		assertTrue(AnagramChecker.getLargestAnagramGroup("sample_word_list.txt").equals(testAnswer));
 	}
 
 }

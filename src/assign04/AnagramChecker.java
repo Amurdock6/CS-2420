@@ -23,6 +23,7 @@ public class AnagramChecker
 	*/
 	public static String sort(String unsorted)
 	{
+		String[] splitString = unsorted.split("");
 		
 		String sorted = "abc";
 		

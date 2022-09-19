@@ -118,6 +118,15 @@ public class AnagramChecker
 		
 		String[] largestAnagram = {};
 		
+		// need to creat comparator class or lambda expression
+		insertionSort(wordArray, comparator);
+		
+		// this won't work right. Just an idea but not entirely sure what to do.
+		for(int i = 1; i < wordArray.length; i++)
+			if( areAnagrams(wordArray[0], wordArray[i]))
+				largestAnagram[i] = wordArray[i];
+			
+		
 		return largestAnagram;
 	}
 	

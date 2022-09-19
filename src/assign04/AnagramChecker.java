@@ -97,7 +97,10 @@ public class AnagramChecker
 	 */
 	public static boolean areAnagrams(String firstWord, String secondWord)
 	{
-		return false;
+		if(sort(firstWord).compareTo(sort(secondWord)) == 0)
+			return true;
+		else
+			return false;
 	}
 	
    /**This method returns the largest group of anagrams in the input array of words, in no particular order.  

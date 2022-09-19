@@ -25,7 +25,24 @@ public class AnagramChecker
 	{
 		String[] splitString = unsorted.split("");
 		
-		String sorted = "abc";
+		for (int i = 1 ; i < splitString.length; i++)
+		{
+			int previousValue = i;
+
+			while(splitString[previousValue - 1].compareTo(splitString[i]) < 1 & previousValue > 0)
+			{
+				splitString[previousValue] = splitString[previousValue-1];
+	             previousValue--;
+	        }
+			
+			splitString[previousValue] = splitString[i];
+	     }
+		
+		String sorted = "";
+		
+		for (int j = 0; j < splitString.length; j++)
+			
+		sorted = sorted + splitString[j];
 		
 		return sorted;
 	}

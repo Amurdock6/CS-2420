@@ -97,6 +97,7 @@ public class AnagramChecker
 	 */
 	public static boolean areAnagrams(String firstWord, String secondWord)
 	{
+		// if the sorted first word is the same as the sorted second word return true
 		if(sort(firstWord).compareTo(sort(secondWord)) == 0)
 			return true;
 		else
@@ -115,7 +116,7 @@ public class AnagramChecker
 	public static String[] getLargestAnagramGroup(String[] wordArray)
 	{
 		
-		String[] largestAnagram = {"abc"};
+		String[] largestAnagram = {};
 		
 		return largestAnagram;
 	}

@@ -23,26 +23,33 @@ public class AnagramChecker
 	*/
 	public static String sort(String unsorted)
 	{
-		String[] splitString = unsorted.split("");
+		// make our string an array of characters
+		char[] splitString = unsorted.toCharArray();
 		
 		for (int i = 1 ; i < splitString.length; i++)
 		{
-			int previousValue = i;
-
-			while(splitString[previousValue - 1].compareTo(splitString[i]) < 1 & previousValue > 0)
-			{
-				splitString[previousValue] = splitString[previousValue-1];
-	             previousValue--;
-	        }
+			// set the position as the second character and compare to the left
+			int position = i;
+			// set the value we are looking at as the second character
+			char currentChar = splitString[i];
 			
-			splitString[previousValue] = splitString[i];
+			// while our character is smaller than the characters on the left
+			while(splitString[position - 1] > currentChar || position > 0)
+			{
+				// set the current position with the bigger character
+				splitString[position] = splitString[position-1];
+	             position--;
+	        }
+			// set the final position for our current character
+			splitString[position] = currentChar;
 	     }
 		
+		// create a string
 		String sorted = "";
 		
+		// add the characters together to form a new sorted string
 		for (int j = 0; j < splitString.length; j++)
-			
-		sorted = sorted + splitString[j];
+			sorted = sorted + splitString[j];
 		
 		return sorted;
 	}

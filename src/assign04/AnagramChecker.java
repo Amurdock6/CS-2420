@@ -28,20 +28,24 @@ public class AnagramChecker
 		
 		for (int i = 1 ; i < splitString.length; i++)
 		{
-			// set the position as the second character and compare to the left
-			int position = i;
+			// set the position as the first character
+			int position = i - 1;
+			
 			// set the value we are looking at as the second character
 			char currentChar = splitString[i];
 			
-			// while our character is smaller than the characters on the left
-			while(splitString[position - 1] > currentChar || position > 0)
+			// while our character is smaller than the characters on the left and position is greater than -1
+			while(position > -1 && splitString[position] > currentChar )
 			{
 				// set the current position with the bigger character
-				splitString[position] = splitString[position-1];
+				splitString[position + 1] = splitString[position];
+				
+				// reduce the position
 	             position--;
 	        }
+			
 			// set the final position for our current character
-			splitString[position] = currentChar;
+			splitString[position + 1] = currentChar;
 	     }
 		
 		// create a string

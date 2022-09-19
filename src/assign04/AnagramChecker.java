@@ -65,7 +65,27 @@ public class AnagramChecker
 	 */
 	public static <T> void insertionSort(T[] toBeSorted, Comparator<? super T> comp)
 	{
-		
+		for (int i = 1 ; i < toBeSorted.length; i++)
+		{
+			// set the position as the first string
+			int position = i - 1;
+			
+			// set the value we are looking at as the second string
+			T currentString = toBeSorted[i];
+			
+			// while our string is smaller than the characters on the left and position is greater than -1
+			while(position > -1 && comp.compare(toBeSorted[position], currentString ) > 1)
+			{
+				// set the current position with the bigger string
+				toBeSorted[position + 1] = toBeSorted[position];
+				
+				// reduce the position
+	             position--;
+	        }
+			
+			// set the final position for our current string
+			toBeSorted[position + 1] = currentString;
+	     }
 	}
 	
 	/**This method returns true if the two input strings are anagrams of each other, otherwise returns false.  

@@ -124,7 +124,9 @@ public class AnagramChecker
 		String[] largestAnagram = {};
 		
 		// need to create comparator class or lambda expression
-		insertionSort(wordArray, SortBySize);
+		SortBySize
+		
+		insertionSort(wordArray, );
 		
 		// this won't work right. Just an idea but not entirely sure what to do.
 		for (int i = 1; i < wordArray.length; i++)
@@ -134,7 +136,8 @@ public class AnagramChecker
 		return largestAnagram;
 	}
 	
-	class SortBySize implements Comparator<String> {
+
+	private class SortBySize implements Comparator<String> {
 
 		public int compare(String a1, String a2) {
 			// TODO Auto-generated method stub

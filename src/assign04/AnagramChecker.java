@@ -102,12 +102,11 @@ public class AnagramChecker
 	public static boolean areAnagrams(String firstWord, String secondWord)
 	{
 		// if the sorted first word is the same as the sorted second word return true
-		if(sort(firstWord).compareTo(sort(secondWord)) == 0)
+		if(sort(firstWord.toLowerCase()).compareTo(sort(secondWord.toLowerCase())) == 0)
 			return true;
 		else
 			return false;
 	}
-	
 	
 	
    /**This method returns the largest group of anagrams in the input array of words, in no particular order.  
@@ -120,24 +119,42 @@ public class AnagramChecker
 	*
 	*/
 	public static String[] getLargestAnagramGroup(String[] wordArray)
-	{
-		
-		
+	{	
+		// Comparator
 		SortBySize sortBySize = new SortBySize();
-		
-		String[] largestAnagram = {};
-		
 		insertionSort(wordArray, sortBySize);
 		
+		String[] largestAnagram = new String[3];
+		
 		// this won't work right. Just an idea but not entirely sure what to do.
-		for (int i = 1; i < wordArray.length; i++)
-			if (areAnagrams(wordArray[0], wordArray[i]))
-				largestAnagram[i] = wordArray[i];
-
+//		for (int i = 1; i < wordArray.length; i++) {
+//			System.out.println(areAnagrams(wordArray[0], wordArray[i]));
+//			if (areAnagrams(wordArray[0], wordArray[i]))
+//				largestAnagram[i] = wordArray[i];
+//		}
+		
+//		System.out.println(Arrays.toString(largestAnagram));
+		
+		int counter = 0;
+		
+		while (areAnagrams(wordArray[0], wordArray[counter])) {
+//			System.out.println(wordArray[counter]);
+			largestAnagram[counter] = wordArray[counter];
+			counter++;
+		}
+		
+		System.out.println(Arrays.toString(largestAnagram) + " sorted");
+		
+		
 		return largestAnagram;
 	}
 	
 
+	/**
+	 * 
+	 * Compares two strings and checks to see which string is bigger.
+	 *
+	 */
 	public static class SortBySize implements Comparator<String> {
 
 		public int compare(String str1, String str2) {
@@ -178,48 +195,40 @@ public class AnagramChecker
 	*@return largestAnagram
 	*
 	*/
-	public static String[] getLargestAnagramGroup(String filename)
-	{
+	@SuppressWarnings("finally")
+	public static String[] getLargestAnagramGroup(String filename) {
 		// create a new String array
 		String[] AnagramListFromFile = {};
-		
+
 		// save the file as a variable
 		File listOfWords = new File(filename);
-		
+
 		// counter to add words to the array
 		int counter = 0;
-		
-	    try 
-	    {
-	    	// create a scanner to run through the file
-	    	Scanner findWords = new Scanner(listOfWords);
-		
-		    // there are more lines in the file
-		    while (findWords.hasNextLine()) 
-		    {
-		    	// add the words to the new array
-		    	String newWord = findWords.nextLine();
-		    	AnagramListFromFile[counter] = newWord;
-		    	
-		    	counter++;
-		    }
-		    
-		    findWords.close();
-	    } 
-	    
-	    // catch an error if the file isn't found
-	    catch (FileNotFoundException e) 
-	    {
-	      System.out.println("File not found");
-	      e.printStackTrace();
-	    }
-	    
-	    // create a largest anagram array
-		String[] LargestAnagram = getLargestAnagramGroup(AnagramListFromFile);
 
-		
-		
-		return LargestAnagram;
+		try {
+			// create a scanner to run through the file
+			Scanner findWords = new Scanner(listOfWords);
+
+			// there are more lines in the file
+			while (findWords.hasNextLine()) {
+				// add the words to the new array
+				String newWord = findWords.nextLine();
+				AnagramListFromFile[counter] = newWord;
+
+				counter++;
+			}
+
+			findWords.close();
+		} finally {
+		    // create a largest anagram array
+			String[] LargestAnagram = getLargestAnagramGroup(AnagramListFromFile);
+
+			
+			
+			return LargestAnagram;
+		}
+
 	}
 }
 

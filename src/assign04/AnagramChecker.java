@@ -1,6 +1,9 @@
 package assign04;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  * This class contains our anagram checker which sorts the anagrams 
@@ -141,9 +144,43 @@ public class AnagramChecker
 	*/
 	public static String[] getLargestAnagramGroup(String filename)
 	{
+		// create a new String array
+		String[] AnagramListFromFile = {};
 		
-		String[] largestAnagram = {"abc"};
-		return largestAnagram;
+		// save the file as a variable
+		File listOfWords = new File(filename);
+		
+		// counter to add words to the array
+		int counter = 0;
+		
+	    try 
+	    {
+	    	// create a scanner to run through the file
+	    	Scanner findWords = new Scanner(listOfWords);
+		
+		    // there are more lines in the file
+		    while (findWords.hasNextLine()) 
+		    {
+		    	// add the words to the new array
+		    	String newWord = findWords.nextLine();
+		    	AnagramListFromFile[counter] = newWord;
+		    }
+		    
+		    findWords.close();
+	    } 
+	    
+	    catch (FileNotFoundException e) 
+	    {
+	      System.out.println("No file found");
+	      e.printStackTrace();
+	    }
+	    
+	    // create a largest anagram array
+		String[] LargestAnagram = getLargestAnagramGroup(AnagramListFromFile);
+
+		
+		
+		return LargestAnagram;
 	}
 }
 

@@ -126,12 +126,14 @@ public class AnagramChecker
 		
 		String[] largestAnagram = new String[3];
 		
-		// this won't work right. Just an idea but not entirely sure what to do.
-//		for (int i = 1; i < wordArray.length; i++) {
-//			System.out.println(areAnagrams(wordArray[0], wordArray[i]));
-//			if (areAnagrams(wordArray[0], wordArray[i]))
-//				largestAnagram[i] = wordArray[i];
-//		}
+		// Make first, last, currentLargestAnagrams, setFirst, setLast, setLargest
+		// Set first as counter, set last right before increasing counter, set current largest as zero to start
+		// Put all of our stuff in a for loop
+		// after while loop set currentLargest
+		// use if statement to check if our currentLargest is bigger than our setLargest
+		// if it is we change setFirst and setLast to the new First and Last and setLargest to currentLargest
+		// continues through the for loop until we get all the way through the array
+		// after for loop populate an array with the words for the largest group of anagrams
 		
 //		System.out.println(Arrays.toString(largestAnagram));
 		

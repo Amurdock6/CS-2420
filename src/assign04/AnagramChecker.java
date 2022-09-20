@@ -164,14 +164,17 @@ public class AnagramChecker
 		    	// add the words to the new array
 		    	String newWord = findWords.nextLine();
 		    	AnagramListFromFile[counter] = newWord;
+		    	
+		    	counter++;
 		    }
 		    
 		    findWords.close();
 	    } 
 	    
+	    // catch an error if the file isn't found
 	    catch (FileNotFoundException e) 
 	    {
-	      System.out.println("No file found");
+	      System.out.println("File not found");
 	      e.printStackTrace();
 	    }
 	    

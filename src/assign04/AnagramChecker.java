@@ -2,6 +2,7 @@ package assign04;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -77,7 +78,7 @@ public class AnagramChecker
 			T currentString = toBeSorted[i];
 			
 			// while our string is smaller than the characters on the left and position is greater than -1
-			while(position > -1 && comp.compare(toBeSorted[position], currentString ) > 1)
+			while(position > -1 && comp.compare(toBeSorted[position], currentString ) > 0)
 			{
 				// set the current position with the bigger string
 				toBeSorted[position + 1] = toBeSorted[position];
@@ -121,12 +122,12 @@ public class AnagramChecker
 	public static String[] getLargestAnagramGroup(String[] wordArray)
 	{
 		
+		
+		SortBySize sortBySize = new SortBySize();
+		
 		String[] largestAnagram = {};
 		
-		// need to create comparator class or lambda expression
-		SortBySize
-		
-		insertionSort(wordArray, );
+		insertionSort(wordArray, sortBySize);
 		
 		// this won't work right. Just an idea but not entirely sure what to do.
 		for (int i = 1; i < wordArray.length; i++)
@@ -137,29 +138,34 @@ public class AnagramChecker
 	}
 	
 
-	private class SortBySize implements Comparator<String> {
+	public static class SortBySize implements Comparator<String> {
 
-		public int compare(String a1, String a2) {
-			// TODO Auto-generated method stub
-			
-			// Grabs the sizes of our anagrams
-			int anagramSize1 = a1.length();
-			int anagramSize2 = a2.length();
-			
-			// Compares the twos lengths and sees which is larger
-			if(anagramSize1 > anagramSize2) {
-				return anagramSize1;
-			} else if (anagramSize1 < anagramSize2) {
-				return anagramSize2;
-			} else if (anagramSize1 == anagramSize2) {
-				
+		public int compare(String str1, String str2) {
+			// Sorting strings
+			char[] arr1 = str1.toCharArray();
+			Arrays.sort(arr1);
+			char[] arr2 = str2.toCharArray();
+			Arrays.sort(arr2);
+			boolean flag = true;
+
+			int counter = -1;
+
+			if (arr1.length < arr2.length) {
+				return counter;
+			} else {
+				// Checks index of characters
+				for (int i = 0; i < arr2.length; i++) {
+					if (arr1[i] < arr2[i]) {
+						return counter;
+					}
+				}
 			}
-			
-			System.out.println(anagramSize1);
-			
-			return 0;
+
+			counter = 1;
+			return counter;
+
 		}
-		
+
 	}
 
 	

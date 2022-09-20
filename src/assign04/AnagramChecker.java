@@ -107,6 +107,8 @@ public class AnagramChecker
 			return false;
 	}
 	
+	
+	
    /**This method returns the largest group of anagrams in the input array of words, in no particular order.  
 	*It returns an empty array if there are no anagrams in the input array.  
 	*This method must call your areAnagrams(String, String) method 
@@ -121,8 +123,8 @@ public class AnagramChecker
 		
 		String[] largestAnagram = {};
 		
-		// need to creat comparator class or lambda expression
-		insertionSort(wordArray, comparator);
+		// need to create comparator class or lambda expression
+		insertionSort(wordArray, SortBySize);
 		
 		// this won't work right. Just an idea but not entirely sure what to do.
 		for(int i = 1; i < wordArray.length; i++)
@@ -132,6 +134,33 @@ public class AnagramChecker
 		
 		return largestAnagram;
 	}
+	
+	class SortBySize implements Comparator<String[]> {
+
+		@Override
+		public int compare(String[] o1, String[] o2) {
+			// TODO Auto-generated method stub
+			
+			// Grabs the sizes of our anagrams
+			int anagramSize1 = o1.length;
+			int anagramSize2 = o2.length;
+			
+			// Compares the twos lengths and sees which is larger
+			if(anagramSize1 > anagramSize2) {
+				// do something when anagramSize1 is larger
+			} else if (anagramSize1 < anagramSize2) {
+				// do something when anagramSize2 is larger
+			} else if (anagramSize1 == anagramSize2) {
+				// do something when the anagrams are equal in length
+			}
+			
+			System.out.println(anagramSize1);
+			
+			return 0;
+		}
+		
+	}
+
 	
    /**This method behaves the same as the previous method, but reads the list of words from the input filename.  
 	*It is assumed that the file contains one word per line.  

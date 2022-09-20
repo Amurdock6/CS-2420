@@ -127,31 +127,29 @@ public class AnagramChecker
 		insertionSort(wordArray, SortBySize);
 		
 		// this won't work right. Just an idea but not entirely sure what to do.
-		for(int i = 1; i < wordArray.length; i++)
-			if( areAnagrams(wordArray[0], wordArray[i]))
+		for (int i = 1; i < wordArray.length; i++)
+			if (areAnagrams(wordArray[0], wordArray[i]))
 				largestAnagram[i] = wordArray[i];
-			
-		
+
 		return largestAnagram;
 	}
 	
-	class SortBySize implements Comparator<String[]> {
+	class SortBySize implements Comparator<String> {
 
-		@Override
-		public int compare(String[] o1, String[] o2) {
+		public int compare(String a1, String a2) {
 			// TODO Auto-generated method stub
 			
 			// Grabs the sizes of our anagrams
-			int anagramSize1 = o1.length;
-			int anagramSize2 = o2.length;
+			int anagramSize1 = a1.length();
+			int anagramSize2 = a2.length();
 			
 			// Compares the twos lengths and sees which is larger
 			if(anagramSize1 > anagramSize2) {
-				// do something when anagramSize1 is larger
+				return anagramSize1;
 			} else if (anagramSize1 < anagramSize2) {
-				// do something when anagramSize2 is larger
+				return anagramSize2;
 			} else if (anagramSize1 == anagramSize2) {
-				// do something when the anagrams are equal in length
+				
 			}
 			
 			System.out.println(anagramSize1);

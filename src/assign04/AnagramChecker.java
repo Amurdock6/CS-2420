@@ -155,12 +155,16 @@ public class AnagramChecker
 			}
 			
 			// set the last value to the number of indexes checked
-			currentLast = counter;
+			currentLast = counter +1;
 			// total number of anagrams is biggest minus smallest
 			currentLargest = currentLast - currentFirst;
 			
+			// if we have one word that doesn't have other anagrams
+			if(currentLargest == 1)
+				currentLargest = 0;
+			
 			// if there are more anagrams in this group than the set highest set new highest
-			if(currentLargest > setLargest)
+			else if(currentLargest > setLargest)
 			{
 				// keep track of first index
 				setFirst = currentFirst;
@@ -174,9 +178,16 @@ public class AnagramChecker
 		// array of largest group of anagrams
 		String[] largestAnagram = new String[setLargest];
 		
+		if(setLargest == 0)
+			return largestAnagram;
+		
+		int k = 0;
+		
 		for(int j = setFirst; j <= setLast; j++)
 		{
-			largestAnagram[j] = wordArray[j];
+			largestAnagram[k] = wordArray[j];
+			
+			k++;
 		}
 		
 		return largestAnagram;

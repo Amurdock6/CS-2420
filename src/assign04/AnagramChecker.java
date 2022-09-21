@@ -109,6 +109,28 @@ public class AnagramChecker
 	}
 	
 	
+	/*
+	 * This method will grow our String Array from the getLargestAnagramGroup method for each new anagram we add
+	 */
+	public static String[] grow(String[] oldArray) {
+		// Creates a new array twice the size of the old one
+		String growString[] = new String[oldArray.length + 1];
+		
+		// copy the data from the old array to the new one
+		for (int i = 0; i < oldArray.length; i++) {
+			growString[i] = oldArray[i];
+		}
+		
+		// create a new array for data
+		oldArray = new String[oldArray.length + 1];
+		
+		// assign the copied array back to oldArray
+		oldArray = growString;
+		
+		return oldArray;
+	}
+	
+	
    /**This method returns the largest group of anagrams in the input array of words, in no particular order.  
 	*It returns an empty array if there are no anagrams in the input array.  
 	*This method must call your areAnagrams(String, String) method 
@@ -124,29 +146,18 @@ public class AnagramChecker
 		SortBySize sortBySize = new SortBySize();
 		insertionSort(wordArray, sortBySize);
 		
-		String[] largestAnagram = new String[3];
+		// keeps track of all the anagrams in a list
+		String[] largestAnagram = {};
 		
-		// Make first, last, currentLargestAnagrams, setFirst, setLast, setLargest
-		// Set first as counter, set last right before increasing counter, set current largest as zero to start
-		// Put all of our stuff in a for loop
-		// after while loop set currentLargest
-		// use if statement to check if our currentLargest is bigger than our setLargest
-		// if it is we change setFirst and setLast to the new First and Last and setLargest to currentLargest
-		// continues through the for loop until we get all the way through the array
-		// after for loop populate an array with the words for the largest group of anagrams
-		
-//		System.out.println(Arrays.toString(largestAnagram));
-		
+		// to keep track of how many times we run through the loop
 		int counter = 0;
 		
 		while (areAnagrams(wordArray[0], wordArray[counter])) {
-//			System.out.println(wordArray[counter]);
+			// adds a new empty space to our largestAnagram array to add the new anagram too.
+			largestAnagram = grow(largestAnagram);
 			largestAnagram[counter] = wordArray[counter];
 			counter++;
 		}
-		
-		System.out.println(Arrays.toString(largestAnagram) + " sorted");
-		
 		
 		return largestAnagram;
 	}
@@ -165,7 +176,6 @@ public class AnagramChecker
 			Arrays.sort(arr1);
 			char[] arr2 = str2.toCharArray();
 			Arrays.sort(arr2);
-			boolean flag = true;
 
 			int counter = -1;
 
@@ -182,7 +192,6 @@ public class AnagramChecker
 
 			counter = 1;
 			return counter;
-
 		}
 
 	}

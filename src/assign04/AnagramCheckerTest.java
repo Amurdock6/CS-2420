@@ -56,8 +56,6 @@ class AnagramCheckerTest {
 		String[] answer = {"Caters", "caster", "carets"};
 		String[] noAnagram = {"carets", "play", "bat"};
 		
-//		System.out.println(Arrays.toString(AnagramChecker.getLargestAnagramGroup(testArray)));
-		
 		// test if the correct array is returned
 		assertTrue(AnagramChecker.getLargestAnagramGroup(testArray).length == 3);
 //		assertTrue(AnagramChecker.getLargestAnagramGroup(noAnagram).length == 0);

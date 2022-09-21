@@ -181,13 +181,18 @@ public class AnagramChecker
 		// array of largest group of anagrams
 		String[] largestAnagramGroup = new String[setLargest];
 		
+		int k = 0;
+		
 		if(setLargest == 0)
 			return largestAnagramGroup;
 		
 		for(int j = 0; j < wordArray.length; j++)
 		{
 			if(areAnagrams(wordArray[j], largestAnagram))
-				largestAnagramGroup[j] = wordArray[j];
+			{
+				largestAnagramGroup[k] = wordArray[j];
+				k++;
+			}
 		}
 		
 		return largestAnagramGroup;

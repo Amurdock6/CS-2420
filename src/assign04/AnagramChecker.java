@@ -161,40 +161,6 @@ public class AnagramChecker
 		
 		return largestAnagram;
 	}
-	
-
-	/**
-	 * 
-	 * Compares two strings and checks to see which string is bigger.
-	 *
-	 */
-	public static class SortBySize implements Comparator<String> {
-
-		public int compare(String str1, String str2) {
-			// Sorting strings
-			char[] arr1 = str1.toCharArray();
-			Arrays.sort(arr1);
-			char[] arr2 = str2.toCharArray();
-			Arrays.sort(arr2);
-
-			int counter = -1;
-
-			if (arr1.length < arr2.length) {
-				return counter;
-			} else {
-				// Checks index of characters
-				for (int i = 0; i < arr2.length; i++) {
-					if (arr1[i] < arr2[i]) {
-						return counter;
-					}
-				}
-			}
-
-			counter = 1;
-			return counter;
-		}
-
-	}
 
 	
    /**This method behaves the same as the previous method, but reads the list of words from the input filename.  
@@ -238,6 +204,39 @@ public class AnagramChecker
 			
 			
 			return LargestAnagram;
+		}
+
+	}
+	
+	/**
+	 * 
+	 * Compares two strings and checks to see which string is bigger.
+	 *
+	 */
+	public static class SortBySize implements Comparator<String> {
+
+		public int compare(String str1, String str2) {
+			// Sorting strings
+			char[] arr1 = str1.toCharArray();
+			Arrays.sort(arr1);
+			char[] arr2 = str2.toCharArray();
+			Arrays.sort(arr2);
+
+			int counter = -1;
+
+			if (arr1.length < arr2.length) {
+				return counter;
+			} else {
+				// Checks index of characters
+				for (int i = 0; i < arr2.length; i++) {
+					if (arr1[i] < arr2[i]) {
+						return counter;
+					}
+				}
+			}
+
+			counter = 1;
+			return counter;
 		}
 
 	}

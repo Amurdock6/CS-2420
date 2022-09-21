@@ -31,11 +31,6 @@ class AnagramCheckerTest {
 	}
 
 	@Test
-	void testInsertionSort() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testAreAnagrams() 
 	{
 		// create some strings
@@ -58,7 +53,7 @@ class AnagramCheckerTest {
 		
 		// test if the correct array is returned
 		assertTrue(AnagramChecker.getLargestAnagramGroup(testArray).length == 3);
-//		assertTrue(AnagramChecker.getLargestAnagramGroup(noAnagram).length == 0);
+		assertTrue(AnagramChecker.getLargestAnagramGroup(noAnagram).length == 0);
 	}
 
 	@Test

@@ -134,8 +134,7 @@ public class AnagramChecker
 		int currentLargest;
 		
 		// first index last index and largest for biggest group of anagrams
-		int setFirst = 0;
-		int setLast = 0;
+		String largestAnagram = "";
 		int setLargest = 0;
 		
 		// loop through all the strings in word array
@@ -149,10 +148,14 @@ public class AnagramChecker
 			currentFirst = counter;
 			
 			// while the values we are checking are anagrams
-			while (areAnagrams(wordArray[currentFirst], wordArray[counter + 1])) 
+			while (areAnagrams(wordArray[currentFirst], wordArray[counter + 1]) && counter < wordArray.length - 2) 
 			{
 				counter++;
 			}
+			
+			if(counter == wordArray.length - 2)
+				if(areAnagrams(wordArray[currentFirst], wordArray[counter + 1]))
+						counter++;
 			
 			// set the last value to the number of indexes checked
 			currentLast = counter +1;
@@ -166,31 +169,28 @@ public class AnagramChecker
 			// if there are more anagrams in this group than the set highest set new highest
 			else if(currentLargest > setLargest)
 			{
-				// keep track of first index
-				setFirst = currentFirst;
-				// keep track of last index
-				setLast = currentLast - 1;
+				
+				//largest anagram
+				largestAnagram = wordArray[currentFirst];
+				
 				// keep track of largest number of anagrams
 				setLargest = currentLargest;
 			}
 		}
 		
 		// array of largest group of anagrams
-		String[] largestAnagram = new String[setLargest];
+		String[] largestAnagramGroup = new String[setLargest];
 		
 		if(setLargest == 0)
-			return largestAnagram;
+			return largestAnagramGroup;
 		
-		int k = 0;
-		
-		for(int j = setFirst; j <= setLast; j++)
+		for(int j = 0; j < wordArray.length; j++)
 		{
-			largestAnagram[k] = wordArray[j];
-			
-			k++;
+			if(areAnagrams(wordArray[j], largestAnagram))
+				largestAnagramGroup[j] = wordArray[j];
 		}
 		
-		return largestAnagram;
+		return largestAnagramGroup;
 	}
 
 	
@@ -272,12 +272,13 @@ public class AnagramChecker
 					// If the char of the first is smaller than the second it's smaller
 					if (arr1[i] < arr2[i])
 					{
+						counter = 1;
 						return counter;
 					}
 				}
 			}
 
-			counter = 1;
+			counter = -1;
 			return counter;
 		}
 

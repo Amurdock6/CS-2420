@@ -139,8 +139,12 @@ public class AnagramChecker
 		int setLargest = 0;
 		
 		// loop through all the strings in word array
-		for(int i = 0; i < wordArray.length; i++)
+		for(int i = 0; i < wordArray.length - 1; i++)
 		{
+			
+			// set counter to current index
+			counter = i;
+			
 			// set first to the current string
 			currentFirst = counter;
 			

@@ -144,6 +144,8 @@ public class AnagramChecker
 	{	
 		// Comparator
 		SortBySize sortBySize = new SortBySize();
+		
+		// sort the array
 		insertionSort(wordArray, sortBySize);
 		
 		// keeps track of all the anagrams in a list
@@ -152,7 +154,8 @@ public class AnagramChecker
 		// to keep track of how many times we run through the loop
 		int counter = 0;
 		
-		while (areAnagrams(wordArray[0], wordArray[counter])) {
+		while (areAnagrams(wordArray[0], wordArray[counter])) 
+		{
 			// adds a new empty space to our largestAnagram array to add the new anagram too.
 			largestAnagram = grow(largestAnagram);
 			largestAnagram[counter] = wordArray[counter];
@@ -197,7 +200,10 @@ public class AnagramChecker
 			}
 
 			findWords.close();
-		} finally {
+		} 
+		
+		finally 
+		{
 		    // create a largest anagram array
 			String[] LargestAnagram = getLargestAnagramGroup(AnagramListFromFile);
 
@@ -216,7 +222,8 @@ public class AnagramChecker
 	public static class SortBySize implements Comparator<String> {
 
 		public int compare(String str1, String str2) {
-			// Sorting strings
+			
+			// Turn strings into char arrays then sort
 			char[] arr1 = str1.toCharArray();
 			Arrays.sort(arr1);
 			char[] arr2 = str2.toCharArray();
@@ -224,12 +231,19 @@ public class AnagramChecker
 
 			int counter = -1;
 
+			// if the length of the array is smaller than the other then it is not going to be bigger
 			if (arr1.length < arr2.length) {
 				return counter;
-			} else {
-				// Checks index of characters
-				for (int i = 0; i < arr2.length; i++) {
-					if (arr1[i] < arr2[i]) {
+			} 
+			
+			else 
+			{
+				// Checks index of characters in the arrays.
+				for (int i = 0; i < arr2.length; i++) 
+				{
+					// If the char of the first is smaller than the second it's smaller
+					if (arr1[i] < arr2[i])
+					{
 						return counter;
 					}
 				}

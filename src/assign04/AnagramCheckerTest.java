@@ -47,8 +47,7 @@ class AnagramCheckerTest {
 	void testGetLargestAnagramGroupStringArray() 
 	{
 		// create test array
-		String[] testArray = {"bat", "tab", "carets", "Caters", "caster", "play"};
-		String[] answer = {"Caters", "caster", "carets"};
+		String[] testArray = {"bat", "carets", "tab", "Caters", "caster", "play"};
 		String[] noAnagram = {"carets", "play", "bat"};
 		
 		// test if the correct array is returned

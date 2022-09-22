@@ -1,9 +1,15 @@
 package assign04;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -186,11 +192,13 @@ public class AnagramChecker
 		int k = 0;
 		
 		// if the largest group of anagrams is zero return empty array
-		if(setLargest == 0)
+		if(setLargest == 0)	
 			return largestAnagramGroup;
 		
 		// go through all of wordArray 
 		//add all of the anagrams that are anagrams of largest anagram to largest anagram group
+		System.out.println(largestAnagram);
+		
 		for(int j = 0; j < wordArray.length; j++)
 		{
 			if(areAnagrams(wordArray[j], largestAnagram))
@@ -211,43 +219,29 @@ public class AnagramChecker
 	*
 	*@param filename
 	*@return largestAnagram
+    *@throws IOException 
 	*
 	*/
 	@SuppressWarnings("finally")
-	public static String[] getLargestAnagramGroup(String filename) {
-		// create a new String array
-		String[] AnagramListFromFile = {};
-
-		// save the file as a variable
-		File listOfWords = new File(filename);
-
-		// counter to add words to the array
-		int counter = 0;
+	public static String[] getLargestAnagramGroup(String filename) throws IOException {
+		// creates a new arrayList to store are data from provided file
+		List<String> AnagramListFromFile = new ArrayList<String>();
 
 		try {
-			// create a scanner to run through the file
-			Scanner findWords = new Scanner(listOfWords);
+			// reads the data in the provided file
+			AnagramListFromFile = Files.readAllLines(Paths.get(filename));
 
-			// there are more lines in the file
-			while (findWords.hasNextLine()) {
-				// add the words to the new array
-				String newWord = findWords.nextLine();
-				AnagramListFromFile[counter] = newWord;
+			// convert arraylist to array
+			String[] array = AnagramListFromFile.toArray(new String[0]);
 
-				counter++;
-			}
+			// checks for anagrams in our array
+			String[] LargestAnagram = getLargestAnagramGroup(array);
 
-			findWords.close();
-		} 
-		
-		finally 
-		{
-		    // create a largest anagram array
-			String[] LargestAnagram = getLargestAnagramGroup(AnagramListFromFile);
-
-			
-			
 			return LargestAnagram;
+		} finally {
+			// returns a blank array if there is nothing in the provided file
+			String[] noAnagrams = {};
+			return noAnagrams;
 		}
 
 	}

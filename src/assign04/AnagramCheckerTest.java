@@ -49,24 +49,27 @@ class AnagramCheckerTest {
 //	{
 //		// create test array
 //		String[] testArray = {"bat", "carets", "tab", "Caters", "caster", "play"};
+//		String[] testArray2 = {"bat", "carets", "tab", "Caters", "caster", "play", "carets", "Caters", "caster", "crates", "Reacts", "recast", "traces"};
 //		String[] noAnagram = {"carets", "play", "bat"};
 //		
 //		// test if the correct array is returned
 //		
 //		assertTrue(AnagramChecker.getLargestAnagramGroup(testArray).length == 3);
 //		assertTrue(AnagramChecker.getLargestAnagramGroup(noAnagram).length == 0);
+//		assertTrue(AnagramChecker.getLargestAnagramGroup(testArray2).length == 10);
 //	}
 
 	@Test
-	void testGetLargestAnagramGroupString() throws IOException 
+	void testGetLargestAnagramGroupString() 
 	{
 		// File array of strings
 		String [] testAnswer = {"carets", "Caters", "caster", "crates", "Reacts", "recast", "traces"};
 		
 		// Test if the get largest returns the correct array
 		
-		AnagramChecker.getLargestAnagramGroup("D:\\coding-stuff\\Java\\CS-2420\\src\\assign04\\sample_word_list.txt");
+//		AnagramChecker.getLargestAnagramGroup("C:\\Users\\Likel\\eclipse-workspace\\CS-2420\\src\\assign04\\sample_word_list.txt");
 		
+		assertTrue(AnagramChecker.getLargestAnagramGroup("C:\\Users\\Likel\\eclipse-workspace\\CS-2420\\src\\assign04\\sample_word_list.txt").length == 7);
  	}
 
 }

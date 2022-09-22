@@ -197,8 +197,8 @@ public class AnagramChecker
 		
 		// go through all of wordArray 
 		//add all of the anagrams that are anagrams of largest anagram to largest anagram group
-		System.out.println(largestAnagram);
-		
+		System.out.println(wordArray.length);
+		System.out.println(Arrays.toString(largestAnagramGroup));
 		for(int j = 0; j < wordArray.length; j++)
 		{
 			if(areAnagrams(wordArray[j], largestAnagram))
@@ -207,6 +207,8 @@ public class AnagramChecker
 				k++;
 			}
 		}
+
+//		System.out.println()
 		
 		return largestAnagramGroup;
 	}
@@ -222,8 +224,7 @@ public class AnagramChecker
     *@throws IOException 
 	*
 	*/
-	@SuppressWarnings("finally")
-	public static String[] getLargestAnagramGroup(String filename) throws IOException {
+	public static String[] getLargestAnagramGroup(String filename) {
 		// creates a new arrayList to store are data from provided file
 		List<String> AnagramListFromFile = new ArrayList<String>();
 
@@ -233,18 +234,20 @@ public class AnagramChecker
 
 			// convert arraylist to array
 			String[] array = AnagramListFromFile.toArray(new String[0]);
-
+			
 			// checks for anagrams in our array
 			String[] LargestAnagram = getLargestAnagramGroup(array);
-
+			
 			return LargestAnagram;
-		} finally {
+		} catch (Exception e) {
 			// returns a blank array if there is nothing in the provided file
 			String[] noAnagrams = {};
+			System.out.println();
 			return noAnagrams;
 		}
 
 	}
+	
 	
 	/**
 	 * 

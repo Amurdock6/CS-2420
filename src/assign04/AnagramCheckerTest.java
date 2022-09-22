@@ -25,6 +25,8 @@ class AnagramCheckerTest {
 		// sort the string
 		String sorted = AnagramChecker.sort(unsorted);
 		
+//		System.out.println(sorted);
+		
 		// make sure the string is sorted
 		assertTrue(sorted.equals("orst"));
 	}

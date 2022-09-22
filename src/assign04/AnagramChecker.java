@@ -125,20 +125,16 @@ public class AnagramChecker
 	*/
 	public static String[] getLargestAnagramGroup(String[] wordArray)
 	{	
-		// will set our groups of anagrams
-		String[] copyOfWordArray = new String[wordArray.length];
-		
-		
 		// sets all items to lower case
 		for (int i = 0; i < wordArray.length; i++) {
-			copyOfWordArray[i] = wordArray[i].toLowerCase();
+			wordArray[i] = wordArray[i].toLowerCase();
 		}
 		
 		// Comparator
 		SortBySize sortBySize = new SortBySize();
 		
 		// sort the array
-		insertionSort(copyOfWordArray, sortBySize);
+		insertionSort(wordArray, sortBySize);
 		
 		// to keep track of how many times we run through the loop
 		int counter = 0;
@@ -163,14 +159,14 @@ public class AnagramChecker
 			currentFirst = counter;
 			
 			// while the values we are checking are anagrams
-			while (areAnagrams(copyOfWordArray[currentFirst], copyOfWordArray[counter + 1]) && counter < copyOfWordArray.length - 2) 
+			while (areAnagrams(wordArray[currentFirst], wordArray[counter + 1]) && counter < wordArray.length - 2) 
 			{
 				counter++;
 			}
 			
 			// To prevent counter from going out of bounds check the last value in the array if it is an anagram
 			if(counter == wordArray.length - 2)
-				if(areAnagrams(copyOfWordArray[currentFirst], copyOfWordArray[copyOfWordArray.length - 1]))
+				if(areAnagrams(wordArray[currentFirst], wordArray[wordArray.length - 1]))
 						counter++;
 			
 			// set the last value to the number of indexes checked
@@ -187,7 +183,7 @@ public class AnagramChecker
 			{
 				
 				//largest anagram
-				largestAnagram = copyOfWordArray[currentFirst];
+				largestAnagram = wordArray[currentFirst];
 				
 				// keep track of largest number of anagrams
 				setLargest = currentLargest;

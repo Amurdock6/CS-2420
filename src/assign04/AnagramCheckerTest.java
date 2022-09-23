@@ -3,7 +3,9 @@ package assign04;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * This class tests our AnagramChecker class
@@ -64,5 +66,4 @@ class AnagramCheckerTest {
 	{	
 		assertTrue(AnagramChecker.getLargestAnagramGroup("C:\\Users\\Likel\\eclipse-workspace\\CS-2420\\src\\assign04\\sample_word_list.txt").length == 7);
  	}
-
 }

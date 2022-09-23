@@ -1,11 +1,6 @@
 package assign04;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Random;
-
-import assign02.Library;
-import assign02.LibraryBook;
 
 public class AnagramTiming {
 	private static Random rand;
@@ -15,8 +10,20 @@ public class AnagramTiming {
 		rand.setSeed(System.currentTimeMillis());
 	
 
-			// Do 10000 lookups and use the average running time.
-			int timesToLoop = 100000;
+			// Do 10000000 lookups and use the average running time.
+		
+			// I would recommend 10000000 timesToLoop for areAnagrams test
+			// I would recommend ... timesToLoop for getLargestAnagramGroup test
+			int timesToLoop = 10000000;
+			
+			
+			// Uncomment when running getLargestAnagramGroup test
+//			String[] anagramArray = new String[20];
+//			
+//			// Adds random strings to anagramArray
+//			for (int i = 0; i < anagramArray.length; i++) {
+//				anagramArray[i] = getRandString();
+//			}
 			
 			
 			// For each problem size n . . .
@@ -35,14 +42,22 @@ public class AnagramTiming {
 				
 				// Now, run the test.
 				startTime = System.nanoTime();
+				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					
+					AnagramChecker.areAnagrams(getRandString(),getRandString());
 				}
+				
+				// Test for getLargestAnagramGroup
+//				startTime = System.nanoTime();
+//				for (int i = 0; i < timesToLoop; i++) 
+//				{
+//					AnagramChecker.getLargestAnagramGroup(anagramArray);
+//				}
 				
 				midpointTime = System.nanoTime();
 				
-				// Run a loop to capture the cost of running the "timesToLoop" loop and generating a random ISBN.
+				// Run a loop to capture the cost of running the loop.
 				for (int i = 0; i < timesToLoop; i++) 
 				{
 					
@@ -57,7 +72,36 @@ public class AnagramTiming {
 				System.out.println(n + "\t" + averageTime);
 				
 			}
+	}
 	
+	
+	/**
+	 * Generates our random strings
+	 * 
+	 * @return generatedString
+	 */
+	public static String getRandString() {
+		// create instance of Random class
+		Random rand = new Random();
+
+		// Generate random integers in range 0 to 999
+		int rand_int = rand.nextInt(10);
+
+		// Checks to make sure that rand_int doesn't equal 0 or 1
+		if (rand_int < 2) {
+			rand_int = rand.nextInt(10);
+		}
+
+		// Generates random strings
+		int leftLimit = 97; // letter 'a'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = rand_int;
+
+		String generatedString = rand.ints(leftLimit, rightLimit + 1).limit(targetStringLength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+
+		return generatedString;
+
 	}
 }
 	

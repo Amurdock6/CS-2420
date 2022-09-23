@@ -14,19 +14,19 @@ public class AnagramTiming {
 		
 			// I would recommend 10000000 timesToLoop for areAnagrams test
 			// I would recommend ... timesToLoop for getLargestAnagramGroup test
-			int timesToLoop = 1000;
+			int timesToLoop = 10000000;
 			
 			// For each problem size n . . .
 			for (int n = 1000; n <= 20000; n += 1000) 
 			{
 				
 				// Uncomment when running getLargestAnagramGroup test
-				String[] anagramArray = new String[n];
-				
-				// Adds random strings to anagramArray
-				for (int i = 0; i < anagramArray.length; i++) {
-					anagramArray[i] = getRandString();
-				}
+//				String[] anagramArray = new String[n];
+//				
+//				// Adds random strings to anagramArray
+//				for (int i = 0; i < anagramArray.length; i++) {
+//					anagramArray[i] = getRandString();
+//				}
 				
 				long startTime, midpointTime, stopTime;
 				
@@ -38,20 +38,20 @@ public class AnagramTiming {
 					// empty block
 				}
 				
-				// Now, run the test.
-//				startTime = System.nanoTime();
-//				// Test for areAnagrams
-//				for (int i = 0; i < timesToLoop; i++) 
-//				{
-//					AnagramChecker.areAnagrams(getRandString(),getRandString());
-//				}
-				
-//				 Test for getLargestAnagramGroup
+//				 Now, run the test.
 				startTime = System.nanoTime();
+				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					AnagramChecker.getLargestAnagramGroup(anagramArray);
+					AnagramChecker.areAnagrams(getRandString(),getRandString());
 				}
+				
+//				 Test for getLargestAnagramGroup
+//				startTime = System.nanoTime();
+//				for (int i = 0; i < timesToLoop; i++) 
+//				{
+//					AnagramChecker.getLargestAnagramGroup(anagramArray);
+//				}
 				
 				midpointTime = System.nanoTime();
 				

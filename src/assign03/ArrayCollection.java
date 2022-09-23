@@ -75,7 +75,7 @@ public class ArrayCollection<T> implements Collection<T>
 			return false;
 		} else {
 			// if the collection does not have an empty spot the collection needs to grow
-			if (this.iterator().hasNext() == false) {
+			if (data.length - 1 ==  realItemsInArray) {
 				this.grow();
 			}
 
@@ -292,23 +292,14 @@ public class ArrayCollection<T> implements Collection<T>
 		// create next item and grab the current parameters item
 		Object nextRetainItem = this.iterator().next();
 		Object nextParamItem = arg0.iterator().next();
-
-//		for (Object u : data) {
-//			System.out.println(u);
-//		}
-//		System.out.println();
 		// while the collection we are checking still has items
 		while (this.iterator().hasNext() == true && arg0.iterator().hasNext() == true) {
-//			System.out.println(nextRetainItem + " reatian");
-//			System.out.println(nextRetainItem + " RetainItem Before if");
 			if (nextRetainItem == null) {
 
 			} else if (!nextRetainItem.equals(nextParamItem)) {
 				// if the input collection does not contain the item in our collection
 				// remove that item
 				hasNextBeenCalled = true;
-				
-				System.out.println(retainCounter);
 				this.iterator().remove();
 				
 				// an item was removed, so the method returns true
@@ -317,19 +308,11 @@ public class ArrayCollection<T> implements Collection<T>
 			
 			// go to next item 
 			retainCounter++;
-			System.out.println("loops deep in dis bitch " + retainCounter);
 			nextRetainItem = this.iterator().next();
 			nextParamItem = arg0.iterator().next();
 		}
 		
 		// sets the counter back to zero so it does not screw up future remove methods
-		
-
-		System.out.println();
-		for (Object u : data) {
-			System.out.println(u);
-		}
-		
 		retainCounter = 0;
 		return itemNotRetained;
 	}
@@ -379,22 +362,37 @@ public class ArrayCollection<T> implements Collection<T>
 	 * @param cmp - the comparator that defines item ordering
 	 * @return - the sorted list
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<T> toSortedList(Comparator<? super T> cmp)
 	{
+		ArrayList<T> sortedArrayList = new ArrayList<T>();
 		
+		// for loop should run through all the items starting at zero
 		for(int i = 0; i < realItemsInArray; i++) 
 		{
+			// j is every item after i and i is the min index
 			int j, minIndex;
+			
+			// loop through all items 
 			for(j = i + 1, minIndex = i; j < realItemsInArray; j++)
+				
+				// check j against i (min index) if j is less than i we want j to be minINdez
 				if(cmp.compare(data[j], data[minIndex]) < 0)
 					minIndex = j;
+			
+			// create temporary storage
 			T temp = data[i];
+			// i data goes into min index spot
 			data[i] = data[minIndex];
+			// min index spot is what we stored in temp
 			data[minIndex] =  temp;
+			
 		}
 		
-		return (ArrayList<T>) Arrays.asList(this.toArray());
+		for(int k = 0; k < realItemsInArray; k++)
+			sortedArrayList.add(data[k]);
+		
+		return sortedArrayList;
 	}
 
 
@@ -447,7 +445,6 @@ public class ArrayCollection<T> implements Collection<T>
 			// Checks to see if there is a next item in ArrayCollection
 			// This if statment will only work when calling retainAll
 			if (retainCounter > 0) {
-				System.out.println("called " + retainCounter );
 				
 				return data[retainCounter];
 			} else if (counter <= numOfItems) {
@@ -479,7 +476,6 @@ public class ArrayCollection<T> implements Collection<T>
 				// Tells are program that we can call next() again
 				hasNextBeenCalled = false;
 				
-				System.out.println("deleteing " + data[itemToDelete]);
 				data[itemToDelete] = null;
 				realItemsInArray--;
 				
@@ -493,8 +489,6 @@ public class ArrayCollection<T> implements Collection<T>
 			
 			// Tells are program that we can call next() again
 			hasNextBeenCalled = false;
-			
-			System.out.println("deleteing " + data[itemToDelete]);
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			

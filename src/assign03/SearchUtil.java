@@ -28,7 +28,7 @@ public class SearchUtil {
 		
 		// create max, min, middle variables
 		int min = 0;
-		int max = list.size();
+		int max = list.size() - 1;
 		int middle = 0;
 		
 		// while our min is less than or equal to our max
@@ -37,7 +37,7 @@ public class SearchUtil {
 			// get the average value to be the middle
 			middle = (min + max) / 2;
 			
-			if(item.equals(list.get(middle)))
+			if(cmp.compare(item, list.get(middle)) == 0)
 				return true;
 			
 			else if(cmp.compare(item, list.get(middle)) < 1) 
@@ -48,4 +48,19 @@ public class SearchUtil {
 		}
 		return false;
 	}	
+	
+//	
+//	public static boolean binarySearch(int[] arr, int goal) {
+//		int low = 0, high = arr.length - 1, mid = 0;
+//		while(low <= high) {
+//			mid = (low + high) / 2;
+//			if(goal == mid) 
+//				return true;
+//			else if(goal < mid) 
+//				high = mid - 1;
+//			else 
+//				low = mid + 1;
+//		}
+//		return false;
+//	}	
 }

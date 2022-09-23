@@ -157,6 +157,7 @@ public class AnagramChecker
 		// loop through all the strings in word array
 		for(int i = 0; i < wordArray.length - 1; i++)
 		{
+			//push
 			
 			// set counter to current index
 			counter = i;

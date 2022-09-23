@@ -212,8 +212,12 @@ public class AnagramChecker
 		{
 			if(areAnagrams(wordArray[j], largestAnagram))
 			{
+				if(k == 2) {
+					k = 1;
+				}
 				largestAnagramGroup[k] = wordArray[j];
 				k++;
+				
 			}
 		}
 		

@@ -240,8 +240,8 @@ public class AnagramChecker
 		SortBySize sortBySize = new SortBySize();
 		
 		// sort the array
-		Arrays.sort(copyOfWordArray);
-//		insertionSort(copyOfWordArray, sortBySize);
+//		Arrays.sort(copyOfWordArray);
+		insertionSort(copyOfWordArray, sortBySize);
 		
 		// to keep track of how many times we run through the loop
 		int counter = 0;

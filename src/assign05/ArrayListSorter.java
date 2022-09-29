@@ -82,6 +82,7 @@ public class ArrayListSorter
 	 */
 	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) 
 	{
+		System.out.println(quickList.size());
 //		find pivot, swap with item at rightBound;
 //
 //		L = leftBound, R = rightBound - 1;
@@ -99,6 +100,36 @@ public class ArrayListSorter
 //		}
 //
 //		swapReferences(arr, L, rightBound);
+		
+	}
+	
+	public interface quicksort {
+		/**
+		 * This method will grab the median of the entire ArrayList
+		 * @return median
+		 */
+		private static int getMedian() {
+			
+			return 0;
+		}
+		
+		/**
+		 * This method will randomly grab a index out of the provided ArrayList
+		 * @return median
+		 */
+		private static int getRandom() {
+			
+			 return 0;
+		}
+		
+		/**
+		 * This method will grab three random indexes and then determine the median based off of those
+		 * @return median
+		 */
+		private static int getThreeRandomThenMedian() {
+			
+			 return 0;
+		}
 	}
 	
 	

@@ -1,6 +1,7 @@
 package assign05;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class contains the methods for merge sort and quick sort 
@@ -25,7 +26,47 @@ public class ArrayListSorter
 	 */
 	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
 	{
+//		mergesort(arr)
+//		{ 
+//		  Create a temp space and ensure it is large enough
+//		  // call internal overloaded method for entire array, and merge space
+//		  // NOTE: size()-1, not size
+//		  mergesort(arr, temp, 0, arr.size() - 1, ...);
+//		}
 		
+//		mergesort(arr, temp, start, end) 
+//		{
+//
+//			  // TODO: Replace this with an insertion sort threshold
+//			  if(start >= end)
+//			    return;
+//
+//			  int mid = start + (end - start) / 2;
+//			  mergesort(arr, temp, start, mid);
+//			  mergesort(arr, temp, mid + 1, end);
+//			  merge(arr, temp, start, mid, end);
+//		}
+		
+//		merge(arr, temp, start, mid, end)
+//		{
+//
+//			  int i = start; 
+//			  int j = mid + 1; 
+//			  int mergePos = start;
+//
+//			  while (i <= mid && j <= end) 
+//			  {
+//			    if (arr[i] <= arr[j])
+//			      temp[mergePos++] = arr[i++]; 
+//			    else
+//			      temp[mergePos++] = arr[j++]; 
+//			  }
+//
+//			  copy anything left over from larger half to temp
+//
+//			  copy temp (from start to end) back into arr (from start to end) 
+//
+//		}
 	}
 	
 	/**
@@ -41,7 +82,23 @@ public class ArrayListSorter
 	 */
 	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) 
 	{
-		
+//		find pivot, swap with item at rightBound;
+//
+//		L = leftBound, R = rightBound - 1;
+//
+//		while(L <= R)
+//		{
+//		  while(L < rightBound && arr[L] <= pivot)
+//		    L++;
+//		  
+//		  while(R >= leftBound && arr[R] >= pivot)
+//		    R--;
+//
+//		  if(L < R)
+//		    swapReferences(arr, L, R);
+//		}
+//
+//		swapReferences(arr, L, rightBound);
 	}
 	
 	
@@ -55,7 +112,14 @@ public class ArrayListSorter
 	public static ArrayList<Integer> generateAscending(int size)
 	{
 		
-		return null;
+		ArrayList<Integer> ascendingList = new ArrayList<>();
+		
+		for(int i = 0; i < size - 1; i++)
+		{
+			ascendingList.add(i + 1);
+		}
+		
+		return ascendingList;
 		
 	}
 	
@@ -71,7 +135,16 @@ public class ArrayListSorter
 	public static ArrayList<Integer> generatePermuted(int size)
 	{
 		
-		return null;
+		ArrayList<Integer> permutedList = new ArrayList<>();
+		
+		for(int i = 0; i < size - 1; i++)
+		{
+			permutedList.add(i + 1);
+		}
+		
+		Collections.shuffle(permutedList);
+		
+		return permutedList;
 		
 	}
 	
@@ -84,8 +157,14 @@ public class ArrayListSorter
 	 */
 	public static ArrayList<Integer> generateDescending(int size)
 	{
+		ArrayList<Integer> descendingList = new ArrayList<>();
 		
-		return null;
+		for(int i = 0; i < size - 1; i++)
+		{
+			descendingList.add(size - i);
+		}
+		
+		return descendingList;
 		
 	}
 	

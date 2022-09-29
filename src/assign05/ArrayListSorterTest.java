@@ -9,6 +9,8 @@ package assign05;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 class ArrayListSorterTest {
@@ -24,18 +26,46 @@ class ArrayListSorterTest {
 	}
 
 	@Test
-	void testGenerateAscending() {
-		fail("Not yet implemented");
+	void testGenerateAscending() 
+	{
+		int ascendingSize = 5;
+		
+		ArrayList<Integer> ascendingTest = ArrayListSorter.generateAscending(ascendingSize);
+		
+		assertTrue(ascendingTest.get(0) == 1);
+		assertTrue(ascendingTest.get(1) == 2);
+		assertTrue(ascendingTest.get(2) == 3);
+		assertTrue(ascendingTest.get(3) == 4);
+		assertTrue(ascendingTest.get(4) == 5);
 	}
 
 	@Test
-	void testGeneratePermuted() {
-		fail("Not yet implemented");
+	void testGeneratePermuted() 
+	{
+		int permuteSize = 3;
+		
+		ArrayList<Integer> permuteTest = ArrayListSorter.generateAscending(permuteSize);
+		
+		System.out.println(permuteTest.toString());
+		
+		assertTrue(permuteTest.contains(1));
+		assertTrue(permuteTest.contains(2));
+		assertTrue(permuteTest.contains(3));
+
 	}
 
 	@Test
-	void testGenerateDescending() {
-		fail("Not yet implemented");
+	void testGenerateDescending() 
+	{
+		int descendingSize = 5;
+		
+		ArrayList<Integer> descendingTest = ArrayListSorter.generateAscending(descendingSize);
+		
+		assertTrue(descendingTest.get(0) == 5);
+		assertTrue(descendingTest.get(1) == 4);
+		assertTrue(descendingTest.get(2) == 3);
+		assertTrue(descendingTest.get(3) == 2);
+		assertTrue(descendingTest.get(4) == 1);
 	}
 
 }

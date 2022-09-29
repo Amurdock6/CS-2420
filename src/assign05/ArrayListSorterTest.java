@@ -46,7 +46,7 @@ class ArrayListSorterTest {
 	{
 		int permuteSize = 3;
 		
-		ArrayList<Integer> permuteTest = ArrayListSorter.generateAscending(permuteSize);
+		ArrayList<Integer> permuteTest = ArrayListSorter.generatePermuted(permuteSize);
 		
 		System.out.println(permuteTest.toString());
 		
@@ -61,7 +61,7 @@ class ArrayListSorterTest {
 	{
 		int descendingSize = 5;
 		
-		ArrayList<Integer> descendingTest = ArrayListSorter.generateAscending(descendingSize);
+		ArrayList<Integer> descendingTest = ArrayListSorter.generateDescending(descendingSize);
 		
 		System.out.println(descendingTest.toString());
 		

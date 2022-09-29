@@ -26,47 +26,47 @@ public class ArrayListSorter
 	 */
 	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
 	{
-//		mergesort(arr)
-//		{ 
-//		  Create a temp space and ensure it is large enough
-//		  // call internal overloaded method for entire array, and merge space
-//		  // NOTE: size()-1, not size
-//		  mergesort(arr, temp, 0, arr.size() - 1, ...);
-//		}
+		mergesort(arr)
+		{ 
+		  Create a temp space and ensure it is large enough
+		  // call internal overloaded method for entire array, and merge space
+		  // NOTE: size()-1, not size
+		  mergesort(arr, temp, 0, arr.size() - 1, ...);
+		}
 		
-//		mergesort(arr, temp, start, end) 
-//		{
-//
-//			  // TODO: Replace this with an insertion sort threshold
-//			  if(start >= end)
-//			    return;
-//
-//			  int mid = start + (end - start) / 2;
-//			  mergesort(arr, temp, start, mid);
-//			  mergesort(arr, temp, mid + 1, end);
-//			  merge(arr, temp, start, mid, end);
-//		}
+		mergesort(arr, temp, start, end) 
+		{
+
+			  // TODO: Replace this with an insertion sort threshold
+			  if(start >= end)
+			    return;
+
+			  int mid = start + (end - start) / 2;
+			  mergesort(arr, temp, start, mid);
+			  mergesort(arr, temp, mid + 1, end);
+			  merge(arr, temp, start, mid, end);
+		}
 		
-//		merge(arr, temp, start, mid, end)
-//		{
-//
-//			  int i = start; 
-//			  int j = mid + 1; 
-//			  int mergePos = start;
-//
-//			  while (i <= mid && j <= end) 
-//			  {
-//			    if (arr[i] <= arr[j])
-//			      temp[mergePos++] = arr[i++]; 
-//			    else
-//			      temp[mergePos++] = arr[j++]; 
-//			  }
-//
-//			  copy anything left over from larger half to temp
-//
-//			  copy temp (from start to end) back into arr (from start to end) 
-//
-//		}
+		merge(arr, temp, start, mid, end)
+		{
+
+			  int i = start; 
+			  int j = mid + 1; 
+			  int mergePos = start;
+
+			  while (i <= mid && j <= end) 
+			  {
+			    if (arr[i] <= arr[j])
+			      temp[mergePos++] = arr[i++]; 
+			    else
+			      temp[mergePos++] = arr[j++]; 
+			  }
+
+			  copy anything left over from larger half to temp
+
+			  copy temp (from start to end) back into arr (from start to end) 
+
+		}
 	}
 	
 	/**

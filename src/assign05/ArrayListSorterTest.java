@@ -16,13 +16,32 @@ import org.junit.jupiter.api.Test;
 class ArrayListSorterTest {
 
 	@Test
-	void testMergesort() {
-		fail("Not yet implemented");
+	void testMergesort() 
+	{
+		int mergeSize = 1000;
+		
+		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
+		
+		ArrayListSorter.mergesort(mergeTest);
+		
+		assertTrue(mergeTest.get(0) == 1);
+		assertTrue(mergeTest.get(500) == 501);
+		assertTrue(mergeTest.get(999) == 1000);
+
 	}
 
 	@Test
-	void testQuicksort() {
-		fail("Not yet implemented");
+	void testQuicksort() 
+	{
+		int quickSortSize = 1000;
+		
+		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
+		
+		ArrayListSorter.quicksort(quickSortTest);
+		
+		assertTrue(quickSortTest.get(0) == 1);
+		assertTrue(quickSortTest.get(500) == 501);
+		assertTrue(quickSortTest.get(999) == 1000);
 	}
 
 	@Test
@@ -32,7 +51,7 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> ascendingTest = ArrayListSorter.generateAscending(ascendingSize);
 		
-		System.out.println(ascendingTest.toString());
+		//System.out.println(ascendingTest.toString());
 		
 		assertTrue(ascendingTest.get(0) == 1);
 		assertTrue(ascendingTest.get(1) == 2);
@@ -48,7 +67,7 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> permuteTest = ArrayListSorter.generatePermuted(permuteSize);
 		
-		System.out.println(permuteTest.toString());
+		//System.out.println(permuteTest.toString());
 		
 		assertTrue(permuteTest.contains(1));
 		assertTrue(permuteTest.contains(2));
@@ -63,7 +82,7 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> descendingTest = ArrayListSorter.generateDescending(descendingSize);
 		
-		System.out.println(descendingTest.toString());
+		//System.out.println(descendingTest.toString());
 		
 		assertTrue(descendingTest.get(0) == 5);
 		assertTrue(descendingTest.get(1) == 4);

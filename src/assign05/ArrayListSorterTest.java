@@ -32,6 +32,8 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> ascendingTest = ArrayListSorter.generateAscending(ascendingSize);
 		
+		System.out.println(ascendingTest.toString());
+		
 		assertTrue(ascendingTest.get(0) == 1);
 		assertTrue(ascendingTest.get(1) == 2);
 		assertTrue(ascendingTest.get(2) == 3);
@@ -60,6 +62,8 @@ class ArrayListSorterTest {
 		int descendingSize = 5;
 		
 		ArrayList<Integer> descendingTest = ArrayListSorter.generateAscending(descendingSize);
+		
+		System.out.println(descendingTest.toString());
 		
 		assertTrue(descendingTest.get(0) == 5);
 		assertTrue(descendingTest.get(1) == 4);

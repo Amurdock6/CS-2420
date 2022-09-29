@@ -114,7 +114,7 @@ public class ArrayListSorter
 		
 		ArrayList<Integer> ascendingList = new ArrayList<>();
 		
-		for(int i = 0; i < size - 1; i++)
+		for(int i = 0; i < size; i++)
 		{
 			ascendingList.add(i + 1);
 		}
@@ -137,7 +137,7 @@ public class ArrayListSorter
 		
 		ArrayList<Integer> permutedList = new ArrayList<>();
 		
-		for(int i = 0; i < size - 1; i++)
+		for(int i = 0; i < size; i++)
 		{
 			permutedList.add(i + 1);
 		}
@@ -159,7 +159,7 @@ public class ArrayListSorter
 	{
 		ArrayList<Integer> descendingList = new ArrayList<>();
 		
-		for(int i = 0; i < size - 1; i++)
+		for(int i = 0; i < size; i++)
 		{
 			descendingList.add(size - i);
 		}

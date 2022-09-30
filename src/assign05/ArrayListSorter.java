@@ -27,27 +27,25 @@ public class ArrayListSorter
 	 */
 	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
 	{
-		mergesort(arr)
-		{ 
-		  Create a temp space and ensure it is large enough
+		  //Create a temp space and ensure it is large enough
+		  <T[]> temp = new <T[mergeList.size()]>;
 		  // call internal overloaded method for entire array, and merge space
 		  // NOTE: size()-1, not size
-		  mergesort(arr, temp, 0, arr.size() - 1, ...);
-		}
+		  mergesort(arr, temp, 0, arr.size() - 1);
+	}
 		
-		mergesort(arr, temp, start, end) 
-		{
+	public static <T extends Comparable<? super T>> void mergesort(arr, temp, start, end) 
+	{
 
-			  // TODO: Replace this with an insertion sort threshold
-			  if(start >= end)
-			    return;
+		  // TODO: Replace this with an insertion sort threshold
+		  if(start >= end)
+		    return;
 
-			  int mid = start + (end - start) / 2;
-			  mergesort(arr, temp, start, mid);
-			  mergesort(arr, temp, mid + 1, end);
-			  merge(arr, temp, start, mid, end);
-		}
-		
+		  int mid = start + (end - start) / 2;
+		  mergesort(arr, temp, start, mid);
+		  mergesort(arr, temp, mid + 1, end);
+		  merge(arr, temp, start, mid, end);
+	}
 		merge(arr, temp, start, mid, end)
 		{
 
@@ -68,7 +66,6 @@ public class ArrayListSorter
 			  copy temp (from start to end) back into arr (from start to end) 
 
 		}
-	}
 	
 	/**
 	 * 

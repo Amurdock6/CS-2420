@@ -107,6 +107,11 @@ public class ArrayListSorter
 		{
             temp.set(mergePos++, mergeList.get(i++));
         }
+		
+		while (j <= end) 
+		{
+            temp.set(mergePos++, mergeList.get(j++));
+        }
 
 		//copy temp (from start to end) back into arr (from start to end)
 		for(int s = start; s <= end; s++)

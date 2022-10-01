@@ -24,6 +24,8 @@ class ArrayListSorterTest {
 		
 		ArrayListSorter.mergesort(mergeTest);
 		
+		System.out.println(mergeTest);
+		
 		assertTrue(mergeTest.get(0) == 1);
 		assertTrue(mergeTest.get(500) == 501);
 		assertTrue(mergeTest.get(999) == 1000);

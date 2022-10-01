@@ -54,8 +54,11 @@ public class ArrayListSorter
 	{
 
 		  // TODO: Replace this with an insertion sort threshold
-		  if(start >= end)
-		    return;
+		  if(end - start <= 3)
+		  {		  
+			  insertionSort(mergeList, start, end);
+			  return;
+		  }
 
 		  // get the middle value of the list
 		  int mid = start + (end - start) / 2;
@@ -123,28 +126,31 @@ public class ArrayListSorter
 	/**
 	 * This generic method sorts the input array using an insertion sort.
 	 * @param ArrayList<T>
+	 * @param leftIndex
+	 * @param rightIndex
 	 */
-	public static <T extends Comparable<? super T>> void insertionSort(ArrayList<T> toBeSorted)
+	public static <T extends Comparable<? super T>> void insertionSort(ArrayList<T> toBeSorted, int leftIndex, int rightIndex)
 	{
-		for (int i = 1 ; i < toBeSorted.size() - 1; i++)
+		for (int i = leftIndex + 1; i <= rightIndex; i++)
 		{
-			// set the position as the first string
-			int position = i - 1;
 			
-			// set the value we are looking at as the second string
+			// set the value we are looking at as the second item
 			T currentValue = toBeSorted.get(i);
 			
-			// while our string is smaller than the characters on the left and position is greater than -1
-			while(position > -1 && toBeSorted.get(position).compareTo(currentValue) > 0)
+			// set the position as the first item
+			int position = i - 1;
+			
+			// while our item is smaller than the items on the left and position is greater than -1
+			while(position >= leftIndex && toBeSorted.get(position).compareTo(currentValue) > -1)
 			{
-				// set the current position with the bigger string
+				// set the current position with the bigger item
 				toBeSorted.set(position + 1, toBeSorted.get(position));
 				
 				// reduce the position
 	             position--;
 	        }
 			
-			// set the final position for our current string
+			// set the final position for our current item
 			toBeSorted.set(position + 1, currentValue);
 	     }
 	}

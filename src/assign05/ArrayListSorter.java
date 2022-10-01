@@ -2,6 +2,7 @@ package assign05;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -117,6 +118,35 @@ public class ArrayListSorter
 		for(int s = start; s <= end; s++)
 			mergeList.set(s, temp.get(s));
 
+	}
+	
+	/**
+	 * This generic method sorts the input array using an insertion sort.
+	 * @param ArrayList<T>
+	 */
+	public static <T extends Comparable<? super T>> void insertionSort(ArrayList<T> toBeSorted)
+	{
+		for (int i = 1 ; i < toBeSorted.size() - 1; i++)
+		{
+			// set the position as the first string
+			int position = i - 1;
+			
+			// set the value we are looking at as the second string
+			T currentValue = toBeSorted.get(i);
+			
+			// while our string is smaller than the characters on the left and position is greater than -1
+			while(position > -1 && toBeSorted.get(position).compareTo(currentValue) > 0)
+			{
+				// set the current position with the bigger string
+				toBeSorted.set(position + 1, toBeSorted.get(position));
+				
+				// reduce the position
+	             position--;
+	        }
+			
+			// set the final position for our current string
+			toBeSorted.set(position + 1, currentValue);
+	     }
 	}
 	
 	/**

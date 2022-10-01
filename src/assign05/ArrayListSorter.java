@@ -29,7 +29,10 @@ public class ArrayListSorter
 	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
 	{
 		  //Create a temp space and ensure it is large enough
-		  T[] temp = (T[]) new Object[10];
+		ArrayList<T> temp = new ArrayList<T>(mergeList.size());
+				
+		for(int i=0; i < mergeList.size(); i++)
+			temp.add(null);
 		  
 		  // call internal overloaded method for entire array, and merge space
 		  // NOTE: size()-1, not size
@@ -46,7 +49,7 @@ public class ArrayListSorter
 	 * @param start
 	 * @param end
 	 */
-	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, T[] temp, int start, int end) 
+	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, ArrayList<T> temp, int start, int end) 
 	{
 
 		  // TODO: Replace this with an insertion sort threshold
@@ -77,25 +80,37 @@ public class ArrayListSorter
 	 * @param mid
 	 * @param end
 	 */
-	private static <T extends Comparable<? super T>> void merge(ArrayList<T> mergeList, T[] temp, int start, int mid, int end)
+	private static <T extends Comparable<? super T>> void merge(ArrayList<T> mergeList, ArrayList<T> temp, int start, int mid, int end)
 	{
 
-		int i = start; 
-		int j = mid + 1; 
+		// set the start index
+		int i = start;
+		
+		// set the middle index
+		int j = mid + 1;
+		
+		// set position to merge them back together
 		int mergePos = start;
 
+		// check if the current i is less than current j, if yes add i to temp, if no add j to temp
 		while (i <= mid && j <= end) 
 		{
 			if (mergeList.get(i).compareTo(mergeList.get(j)) < 1)
-				temp[mergePos++] = mergeList.get(i++);
+				temp.set(mergePos++, mergeList.get(i++));
 			
 			else
-				temp[mergePos++] = mergeList.get(j++); 
+				temp.set(mergePos++, mergeList.get(j++)); 
 		}
 
-		copy anything left over from larger half to temp
+		//copy anything left over from larger half to temp
+		while (i <= mid) 
+		{
+            temp.set(mergePos++, mergeList.get(i++));
+        }
 
-		copy temp (from start to end) back into arr (from start to end) 
+		//copy temp (from start to end) back into arr (from start to end)
+		for(int s = start; s <= end; s++)
+			mergeList.set(s, temp.get(s));
 
 	}
 	
@@ -110,48 +125,30 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-//	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) 
-//	{
-//		System.out.print(quicksort.getMedian(quickList));
-//		find pivot, swap with item at rightBound;
-//
-//		L = leftBound, R = rightBound - 1;
-//
-//		while(L <= R)
-//		{
-//		  while(L < rightBound && arr[L] <= pivot)
-//		    L++;
-//		  
-//		  while(R >= leftBound && arr[R] >= pivot)
-//		    R--;
-//
-//		  if(L < R)
-//		    swapReferences(arr, L, R);
-//		}
-//
-//		swapReferences(arr, L, rightBound);
-//		
-//	}
+	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) 
+	{
+		
+	}
 	
-//	public interface quicksort 
-//	{
-//		/**
-//		 * This method will grab the median of the entire ArrayList
-//		 * @return median
-//		 */
-//		private static <T> int getMedian(ArrayList<T> passedArrayList) {
-//
-//	        if (passedArrayList.size() % 2 == 1)
-//	            System.out.println(passedArrayList.get((passedArrayList.size() + 1) / 2 - 1));
-//	        else {
-//	            double lower = passedArrayList.get(passedArrayList.size() / 2 - 1);
-//	            double upper = passedArrayList.get(passedArrayList.size() / 2);
-//
-//	           System.out.println((lower + upper) / 2.0);
-//	        }
-//	        
-//			return 0;
-//		}
+	public interface quicksort 
+	{
+		/**
+		 * This method will grab the median of the entire ArrayList
+		 * @return median
+		 */
+		private static <T> int getMedian(ArrayList<T> passedArrayList) {
+
+	        if (passedArrayList.size() % 2 == 1)
+	            System.out.println(passedArrayList.get((passedArrayList.size() + 1) / 2 - 1));
+	        else {
+	            double lower = (double) passedArrayList.get(passedArrayList.size() / 2 - 1);
+	            double upper = (double) passedArrayList.get(passedArrayList.size() / 2);
+
+	           System.out.println((lower + upper) / 2.0);
+	        }
+	        
+			return 0;
+		}
 		
 		/**
 		 * This method will randomly grab a index out of the provided ArrayList

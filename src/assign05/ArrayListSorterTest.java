@@ -18,15 +18,19 @@ class ArrayListSorterTest {
 	@Test
 	void testMergesort() 
 	{
-		int mergeSize = 1000;
+		int mergeSize = 6;
 		
 		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
 		
 		ArrayListSorter.mergesort(mergeTest);
 		
 		assertTrue(mergeTest.get(0) == 1);
-		assertTrue(mergeTest.get(500) == 501);
-		assertTrue(mergeTest.get(999) == 1000);
+		assertTrue(mergeTest.get(2) == 3);
+		assertTrue(mergeTest.get(5) == 6);
+		
+//		assertTrue(mergeTest.get(0) == 1);
+//		assertTrue(mergeTest.get(500) == 501);
+//		assertTrue(mergeTest.get(999) == 1000);
 
 	}
 

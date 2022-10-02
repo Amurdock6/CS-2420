@@ -11,10 +11,10 @@ public class ArrayListSorterTiming
 		public static void main(String[] args)
 		{
 
-				int timesToLoop = 100;
+				int timesToLoop = 100000;
 				
 				// For each problem size n . . .
-				for (int n = 10000; n <= 100000; n += 10000) 
+				for (int n = 100; n <= 1000; n += 100) 
 				{
 					
 					long startTime, midpointTime, stopTime;

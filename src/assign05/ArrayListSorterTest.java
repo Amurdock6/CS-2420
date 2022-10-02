@@ -22,7 +22,7 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
 		
-		ArrayListSorter.mergesort(mergeTest, 100);
+		ArrayListSorter.mergesort(mergeTest, 20);
 		
 		System.out.println(mergeTest);
 		

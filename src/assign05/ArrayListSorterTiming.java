@@ -67,7 +67,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, 10);
+						ArrayListSorter.mergesort(merge, (2 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -100,7 +100,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, 20);
+						ArrayListSorter.mergesort(merge, (3 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -133,7 +133,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, 40);
+						ArrayListSorter.mergesort(merge, (4 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -166,7 +166,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, 80);
+						ArrayListSorter.mergesort(merge, n);
 					}
 					
 					midpointTime = System.nanoTime();

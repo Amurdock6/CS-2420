@@ -157,6 +157,17 @@ public class ArrayListSorter
 	     }
 	}
 	
+	// A utility function to swap two elements
+    static int[] swap(int[] arr, int L, int R)
+    {
+    	System.out.println("swaping");
+        int temp = arr[L];
+        arr[L] = arr[R];
+        arr[R] = temp;
+        
+        return arr;
+    }
+	
 	/**
 	 * 
 	 * This method performs a quicksort on the generic ArrayList given as input. You
@@ -169,25 +180,60 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) {
-		    // pivot (Element to be placed at right position)
-			int pivot = quicksort.getMedian(quickList);
-			
-			int leftBound = (int) quickList.get(0);
-			int rightBound = (int) quickList.size();
-
-			int L = leftBound, R = rightBound - 1;
-
-			while(L <= R){
-			  while(L < rightBound && arr[L] <= pivot)
-			    L++;
-			  while(R >= leftBound && arr[R] >= pivot)
-			    R--;
-
-			  if(L < R)
-			    swapReferences(arr, L, R);
-			}
+	 public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) {
+		// converts ArrayList to array to make pseudo code run
+		Object[] ob = quickList.toArray();
+		int[] intList = new int[ob.length];
 		
+		// takes items from our ArrayList and puts them into array
+		for (int x = 0; x < intList.length; x++) {
+			intList[x] = (Integer) ob[x];
+		}
+
+		int pivot = intList[quicksort.getMedian(quickList)];
+		int leftBound = intList[0];
+		int rightBound = intList.length;
+
+		int L = leftBound, R = rightBound - 1;
+		
+		while (L <= R) {
+			while (L < rightBound && intList[L] <= pivot) {
+				L++;
+			}
+			while (R >= leftBound && intList[R] >= pivot) {
+				R--;
+			}
+
+			if (L < R) {
+				// swaps the reference points
+				intList = swap(intList, L, R);
+			}
+			
+			// swaps the reference points
+			intList = swap(intList, L, R);
+		}
+		
+		// need to set our quickList equals to our intList
+		System.out.println(Arrays.toString(intList));
+		
+//		find pivot, swap with item at rightBound;
+//
+//		L = leftBound, R = rightBound - 1;
+//
+//		while(L <= R){
+//		  while(L < rightBound && arr[L] <= pivot)
+//		    L++;
+//		  while(R >= leftBound && arr[R] >= pivot)
+//		    R--;
+//
+//		  if(L < R)
+//		    swapReferences(arr, L, R);
+//		}
+//
+//		swapReferences(arr, L, rightBound);
+		
+		
+
 	}
 
 	public interface quicksort {

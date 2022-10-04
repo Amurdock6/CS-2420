@@ -169,19 +169,24 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList, boolean getMedian, boolean getRandom, boolean getThreeRandMed ) {
-		if (getMedian == true) {
-			quicksort.getMedian(quickList);
-		} else if (getRandom == true) {
-			quicksort.getRandom(quickList);
-		} else if (getThreeRandMed == true) {
-			quicksort.getThreeRandomThenMedian(quickList);
-		} else {
-			quicksort.getMedian(quickList);
-		}
-		
-		
-		
+	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) {
+		    // pivot (Element to be placed at right position)
+			int pivot = quicksort.getMedian(quickList);
+			
+			int leftBound = (int) quickList.get(0);
+			int rightBound = (int) quickList.size();
+
+			int L = leftBound, R = rightBound - 1;
+
+			while(L <= R){
+			  while(L < rightBound && arr[L] <= pivot)
+			    L++;
+			  while(R >= leftBound && arr[R] >= pivot)
+			    R--;
+
+			  if(L < R)
+			    swapReferences(arr, L, R);
+			}
 		
 	}
 
@@ -237,6 +242,7 @@ public class ArrayListSorter
 			intArray[1] = getRandom(passedArrayList);
 			intArray[2] = getRandom(passedArrayList);
 			
+			// finds the median of our 3 random numbers
 			Arrays.sort(intArray);
 			double median;
 			if (intArray.length % 2 == 0)

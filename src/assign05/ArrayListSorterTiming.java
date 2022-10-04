@@ -14,12 +14,17 @@ public class ArrayListSorterTiming
 				int timesToLoop = 100000;
 				
 				// For each problem size n . . .
-				for (int n = 100; n <= 1000; n += 100) 
+				for (int n = 1000; n <= 10000; n += 1000) 
 				{
 					
 					long startTime, midpointTime, stopTime;
 					
 					ArrayList<Integer> merge = ArrayListSorter.generatePermuted(n);
+					ArrayList<Integer> merge2 = new ArrayList<>(merge);
+					ArrayList<Integer> merge3 = new ArrayList<>(merge);
+					ArrayList<Integer> merge4 = new ArrayList<>(merge);
+					ArrayList<Integer> merge5 = new ArrayList<>(merge);
+					
 					
 					// First, spin computing stuff until one second has gone by.
 					// This allows this thread to stabilize.
@@ -67,7 +72,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, (2 * n) / 5);
+						ArrayListSorter.mergesort(merge2, (2 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -100,7 +105,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, (3 * n) / 5);
+						ArrayListSorter.mergesort(merge3, (3 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -133,7 +138,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, (4 * n) / 5);
+						ArrayListSorter.mergesort(merge4, (4 * n) / 5);
 					}
 					
 					midpointTime = System.nanoTime();
@@ -166,7 +171,7 @@ public class ArrayListSorterTiming
 					// Test for areAnagrams
 					for (int i = 0; i < timesToLoop; i++) 
 					{
-						ArrayListSorter.mergesort(merge, n);
+						ArrayListSorter.mergesort(merge5, n);
 					}
 					
 					midpointTime = System.nanoTime();

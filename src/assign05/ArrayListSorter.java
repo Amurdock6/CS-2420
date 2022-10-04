@@ -157,38 +157,39 @@ public class ArrayListSorter
 	
 	/**
 	 * 
-	 * This method performs a quicksort on the generic ArrayList given as input.
-	 * You must implement three different strategies for determining the pivot, 
-	 * and your implementation should be able to easily switch among these strategies.  
-	 * (Consider using a few private helper methods for your different pivot-selection strategies.)  
-	 * You will perform timing experiments to determine which strategy works best.  
-	 * Your implementation may switch to insertion sort on some small threshold, if you wish.
+	 * This method performs a quicksort on the generic ArrayList given as input. You
+	 * must implement three different strategies for determining the pivot, and your
+	 * implementation should be able to easily switch among these strategies.
+	 * (Consider using a few private helper methods for your different
+	 * pivot-selection strategies.) You will perform timing experiments to determine
+	 * which strategy works best. Your implementation may switch to insertion sort
+	 * on some small threshold, if you wish.
 	 * 
 	 * @param <T>
 	 */
-	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) 
-	{
-		
+	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) {
+		quicksort.getMedian(quickList);
 	}
-	
-	public interface quicksort 
-	{
+
+	public interface quicksort {
 		/**
 		 * This method will grab the median of the entire ArrayList
+		 * 
 		 * @return median
 		 */
-		private static <T> int getMedian(ArrayList<T> passedArrayList) {
+		static <T> int getMedian(ArrayList<T> passedArrayList) {
+			double lower = 0;
+			double upper = 0;
 
-	        if (passedArrayList.size() % 2 == 1)
-	            System.out.println(passedArrayList.get((passedArrayList.size() + 1) / 2 - 1));
-	        else {
-	            double lower = (double) passedArrayList.get(passedArrayList.size() / 2 - 1);
-	            double upper = (double) passedArrayList.get(passedArrayList.size() / 2);
+			if (passedArrayList.size() % 2 == 1)
+				System.out.println(passedArrayList.get((passedArrayList.size() + 1) / 2 - 1));
+			else {
+				// Will make sure that our passed array is able to be divided
+				 lower = (double) (passedArrayList.size() / 2 - 1);
+				 upper = (double) (passedArrayList.size() / 2);
+			}
 
-	           System.out.println((lower + upper) / 2.0);
-	        }
-	        
-			return 0;
+			return (int) Math.round((lower + upper) / 2.0);
 		}
 		
 		/**

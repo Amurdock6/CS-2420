@@ -46,6 +46,8 @@ class ArrayListSorterTest {
 		assertTrue(quickSortTest.get(0) == 1);
 		assertTrue(quickSortTest.get(500) == 501);
 		assertTrue(quickSortTest.get(999) == 1000);
+		
+		
 	}
 //	
 //	@Test

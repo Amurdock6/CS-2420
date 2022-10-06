@@ -23,7 +23,7 @@ class ArrayListSorterTest {
 		
 		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
 		
-		ArrayListSorter.mergesort(mergeTest, 20);
+		ArrayListSorter.mergesort(mergeTest);
 		
 		assertTrue(mergeTest.get(0) == 1);
 		assertTrue(mergeTest.get(500) == 501);
@@ -33,15 +33,12 @@ class ArrayListSorterTest {
 
 	@Test
 	void testQuicksort() {
-		int quickSortSize = 100;
+		int quickSortSize = 1000;
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
+		
 
-		System.out.println("pre " + quickSortTest);
-
-		ArrayListSorter.quickSort(quickSortTest);
-
-		System.out.println("post " + quickSortTest);
+		ArrayListSorter.quicksort(quickSortTest);
 
 		assertTrue(quickSortTest.get(0) == 1);
 		assertTrue(quickSortTest.get(5) == 6);

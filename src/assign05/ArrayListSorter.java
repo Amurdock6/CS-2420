@@ -1,11 +1,8 @@
 package assign05;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -30,7 +27,7 @@ public class ArrayListSorter
 	 * @param <T>
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, int threshold) 
+	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
 	{
 		  //Create a temp space and ensure it is large enough
 		ArrayList<T> temp = new ArrayList<T>(mergeList.size());
@@ -40,7 +37,7 @@ public class ArrayListSorter
 		  
 		  // call internal overloaded method for entire array, and merge space
 		  // NOTE: size()-1, not size
-		  mergesort(mergeList, temp, 0, mergeList.size() - 1, threshold);
+		  mergesort(mergeList, temp, 0, mergeList.size() - 1);
 	}
 	
 	/**
@@ -53,11 +50,11 @@ public class ArrayListSorter
 	 * @param start
 	 * @param end
 	 */
-	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, ArrayList<T> temp, int start, int end, int threshold) 
+	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, ArrayList<T> temp, int start, int end) 
 	{
 
 		  // TODO: Replace this with an insertion sort threshold
-		  if(end - start <= threshold)
+		  if(end - start <= 60)
 		  {		  
 			  insertionSort(mergeList, start, end);
 			  return;
@@ -67,10 +64,10 @@ public class ArrayListSorter
 		  int mid = start + (end - start) / 2;
 		  
 		  // call merge sort, creates first half
-		  mergesort(mergeList, temp, start, mid, threshold);
+		  mergesort(mergeList, temp, start, mid);
 		  
 		  // call merge sort, creates second half
-		  mergesort(mergeList, temp, mid + 1, end, threshold);
+		  mergesort(mergeList, temp, mid + 1, end);
 		  
 		  // call merge, sorts and puts them back together
 		  merge(mergeList, temp, start, mid, end);
@@ -171,16 +168,16 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-	public static <T extends Comparable<? super T>> void quickSort(ArrayList<T> items) {
+	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items) {
 		Collections.shuffle(items); // sorted array is the worst case
-		quickSort(items, 0, items.size() - 1);
+		quicksort(items, 0, items.size() - 1);
 	}
 
-	private static <T extends Comparable<? super T>> void quickSort(ArrayList<T> items, int lo, int hi) {
+	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int lo, int hi) {
 		if (lo < hi) {
 			Pair pair = partition(items, lo, hi);
-			quickSort(items, lo, pair.lt - 1);
-			quickSort(items, pair.gt + 1, hi);
+			quicksort(items, lo, pair.lt - 1);
+			quicksort(items, pair.gt + 1, hi);
 		}
 	}
 

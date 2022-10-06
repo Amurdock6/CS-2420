@@ -19,15 +19,26 @@ class ArrayListSorterTest {
 	@Test
 	void testMergesort() 
 	{
+		int mergeSize = 1000;
+		
+		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
+		
+		ArrayListSorter.mergesort(mergeTest, 20);
+		
+		assertTrue(mergeTest.get(0) == 1);
+		assertTrue(mergeTest.get(500) == 501);
+		assertTrue(mergeTest.get(999) == 1000);
+
+	}
+	
+	@Test
+	void testMergesortZeroSize() 
+	{
 		int mergeSize = 0;
 		
 		ArrayList<Integer> mergeTest = ArrayListSorter.generatePermuted(mergeSize);
 		
-		ArrayListSorter.mergesort(mergeTest);
-		
-//		assertTrue(mergeTest.get(0) == 1);
-//		assertTrue(mergeTest.get(500) == 501);
-//		assertTrue(mergeTest.get(999) == 1000);
+		ArrayListSorter.mergesort(mergeTest, 20);
 		
 		assertTrue(mergeTest.size() == 0);
 
@@ -39,21 +50,25 @@ class ArrayListSorterTest {
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
 		
-
-<<<<<<< Updated upstream
 		ArrayListSorter.quicksort(quickSortTest);
-=======
-		//System.out.println("pre " + quickSortTest);
 
-		ArrayListSorter.quickSort(quickSortTest);
-
-		//System.out.println("post " + quickSortTest);
->>>>>>> Stashed changes
 
 		assertTrue(quickSortTest.get(0) == 1);
 		assertTrue(quickSortTest.get(5) == 6);
 		assertTrue(quickSortTest.get(9) == 10);
 		assertTrue(quickSortTest.get(999) == 1000);
+	}
+	
+	@Test
+	void testQuicksortZeroSize() {
+		int quickSortSize = 0;
+
+		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
+		
+		ArrayListSorter.quicksort(quickSortTest);
+
+
+		assertTrue(quickSortTest.size() == 0);
 	}
 
 	@Test

@@ -27,7 +27,7 @@ public class ArrayListSorter
 	 * @param <T>
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList) 
+	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, int threshold) 
 	{
 		  //Create a temp space and ensure it is large enough
 		ArrayList<T> temp = new ArrayList<T>(mergeList.size());
@@ -37,7 +37,7 @@ public class ArrayListSorter
 		  
 		  // call internal overloaded method for entire array, and merge space
 		  // NOTE: size()-1, not size
-		  mergesort(mergeList, temp, 0, mergeList.size() - 1);
+		  mergesort(mergeList, temp, 0, mergeList.size() - 1, threshold);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class ArrayListSorter
 	 * @param start
 	 * @param end
 	 */
-	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, ArrayList<T> temp, int start, int end) 
+	private static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, ArrayList<T> temp, int start, int end, int threshold) 
 	{
 
 		  // TODO: Replace this with an insertion sort threshold
@@ -64,10 +64,10 @@ public class ArrayListSorter
 		  int mid = start + (end - start) / 2;
 		  
 		  // call merge sort, creates first half
-		  mergesort(mergeList, temp, start, mid);
+		  mergesort(mergeList, temp, start, mid, threshold);
 		  
 		  // call merge sort, creates second half
-		  mergesort(mergeList, temp, mid + 1, end);
+		  mergesort(mergeList, temp, mid + 1, end, threshold);
 		  
 		  // call merge, sorts and puts them back together
 		  merge(mergeList, temp, start, mid, end);

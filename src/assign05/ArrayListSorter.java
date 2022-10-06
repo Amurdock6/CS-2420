@@ -170,35 +170,76 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-	 public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList) {
+//	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList, int leftBound, int R) {
+//		int pivot = (int) quickList.get(quicksort.getMedian(quickList));
+//		int leftBound = (int) quickList.get(0) - 1;
+//		int rightBound = quickList.size();
+//		
+//		
+//		int L = leftBound, R = rightBound - 1;
+//		
+//		while (L <= R) {
+//			while (L <= rightBound && (int) quickList.get(L) <= pivot) {
+//				L++;
+//			}
+//			while (R >= leftBound && (int) quickList.get(R) >= pivot) {
+//				R--;
+//			}
+//			if (L < R) {
+//				T temp;
+//				temp = quickList.get(L);
+//				quickList.set(L, quickList.get(R));
+//				quickList.set(R, temp);
+//			}
+////			 swap arr[i+1] and arr[high] (or pivot)
+//			T temp = quickList.get(L + 1);
+//			quickList.set(L + 1, quickList.get(R));
+//			quickList.set(R, temp);
+////			quicksort(quickList);
+//		}
+//		
+//		
+//	}
+	
+//	
+//	public static <T extends Comparable<? super T>> void quickSort(ArrayList<T> quickList, int begin, int end) {
+//		 int[] arr = new int[quickList.size()];
+//		    for (int i=0; i < arr.length; i++)
+//		    {
+//		        arr[i] = ((Integer) quickList.get(i)).intValue();
+//		    }
+//		    
+//		    startQuickSort(arr, begin, end);
+//	}
+	
+	static void quickSort(int[] quickList, int begin, int end) {
+		if (begin < end) {
+			int partitionIndex = partition(quickList, begin, end);
 
-		int pivot = (int) quickList.get(quicksort.getMedian(quickList));
-		int leftBound = (int) quickList.get(0);
-		int rightBound = quickList.size();
+			quickSort(quickList, begin, partitionIndex - 1);
+			quickSort(quickList, partitionIndex + 1, end);
+		}
+	}
 
-		int L = leftBound, R = rightBound - 1;
-		int i = 0;
-		
-			while (L <= R) {
-				while (L < rightBound && (int) quickList.get(L) <= pivot) {
-					L++;
-				}
-				while (R >= leftBound && (int) quickList.get(R) >= pivot) {
-					R--;
-				}
-				if (L < R) {
-					T temp;
-					temp = quickList.get(L);
-					quickList.set(L, quickList.get(R));
-					quickList.set(R, temp);
-				}
+	private static int partition(int[] arr, int begin, int end) {
+		int pivot = arr[end];
+		int i = (begin - 1);
 
-				// swap arr[i+1] and arr[high] (or pivot)
-				T temp = quickList.get(L + 1);
-				quickList.set(L + 1, quickList.get(R));
-				quickList.set(R, temp);
+		for (int j = begin; j < end; j++) {
+			if (arr[j] <= pivot) {
+				i++;
+
+				int swapTemp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = swapTemp;
 			}
-			
+		}
+
+		int swapTemp = arr[i + 1];
+		arr[i + 1] = arr[end];
+		arr[end] = swapTemp;
+
+		return i + 1;
 	}
 	 
 

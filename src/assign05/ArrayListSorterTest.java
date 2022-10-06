@@ -47,16 +47,6 @@ class ArrayListSorterTest {
 		assertTrue(quickSortTest.get(5) == 6);
 		assertTrue(quickSortTest.get(9) == 10);
 	}
-	
-	@Test
-	void testQuicksortGetMedian() 
-	{
-		int quickSortSize = 1000;
-		
-		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
-		
-		assertTrue(ArrayListSorter.quicksort.getMedian(quickSortTest) ==  500);
-	}
 
 	@Test
 	void testGenerateAscending() 

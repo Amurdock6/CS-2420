@@ -15,7 +15,7 @@ public class Quicksort_vs_mergesort_timing
 				
 				long startTime, midpointTime, stopTime;
 				
-				ArrayList<Integer> quickSort = ArrayListSorter.generatePermuted(n);
+				ArrayList<Integer> versus = ArrayListSorter.generatePermuted(n);
 
 				
 				// Test quickSort
@@ -33,7 +33,7 @@ public class Quicksort_vs_mergesort_timing
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort));
+					ArrayListSorter.quicksort(new ArrayList<Integer>(versus));
 				}
 				
 				midpointTime = System.nanoTime();
@@ -41,7 +41,7 @@ public class Quicksort_vs_mergesort_timing
 				// Run a loop to capture the cost of running the loop.
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					new ArrayList<Integer>(quickSort);
+					new ArrayList<Integer>(versus);
 				}
 				
 				stopTime = System.nanoTime();
@@ -69,7 +69,7 @@ public class Quicksort_vs_mergesort_timing
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.mergesort(new ArrayList<Integer>(quickSort), 60);
+					ArrayListSorter.mergesort(new ArrayList<Integer>(versus), 60);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -77,7 +77,7 @@ public class Quicksort_vs_mergesort_timing
 				// Run a loop to capture the cost of running the loop.
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					new ArrayList<Integer>(quickSort);
+					new ArrayList<Integer>(versus);
 				}
 				
 				stopTime = System.nanoTime();

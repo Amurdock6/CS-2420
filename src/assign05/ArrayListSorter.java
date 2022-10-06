@@ -185,7 +185,7 @@ public class ArrayListSorter
         int init = begin;
         int length = end;
 
-        int pivot = quicksort.getRandom(quickList);
+        int pivot = (int) quicksort.getRandom(quickList);
         
         while (true) {
             while ((int) quickList.get(length) > (int) pivot && length > begin) {
@@ -213,23 +213,17 @@ public class ArrayListSorter
     
     public interface quicksort {
         /**
-         * This method will grab the median of the entire ArrayList
+         * This method will grab the middle of the entire ArrayList
          * 
-         * @return median
+         * @return middle
          */
-        static <T> int getMedian(ArrayList<T> passedArrayList) {
-            double lower = 0;
-            double upper = 0;
-
-            if (passedArrayList.size() % 2 == 1)
-                System.out.println(passedArrayList.get((passedArrayList.size() + 1) / 2 - 1));
-            else {
-                // Will make sure that our passed array is able to be divided
-                lower = (double) (passedArrayList.size() / 2 - 1);
-                upper = (double) (passedArrayList.size() / 2);
-            }
-
-            return (int) Math.round((lower + upper) / 2.0);
+        static <T> T getMiddleIndex(ArrayList<T> passedArrayList) {
+        	
+           int middleIndex = passedArrayList.size() / 2;
+           
+           T middleItem = passedArrayList.get(middleIndex);
+           
+           return middleItem;
         }
 
         /**
@@ -238,14 +232,19 @@ public class ArrayListSorter
          * @param <T>
          * @return median
          */
-        static <T> int getRandom(ArrayList<T> passedArrayList) {
-            int arrayListSize = passedArrayList.size();
+        static <T> T getRandom(ArrayList<T> passedArrayList) 
+        {
+            // Set the index values of the array list
+        	int arrayListSize = passedArrayList.size() - 1;
 
             Random rand = new Random(); // instance of random class
-            int upperbound = arrayListSize;
-            int randomIndex = rand.nextInt(upperbound);
+           
+            // get a random index from 
+            int randomIndex = rand.nextInt(arrayListSize);
+            
+            T randomItem = passedArrayList.get(randomIndex);
 
-            return randomIndex;
+            return randomItem;
         }
 
         /**
@@ -259,23 +258,16 @@ public class ArrayListSorter
             intArray = new int[3];
 
             // sets are array with 3 random numbers from our passedArrayList
-            intArray[0] = getRandom(passedArrayList);
-            intArray[1] = getRandom(passedArrayList);
-            intArray[2] = getRandom(passedArrayList);
+            intArray[0] = (int) getRandom(passedArrayList);
+            intArray[1] = (int) getRandom(passedArrayList);
+            intArray[2] = (int) getRandom(passedArrayList);
 
             // finds the median of our 3 random numbers
             Arrays.sort(intArray);
-            double median;
-            if (intArray.length % 2 == 0)
-                median = ((double) intArray[intArray.length / 2] + (double) intArray[intArray.length / 2 - 1]) / 2;
-            else
-                median = (double) intArray[intArray.length / 2];
 
-            // converts our median from a double to a int so we can grab the median from our
-            // array
-            int returnMedian = (int) Math.round(median);
-
-            return returnMedian;
+            int median = intArray[1];
+            
+            return median;
         }
     }
 	

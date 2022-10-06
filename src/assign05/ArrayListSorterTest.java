@@ -33,20 +33,15 @@ class ArrayListSorterTest {
 
 	@Test
 	void testQuicksort() {
-		int quickSortSize = 1000;
+		int quickSortSize = 100;
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
 
-//		int[] arr = new int[quickSortSize];
-//		for (int i = 0; i < arr.length; i++) {
-//			arr[i] = ((Integer) quickSortTest.get(i)).intValue();
-//		}
-
-		System.out.println(quickSortTest);
+		System.out.println("pre " + quickSortTest);
 
 		ArrayListSorter.quickSort(quickSortTest, 0, quickSortTest.size() - 1);
 
-		System.out.println(quickSortTest);
+		System.out.println("post " + quickSortTest);
 
 		assertTrue(quickSortTest.get(0) == 1);
 		assertTrue(quickSortTest.get(500) == 501);

@@ -170,49 +170,7 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-//	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> quickList, int leftBound, int R) {
-//		int pivot = (int) quickList.get(quicksort.getMedian(quickList));
-//		int leftBound = (int) quickList.get(0) - 1;
-//		int rightBound = quickList.size();
-//		
-//		
-//		int L = leftBound, R = rightBound - 1;
-//		
-//		while (L <= R) {
-//			while (L <= rightBound && (int) quickList.get(L) <= pivot) {
-//				L++;
-//			}
-//			while (R >= leftBound && (int) quickList.get(R) >= pivot) {
-//				R--;
-//			}
-//			if (L < R) {
-//				T temp;
-//				temp = quickList.get(L);
-//				quickList.set(L, quickList.get(R));
-//				quickList.set(R, temp);
-//			}
-////			 swap arr[i+1] and arr[high] (or pivot)
-//			T temp = quickList.get(L + 1);
-//			quickList.set(L + 1, quickList.get(R));
-//			quickList.set(R, temp);
-////			quicksort(quickList);
-//		}
-//		
-//		
-//	}
-	
-//	
-//	public static <T extends Comparable<? super T>> void quickSort(ArrayList<T> quickList, int begin, int end) {
-//		 int[] arr = new int[quickList.size()];
-//		    for (int i=0; i < arr.length; i++)
-//		    {
-//		        arr[i] = ((Integer) quickList.get(i)).intValue();
-//		    }
-//		    
-//		    startQuickSort(arr, begin, end);
-//	}
-	
-	static <T extends Comparable<? super T>> void  quickSort(ArrayList<T> quickList, int begin, int end) {
+	static <T extends Comparable<? super T>> void quickSort(ArrayList<T> quickList, int begin, int end) {
 		if (begin < end) {
 			int partitionIndex = partition(quickList, begin, end);
 
@@ -221,12 +179,13 @@ public class ArrayListSorter
 		}
 	}
 
+	
 	private static <T extends Comparable<? super T>> int partition(ArrayList<T> quickList, int begin, int end) {
 		int init = begin;
 		int length = end;
 
-		T pivot = quickList.get(end);
-
+		int pivot = quicksort.getRandom(quickList);
+		
 		while (true) {
 			while ((int) quickList.get(length) > (int) pivot && length > begin) {
 				length--;
@@ -249,8 +208,8 @@ public class ArrayListSorter
 			}
 		}
 	}
-	 
 
+	
 	public interface quicksort {
 		/**
 		 * This method will grab the median of the entire ArrayList
@@ -297,23 +256,24 @@ public class ArrayListSorter
 		static <T> int getThreeRandomThenMedian(ArrayList<T> passedArrayList) {
 			int[] intArray;
 			intArray = new int[3];
-			
+
 			// sets are array with 3 random numbers from our passedArrayList
 			intArray[0] = getRandom(passedArrayList);
 			intArray[1] = getRandom(passedArrayList);
 			intArray[2] = getRandom(passedArrayList);
-			
+
 			// finds the median of our 3 random numbers
 			Arrays.sort(intArray);
 			double median;
 			if (intArray.length % 2 == 0)
-			    median = ((double)intArray[intArray.length/2] + (double)intArray[intArray.length/2 - 1])/2;
+				median = ((double) intArray[intArray.length / 2] + (double) intArray[intArray.length / 2 - 1]) / 2;
 			else
-			    median = (double) intArray[intArray.length/2];
-			
-			// converts our median from a double to a int so we can grab the median from our array
+				median = (double) intArray[intArray.length / 2];
+
+			// converts our median from a double to a int so we can grab the median from our
+			// array
 			int returnMedian = (int) Math.round(median);
-			
+
 			return returnMedian;
 		}
 	}

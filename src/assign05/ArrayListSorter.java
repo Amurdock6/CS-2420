@@ -212,7 +212,7 @@ public class ArrayListSorter
 //		    startQuickSort(arr, begin, end);
 //	}
 	
-	static void quickSort(int[] quickList, int begin, int end) {
+	static <T extends Comparable<? super T>> void  quickSort(ArrayList<T> quickList, int begin, int end) {
 		if (begin < end) {
 			int partitionIndex = partition(quickList, begin, end);
 
@@ -221,25 +221,33 @@ public class ArrayListSorter
 		}
 	}
 
-	private static int partition(int[] arr, int begin, int end) {
-		int pivot = arr[end];
-		int i = (begin - 1);
+	private static <T extends Comparable<? super T>> int partition(ArrayList<T> quickList, int begin, int end) {
+		int init = begin;
+		int length = end;
 
-		for (int j = begin; j < end; j++) {
-			if (arr[j] <= pivot) {
-				i++;
+		T pivot = quickList.get(end);
 
-				int swapTemp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = swapTemp;
+		while (true) {
+			while ((int) quickList.get(length) > (int) pivot && length > begin) {
+				length--;
+			}
+
+			while ((int) quickList.get(init) < (int) pivot && init < end) {
+				init++;
+			}
+
+			if (init < length) {
+				T temp;
+				temp = quickList.get(init);
+				quickList.set(init, quickList.get(length));
+				quickList.set(length, temp);
+				length--;
+				init++;
+
+			} else {
+				return length;
 			}
 		}
-
-		int swapTemp = arr[i + 1];
-		arr[i + 1] = arr[end];
-		arr[end] = swapTemp;
-
-		return i + 1;
 	}
 	 
 

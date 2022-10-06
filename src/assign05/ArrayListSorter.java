@@ -160,55 +160,68 @@ public class ArrayListSorter
 	
 	
 	/**
-     * 
-     * This method performs a quicksort on the generic ArrayList given as input. You
-     * must implement three different strategies for determining the pivot, and your
-     * implementation should be able to easily switch among these strategies.
-     * (Consider using a few private helper methods for your different
-     * pivot-selection strategies.) You will perform timing experiments to determine
-     * which strategy works best. Your implementation may switch to insertion sort
-     * on some small threshold, if you wish.
-     * 
-     * @param <T>
-     */
-    static <T extends Comparable<? super T>> void quickSort(ArrayList<T> quickList, int begin, int end) {
-        if (begin < end) {
-            int partitionIndex = partition(quickList, begin, end);
+	 * 
+	 * This method performs a quicksort on the generic ArrayList given as input. You
+	 * must implement three different strategies for determining the pivot, and your
+	 * implementation should be able to easily switch among these strategies.
+	 * (Consider using a few private helper methods for your different
+	 * pivot-selection strategies.) You will perform timing experiments to determine
+	 * which strategy works best. Your implementation may switch to insertion sort
+	 * on some small threshold, if you wish.
+	 * 
+	 * @param <T>
+	 */
+	// 3-way quicksort
 
-            quickSort(quickList, begin, partitionIndex - 1);
-            quickSort(quickList, partitionIndex + 1, end);
-        }
-    }
+	public static <T extends Comparable<? super T>> void quickSort(ArrayList<T> items) {
+		Collections.shuffle(items); // sorted array is the worst case
+		quickSort(items, 0, items.size() - 1);
+	}
 
-    
-    private static <T extends Comparable<? super T>> int partition(ArrayList<T> quickList, int begin, int end) {
-        int init = begin;
-        int length = end;
+	private static <T extends Comparable<? super T>> void quickSort(ArrayList<T> items, int lo, int hi) {
+		if (lo < hi) {
+			Pair pair = partition(items, lo, hi);
+			quickSort(items, lo, pair.lt - 1);
+			quickSort(items, pair.gt + 1, hi);
+		}
+	}
 
-        int pivot = (int) quicksort.getRandom(quickList);
-        
-        while (true) {
-            while ((int) quickList.get(length) > (int) pivot && length > begin) {
-                length--;
-            }
+	private static <T extends Comparable<? super T>> Pair partition(ArrayList<T> items, int lo, int hi) {
+		int lt = lo;
+		int i = lo + 1;
+		int gt = hi;
+		T item = items.get(lo);
 
-            while ((int) quickList.get(init) < (int) pivot && init < end) {
-                init++;
-            }
+		while (i <= gt) {
+			int cmp = items.get(i).compareTo(item);
 
-            if (init < length) {
-                T temp;
-                temp = quickList.get(init);
-                quickList.set(init, quickList.get(length));
-                quickList.set(length, temp);
-                length--;
-                init++;
+			if (cmp < 0)
+				swap(items, lt++, i++);
+			else if (cmp > 0)
+				swap(items, i, gt--);
+			else
+				i++;
+		}
 
-            } else {
-                return length;
-            }
-        }
-    }
+		return new Pair(lt, gt);
+	}
+
+	private static <T> void swap(List<T> items, int i, int j) {
+		T tmp = items.get(i);
+		items.set(i, items.get(j));
+		items.set(j, tmp);
+	}
+
+	private static final class Pair {
+
+		private int lt;
+		private int gt;
+
+		public Pair(int lt, int gt) {
+			this.lt = lt;
+			this.gt = gt;
+		}
+	}
 
     
     public interface quicksort {

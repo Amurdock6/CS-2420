@@ -33,13 +33,13 @@ class ArrayListSorterTest {
 
 	@Test
 	void testQuicksort() {
-		int quickSortSize = 10;
+		int quickSortSize = 100;
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
 
 		System.out.println("pre " + quickSortTest);
 
-		ArrayListSorter.quickSort(quickSortTest, 0, quickSortTest.size() - 1);
+		ArrayListSorter.quickSort(quickSortTest);
 
 		System.out.println("post " + quickSortTest);
 

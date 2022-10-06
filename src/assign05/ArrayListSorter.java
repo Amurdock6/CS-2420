@@ -171,8 +171,6 @@ public class ArrayListSorter
 	 * 
 	 * @param <T>
 	 */
-	// 3-way quicksort
-
 	public static <T extends Comparable<? super T>> void quickSort(ArrayList<T> items) {
 		Collections.shuffle(items); // sorted array is the worst case
 		quickSort(items, 0, items.size() - 1);

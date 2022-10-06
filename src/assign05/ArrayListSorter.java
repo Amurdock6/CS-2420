@@ -206,7 +206,7 @@ public class ArrayListSorter
 		return new Pair(lt, gt);
 	}
 
-	private static <T> void swap(List<T> items, int i, int j) {
+	private static <T> void swap(ArrayList<T> items, int i, int j) {
 		T tmp = items.get(i);
 		items.set(i, items.get(j));
 		items.set(j, tmp);

@@ -193,7 +193,7 @@ public class ArrayListSorter
 
 //		while (i <= gt) {
 //			int cmp = items.get(i).compareTo(pivot);
-//
+
 //			if (cmp < 0)
 //				swap(items, lt++, i++);
 //			else if (cmp > 0)

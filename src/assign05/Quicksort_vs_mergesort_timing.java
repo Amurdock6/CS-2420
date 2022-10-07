@@ -71,7 +71,7 @@ public class Quicksort_vs_mergesort_timing
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.mergesort(new ArrayList<Integer>(versusAscending), 60);
+					ArrayListSorter.mergesort(new ArrayList<Integer>(versusAscending), 20);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -142,7 +142,7 @@ public class Quicksort_vs_mergesort_timing
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.mergesort(new ArrayList<Integer>(versusDescending), 60);
+					ArrayListSorter.mergesort(new ArrayList<Integer>(versusDescending), 20);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -214,7 +214,7 @@ public class Quicksort_vs_mergesort_timing
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.mergesort(new ArrayList<Integer>(versuspermuted), 60);
+					ArrayListSorter.mergesort(new ArrayList<Integer>(versuspermuted), 20);
 				}
 				
 				midpointTime = System.nanoTime();

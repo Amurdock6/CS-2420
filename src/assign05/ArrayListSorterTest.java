@@ -52,7 +52,7 @@ class ArrayListSorterTest {
 		
 		
 		System.out.println(quickSortTest);
-		ArrayListSorter.quicksort(quickSortTest);
+		ArrayListSorter.quicksort(quickSortTest, 1);
 		System.out.println(quickSortTest);
 
 		assertTrue(quickSortTest.get(0) == 1);
@@ -67,7 +67,7 @@ class ArrayListSorterTest {
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
 		
-		ArrayListSorter.quicksort(quickSortTest);
+		ArrayListSorter.quicksort(quickSortTest, 1);
 
 
 		assertTrue(quickSortTest.size() == 0);

@@ -54,7 +54,7 @@ public class ArrayListSorter
 	{
 
 		  // TODO: Replace this with an insertion sort threshold
-		  if(end - start <= 60)
+		  if(end - start <= threshold)
 		  {		  
 			  insertionSort(mergeList, start, end);
 			  return;
@@ -261,19 +261,19 @@ public class ArrayListSorter
          * 
          * @return median
          */
-        static <T> int getThreeRandomThenMedian(ArrayList<T> passedArrayList) {
-            int[] intArray;
-            intArray = new int[3];
+        static <T> T getThreeRandomThenMedian(ArrayList<T> passedArrayList) {
+            Object[] medianArray = new Object[3];
+            //ArrayList<T> temp = new ArrayList<T>(mergeList.size());
 
             // sets are array with 3 random numbers from our passedArrayList
-            intArray[0] = (int) getRandom(passedArrayList);
-            intArray[1] = (int) getRandom(passedArrayList);
-            intArray[2] = (int) getRandom(passedArrayList);
+            medianArray[0] = getRandom(passedArrayList);
+            medianArray[1] = getRandom(passedArrayList);
+            medianArray[2] = getRandom(passedArrayList);
 
             // finds the median of our 3 random numbers
-            Arrays.sort(intArray);
+            Arrays.sort(medianArray);
 
-            int median = intArray[1];
+            T median = (T) medianArray[1];
             
             return median;
         }

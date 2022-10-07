@@ -185,9 +185,9 @@ public class ArrayListSorter
 	}
 
 	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int lo, int hi) {
-		int lt = lo;
-		int i = lo + 1;
-		int gt = hi;
+//		int lt = lo;
+//		int i = lo + 1;
+//		int gt = hi;
 //		T item = items.get(lo);
 //		T pivot = quicksort.getRandom(items);
 
@@ -227,23 +227,23 @@ public class ArrayListSorter
 //		return new Pair(lt, gt);
 	
 		
-	}
+//	}
 
-	private static <T> void swap(ArrayList<T> items, int i, int j) {
-		T tmp = items.get(i);
-		items.set(i, items.get(j));
-		items.set(j, tmp);
-	}
-
-	private static final class Pair {
-
-		private int lt;
-		private int gt;
-
-		public Pair(int lt, int gt) {
-			this.lt = lt;
-			this.gt = gt;
-		}
+//	private static <T> void swap(ArrayList<T> items, int i, int j) {
+//		T tmp = items.get(i);
+//		items.set(i, items.get(j));
+//		items.set(j, tmp);
+//	}
+//
+//	private static final class Pair {
+//
+//		private int lt;
+//		private int gt;
+//
+//		public Pair(int lt, int gt) {
+//			this.lt = lt;
+//			this.gt = gt;
+//		}
 	}
 
     

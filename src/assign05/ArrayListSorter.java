@@ -172,49 +172,55 @@ public class ArrayListSorter
 		quicksort(items, 0, items.size() - 1);
 	}
 
-	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int lo, int hi) {
-		int q;
-		if (lo < hi) 
+	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int leftBound, int rightBound) {
+		int mid;
+		if (leftBound < rightBound) 
 		{
-            q = partition(items, lo, hi);
-            quicksort(items, lo, q);
-            quicksort(items, q+1, hi);
+            mid = partition(items, leftBound, rightBound);
+            quicksort(items, leftBound, mid);
+            quicksort(items, mid+1, rightBound);
 		}
 	}
 
-	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int lo, int hi) {
+	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int leftBound, int rightBound) {
 
 		        
-		        int init = lo;
-		        int length = hi;
+		        int left = leftBound;
+		        int right = rightBound;
 		        
-		        T pivot = items.get(lo);
+		        //T pivot = items.get(leftBound);
+		        int pivotIndex = quicksort.getMiddle(leftBound, rightBound);
+		        
+		        T pivot = items.get(pivotIndex);
+		        System.out.println(pivot);
+
 		        
 		                
 		        while(true)
 		        {
-		            while(items.get(length).compareTo(pivot) > 0 && length > lo){
-		                length--;
+		            while(items.get(right).compareTo(pivot) > 0 && right > leftBound){
+		            	right--;
 		            }
 		            
-		            while(items.get(init).compareTo(pivot) < 0 && init < hi){
-		                init++;
+		            while(items.get(left).compareTo(pivot) < 0 && left < rightBound){
+		            	left++;
 		            }
 		            
-		            if(init < length)
+		            if(left < right)
 		            {
 		                T temp;
-		                temp = items.get(init);
-		                items.set(init,items.get(length));
-		                items.set(length,temp);
-		                length--;
-		                init++;
+		                temp = items.get(left);
+		                
+		                items.set(left, items.get(right));
+		                items.set(right, temp);
+		                
+		                right--;
+		                left++;
 		                
 		            }
+		            
 		            else
-		            {
-		                return length;
-		            }
+		                return right;
 		        }
 		        
 		    }
@@ -227,13 +233,11 @@ public class ArrayListSorter
          * 
          * @return middle
          */
-        static <T> T getMiddleIndex(ArrayList<T> passedArrayList) {
+        static <T> int getMiddle(int start, int end) {
         	
-           int middleIndex = passedArrayList.size() / 2;
+           int middleIndex = (end - start) / 2;
            
-           T middleItem = passedArrayList.get(middleIndex);
-           
-           return middleItem;
+           return middleIndex;
         }
 
         /**
@@ -242,19 +246,17 @@ public class ArrayListSorter
          * @param <T>
          * @return median
          */
-        static <T> T getRandom(ArrayList<T> passedArrayList) 
+        static <T> int getRandom(ArrayList<T> passedArrayList, int start, int end) 
         {
             // Set the index values of the array list
-        	int arrayListSize = passedArrayList.size() - 1;
+        	int arrayListSize = end - start;
 
             Random rand = new Random(); // instance of random class
            
             // get a random index from 
             int randomIndex = rand.nextInt(arrayListSize);
-            
-            T randomItem = passedArrayList.get(randomIndex);
 
-            return randomItem;
+            return randomIndex;
         }
 
         /**
@@ -263,14 +265,14 @@ public class ArrayListSorter
          * 
          * @return median
          */
-        static <T> T getThreeRandomThenMedian(ArrayList<T> passedArrayList) {
+        static <T> T getThreeRandomThenMedian(ArrayList<T> passedArrayList, int start, int end) {
             Object[] medianArray = new Object[3];
             //ArrayList<T> temp = new ArrayList<T>(mergeList.size());
 
             // sets are array with 3 random numbers from our passedArrayList
-            medianArray[0] = getRandom(passedArrayList);
-            medianArray[1] = getRandom(passedArrayList);
-            medianArray[2] = getRandom(passedArrayList);
+            medianArray[0] = getRandom(passedArrayList, start, end);
+            medianArray[1] = getRandom(passedArrayList, start, end);
+            medianArray[2] = getRandom(passedArrayList, start, end);
 
             // finds the median of our 3 random numbers
             Arrays.sort(medianArray);

@@ -210,7 +210,6 @@ public class ArrayListSorter {
 
 					items.set(left, items.get(right));
 					items.set(right, temp);
-
 					right--;
 					left++;
 
@@ -245,9 +244,7 @@ public class ArrayListSorter {
         	 Random rand = new Random(); // instance of random class
         	
         	 int diff = end - start;
-                return (start + rand.nextInt(diff + 1));
-
-             
+                return (start + rand.nextInt(diff + 1)); 
         }
 
         /**
@@ -257,7 +254,7 @@ public class ArrayListSorter {
          * @return median
          */
         static <T> int getThreeRandomThenMedian(ArrayList<T> passedArrayList, int start, int end) {
-            Object[] medianArray = new Object[3];
+            int[] medianArray = new int[3];
             //ArrayList<T> temp = new ArrayList<T>(mergeList.size());
 
             // sets are array with 3 random numbers from our passedArrayList
@@ -268,7 +265,7 @@ public class ArrayListSorter {
             // finds the median of our 3 random numbers
             Arrays.sort(medianArray);
 
-            int median = (int) medianArray[1];
+            int median = medianArray[1];
             
             return median;
         }

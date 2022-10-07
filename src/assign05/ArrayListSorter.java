@@ -27,7 +27,7 @@ public class ArrayListSorter
 	 * @param <T>
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, int threshold) 
+	public static <T extends Comparable<? super T>> void mergesort(ArrayList<T> mergeList, int threshold)
 	{
 		  //Create a temp space and ensure it is large enough
 		ArrayList<T> temp = new ArrayList<T>(mergeList.size());
@@ -169,36 +169,64 @@ public class ArrayListSorter
 	 * @param <T>
 	 */
 	public static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items) {
-		Collections.shuffle(items); // sorted array is the worst case
 		quicksort(items, 0, items.size() - 1);
 	}
 
 	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int lo, int hi) {
+		int q;
 		if (lo < hi) {
-			Pair pair = partition(items, lo, hi);
-			quicksort(items, lo, pair.lt - 1);
-			quicksort(items, pair.gt + 1, hi);
+            q = partition(items, lo, hi);
+            quicksort(items, lo, q);
+            quicksort(items, q+1, hi);
+//			Pair pair = partition(items, lo, hi);
+//			quicksort(items, lo, pair.lt - 1);
+//			quicksort(items, pair.gt + 1, hi);
 		}
 	}
 
-	private static <T extends Comparable<? super T>> Pair partition(ArrayList<T> items, int lo, int hi) {
+	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int lo, int hi) {
 		int lt = lo;
 		int i = lo + 1;
 		int gt = hi;
-		T item = items.get(lo);
+//		T item = items.get(lo);
+//		T pivot = quicksort.getRandom(items);
 
-		while (i <= gt) {
-			int cmp = items.get(i).compareTo(item);
-
-			if (cmp < 0)
-				swap(items, lt++, i++);
-			else if (cmp > 0)
-				swap(items, i, gt--);
-			else
-				i++;
-		}
-
-		return new Pair(lt, gt);
+//		while (i <= gt) {
+//			int cmp = items.get(i).compareTo(pivot);
+//
+//			if (cmp < 0)
+//				swap(items, lt++, i++);
+//			else if (cmp > 0)
+//				swap(items, i, gt--);
+//			else
+//				i++;
+//		}
+		
+		
+//		// swaps our hi bound with pivot
+//		int test = items.size() - 1;
+//		T temp = pivot;
+//		pivot = items.get(test);
+//		items.set(hi, temp);
+//		
+//		int L = lo, R = hi - 1;
+//
+//		while(L <= R){
+//			int cmp = items.get(L).compareTo(pivot);
+//			
+//		  while(L < lo && cmp > 0)
+//		    L++;
+//		  while(R >= hi && cmp < 0)
+//		    R--;
+//
+//		  if(L < R)
+//		    swap(items, L, R);
+//		}
+//
+//		swap(items, L, hi);
+//		return new Pair(lt, gt);
+	
+		
 	}
 
 	private static <T> void swap(ArrayList<T> items, int i, int j) {

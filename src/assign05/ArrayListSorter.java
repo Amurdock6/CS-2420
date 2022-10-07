@@ -183,51 +183,49 @@ public class ArrayListSorter
 	}
 
 	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int lo, int hi) {
+		int init = lo;
+		int length = hi;
 
-		        
-		        int init = lo;
-		        int length = hi;
-		        
-		        T pivot = items.get(lo);
-		        
-		                
-		        while(true)
-		        {
-		            while(items.get(length).compareTo(pivot) > 0 && length > lo){
-		                length--;
-		            }
-		            
-		            while(items.get(init).compareTo(pivot) < 0 && init < hi){
-		                init++;
-		            }
-		            
-		            if(init < length)
-		            {
-		                T temp;
-		                temp = items.get(init);
-		                items.set(init,items.get(length));
-		                items.set(length,temp);
-		                length--;
-		                init++;
-		                
-		            }
-		            else
-		            {
-		                return length;
-		            }
-		        }
-		        
-		    }
+		System.out.println(items.size() + " size " + lo + " lo " + hi + " hi");
+		T pivot = quicksort.getMiddleIndex(items, lo, hi);
+
+		while (true) {
+			while (items.get(length).compareTo(pivot) > 0 && length > lo) {
+				length--;
+			}
+
+			while (items.get(init).compareTo(pivot) < 0 && init < hi) {
+				init++;
+			}
+
+			if (init < length) {
+				T temp;
+				temp = items.get(init);
+				items.set(init, items.get(length));
+				items.set(length, temp);
+				length--;
+				init++;
+
+			} else {
+				return length;
+			}
+		}
+
+	}
 	
 
-    
+	static int i = 0;   
     public interface quicksort {
         /**
          * This method will grab the middle of the entire ArrayList
          * 
          * @return middle
          */
-        static <T> T getMiddleIndex(ArrayList<T> passedArrayList) {
+        static <T> T getMiddleIndex(ArrayList<T> passedArrayList, int lo, int hi) {
+        	i++;
+        	System.out.println(i + " times that pivot has been found");
+//        	System.out.println(lo + " lo and hi " + hi);
+//        	System.out.println(passedArrayList.size() + " middleIndex passedArrayList length");
         	
            int middleIndex = passedArrayList.size() / 2;
            

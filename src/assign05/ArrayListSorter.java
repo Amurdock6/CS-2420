@@ -174,77 +174,51 @@ public class ArrayListSorter
 
 	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int lo, int hi) {
 		int q;
-		if (lo < hi) {
+		if (lo < hi) 
+		{
             q = partition(items, lo, hi);
             quicksort(items, lo, q);
             quicksort(items, q+1, hi);
-//			Pair pair = partition(items, lo, hi);
-//			quicksort(items, lo, pair.lt - 1);
-//			quicksort(items, pair.gt + 1, hi);
 		}
 	}
 
 	private static <T extends Comparable<? super T>> int partition(ArrayList<T> items, int lo, int hi) {
-//		int lt = lo;
-//		int i = lo + 1;
-//		int gt = hi;
-//		T item = items.get(lo);
-//		T pivot = quicksort.getRandom(items);
 
-//		while (i <= gt) {
-//			int cmp = items.get(i).compareTo(pivot);
-
-//			if (cmp < 0)
-//				swap(items, lt++, i++);
-//			else if (cmp > 0)
-//				swap(items, i, gt--);
-//			else
-//				i++;
-//		}
-		
-		
-//		// swaps our hi bound with pivot
-//		int test = items.size() - 1;
-//		T temp = pivot;
-//		pivot = items.get(test);
-//		items.set(hi, temp);
-//		
-//		int L = lo, R = hi - 1;
-//
-//		while(L <= R){
-//			int cmp = items.get(L).compareTo(pivot);
-//			
-//		  while(L < lo && cmp > 0)
-//		    L++;
-//		  while(R >= hi && cmp < 0)
-//		    R--;
-//
-//		  if(L < R)
-//		    swap(items, L, R);
-//		}
-//
-//		swap(items, L, hi);
-//		return new Pair(lt, gt);
+		        
+		        int init = lo;
+		        int length = hi;
+		        
+		        T pivot = items.get(lo);
+		        
+		                
+		        while(true)
+		        {
+		            while(items.get(length).compareTo(pivot) > 0 && length > lo){
+		                length--;
+		            }
+		            
+		            while(items.get(init).compareTo(pivot) < 0 && init < hi){
+		                init++;
+		            }
+		            
+		            if(init < length)
+		            {
+		                T temp;
+		                temp = items.get(init);
+		                items.set(init,items.get(length));
+		                items.set(length,temp);
+		                length--;
+		                init++;
+		                
+		            }
+		            else
+		            {
+		                return length;
+		            }
+		        }
+		        
+		    }
 	
-		
-//	}
-
-//	private static <T> void swap(ArrayList<T> items, int i, int j) {
-//		T tmp = items.get(i);
-//		items.set(i, items.get(j));
-//		items.set(j, tmp);
-//	}
-//
-//	private static final class Pair {
-//
-//		private int lt;
-//		private int gt;
-//
-//		public Pair(int lt, int gt) {
-//			this.lt = lt;
-//			this.gt = gt;
-//		}
-	}
 
     
     public interface quicksort {

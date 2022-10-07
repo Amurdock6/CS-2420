@@ -49,10 +49,7 @@ class ArrayListSorterTest {
 		int quickSortSize = 1000;
 
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
-		
-		System.out.println(quickSortTest);
 		ArrayListSorter.quicksort(quickSortTest, 3);
-		System.out.println(quickSortTest);
 
 		assertTrue(quickSortTest.get(0) == 1);
 		assertTrue(quickSortTest.get(5) == 6);

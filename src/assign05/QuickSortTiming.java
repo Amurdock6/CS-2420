@@ -33,7 +33,7 @@ public class QuickSortTiming
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort));
+					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort), 1);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -69,7 +69,7 @@ public class QuickSortTiming
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort));
+					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort), 2);
 				}
 				
 				midpointTime = System.nanoTime();
@@ -106,7 +106,7 @@ public class QuickSortTiming
 				// Test for areAnagrams
 				for (int i = 0; i < timesToLoop; i++) 
 				{
-					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort));
+					ArrayListSorter.quicksort(new ArrayList<Integer>(quickSort), 3);
 				}
 				
 				midpointTime = System.nanoTime();

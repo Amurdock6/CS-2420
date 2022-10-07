@@ -194,8 +194,6 @@ public class ArrayListSorter
 		        int pivotIndex = quicksort.getRandom(leftBound, rightBound);
 		        
 		        T pivot = items.get(pivotIndex);
-		        System.out.println(pivot);
-
 		        
 		                
 		        while(true)
@@ -235,11 +233,9 @@ public class ArrayListSorter
          * 
          * @return middle
          */
-        static <T> int getMiddle(int start, int end) {
-        	
-           int middleIndex = (end - start) / 2;
-           
-           return middleIndex;
+        static <T> int getMiddle(int start, int end) 
+        {
+        	return (start + (end - start) / 2);
         }
 
         /**
@@ -254,18 +250,8 @@ public class ArrayListSorter
         	 Random rand = new Random(); // instance of random class
         	
         	 int diff = end - start;
-             if (diff >= 0) 
-             {
                 return (start + rand.nextInt(diff + 1));
-             }
-             
-             int i;
-             
-             do 
-             {
-                i = rand.nextInt();
-             } while (i < start || i > end);
-             return i;
+
              
         }
 

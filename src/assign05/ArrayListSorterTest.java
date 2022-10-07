@@ -51,7 +51,6 @@ class ArrayListSorterTest {
 		ArrayList<Integer> quickSortTest = ArrayListSorter.generatePermuted(quickSortSize);
 		
 		
-		System.out.println(quickSortTest);
 		ArrayListSorter.quicksort(quickSortTest);
 		System.out.println(quickSortTest);
 

@@ -7,7 +7,7 @@ public class QuickSortTiming
 	public static void main(String[] args)
 	{
 
-			int timesToLoop = 100000;
+			int timesToLoop = 1000;
 			
 			// For each problem size n . . .
 			for (int n = 1000; n <= 10000; n += 1000) 

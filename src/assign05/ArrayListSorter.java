@@ -173,7 +173,9 @@ public class ArrayListSorter
 	}
 
 	private static <T extends Comparable<? super T>> void quicksort(ArrayList<T> items, int leftBound, int rightBound) {
+		
 		int mid;
+		
 		if (leftBound < rightBound) 
 		{
             mid = partition(items, leftBound, rightBound);
@@ -189,7 +191,7 @@ public class ArrayListSorter
 		        int right = rightBound;
 		        
 		        //T pivot = items.get(leftBound);
-		        int pivotIndex = quicksort.getMiddle(leftBound, rightBound);
+		        int pivotIndex = quicksort.getRandom(leftBound, rightBound);
 		        
 		        T pivot = items.get(pivotIndex);
 		        System.out.println(pivot);
@@ -246,17 +248,25 @@ public class ArrayListSorter
          * @param <T>
          * @return median
          */
-        static <T> int getRandom(ArrayList<T> passedArrayList, int start, int end) 
+        static <T> int getRandom(int start, int end) 
         {
-            // Set the index values of the array list
-        	int arrayListSize = end - start;
-
-            Random rand = new Random(); // instance of random class
-           
-            // get a random index from 
-            int randomIndex = rand.nextInt(arrayListSize);
-
-            return randomIndex;
+        	
+        	 Random rand = new Random(); // instance of random class
+        	
+        	 int diff = end - start;
+             if (diff >= 0) 
+             {
+                return (start + rand.nextInt(diff + 1));
+             }
+             
+             int i;
+             
+             do 
+             {
+                i = rand.nextInt();
+             } while (i < start || i > end);
+             return i;
+             
         }
 
         /**
@@ -270,9 +280,9 @@ public class ArrayListSorter
             //ArrayList<T> temp = new ArrayList<T>(mergeList.size());
 
             // sets are array with 3 random numbers from our passedArrayList
-            medianArray[0] = getRandom(passedArrayList, start, end);
-            medianArray[1] = getRandom(passedArrayList, start, end);
-            medianArray[2] = getRandom(passedArrayList, start, end);
+            medianArray[0] = getRandom(start, end);
+            medianArray[1] = getRandom(start, end);
+            medianArray[2] = getRandom(start, end);
 
             // finds the median of our 3 random numbers
             Arrays.sort(medianArray);

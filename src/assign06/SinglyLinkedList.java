@@ -3,6 +3,13 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * This class simulates a linked list without using the java linked list methods
+ * 
+ * @author Todd Oldham and Alex Murdock
+ * @version October 7, 2022
+ */
+
 public class SinglyLinkedList<T> implements List 
 {
 	// empty constructor

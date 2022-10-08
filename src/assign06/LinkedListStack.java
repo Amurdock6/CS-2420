@@ -15,7 +15,9 @@ public class LinkedListStack<T> implements Stack
 	// instance of singly linked list
 	private SinglyLinkedList instanceLinkedList;
 	
-	// empty constructor
+	/*
+	 *  empty constructor
+	 */
 	public LinkedListStack()
 	{
 		instanceLinkedList = new SinglyLinkedList();
@@ -36,19 +38,21 @@ public class LinkedListStack<T> implements Stack
 	@Override
 	public Object peek() throws NoSuchElementException 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return instanceLinkedList.getFirst();
 	}
 
 	@Override
-	public Object pop() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+	public Object pop() throws NoSuchElementException 
+	{
+
+		return instanceLinkedList.deleteFirst();
+		
 	}
 
 	@Override
-	public void push(Object element) {
-		// TODO Auto-generated method stub
+	public void push(Object element) 
+	{
+		instanceLinkedList.insertFirst(element);
 		
 	}
 

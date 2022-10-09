@@ -98,7 +98,7 @@ public class SinglyLinkedList<T> implements List
 		head = new Node(element);
 		
 		// set temp to node after head
-		temp = head.next;
+		head.next = temp;
 		
 		// we have one more item in the list
 		size = size + 1;
@@ -118,10 +118,17 @@ public class SinglyLinkedList<T> implements List
 	{
 		if(index < 0 || index > size())
 			throw new IndexOutOfBoundsException();
+		
+		else if( index == 0)
+			insertFirst(element);
+		
 		else
 		{
 			// Get the node before where we want to insert
 			Node beforeInsert = getNodeAtIndex(index - 1);
+			
+			// Set the after node
+			Node afterNode = beforeInsert.next;
 			
 			// Create a new node and put the element into it
 			Node insertNode = new Node(element);
@@ -132,10 +139,8 @@ public class SinglyLinkedList<T> implements List
 			// increase the size of the list
 			size = size + 1;
 			
-			// if the next node after the new node is not null set the next to that node
-			if(beforeInsert.next.next != null)
-				// Set the next node after insert to the index after insert
-				insertNode.next = beforeInsert.next.next;
+			insertNode.next = afterNode;
+			
 		}
 	}
 
@@ -188,16 +193,21 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public Object deleteFirst() throws NoSuchElementException 
 	{
-		// Get the value from the node to be deleted
-		Object deletedValue = head.element;
-		
-		// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
-		head = head.next;
-		
-		// Reduce size to show that one of the list items was removed
-		size = size - 1;
-		
-		return deletedValue;
+		if(size() == 0)
+			throw new NoSuchElementException();
+		else
+		{
+			// Get the value from the node to be deleted
+			Object deletedValue = head.element;
+			
+			// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
+			head = head.next;
+			
+			// Reduce size to show that one of the list items was removed
+			size = size - 1;
+			
+			return deletedValue;
+		}
 	}
 
 	/**
@@ -211,19 +221,25 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public Object delete(int index) throws IndexOutOfBoundsException 
 	{
-		// Get the node before the node to be deleted
-		Node beforeDelete = getNodeAtIndex(index - 1);
+		if(index < 0 || index >= size())
+			throw new IndexOutOfBoundsException();
 		
-		// Get the value from the node to be deleted
-		Object deletedValue = beforeDelete.next.element;
-		
-		// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
-		beforeDelete.next = beforeDelete.next.next;
-		
-		// Reduce size to show that one of the list items was removed
-		size = size - 1;
-		
-		return deletedValue;
+		else
+		{
+			// Get the node before the node to be deleted
+			Node beforeDelete = getNodeAtIndex(index - 1);
+			
+			// Get the value from the node to be deleted
+			Object deletedValue = beforeDelete.next.element;
+			
+			// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
+			beforeDelete.next = beforeDelete.next.next;
+			
+			// Reduce size to show that one of the list items was removed
+			size = size - 1;
+			
+			return deletedValue;
+		}
 	}
 
 	/**

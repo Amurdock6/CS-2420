@@ -116,8 +116,27 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public void insert(int index, Object element) throws IndexOutOfBoundsException 
 	{
-		// TODO Auto-generated method stub
-		
+		if(index < 0 || index > size())
+			throw new IndexOutOfBoundsException();
+		else
+		{
+			// Get the node before where we want to insert
+			Node beforeInsert = getNodeAtIndex(index - 1);
+			
+			// Create a new node and put the element into it
+			Node insertNode = new Node(element);
+				
+			// Set the new node to the index after the before node
+			beforeInsert.next = insertNode;
+			
+			// increase the size of the list
+			size = size + 1;
+			
+			// if the next node after the new node is not null set the next to that node
+			if(beforeInsert.next.next != null)
+				// Set the next node after insert to the index after insert
+				insertNode.next = beforeInsert.next.next;
+		}
 	}
 
 	/**
@@ -169,8 +188,16 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public Object deleteFirst() throws NoSuchElementException 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// Get the value from the node to be deleted
+		Object deletedValue = head.element;
+		
+		// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
+		head = head.next;
+		
+		// Reduce size to show that one of the list items was removed
+		size = size - 1;
+		
+		return deletedValue;
 	}
 
 	/**
@@ -210,8 +237,15 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public int indexOf(Object element) 
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		// run through the list looking for the element
+		for(int i = 0; i < size(); i++)
+			// if the element of the node we are checking is the element return the value of the index of that element
+			if(getNodeAtIndex(i).element == element)
+				return i;
+		
+		// if the element isn't found return -1
+		return -1;
+
 	}
 
 	/**
@@ -233,8 +267,13 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public boolean isEmpty() 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// if the list is empty return true
+		if(size() == 0)
+			return true;
+		
+		// if it is not empty return false
+		else
+			return false;
 	}
 
 	/**
@@ -244,8 +283,12 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
+		// set the head element and next to null
+		head.element = null;
+		head.next = null;
 		
+		// set the size equal to zero
+		size = 0;
 	}
 
 	/**
@@ -259,8 +302,14 @@ public class SinglyLinkedList<T> implements List
 	@Override
 	public Object[] toArray() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// create a new array with the size of the the list
+		Object[] convertedArray = new Object[size()];
+		
+		// go through the list adding each element to the array.
+		for (int i = 0; i < size(); i++)
+			convertedArray[i] = getNodeAtIndex(i).element;
+		
+		return convertedArray;
 	}
 
 	/**

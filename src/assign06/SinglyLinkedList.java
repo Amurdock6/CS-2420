@@ -284,8 +284,7 @@ public class SinglyLinkedList<T> implements List
 	public void clear()
 	{
 		// set the head element and next to null
-		head.element = null;
-		head.next = null;
+		head = null;
 		
 		// set the size equal to zero
 		size = 0;

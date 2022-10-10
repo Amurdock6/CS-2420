@@ -224,6 +224,10 @@ public class SinglyLinkedList<T> implements List
 		if(index < 0 || index >= size())
 			throw new IndexOutOfBoundsException();
 		
+		// if the index is zero use our delete first so we don't get an error trying to get the index before zero
+		else if(index == 0)
+			return deleteFirst();
+		
 		else
 		{
 			// Get the node before the node to be deleted
@@ -345,9 +349,14 @@ public class SinglyLinkedList<T> implements List
 	 * @author Todd Oldham and Alex Murdock
 	 *
 	 */
-	private class LinkedListIterator implements Iterator<T>
+	private class LinkedListIterator implements Iterator<Object>
 	{
-
+		
+		private int index = 0;
+		private Node currentNode = head;
+		private Node previousNode = null;
+		private int nextHasBeenCalled = 0;
+		
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
 		 */
@@ -359,18 +368,46 @@ public class SinglyLinkedList<T> implements List
 		/**
 		 * Returns true if there are any more items in the collection to iterate through, false otherwise.
 		 */
+		@Override
 		public boolean hasNext() 
 		{
-			return false;
+			return index < size();
 		}
 
+		
 		/**
+		 * 
 		 * Must throw a NoSuchElementException if there are no more items to iterate through, 
 		 * otherwise, returns the next item in the collection
+		 * 
+		 * @throws NoSuchElementException
+		 * @return next element
+		 * 
 		 */
-		public T next() 
+		@Override
+		public Object next() 
 		{
-			return null;
+			if(!hasNext())
+				throw new NoSuchElementException();
+			
+			else
+			{
+				//next has been called set to 1
+				nextHasBeenCalled = 1;
+				
+				// Set the previous node to what the current node was
+				previousNode = currentNode;
+				
+				// Set the current node to the next node
+				currentNode = currentNode.next;
+				
+				// increase the index
+				index++;
+				
+				// return the element from what the current node was
+				return previousNode.element;
+			}
+				
 		}
 
 		/**
@@ -378,10 +415,24 @@ public class SinglyLinkedList<T> implements List
 		 * It can therefore only be called once per call to next. 
 		 * If next has not been called since the last call to remove, or if it hasn't been called at all, 
 		 * throws an IllegalStateException.
+		 * 
+		 * @throws IllegalStateException
+		 * 
 		 */
+		@Override
 		public void remove() 
 		{
+			if(nextHasBeenCalled == 1)
+			{
+				// reset if next has been called
+				nextHasBeenCalled = 0;
+				
+				// set the node that we just returned to null
+				;
+			}
 			
+			else
+				throw new IllegalStateException();
 		}
 	}
 }

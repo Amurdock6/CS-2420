@@ -2,6 +2,7 @@ package assign06;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -126,6 +127,22 @@ class SinglyLinkedListTester
 		
 		assertThrows(IndexOutOfBoundsException.class, () -> testList.delete(3) );
 	}
+	
+	@Test
+	void testDeleteFirstWithDelete() 
+	{
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		testList.delete(0);
+		
+		assertTrue( (int) testList.get(0) == 8);
+		assertTrue( (int) testList.get(1) == 6);
+		assertTrue( (int) testList.get(2) == 7);
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> testList.delete(3) );
+	}
 
 	@Test
 	void testIndexOf() 
@@ -183,6 +200,102 @@ class SinglyLinkedListTester
 		assertTrue( (int) testArray[1] == 8);
 		assertTrue( (int) testArray[2] == 6);
 		assertTrue( (int) testArray[3] == 7);
+		
+	}
+	
+	@Test
+	void testHasNext()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		int counter = 0;
+		
+		while(testIter.hasNext())
+		{
+			testIter.next();
+			counter++;
+		}
+		
+		assertTrue(counter == 4);
+	}
+	
+	@Test
+	void testNext()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		assertTrue ( (int) testIter.next() == 4);
+		assertTrue ( (int) testIter.next() == 8);
+		assertTrue ( (int) testIter.next() == 6);
+		assertTrue ( (int) testIter.next() == 7);
+		
+		assertThrows(NoSuchElementException.class, () -> testIter.next() );
+		
+	}
+	
+	@Test
+	void testRemoveException()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		assertThrows(IllegalStateException.class, () -> testIter.remove() );
+		
+	}
+	
+	@Test
+	void testDoubleRemoveException()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		testIter.next();
+		testIter.remove();
+		
+		assertThrows(IllegalStateException.class, () -> testIter.remove() );
+		
+	}
+	
+	@Test
+	void testRemove()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		System.out.println(testIter.next());
+		testIter.remove();
+		System.out.println(testIter.next());
+		
+		System.out.println(testList.size());
+		System.out.println(testList.getFirst());
+		assertTrue( (int) testList.getFirst() == 8);
 		
 	}
 

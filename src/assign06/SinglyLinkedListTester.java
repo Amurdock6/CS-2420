@@ -279,7 +279,7 @@ class SinglyLinkedListTester
 	}
 	
 	@Test
-	void testRemove()
+	void testRemoveFirst()
 	{
 		
 		testList.insert(0, 4);
@@ -289,13 +289,80 @@ class SinglyLinkedListTester
 		
 		Iterator testIter = testList.iterator();
 		
-		System.out.println(testIter.next());
+		testIter.next();
 		testIter.remove();
-		System.out.println(testIter.next());
+		testIter.next();
 		
-		System.out.println(testList.size());
-		System.out.println(testList.getFirst());
 		assertTrue( (int) testList.getFirst() == 8);
+		
+	}
+	
+	@Test
+	void testRemoveLast()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		testIter.next();
+		testIter.next();
+		testIter.next();
+		testIter.next();
+		testIter.remove();
+		
+		assertTrue( testList.size() == 3);
+		assertTrue( (int) testList.get(2) == 6);
+		
+	}
+	
+	@Test
+	void testRemovemiddle()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		testIter.next();
+		testIter.next();
+		testIter.remove();
+		testIter.next();
+		testIter.remove();
+		testIter.next();
+		
+		assertTrue( testList.size() == 2);
+		assertTrue( (int) testList.get(1) == 7);
+		
+	}
+	
+	@Test
+	void testRemoveAll()
+	{
+		
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		
+		Iterator testIter = testList.iterator();
+		
+		testIter.next();
+		testIter.remove();
+		testIter.next();
+		testIter.remove();
+		testIter.next();
+		testIter.remove();
+		testIter.next();
+		testIter.remove();
+		
+		assertTrue( testList.size() == 0);
 		
 	}
 

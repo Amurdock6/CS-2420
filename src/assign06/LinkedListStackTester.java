@@ -2,38 +2,101 @@ package assign06;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class LinkedListStackTester {
-
-	@Test
-	void testClear() {
-		fail("Not yet implemented");
+class LinkedListStackTester 
+{
+	
+	private LinkedListStack testStack;
+	
+	@BeforeEach
+	void setUp() throws Exception 
+	{
+		testStack = new LinkedListStack();
 	}
 
 	@Test
-	void testIsEmpty() {
-		fail("Not yet implemented");
+	void testClear() 
+	{
+		testStack.push(1);
+		testStack.push(2);
+		testStack.push(3);
+		testStack.clear();
+		
+		assertTrue(testStack.size() == 0);
+		assertTrue(testStack.isEmpty());
 	}
 
 	@Test
-	void testPeek() {
-		fail("Not yet implemented");
+	void testIsEmpty() 
+	{
+		assertTrue(testStack.isEmpty());
 	}
 
 	@Test
-	void testPop() {
-		fail("Not yet implemented");
+	void testPeek() 
+	{
+		testStack.push(1);
+		assertTrue( (int) testStack.peek() == 1);
+		
+		testStack.push(2);
+		assertTrue( (int) testStack.peek() == 2);
+		
+		testStack.push(3);
+		assertTrue( (int) testStack.peek() == 3);
+	}
+	
+	@Test
+	void testPeekException() 
+	{
+		assertThrows(NoSuchElementException.class, () -> testStack.peek() );
 	}
 
 	@Test
-	void testPush() {
-		fail("Not yet implemented");
+	void testPop() 
+	{
+		testStack.push(1);
+		testStack.push(2);
+		testStack.push(3);
+		
+		assertTrue((int) testStack.pop() == 3);
+		assertTrue((int) testStack.pop() == 2);
+		assertTrue((int) testStack.pop() == 1);
+		
+		assertTrue(testStack.isEmpty());
+		assertTrue(testStack.size() == 0);
+	}
+	
+	@Test
+	void testPopException() 
+	{
+		assertThrows(NoSuchElementException.class, () -> testStack.pop() );
 	}
 
 	@Test
-	void testSize() {
-		fail("Not yet implemented");
+	void testPush() 
+	{
+		testStack.push(1);
+		testStack.push(2);
+		testStack.push(3);
+		
+		assertTrue((int) testStack.peek() == 3);
+		assertFalse(testStack.isEmpty());
+		assertTrue(testStack.size() == 3);
+	}
+
+	@Test
+	void testSize() 
+	{
+		testStack.push(1);
+		assertTrue(testStack.size() == 1);
+		testStack.push(2);
+		assertTrue(testStack.size() == 2);
+		testStack.push(3);
+		assertTrue(testStack.size() == 3);
 	}
 
 }

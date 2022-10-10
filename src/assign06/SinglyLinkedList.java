@@ -355,6 +355,7 @@ public class SinglyLinkedList<T> implements List
 		private int index = 0;
 		private Node currentNode = head;
 		private Node previousNode = null;
+		private Node beforePrevious = null;
 		private int nextHasBeenCalled = 0;
 		
 		/**
@@ -395,14 +396,21 @@ public class SinglyLinkedList<T> implements List
 				//next has been called set to 1
 				nextHasBeenCalled = 1;
 				
+				// increase the index
+				index++;
+				
+				if(index == 2)
+					beforePrevious = head;
+				
+				if(index >= 3)
+					beforePrevious = beforePrevious.next;
+				
 				// Set the previous node to what the current node was
 				previousNode = currentNode;
 				
 				// Set the current node to the next node
 				currentNode = currentNode.next;
 				
-				// increase the index
-				index++;
 				
 				// return the element from what the current node was
 				return previousNode.element;
@@ -427,8 +435,31 @@ public class SinglyLinkedList<T> implements List
 				// reset if next has been called
 				nextHasBeenCalled = 0;
 				
-				// set the node that we just returned to null
-				;
+				// if the item to remove is the first item
+				if(index == 1)
+				{
+					// set the head to the next item
+					head = head.next;
+					
+					// reduce the index
+					index--;
+					
+					// reduce the size
+					size--;
+				}
+				
+				else
+				{
+					// set the reference from before remove to the item after remove
+					beforePrevious.next = beforePrevious.next.next;
+					
+					// reduce index
+					index --;
+					
+					// reduce size
+					size--;
+				}
+				
 			}
 			
 			else

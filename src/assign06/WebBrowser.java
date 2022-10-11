@@ -4,8 +4,7 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 
 /**
- * This class contains the methods for merge sort and quick sort along with
- * methods for generating list arrays in ascending descending and random order
+ * This class represents a browser window with forward, backward, visit and history methods that simulate a web browser
  * 
  * @author Todd Oldham and Alex Murdock
  * @version October 7, 2022
@@ -14,8 +13,8 @@ import java.util.NoSuchElementException;
 public class WebBrowser 
 {
 	// instances of Stack interface
-	private Stack forwardButton;
-	private Stack backwardButton;
+	private LinkedListStack forwardButton;
+	private LinkedListStack backwardButton;
 	
 	/**
 	 * 
@@ -25,7 +24,8 @@ public class WebBrowser
 	 */
 	public WebBrowser()
 	{
-		
+		forwardButton = new LinkedListStack();
+		backwardButton = new LinkedListStack();
 	}
 	
 	/**

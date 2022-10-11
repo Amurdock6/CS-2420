@@ -15,7 +15,7 @@ public class WebBrowser
 	// instances of Stack interface
 	private LinkedListStack forwardButton;
 	private LinkedListStack backwardButton;
-	
+	private URL current;
 	/**
 	 * 
 	 * This constructor creates a new web browser with no previously-visited webpages
@@ -39,6 +39,18 @@ public class WebBrowser
 	 */
 	public WebBrowser(SinglyLinkedList<URL> history)
 	{
+		// create forward and backward stacks
+		forwardButton = new LinkedListStack();
+		backwardButton = new LinkedListStack();
+		
+		// set current equal to the top of the history stack
+		current = (URL) history.getFirst();
+		
+		// going from the last item to the first item in the history stack add them to the backward button stack
+		// Should be in order from most recently visited to last visited
+		for(int i = history.size() - 1; i > 0; i--)
+			backwardButton.push( (URL) history.get(i));
+		
 		
 	}
 	
@@ -53,6 +65,15 @@ public class WebBrowser
 	 */
 	public void visit(URL webpage)
 	{
+		// clear the forward button
+		forwardButton.clear();
+		
+		// add the current webpage to the backward button stack
+		backwardButton.push(current);
+		
+		// set the current as the new webpage
+		current = webpage;
+		
 		
 	}
 	
@@ -66,7 +87,13 @@ public class WebBrowser
 	 */
 	public URL back() throws NoSuchElementException
 	{
-		return null;
+		// add the current webpage to the forward button
+		forwardButton.push(current);
+		
+		// make the current the last visited site in the backward stack
+		current = (URL) backwardButton.pop();
+		
+		return current;
 	}
 	
 	/**
@@ -79,7 +106,13 @@ public class WebBrowser
 	 */
 	public URL forward() throws NoSuchElementException
 	{
-		return null;
+		// add the current webpage to the backward button
+		backwardButton.push(current);
+		
+		// make the current webpage the most recently visited page in the forward buttong
+		current = (URL) forwardButton.pop();
+		
+		return current;
 	}
 	
 	/**
@@ -94,6 +127,21 @@ public class WebBrowser
 	 */
 	public SinglyLinkedList<URL> history()
 	{
-		return null;
+		// create a singly linked list to return
+		SinglyLinkedList hist = new SinglyLinkedList();
+		
+		// create a new stack to copy the back button into
+		LinkedListStack historyStack = new LinkedListStack();
+		
+		historyStack = backwardButton;
+		
+		// go through and add the last item in the stack first so that the order stays most recently visited to last visited
+		for(int i = historyStack.size() -1; i >= 0; i--)
+			hist.insert(i, (URL) historyStack.pop()); 
+		
+		// add the current webpage to the stack
+		hist.insertFirst(current);
+		
+		return hist;
 	}
 }

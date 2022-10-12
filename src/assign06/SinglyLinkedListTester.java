@@ -129,6 +129,23 @@ class SinglyLinkedListTester
 	}
 	
 	@Test
+	void testDeleteAll() 
+	{
+		testList.insert(0, 4);
+		testList.insert(1, 6);
+		testList.insert(2, 7);
+		testList.insert(1, 8);
+		testList.delete(1);
+		testList.delete(0);
+		testList.delete(0);
+		testList.delete(0);
+		
+		assertTrue(testList.size() == 0);
+		assertTrue(testList.isEmpty());
+
+	}
+	
+	@Test
 	void testDeleteFirstWithDelete() 
 	{
 		testList.insert(0, 4);
@@ -143,6 +160,7 @@ class SinglyLinkedListTester
 		
 		assertThrows(IndexOutOfBoundsException.class, () -> testList.delete(3) );
 	}
+	
 
 	@Test
 	void testIndexOf() 

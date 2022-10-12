@@ -15,7 +15,8 @@ public class WebBrowser
 	// instances of Stack interface
 	private LinkedListStack forwardButton;
 	private LinkedListStack backwardButton;
-	private URL current;
+	private SinglyLinkedList hist;
+	private URL current = null;
 	/**
 	 * 
 	 * This constructor creates a new web browser with no previously-visited webpages
@@ -26,6 +27,7 @@ public class WebBrowser
 	{
 		forwardButton = new LinkedListStack();
 		backwardButton = new LinkedListStack();
+		hist = new SinglyLinkedList();
 	}
 	
 	/**
@@ -46,11 +48,14 @@ public class WebBrowser
 		// set current equal to the top of the history stack
 		current = (URL) history.getFirst();
 		
+		// set the hist equal to history and get rid of the current webpage from history
+		hist = history;
+		hist.deleteFirst();
+		
 		// going from the last item to the first item in the history stack add them to the backward button stack
 		// Should be in order from most recently visited to last visited
-		for(int i = history.size() - 1; i > 0; i--)
-			backwardButton.push( (URL) history.get(i));
-		
+		for(int i = history.size() - 1; i >= 0; i--)
+			backwardButton.push( (URL) history.get(i));	
 		
 	}
 	
@@ -68,13 +73,15 @@ public class WebBrowser
 		// clear the forward button
 		forwardButton.clear();
 		
-		// add the current webpage to the backward button stack
-		backwardButton.push(current);
+		// add the current webpage to the backward button stack and history
+		if(current != null)
+		{
+			backwardButton.push(current);
+			hist.insertFirst(current);
+		}
 		
 		// set the current as the new webpage
-		current = webpage;
-		
-		
+		current = webpage;	
 	}
 	
 	/**
@@ -93,6 +100,9 @@ public class WebBrowser
 		// make the current the last visited site in the backward stack
 		current = (URL) backwardButton.pop();
 		
+		// get rid of the top of history
+		hist.deleteFirst();
+		
 		return current;
 	}
 	
@@ -109,7 +119,10 @@ public class WebBrowser
 		// add the current webpage to the backward button
 		backwardButton.push(current);
 		
-		// make the current webpage the most recently visited page in the forward buttong
+		// add the current webpage to history
+		hist.insertFirst(current);
+		
+		// make the current webpage the most recently visited page in the forward button
 		current = (URL) forwardButton.pop();
 		
 		return current;
@@ -127,19 +140,8 @@ public class WebBrowser
 	 */
 	public SinglyLinkedList<URL> history()
 	{
-		// create a singly linked list to return
-		SinglyLinkedList hist = new SinglyLinkedList();
 		
-		// create a new stack to copy the back button into
-		LinkedListStack historyStack = new LinkedListStack();
-		
-		historyStack = backwardButton;
-		
-		// go through and add the last item in the stack first so that the order stays most recently visited to last visited
-		for(int i = historyStack.size() -1; i >= 0; i--)
-			hist.insert(i, (URL) historyStack.pop()); 
-		
-		// add the current webpage to the stack
+		// add the current webpage to the top of the history stack
 		hist.insertFirst(current);
 		
 		return hist;

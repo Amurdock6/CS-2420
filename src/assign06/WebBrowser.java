@@ -15,7 +15,6 @@ public class WebBrowser
 	// instances of Stack interface
 	private LinkedListStack forwardButton;
 	private LinkedListStack backwardButton;
-	private SinglyLinkedList hist;
 	private URL current = null;
 	/**
 	 * 
@@ -27,7 +26,6 @@ public class WebBrowser
 	{
 		forwardButton = new LinkedListStack();
 		backwardButton = new LinkedListStack();
-		hist = new SinglyLinkedList();
 	}
 	
 	/**
@@ -45,16 +43,14 @@ public class WebBrowser
 		forwardButton = new LinkedListStack();
 		backwardButton = new LinkedListStack();
 		
+		int sizeValue = history.size();
+		
 		// set current equal to the top of the history stack
 		current = (URL) history.getFirst();
 		
-		// set the hist equal to history and get rid of the current webpage from history
-		hist = history;
-		hist.deleteFirst();
-		
 		// going from the last item to the first item in the history stack add them to the backward button stack
 		// Should be in order from most recently visited to last visited
-		for(int i = history.size() - 1; i >= 0; i--)
+		for(int i = sizeValue - 1; i > 0; i--)
 			backwardButton.push( (URL) history.get(i));	
 		
 	}
@@ -73,12 +69,10 @@ public class WebBrowser
 		// clear the forward button
 		forwardButton.clear();
 		
-		// add the current webpage to the backward button stack and history
+		// add the current webpage to the backward button stack
 		if(current != null)
-		{
 			backwardButton.push(current);
-			hist.insertFirst(current);
-		}
+
 		
 		// set the current as the new webpage
 		current = webpage;	
@@ -100,9 +94,6 @@ public class WebBrowser
 		// make the current the last visited site in the backward stack
 		current = (URL) backwardButton.pop();
 		
-		// get rid of the top of history
-		hist.deleteFirst();
-		
 		return current;
 	}
 	
@@ -118,9 +109,6 @@ public class WebBrowser
 	{
 		// add the current webpage to the backward button
 		backwardButton.push(current);
-		
-		// add the current webpage to history
-		hist.insertFirst(current);
 		
 		// make the current webpage the most recently visited page in the forward button
 		current = (URL) forwardButton.pop();
@@ -140,6 +128,34 @@ public class WebBrowser
 	 */
 	public SinglyLinkedList<URL> history()
 	{
+		// a temp stack to stor the values of the backward button
+		LinkedListStack tempStack = new LinkedListStack();
+		
+		// history linked list that we will return
+		SinglyLinkedList<URL> hist = new SinglyLinkedList();
+		
+		// place holder for the URLs so we don't lose them
+		URL tempValue = null;
+		
+		// set the size of the backward button since it will change
+		int sizeValue = backwardButton.size();
+	
+		// move all of the values from backward button into a temp stack
+		for(int i = 0; i < sizeValue; i++)
+		{
+			tempStack.push(backwardButton.pop());
+		}
+		
+		// move all the values from temp stack back into backward button and the history list
+		for(int j = 0; j < sizeValue; j++)
+		{
+			tempValue = (URL) tempStack.pop();
+			
+			backwardButton.push(tempValue);
+			
+			hist.insertFirst(tempValue);
+		}
+		
 		
 		// add the current webpage to the top of the history stack
 		hist.insertFirst(current);

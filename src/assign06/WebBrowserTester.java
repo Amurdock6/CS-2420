@@ -141,6 +141,8 @@ class WebBrowserTester {
 		assertEquals("https://a", webHistory.get(3).toString());
 		
 		assertEquals(testBrowserHist.back().toString(), "https://c");
+		assertEquals(testBrowserHist.back().toString(), "https://b");
+		assertEquals(testBrowserHist.back().toString(), "https://a");
 
 	}
 

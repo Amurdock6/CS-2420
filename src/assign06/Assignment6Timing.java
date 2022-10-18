@@ -25,18 +25,18 @@ public class Assignment6Timing
 //			timeAddN(N);
 //		}
 
-//		// Time adding then removing N values to different kinds of stacks
-//		for(int N = 1000; N <= 15000; N += 1000)
-//		{
-//			timeRemoveN(N);
-//		}
-		
-		
-//		 Time adding then peeking N values to different kinds of stacks
+		// Time adding then removing N values to different kinds of stacks
 		for(int N = 1000; N <= 15000; N += 1000)
 		{
-			timePeekN(N);
+			timeRemoveN(N);
 		}
+		
+		
+//		// Time adding then peeking N values to different kinds of stacks
+//		for(int N = 1000; N <= 15000; N += 1000)
+//		{
+//			timePeekN(N);
+//		}
 	}
 
 	private static void timeAddN(int N)

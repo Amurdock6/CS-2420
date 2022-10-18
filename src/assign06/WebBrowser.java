@@ -13,8 +13,8 @@ import java.util.NoSuchElementException;
 public class WebBrowser 
 {
 	// instances of Stack interface
-	private LinkedListStack forwardButton;
-	private LinkedListStack backwardButton;
+	private ArrayStack forwardButton;
+	private ArrayStack backwardButton;
 	private URL current = null;
 	/**
 	 * 
@@ -24,8 +24,8 @@ public class WebBrowser
 	 */
 	public WebBrowser()
 	{
-		forwardButton = new LinkedListStack();
-		backwardButton = new LinkedListStack();
+		forwardButton = new ArrayStack();
+		backwardButton = new ArrayStack();
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class WebBrowser
 	public WebBrowser(SinglyLinkedList<URL> history)
 	{
 		// create forward and backward stacks
-		forwardButton = new LinkedListStack();
-		backwardButton = new LinkedListStack();
+		forwardButton = new ArrayStack();
+		backwardButton = new ArrayStack();
 		
 		int sizeValue = history.size();
 		

@@ -45,14 +45,16 @@ public class LinkedListStack<T> implements Stack
 
 	/**
 	 * Returns, but does not remove, the element at the top of the stack.
+	 * @return 
 	 * 
 	 * @return the element at the top of the stack
 	 * @throws NoSuchElementException if the stack is empty
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object peek() throws NoSuchElementException 
+	public T peek() throws NoSuchElementException 
 	{
-		return instanceLinkedList.getFirst();
+		return (T) instanceLinkedList.getFirst();
 	}
 
 	/**
@@ -61,10 +63,11 @@ public class LinkedListStack<T> implements Stack
 	 * @return the element at the top of the stack
 	 * @throws NoSuchElementException if the stack is empty
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object pop() throws NoSuchElementException 
+	public T pop() throws NoSuchElementException 
 	{
-		return instanceLinkedList.deleteFirst();
+		return (T) instanceLinkedList.deleteFirst();
 	}
 
 	/**

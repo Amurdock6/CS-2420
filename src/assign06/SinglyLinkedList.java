@@ -3,8 +3,6 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import assign03.ArrayCollection;
-
 /**
  * This class simulates a linked list without using the java linked list methods
  * 
@@ -151,8 +149,9 @@ public class SinglyLinkedList<T> implements List
 	 * @return the first element in the list
 	 * @throws NoSuchElementException if the list is empty
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object getFirst() throws NoSuchElementException 
+	public T getFirst() throws NoSuchElementException 
 	{
 		// if there are no elements in the list throw error
 		if(size() == 0)
@@ -160,7 +159,7 @@ public class SinglyLinkedList<T> implements List
 		
 		// return the value of head
 		else
-			return head.element;
+			return (T) head.element;
 	}
 
 	/**
@@ -190,8 +189,9 @@ public class SinglyLinkedList<T> implements List
 	 * @return the first element
 	 * @throws NoSuchElementException if the list is empty
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object deleteFirst() throws NoSuchElementException 
+	public T deleteFirst() throws NoSuchElementException 
 	{
 		if(size() == 0)
 			throw new NoSuchElementException();
@@ -206,7 +206,7 @@ public class SinglyLinkedList<T> implements List
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return deletedValue;
+			return (T) deletedValue;
 		}
 	}
 
@@ -218,8 +218,9 @@ public class SinglyLinkedList<T> implements List
 	 * @return the element at the position
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index >= size())
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object delete(int index) throws IndexOutOfBoundsException 
+	public T delete(int index) throws IndexOutOfBoundsException 
 	{
 		if(index < 0 || index >= size())
 			throw new IndexOutOfBoundsException();
@@ -242,7 +243,7 @@ public class SinglyLinkedList<T> implements List
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return deletedValue;
+			return (T) deletedValue;
 		}
 	}
 

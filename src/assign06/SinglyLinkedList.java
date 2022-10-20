@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * @author Todd Oldham and Alex Murdock
  * @version October 7, 2022
  */
-public class SinglyLinkedList<T> implements List 
+public class SinglyLinkedList<E> implements List<E>
 {
 	
 	/**
@@ -20,10 +20,10 @@ public class SinglyLinkedList<T> implements List
 	 *
 	 * @param <T>
 	 */
-	private class Node<T>
+	private class Node<E>
 	{
 		// Each Node has a value associated
-		T element;
+		E element;
 		// Each nod has a next node - unless it is the node at the end of the list
 		Node next;
 		
@@ -34,7 +34,7 @@ public class SinglyLinkedList<T> implements List
 		 * 
 		 * @param data
 		 */
-		Node(T data)
+		Node(E data)
 		{
 			element = data;
 			next = null;
@@ -87,7 +87,7 @@ public class SinglyLinkedList<T> implements List
 	 * @param element - the element to add
 	 */
 	@Override
-	public void insertFirst(Object element) 
+	public void insertFirst(E element) 
 	{
 		// set current head to temp
 		Node temp = head;
@@ -112,7 +112,7 @@ public class SinglyLinkedList<T> implements List
 	index > size())
 	 */
 	@Override
-	public void insert(int index, Object element) throws IndexOutOfBoundsException 
+	public void insert(int index, E element) throws IndexOutOfBoundsException 
 	{
 		if(index < 0 || index > size())
 			throw new IndexOutOfBoundsException();
@@ -149,17 +149,17 @@ public class SinglyLinkedList<T> implements List
 	 * @return the first element in the list
 	 * @throws NoSuchElementException if the list is empty
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public T getFirst() throws NoSuchElementException 
+	public E getFirst() throws NoSuchElementException 
 	{
 		// if there are no elements in the list throw error
 		if(size() == 0)
 			throw new NoSuchElementException();
 		
 		// return the value of head
-		else
-			return (T) head.element;
+		else {
+			return head.element;
+		}
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class SinglyLinkedList<T> implements List
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index >= size())
 	 */
 	@Override
-	public Object get(int index) throws IndexOutOfBoundsException 
+	public E get(int index) throws IndexOutOfBoundsException
 	{
 		// if the index is not within the list bounds throw error
 		if(index < 0 || index >= size())
@@ -191,7 +191,7 @@ public class SinglyLinkedList<T> implements List
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T deleteFirst() throws NoSuchElementException 
+	public E deleteFirst() throws NoSuchElementException 
 	{
 		if(size() == 0)
 			throw new NoSuchElementException();
@@ -206,7 +206,7 @@ public class SinglyLinkedList<T> implements List
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return (T) deletedValue;
+			return (E) deletedValue;
 		}
 	}
 
@@ -220,7 +220,7 @@ public class SinglyLinkedList<T> implements List
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T delete(int index) throws IndexOutOfBoundsException 
+	public E delete(int index) throws IndexOutOfBoundsException 
 	{
 		if(index < 0 || index >= size())
 			throw new IndexOutOfBoundsException();
@@ -243,7 +243,7 @@ public class SinglyLinkedList<T> implements List
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return (T) deletedValue;
+			return (E) deletedValue;
 		}
 	}
 

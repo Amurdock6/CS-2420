@@ -34,7 +34,7 @@ void insert(int index, E element) throws IndexOutOfBoundsException;
  * @return the first element in the list
  * @throws NoSuchElementException if the list is empty
  */
-E getFirst() throws NoSuchElementException;
+Object getFirst() throws NoSuchElementException;
 /**
  * Gets the element at a specific position in the list.
  * O(N) for a singly-linked list.
@@ -44,7 +44,7 @@ E getFirst() throws NoSuchElementException;
  * @throws IndexOutOfBoundsException if index is out of range (index < 0 || 
 index >= size())
  */
-E get(int index) throws IndexOutOfBoundsException;
+Object get(int index) throws IndexOutOfBoundsException;
 /**
  * Deletes and returns the first element from the list.
  * O(1) for a singly-linked list.

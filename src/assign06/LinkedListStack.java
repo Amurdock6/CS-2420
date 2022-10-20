@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * @version October 7, 2022
  */
 
-public class LinkedListStack<T> implements Stack
+public class LinkedListStack<E> implements Stack
 {
 	
 	// instance of singly linked list
@@ -52,9 +52,9 @@ public class LinkedListStack<T> implements Stack
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T peek() throws NoSuchElementException 
+	public E peek() throws NoSuchElementException 
 	{
-		return (T) instanceLinkedList.getFirst();
+		return instanceLinkedList.getFirst();
 	}
 
 	/**
@@ -65,9 +65,9 @@ public class LinkedListStack<T> implements Stack
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T pop() throws NoSuchElementException 
+	public E pop() throws NoSuchElementException 
 	{
-		return (T) instanceLinkedList.deleteFirst();
+		return instanceLinkedList.deleteFirst();
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class WebBrowser
 		int sizeValue = history.size();
 		
 		// set current equal to the top of the history stack
-		current = (URL) history.getFirst();
+		current = history.getFirst();
 		
 		// going from the last item to the first item in the history stack add them to the backward button stack
 		// Should be in order from most recently visited to last visited

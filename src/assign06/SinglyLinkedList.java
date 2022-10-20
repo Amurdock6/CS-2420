@@ -217,7 +217,6 @@ public class SinglyLinkedList<E> implements List<E>
 	 * @return the element at the position
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index >= size())
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public E delete(int index) throws IndexOutOfBoundsException 
 	{
@@ -234,7 +233,7 @@ public class SinglyLinkedList<E> implements List<E>
 			Node beforeDelete = getNodeAtIndex(index - 1);
 			
 			// Get the value from the node to be deleted
-			Object deletedValue = beforeDelete.next.element;
+			E deletedValue = beforeDelete.next.element;
 			
 			// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
 			beforeDelete.next = beforeDelete.next.next;
@@ -242,7 +241,7 @@ public class SinglyLinkedList<E> implements List<E>
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return (E) deletedValue;
+			return deletedValue;
 		}
 	}
 
@@ -337,7 +336,7 @@ public class SinglyLinkedList<E> implements List<E>
 	 *
 	 */
 	@Override
-	public Iterator iterator() 
+	public Iterator<E> iterator() 
 	{
 		return new LinkedListIterator();
 	}

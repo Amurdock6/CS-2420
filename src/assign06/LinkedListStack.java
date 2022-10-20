@@ -9,11 +9,11 @@ import java.util.NoSuchElementException;
  * @version October 7, 2022
  */
 
-public class LinkedListStack<E> implements Stack
+public class LinkedListStack<E> implements Stack<E>
 {
 	
 	// instance of singly linked list
-	private SinglyLinkedList instanceLinkedList;
+	private SinglyLinkedList<E> instanceLinkedList;
 	
 	/*
 	 *  empty constructor
@@ -50,7 +50,6 @@ public class LinkedListStack<E> implements Stack
 	 * @return the element at the top of the stack
 	 * @throws NoSuchElementException if the stack is empty
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public E peek() throws NoSuchElementException 
 	{
@@ -63,7 +62,6 @@ public class LinkedListStack<E> implements Stack
 	 * @return the element at the top of the stack
 	 * @throws NoSuchElementException if the stack is empty
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public E pop() throws NoSuchElementException 
 	{
@@ -76,7 +74,7 @@ public class LinkedListStack<E> implements Stack
 	 * @param element - the element to be added
 	 */
 	@Override
-	public void push(Object element) 
+	public void push(E element) 
 	{
 		instanceLinkedList.insertFirst(element);
 	}

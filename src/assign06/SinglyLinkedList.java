@@ -18,9 +18,9 @@ public class SinglyLinkedList<E> implements List<E>
 	 * 
 	 * @author Todd Oldham and Alex Murdock
 	 *
-	 * @param <T>
+	 * @param <E>
 	 */
-	private class Node<E>
+	private class Node
 	{
 		// Each Node has a value associated
 		E element;
@@ -189,7 +189,6 @@ public class SinglyLinkedList<E> implements List<E>
 	 * @return the first element
 	 * @throws NoSuchElementException if the list is empty
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public E deleteFirst() throws NoSuchElementException 
 	{
@@ -198,7 +197,7 @@ public class SinglyLinkedList<E> implements List<E>
 		else
 		{
 			// Get the value from the node to be deleted
-			Object deletedValue = head.element;
+			E deletedValue = head.element;
 			
 			// Set the reference of the node after the node before the node to be deleted to the node after the deleted node
 			head = head.next;
@@ -206,7 +205,7 @@ public class SinglyLinkedList<E> implements List<E>
 			// Reduce size to show that one of the list items was removed
 			size = size - 1;
 			
-			return (E) deletedValue;
+			return deletedValue;
 		}
 	}
 
@@ -350,7 +349,7 @@ public class SinglyLinkedList<E> implements List<E>
 	 * @author Todd Oldham and Alex Murdock
 	 *
 	 */
-	private class LinkedListIterator implements Iterator<Object>
+	private class LinkedListIterator implements Iterator<E>
 	{
 		
 		private int index = 0;
@@ -387,7 +386,7 @@ public class SinglyLinkedList<E> implements List<E>
 		 * 
 		 */
 		@Override
-		public Object next() 
+		public E next() 
 		{
 			if(!hasNext())
 				throw new NoSuchElementException();

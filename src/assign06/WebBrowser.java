@@ -24,8 +24,8 @@ public class WebBrowser
 	 */
 	public WebBrowser()
 	{
-		forwardButton = new ArrayStack();
-		backwardButton = new ArrayStack();
+		forwardButton = new ArrayStack<URL>();
+		backwardButton = new ArrayStack<URL>();
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class WebBrowser
 	public WebBrowser(SinglyLinkedList<URL> history)
 	{
 		// create forward and backward stacks
-		forwardButton = new ArrayStack();
-		backwardButton = new ArrayStack();
+		forwardButton = new ArrayStack<URL>();
+		backwardButton = new ArrayStack<URL>();
 		
 		int sizeValue = history.size();
 		
@@ -129,10 +129,10 @@ public class WebBrowser
 	public SinglyLinkedList<URL> history()
 	{
 		// a temp stack to stor the values of the backward button
-		LinkedListStack<URL> tempStack = new LinkedListStack();
+		LinkedListStack<URL> tempStack = new LinkedListStack<URL>();
 		
 		// history linked list that we will return
-		SinglyLinkedList<URL> hist = new SinglyLinkedList();
+		SinglyLinkedList<URL> hist = new SinglyLinkedList<URL>();
 		
 		// place holder for the URLs so we don't lose them
 		URL tempValue = null;

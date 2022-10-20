@@ -20,7 +20,7 @@ public class LinkedListStack<E> implements Stack<E>
 	 */
 	public LinkedListStack()
 	{
-		instanceLinkedList = new SinglyLinkedList();
+		instanceLinkedList = new SinglyLinkedList<E>();
 	}
 
 	/**

@@ -10,11 +10,11 @@ import java.util.NoSuchElementException;
  * @version October 7, 2022
  */
 
-public class WebBrowser 
+public class WebBrowser
 {
 	// instances of Stack interface
-	private ArrayStack forwardButton;
-	private ArrayStack backwardButton;
+	private ArrayStack<URL> forwardButton;
+	private ArrayStack<URL> backwardButton;
 	private URL current = null;
 	/**
 	 * 
@@ -51,7 +51,7 @@ public class WebBrowser
 		// going from the last item to the first item in the history stack add them to the backward button stack
 		// Should be in order from most recently visited to last visited
 		for(int i = sizeValue - 1; i > 0; i--)
-			backwardButton.push( (URL) history.get(i));	
+			backwardButton.push(history.get(i));	
 		
 	}
 	
@@ -92,7 +92,7 @@ public class WebBrowser
 		forwardButton.push(current);
 		
 		// make the current the last visited site in the backward stack
-		current = (URL) backwardButton.pop();
+		current = backwardButton.pop();
 		
 		return current;
 	}
@@ -111,7 +111,7 @@ public class WebBrowser
 		backwardButton.push(current);
 		
 		// make the current webpage the most recently visited page in the forward button
-		current = (URL) forwardButton.pop();
+		current = forwardButton.pop();
 		
 		return current;
 	}
@@ -129,7 +129,7 @@ public class WebBrowser
 	public SinglyLinkedList<URL> history()
 	{
 		// a temp stack to stor the values of the backward button
-		LinkedListStack tempStack = new LinkedListStack();
+		LinkedListStack<URL> tempStack = new LinkedListStack();
 		
 		// history linked list that we will return
 		SinglyLinkedList<URL> hist = new SinglyLinkedList();
@@ -149,7 +149,7 @@ public class WebBrowser
 		// move all the values from temp stack back into backward button and the history list
 		for(int j = 0; j < sizeValue; j++)
 		{
-			tempValue = (URL) tempStack.pop();
+			tempValue = tempStack.pop();
 			
 			backwardButton.push(tempValue);
 			

@@ -10,17 +10,19 @@ import java.util.Scanner;
  * Represents a "dictionary" of strings using a binary search tree and offers
  * methods for spell-checking documents.
  * 
- * @author Erin Parker and ??
- * @version March 17, 2021
+ * @author Erin Parker and Todd Oldham and Alex Murdock
+ * @version October 21, 2022
  */
-public class SpellChecker {
+public class SpellChecker 
+{
 
 	private BinarySearchTree<String> dictionary;
 
 	/**
 	 * Default constructor--creates empty dictionary.
 	 */
-	public SpellChecker() {
+	public SpellChecker() 
+	{
 		dictionary = new BinarySearchTree<String>();
 	}
 
@@ -29,7 +31,8 @@ public class SpellChecker {
 	 * 
 	 * @param words - the List of Strings used to build the dictionary
 	 */
-	public SpellChecker(List<String> words) {
+	public SpellChecker(List<String> words) 
+	{
 		this();
 		buildDictionary(words);
 	}
@@ -40,7 +43,8 @@ public class SpellChecker {
 	 * @param dictionaryFile - the File that contains Strings used to build the
 	 *                        dictionary
 	 */
-	public SpellChecker(File dictionaryFile) {
+	public SpellChecker(File dictionaryFile) 
+	{
 		this();
 		buildDictionary(readFromFile(dictionaryFile));
 	}
@@ -50,8 +54,9 @@ public class SpellChecker {
 	 * 
 	 * @param word - the String to be added to the dictionary
 	 */
-	public void addToDictionary(String word) {
-		// FILL IN
+	public void addToDictionary(String word) 
+	{
+		dictionary.add(word);
 	}
 
 	/**
@@ -59,8 +64,9 @@ public class SpellChecker {
 	 * 
 	 * @param word - the String to be removed from the dictionary
 	 */
-	public void removeFromDictionary(String word) {
-		// FILL IN
+	public void removeFromDictionary(String word) 
+	{
+		dictionary.remove(word);
 	}
 
 	/**
@@ -74,9 +80,16 @@ public class SpellChecker {
 
 		List<String> wordsToCheck = readFromFile(documentFile);
 
-		// FILL IN -- do not return null
-
-		return null;
+		List<String> misspelledWords = null;
+		
+		for(int i = 0; i < wordsToCheck.size(); i++)
+		{
+			if(!dictionary.contains(wordsToCheck.get(i)))
+					misspelledWords.add(wordsToCheck.get(i));
+			
+		}
+		
+		return misspelledWords;
 	}
 
 	/**
@@ -84,8 +97,9 @@ public class SpellChecker {
 	 * 
 	 * @param words - the List of Strings to be added to the dictionary
 	 */
-	private void buildDictionary(List<String> words) {
-		// FILL IN
+	private void buildDictionary(List<String> words) 
+	{
+		dictionary.addAll(words);
 	}
 
 	/**

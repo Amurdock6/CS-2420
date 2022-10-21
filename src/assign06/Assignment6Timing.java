@@ -19,7 +19,7 @@ public class Assignment6Timing
 			// empty block
 		}
 
-//		// Time adding N values to different kinds of stacks
+		// Time adding N values to different kinds of stacks
 //		for(int N = 1000; N <= 15000; N += 1000)
 //		{
 //			timeAddN(N);
@@ -32,7 +32,7 @@ public class Assignment6Timing
 		}
 		
 		
-//		// Time adding then peeking N values to different kinds of stacks
+		// Time adding then peeking N values to different kinds of stacks
 //		for(int N = 1000; N <= 15000; N += 1000)
 //		{
 //			timePeekN(N);
@@ -55,8 +55,8 @@ public class Assignment6Timing
 
 		for (int i = 0; i < timesToLoop; i++)
 		{
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals)
 				timeStack.push(j);
 		}
@@ -65,8 +65,8 @@ public class Assignment6Timing
 
 		// Run an loop to capture the cost of the overhead
 		for (long i = 0; i < timesToLoop; i++) {
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals) {}
 		}
 
@@ -98,8 +98,8 @@ public class Assignment6Timing
 
 		for (int i = 0; i < timesToLoop; i++)
 		{
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals)
 				timeStack.push(j);
 			for(int j = 0; j < N; j++)
@@ -110,8 +110,8 @@ public class Assignment6Timing
 
 		// Run an loop to capture the cost of the overhead
 		for (long i = 0; i < timesToLoop; i++) {
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals) 
 			{
 				timeStack.push(j); // subtract the push time since we are timing pop
@@ -148,8 +148,8 @@ public class Assignment6Timing
 
 		for (int i = 0; i < timesToLoop; i++)
 		{
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals)
 				timeStack.push(j);
 			for(int j = 0; j < N; j++)
@@ -163,8 +163,8 @@ public class Assignment6Timing
 
 		// Run an loop to capture the cost of the overhead
 		for (long i = 0; i < timesToLoop; i++) {
-			timeStack = new ArrayStack<Integer>();
-			//timeStack = new LinkedListStack<Integer>();
+//			timeStack = new ArrayStack<Integer>();
+			timeStack = new LinkedListStack<Integer>();
 			for(int j : testVals) 
 			{
 				timeStack.push(j); // subtract the push time since we are timing peek

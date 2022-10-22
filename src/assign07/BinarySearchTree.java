@@ -13,17 +13,25 @@ import java.util.NoSuchElementException;
  */
 public class BinarySearchTree<Type extends Comparable<? super Type>> implements SortedSet<Type>
 {
-
-	private class BinaryNode<Type> 
+	
+	
+	/**
+	 * Represents a generically-typed binary tree node. Each binary node contains
+	 * data, a reference to the left child, and a reference to the right child.
+	 * 
+	 * @author Erin Parker and Todd Oldham and Alex Murdock
+	 * @version October 21, 2022
+	 */
+	private class BinaryNode 
 	{
 
 		private Type data;
 
-		private BinaryNode<Type> leftChild;
+		private BinaryNode leftChild;
 
-		private BinaryNode<Type> rightChild;
+		private BinaryNode rightChild;
 
-		public BinaryNode(Type data, BinaryNode<Type> leftChild, BinaryNode<Type> rightChild) 
+		public BinaryNode(Type data, BinaryNode leftChild, BinaryNode rightChild) 
 		{
 			this.data = data;
 			this.leftChild = leftChild;
@@ -54,7 +62,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @return reference to the left child node
 		 */
-		public BinaryNode<Type> getLeftChild() 
+		public BinaryNode getLeftChild() 
 		{
 			return leftChild;
 		}
@@ -62,7 +70,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @param leftChild - reference of the left child node to be set
 		 */
-		public void setLeftChild(BinaryNode<Type> leftChild) 
+		public void setLeftChild(BinaryNode leftChild) 
 		{
 			this.leftChild = leftChild;
 		}
@@ -70,7 +78,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @return reference to the right child node
 		 */
-		public BinaryNode<Type> getRightChild() 
+		public BinaryNode getRightChild() 
 		{
 			return rightChild;
 		}
@@ -78,7 +86,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @param rightChild - reference of the right child node to be set
 		 */
-		public void setRightChild(BinaryNode<Type> rightChild) 
+		public void setRightChild(BinaryNode rightChild) 
 		{
 			this.rightChild = rightChild;
 		}
@@ -86,7 +94,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @return reference to the leftmost node in the binary tree rooted at this node
 		 */
-		public BinaryNode<Type> getLeftmostNode() 
+		public BinaryNode getLeftmostNode() 
 		{
 
 			if(leftChild == null) 
@@ -101,7 +109,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		/**
 		 * @return reference to the rightmost node in the binary tree rooted at this node
 		 */
-		public BinaryNode<Type> getRightmostNode() 
+		public BinaryNode getRightmostNode() 
 		{
 			if(rightChild == null) 
 			{
@@ -144,6 +152,38 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		}
 	}
 	
+	// keep track of the size of the tree
+	private int size = 0;
+	
+	// start the tree with our root node
+	private BinaryNode root = null;
+	
+	
+	/**
+	 * Recursive method used by the insert driver
+	 * @param item - the item to insert
+	 * @param current - the current node
+	 */
+	private void traverseAddBST(Type item, BinaryNode current)
+	{
+		// need to go left
+		if(item.compareTo(current.data) < 0)
+		{
+			if(current.leftChild == null)
+				current.leftChild = new BinaryNode(item);
+			else
+				traverseAddBST(item, current.leftChild);
+		}
+		
+		// need to go right
+		else
+		{
+			if(current.rightChild == null)
+				current.rightChild = new BinaryNode(item);
+			else
+				traverseAddBST(item, current.rightChild);
+		}
+	}
 	
 	/**
 	 * Ensures that this set contains the specified item.
@@ -155,8 +195,20 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public boolean add(Type item) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// we don't want duplicates
+		if (contains(item))
+			return false;
+		
+		// if our tree isn't started start the tree (change the root)
+		if(root == null)
+			root = new BinaryNode(item);
+		
+		// travel through the tree until where the new item needs to be added
+		else
+			traverseAddBST(item, root);
+		
+		return true;
+		
 	}
 
 	/**
@@ -170,8 +222,30 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public boolean addAll(Collection<? extends Type> items) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// check if something was added
+		boolean result = false;
+		
+		// create a variable to hold items from items collection
+		Type item;
+		
+		// go through all the items
+		for(int i = 0; i < items.size(); i++)
+		{
+			
+			// set the item to the next item
+			item = items.iterator().next();
+			
+			// check if the tree contains the item then add it if it does not
+			if(!contains(item))
+			{
+					add(item);
+					
+					result = true;
+			}
+			
+		}
+			
+		return result;
 	}
 
 	/**
@@ -181,8 +255,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public void clear() 
 	{
-		// TODO Auto-generated method stub
+		root = null;
 		
+		size = 0;
 	}
 
 	/**
@@ -223,8 +298,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public Type first() throws NoSuchElementException 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return root.getLeftmostNode().getData();
 	}
 
 	/**
@@ -233,7 +307,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public boolean isEmpty() 
 	{
-		// TODO Auto-generated method stub
+		if(size == 0)
+			return true;
+		
 		return false;
 	}
 
@@ -245,19 +321,21 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public Type last() throws NoSuchElementException 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return root.getRightmostNode().getData();
 	}
 
 	/**
-	 * Returns the last (i.e., largest) item in this set.
+	 * Ensures that this set does not contain the specified item.
 	 * 
-	 * @throws NoSuchElementException if the set is empty
+	 * @param item - the item whose absence is ensured in this set
+	 * @return true if this set changed as a result of this method call (that is, if
+	 *         the input item was actually removed); otherwise, returns false
 	 */
 	@Override
 	public boolean remove(Type item) 
 	{
 		// TODO Auto-generated method stub
+		size --;
 		return false;
 	}
 
@@ -273,8 +351,30 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public boolean removeAll(Collection<? extends Type> items) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// check if something was added
+		boolean result = false;
+		
+		// create a variable to hold items from items collection
+		Type item;
+		
+		// go through all the items
+		for(int i = 0; i < items.size(); i++)
+		{
+			
+			// set the item to the next item
+			item = items.iterator().next();
+			
+			// check if the tree contains the item then add it if it does not
+			if(!contains(item))
+			{
+					add(item);
+					
+					result = true;
+			}
+			
+		}
+			
+		return result;
 	}
 
 	/**
@@ -283,8 +383,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	@Override
 	public int size() 
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	/**

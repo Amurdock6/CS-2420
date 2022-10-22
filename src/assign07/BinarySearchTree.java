@@ -26,6 +26,8 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	{
 
 		private Type data;
+		
+		private BinaryNode parent;
 
 		private BinaryNode leftChild;
 
@@ -39,22 +41,23 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		 * @param leftChild
 		 * @param rightChild
 		 */
-		public BinaryNode(Type data, BinaryNode leftChild, BinaryNode rightChild) 
+		public BinaryNode(Type data, BinaryNode leftChild, BinaryNode rightChild, BinaryNode parent) 
 		{
 			this.data = data;
 			this.leftChild = leftChild;
 			this.rightChild = rightChild;
+			this.parent = parent;
 		}
 
 		/**
 		 * 
-		 * Constructor of a binary node with no children
+		 * Constructor of a binary node with no children or parent
 		 * 
 		 * @param data
 		 */
 		public BinaryNode(Type data) 
 		{
-			this(data, null, null);
+			this(data, null, null, null);
 		}
 
 		/**
@@ -89,6 +92,22 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			this.leftChild = leftChild;
 		}
 
+		/**
+		 * @return reference to the parent node
+		 */
+		public BinaryNode getParent() 
+		{
+			return parent;
+		}
+
+		/**
+		 * @param parent - reference of the parent node to be set
+		 */
+		public void setParent(BinaryNode parent) 
+		{
+			this.parent = parent;
+		}
+		
 		/**
 		 * @return reference to the right child node
 		 */
@@ -172,6 +191,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	// start the tree with our root node
 	private BinaryNode root = null;
 	
+	// an arraylist of all the items in the tree
+	private ArrayList<Type> dictionaryArray = new ArrayList();
+	
 	
 	/**
 	 * Recursive method used by the insert driver
@@ -186,7 +208,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			// if the next node is null add the new node
 			if(current.leftChild == null)
 			{
-				current.leftChild = new BinaryNode(item);
+				current.leftChild = new BinaryNode(item, null, null, current);
 				size++;
 			}
 			
@@ -195,13 +217,13 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 				traverseAddBST(item, current.leftChild);
 		}
 		
-		// item is greater tahn current node go to right tree
+		// item is greater than current node go to right tree
 		else
 		{
 			// if the next node is null add the new node
 			if(current.rightChild == null)
 			{
-				current.rightChild = new BinaryNode(item);
+				current.rightChild = new BinaryNode(item, null, null, current);
 				size++;
 			}
 			
@@ -230,6 +252,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		{
 			root = new BinaryNode(item);
 			size++;
+			return true;
 		}
 		
 		// travel through the tree until where the new item needs to be added
@@ -254,15 +277,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		// check if something was added
 		boolean result = false;
 		
-		// create a variable to hold items from items collection
-		Type item;
-		
 		// go through all the items
-		for(int i = 0; i < items.size(); i++)
+		for(Type item : items)
 		{
-			
-			// set the item to the next item
-			item = items.iterator().next();
 			
 			// check if the tree contains the item then add it if it does not
 			if(!contains(item))
@@ -341,15 +358,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	public boolean containsAll(Collection<? extends Type> items) 
 	{
 		
-		// create a variable to hold items from items collection
-		Type item;
-		
 		// go through all the items
-		for(int i = 0; i < items.size(); i++)
+		for(Type item : items)
 		{
-			
-			// set the item to the next item
-			item = items.iterator().next();
 			
 			// check if the tree contains the item if it doesn't then return false
 			if(!contains(item))
@@ -403,10 +414,71 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 */
 	@Override
 	public boolean remove(Type item) 
+	{	
+		
+		if(!contains(item))
+			return false;
+		
+		// Get the node that we are trying to remove
+		BinaryNode Remove = getNode(item, root);
+		
+		// Case 1, no children
+		if(Remove.leftChild == null && Remove.rightChild == null)
+		{
+			Remove = null;
+			size --;
+			return true;
+		}
+		
+		// Case 2, 1 child
+		else if(Remove.leftChild == null || Remove.rightChild == null)
+		{
+			// if the node has a left child
+			if(Remove.leftChild != null)
+				Remove.parent.leftChild = Remove.leftChild;
+			
+			// if the node has a right child
+			else
+				Remove.parent.rightChild = Remove.rightChild;
+			
+			size --;
+			return true;
+		}
+		
+		// Case 3, 2 children
+		else
+		{
+			// Get the value of the item of the successor of the node we want to remove
+			Type successorItem = Remove.successor().getData();
+			
+			// Set the node we want to remove data value to successor value
+			Remove.data = successorItem;
+			
+			// Get the successor node
+			BinaryNode removeNode = Remove.successor();
+			
+			// Remove the succesor node
+			removeNode = null;
+			
+			size --;
+			return true;
+		}
+	}
+
+	private BinaryNode getNode(Type item, BinaryNode current) 
 	{
-		// TODO Auto-generated method stub
-		size --;
-		return false;
+		
+		// return the node if it has the item
+		if(item.equals(current.data))
+			return current;
+		
+		// If the item is less than the current node data go left
+		if(item.compareTo(current.data) < 0)
+			return getNode(item, current.leftChild);
+		
+		// otherwise go right
+		else
+			return getNode(item, current.rightChild);
 	}
 
 	/**
@@ -424,15 +496,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		// check if something was removed
 		boolean result = false;
 		
-		// create a variable to hold items from items collection
-		Type item;
-		
 		// go through all the items
-		for(int i = 0; i < items.size(); i++)
+		for(Type item : items)
 		{
-			
-			// set the item to the next item
-			item = items.iterator().next();
 			
 			// check if the tree contains the item then remove it if it does
 			if(contains(item))
@@ -462,14 +528,32 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 */
 	@Override
 	public ArrayList<Type> toArrayList() 
-	{
+	{	
 		
-		ArrayList<Type> dictionaryArray = new ArrayList();
+		traverseBST(root);
 		
-		// need to fill in still
-		
-		// TODO Auto-generated method stub
 		return dictionaryArray;
+	}
+	
+	/**
+	 * 
+	 * This method is used to run throught the entire BST and add items to an array list in order
+	 * 
+	 * @param current
+	 */
+	void traverseBST(BinaryNode current)
+	{
+		// if the current node is null
+		if (current == null) return;
+		
+		// goes left to the very bottom of each subtree
+		traverseBST(current.leftChild);
+		
+		// adds all the items in the tree
+		dictionaryArray.add(current.getData());
+		
+		// goes right to the very bottom of each subtree
+		traverseBST(current.rightChild);	
 	}
 
 }

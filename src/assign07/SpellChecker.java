@@ -80,7 +80,7 @@ public class SpellChecker
 
 		List<String> wordsToCheck = readFromFile(documentFile);
 
-		List<String> misspelledWords = null;
+		List<String> misspelledWords = new ArrayList();
 		
 		for(int i = 0; i < wordsToCheck.size(); i++)
 		{

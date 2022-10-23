@@ -18,7 +18,7 @@ public class BST_Comparison_Timing
 			// empty block
 		}
 		
-		for(int N = 1000; N <= 20000; N += 1000)
+		for(int N = 10000; N <= 200000; N += 10000)
 		{
 			long midpointTime, stopTime;
 			int timesToLoop = 1000;
@@ -36,7 +36,7 @@ public class BST_Comparison_Timing
 			TreeSet<Integer> treeTiming4;
 
 			
-			// TEST NUMBER 1
+			// TEST NUMBER 1 BinarySerachTree contains
 			
 			startTime = System.nanoTime();
 
@@ -74,7 +74,7 @@ public class BST_Comparison_Timing
 				System.out.println(N + "\t"+ averageTime);
 				
 				
-				// TEST NUMBER 2
+				// TEST NUMBER 2 Tree Set Contains
 				
 				startTime = System.nanoTime();
 
@@ -92,7 +92,6 @@ public class BST_Comparison_Timing
 				// Run an loop to capture the cost of the overhead
 				for (long i = 0; i < timesToLoop; i++) 
 				{
-					//treeTiming = new TreeSet<Integer>();
 					treeTiming2 = new TreeSet<Integer>();
 					for(int j : testVals) 
 					{
@@ -113,7 +112,7 @@ public class BST_Comparison_Timing
 					
 					
 					
-				// TEST NUMBER 3
+				// TEST NUMBER 3 BinarySearchTree Add
 					
 					
 				startTime = System.nanoTime();
@@ -129,7 +128,6 @@ public class BST_Comparison_Timing
 
 				// Run an loop to capture the cost of the overhead
 				for (long i = 0; i < timesToLoop; i++) {
-					// treeTiming = new TreeSet<Integer>();
 					treeTiming3 = new BinarySearchTree<Integer>();
 					for (int j : testVals) 
 					{
@@ -149,7 +147,7 @@ public class BST_Comparison_Timing
 				
 				
 				
-				// TEST NUMBER 4
+				// TEST NUMBER 4 TreeSet add
 				
 				
 				startTime = System.nanoTime();
@@ -165,7 +163,6 @@ public class BST_Comparison_Timing
 
 				// Run an loop to capture the cost of the overhead
 				for (long i = 0; i < timesToLoop; i++) {
-					// treeTiming = new TreeSet<Integer>();
 					treeTiming4 = new TreeSet<Integer>();
 					for (int j : testVals) 
 					{

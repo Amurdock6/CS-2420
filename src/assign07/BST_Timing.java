@@ -27,7 +27,7 @@ public class BST_Timing
 			for(int i=0; i < N; i++)
 				testVals.add(i + 1);
 			
-			//Collections.shuffle(testVals);
+			Collections.shuffle(testVals);
 
 			BinarySearchTree<Integer> treeTiming;
 

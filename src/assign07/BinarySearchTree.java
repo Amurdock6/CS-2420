@@ -449,7 +449,6 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 					Remove.parent.rightChild = Remove.rightChild;
 				}
 			} catch (Exception e) {
-				System.out.println(e);
 
 			} finally {
 

@@ -16,7 +16,7 @@ class BinarySearchTreeTest {
 	@BeforeEach
 	void setUp() throws Exception 
 	{
-		testTree = new BinarySearchTree();
+		testTree = new BinarySearchTree<String>();
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ class BinarySearchTreeTest {
 	@Test
 	void testAddAll() 
 	{
-		ArrayList<String> addAllCollection = new ArrayList();
+		ArrayList<String> addAllCollection = new ArrayList<String>();
 		
 		addAllCollection.add("hello");
 		addAllCollection.add("saturday");
@@ -88,7 +88,7 @@ class BinarySearchTreeTest {
 	void testContainsAll() 
 	{
 		
-		ArrayList<String> addAllCollection = new ArrayList();
+		ArrayList<String> addAllCollection = new ArrayList<String>();
 		
 		addAllCollection.add("hello");
 		addAllCollection.add("saturday");
@@ -149,7 +149,7 @@ class BinarySearchTreeTest {
 	@Test
 	void testRemoveAll() 
 	{
-		ArrayList<String> addAllCollection = new ArrayList();
+		ArrayList<String> addAllCollection = new ArrayList<String>();
 		
 		addAllCollection.add("hello");
 		addAllCollection.add("saturday");
@@ -197,7 +197,7 @@ class BinarySearchTreeTest {
 		testTree.add("goodbye");
 		testTree.add("final");
 		
-		ArrayList finalTest = testTree.toArrayList();
+		ArrayList<String> finalTest = testTree.toArrayList();
 		
 		assertTrue(finalTest.size() == 5);
 		assertTrue(finalTest.get(0) == "final");

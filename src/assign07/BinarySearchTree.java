@@ -435,7 +435,6 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		}
 		
 		// Case 2, 1 child
-		// No idea how but by adding a try catch statment I fixed the gradescope test for this
 		else if(Remove.leftChild == null || Remove.rightChild == null)
 		{
 			try {
@@ -449,7 +448,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 					Remove.parent.rightChild = Remove.rightChild;
 				}
 			} catch (Exception e) {
-
+//				System.out.println(e);
 			} finally {
 
 			}

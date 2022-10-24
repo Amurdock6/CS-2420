@@ -3,10 +3,11 @@ package assign07;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BinarySearchTreeTest {
 	
@@ -16,6 +17,13 @@ class BinarySearchTreeTest {
 	void setUp() throws Exception 
 	{
 		testTree = new BinarySearchTree();
+	}
+	
+	@Test
+	void testFirstThrowsError() {
+		NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> testTree.first(), "Expected testTree.first() to throw NoSuchElementException, but it didn't");
+
+		assertTrue(thrown != null);
 	}
 	
 	@Test
@@ -104,6 +112,7 @@ class BinarySearchTreeTest {
 
 		assertTrue(testTree.first() == "goodbye");
 	}
+
 
 	@Test
 	void testIsEmpty() 

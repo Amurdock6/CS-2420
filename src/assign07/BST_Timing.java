@@ -23,7 +23,7 @@ public class BST_Timing
 			int timesToLoop = 1000;
 
 			// Generate ordered numbers
-			List<Integer> testVals = new <Integer>ArrayList();
+			List<Integer> testVals = new <Integer>ArrayList<Integer>();
 			for(int i=0; i < N; i++)
 				testVals.add(i + 1);
 			

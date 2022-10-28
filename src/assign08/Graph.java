@@ -150,14 +150,20 @@ public class Graph {
 		private boolean isWall;
 		
 		// TODO: You will undoubtedly want to add more members and functionality to this class.
+		private boolean visited;
+		private Node cameFrom;
 				
 		public Node(int _x, int _y)
 		{
 			isStart = false;
 			isGoal = false;
 			isOnPath = false;
+			visited = false;
+			
 			x = _x;
 			y = _y;
+			
+			cameFrom = null;
 		}
 		
 		@Override

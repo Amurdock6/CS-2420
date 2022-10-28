@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 /**
  * 
- * @author Daniel Kopta
+ * @author Daniel Kopta and Todd Oldham and Alex Murdock
  * This Graph class acts as a starting point for your maze path finder.
  * Add to this class as needed.
  */
@@ -134,7 +134,7 @@ public class Graph {
 
 	
 	/**
-	 * @author Daniel Kopta
+	 * @author Daniel Kopta and Todd Oldham and Alex Murdock
 	 * 	A node class to assist in the implementation of the graph.
 	 * 	You will need to add additional functionality to this class.
 	 */

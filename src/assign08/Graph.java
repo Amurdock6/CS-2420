@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 
 
 /**
@@ -115,7 +116,34 @@ public class Graph {
 	 */
 	public int CalculateShortestPath()
 	{
-		// TODO: Fill in this method
+		start.visited = true;
+		start.isOnPath = true;
+		
+		LinkedList<Node> nodeQueue = new LinkedList<Node>();
+		
+		while(!nodeQueue.isEmpty())
+		{
+			Node current = nodeQueue.poll();
+			
+			if(current.isGoal = true)
+				while(current.isStart = false)
+				{
+					current.isOnPath = true;
+					current = current.cameFrom;
+				}
+				return 0;
+			
+			for(Node neighborNode : current.neighbors)
+			{
+				if(!neighborNode.visited)
+				{
+					neighborNode.visited = true;
+					neighborNode.cameFrom = current;
+					nodeQueue.offer(neighborNode);
+				}
+			}
+		}
+		
 		return 0;
 	}
 
@@ -148,8 +176,6 @@ public class Graph {
 		private boolean isGoal;
 		private boolean isOnPath;
 		private boolean isWall;
-		
-		// TODO: You will undoubtedly want to add more members and functionality to this class.
 		private boolean visited;
 		private Node cameFrom;
 				

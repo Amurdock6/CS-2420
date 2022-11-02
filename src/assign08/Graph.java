@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 
 
+
 /**
  * 
  * @author Daniel Kopta and Todd Oldham and Alex Murdock
@@ -126,16 +127,18 @@ public class Graph {
 			Node current = nodeQueue.poll();
 			
 			if(current.isGoal = true)
+			{
 				while(current.isStart = false)
 				{
 					current.isOnPath = true;
 					current = current.cameFrom;
 				}
 				return 0;
+			}
 			
 			for(Node neighborNode : current.neighbors)
 			{
-				if(!neighborNode.visited)
+				if(!neighborNode.visited && !neighborNode.isWall)
 				{
 					neighborNode.visited = true;
 					neighborNode.cameFrom = current;
@@ -178,6 +181,7 @@ public class Graph {
 		private boolean isWall;
 		private boolean visited;
 		private Node cameFrom;
+		private Node[] neighbors = new Node[4];
 				
 		public Node(int _x, int _y)
 		{
@@ -190,6 +194,18 @@ public class Graph {
 			y = _y;
 			
 			cameFrom = null;
+			
+			Node left = new Node(x - 1 , y);
+			Node right = new Node(x + 1 , y);
+			Node front = new Node(x , y + 1);
+			Node back = new Node(x , y - 1);
+			
+			neighbors[0] = left;
+			neighbors[1] = right;
+			neighbors[2] = front;
+			neighbors[3] = back;
+			
+			
 		}
 		
 		@Override

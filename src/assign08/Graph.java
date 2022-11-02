@@ -159,8 +159,25 @@ public class Graph {
 	 */
 	public int CalculateAPath()
 	{
-		// TODO: Fill in this method
-		return 0;		
+//		// TODO: Fill in this method
+//		System.out.println("test");
+//		Object test = new Node[curr.x][curr.y];
+//		System.out.println(test);
+		
+//		curr.visited = true;
+//		
+//		if (curr.equals(goal))
+//			return curr.x;
+//		
+//		for(Node next : curr.neighbors) {
+//			if(!next.visited) {
+//				next.cameFrom = curr;
+//				CalculateAPath(next, goal);
+//			}
+//		}
+		
+		
+		return 0;	
 	}
 
 	
@@ -195,15 +212,20 @@ public class Graph {
 			
 			cameFrom = null;
 			
-			Node left = new Node(x - 1 , y);
-			Node right = new Node(x + 1 , y);
-			Node front = new Node(x , y + 1);
-			Node back = new Node(x , y - 1);
+			if (x > 0 && y > 0) {
+				Node left = new Node(x - 1 , y);
+				Node right = new Node(x + 1 , y);
+				Node front = new Node(x , y + 1);
+				Node back = new Node(x , y - 1);
+				
+				neighbors[0] = left;
+				neighbors[1] = right;
+				neighbors[2] = front;
+				neighbors[3] = back;
+			}
+
 			
-			neighbors[0] = left;
-			neighbors[1] = right;
-			neighbors[2] = front;
-			neighbors[3] = back;
+			
 			
 			
 		}

@@ -21,7 +21,7 @@ public class TestPathFinder {
 		 */
 		
 		// Run the pathfinder with a final argument of true to find the shortest path to the closest goal
-		PathFinder.solveMaze("C:\\Users\\Likel\\eclipse-workspace\\CS-2420\\src\\assign08Resources\\bigMaze.txt", "C:\\Users\\Likel\\eclipse-workspace\\CS-2420\\src\\assign08Resources\\testOutput1.txt", true);
+		PathFinder.solveMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\bigMaze.txt", "C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\testOutput1.txt", true);
 		// Run the pathfinder with a final argument of false to find any path to any goal
 //		PathFinder.solveMaze("../assign08Resources/bigMaze.txt", "../assign08Resources/testOutput2.txt", false);
 	}

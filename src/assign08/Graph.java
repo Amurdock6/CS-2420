@@ -77,6 +77,7 @@ public class Graph {
 					throw new IllegalArgumentException("maze contains unknown character: \'" + row.charAt(j) + "\'");
 				}
 		}
+		System.out.println("graph");
 		input.close();
 	}
 	
@@ -117,6 +118,8 @@ public class Graph {
 	 */
 	public int CalculateShortestPath()
 	{
+		
+		System.out.println("Hello");
 		start.visited = true;
 		start.isOnPath = true;
 		
@@ -135,6 +138,12 @@ public class Graph {
 				}
 				return 0;
 			}
+			
+			current.neighbors[0] = nodes[current.x - 1][current.y];
+			current.neighbors[1] = nodes[current.x + 1][current.y];
+			current.neighbors[1] = nodes[current.x][current.y - 1];
+			current.neighbors[1] = nodes[current.x][current.y + 1];
+			
 			
 			for(Node neighborNode : current.neighbors)
 			{
@@ -211,22 +220,6 @@ public class Graph {
 			y = _y;
 			
 			cameFrom = null;
-			
-			if (x > 0 && y > 0) {
-				Node left = new Node(x - 1 , y);
-				Node right = new Node(x + 1 , y);
-				Node front = new Node(x , y + 1);
-				Node back = new Node(x , y - 1);
-				
-				neighbors[0] = left;
-				neighbors[1] = right;
-				neighbors[2] = front;
-				neighbors[3] = back;
-			}
-
-			
-			
-			
 			
 		}
 		

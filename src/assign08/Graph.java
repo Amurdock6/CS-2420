@@ -77,7 +77,6 @@ public class Graph {
 					throw new IllegalArgumentException("maze contains unknown character: \'" + row.charAt(j) + "\'");
 				}
 		}
-		System.out.println("graph");
 		input.close();
 	}
 	
@@ -118,20 +117,20 @@ public class Graph {
 	 */
 	public int CalculateShortestPath()
 	{
-		
-		System.out.println("Hello");
+
 		start.visited = true;
 		start.isOnPath = true;
 		
 		LinkedList<Node> nodeQueue = new LinkedList<Node>();
 		
+		nodeQueue.offer(start);
+		
 		while(!nodeQueue.isEmpty())
 		{
 			Node current = nodeQueue.poll();
-			
-			if(current.isGoal = true)
+			if(current.isGoal == true)
 			{
-				while(current.isStart = false)
+				while(current.isStart == false)
 				{
 					current.isOnPath = true;
 					current = current.cameFrom;
@@ -141,9 +140,10 @@ public class Graph {
 			
 			current.neighbors[0] = nodes[current.x - 1][current.y];
 			current.neighbors[1] = nodes[current.x + 1][current.y];
-			current.neighbors[1] = nodes[current.x][current.y - 1];
-			current.neighbors[1] = nodes[current.x][current.y + 1];
-			
+			current.neighbors[2] = nodes[current.x][current.y - 1];
+			current.neighbors[3] = nodes[current.x][current.y + 1];
+
+			System.out.println(current.neighbors[1]);
 			
 			for(Node neighborNode : current.neighbors)
 			{
@@ -158,7 +158,6 @@ public class Graph {
 		
 		return 0;
 	}
-
 	
 	/**
 	 * Traverse the graph with DFS (any path to any goal)

@@ -192,7 +192,7 @@ public class Graph {
 			if (!current.visited) {
 				current.visited = true;
 
-				// gets neigbours of current Node
+				// gets neighbors of current Node
 				current.neighbors[0] = nodes[current.x - 1][current.y];
 				current.neighbors[1] = nodes[current.x + 1][current.y];
 				current.neighbors[2] = nodes[current.x][current.y - 1];

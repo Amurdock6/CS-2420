@@ -120,6 +120,9 @@ public class Graph {
 	 */
 	public int CalculateShortestPath()
 	{
+		// create a node counter
+		int nodeCounter = 0;
+		
 		// set start visited and is on path to true
 		start.visited = true;
 		start.isOnPath = true;
@@ -136,6 +139,9 @@ public class Graph {
 			// current node is equal to the first item in the queue
 			Node current = nodeQueue.poll();
 			
+			// increment node counter
+			nodeCounter ++;
+			
 			// if the current node is the goal node we create a path from that node back to the start
 			if(current.isGoal == true)
 			{
@@ -144,7 +150,10 @@ public class Graph {
 					current.isOnPath = true;
 					current = current.cameFrom;
 				}
-				return 0;
+				
+				//print out the number of nodes searched
+				System.out.println("Number of nodes searched, " + nodeCounter);
+				return nodeCounter;
 			}
 			
 			// set the neighbors of our current node
@@ -167,7 +176,7 @@ public class Graph {
 			}
 		}
 		
-		return 0;
+		return nodeCounter;
 	}
 
 	
@@ -179,6 +188,9 @@ public class Graph {
 	 */
 	public int CalculateAPath()
 	{
+		// create node counter
+		int nodeCounter = 0;
+		
 		// set the start visited and on path to true
 		start.visited = true;
 		start.isOnPath = true;
@@ -195,6 +207,9 @@ public class Graph {
 			// set the current node to the top of the stack
 			Node current = stack.pop();
 			
+			// increment node counter
+			nodeCounter ++;
+			
 			// if the current node is the goal we create a path form the goal back to start
 			if (current.isGoal == true) 
 			{
@@ -204,7 +219,9 @@ public class Graph {
 					current = current.cameFrom;
 				}
 				
-				return 0;
+				//print out the number of nodes searched
+				System.out.println("Number of nodes searched, " + nodeCounter);
+				return nodeCounter;
 			}
 			
 
@@ -228,7 +245,8 @@ public class Graph {
 			}
 
 		}
-		return 0;
+		
+		return nodeCounter;
 	}
 
 	

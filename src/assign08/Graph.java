@@ -120,17 +120,23 @@ public class Graph {
 	 */
 	public int CalculateShortestPath()
 	{
-
+		// set start visited and is on path to true
 		start.visited = true;
 		start.isOnPath = true;
 		
+		// create a queue
 		LinkedList<Node> nodeQueue = new LinkedList<Node>();
 		
+		// add start to the queue
 		nodeQueue.offer(start);
 		
+		// while there are items in the queue
 		while(!nodeQueue.isEmpty())
 		{
+			// current node is equal to the first item in the queue
 			Node current = nodeQueue.poll();
+			
+			// if the current node is the goal node we create a path from that node back to the start
 			if(current.isGoal == true)
 			{
 				while(current.isStart == false)
@@ -141,15 +147,19 @@ public class Graph {
 				return 0;
 			}
 			
+			// set the neighbors of our current node
 			current.neighbors[0] = nodes[current.x - 1][current.y];
 			current.neighbors[1] = nodes[current.x + 1][current.y];
 			current.neighbors[2] = nodes[current.x][current.y - 1];
 			current.neighbors[3] = nodes[current.x][current.y + 1];
 			
+			// go through each of the neighbors of the current node
 			for(Node neighborNode : current.neighbors)
 			{
+				// if the neighbor has not been visited and is not a wall
 				if(!neighborNode.visited && !neighborNode.isWall)
 				{
+					// set the neighbor as visited, and where it came from, then add the neighbor to the queue
 					neighborNode.visited = true;
 					neighborNode.cameFrom = current;
 					nodeQueue.offer(neighborNode);
@@ -169,18 +179,23 @@ public class Graph {
 	 */
 	public int CalculateAPath()
 	{
-		// TODO: Fill in this method
+		// set the start visited and on path to true
 		start.visited = true;
 		start.isOnPath = true;
 
+		// create a new stack for the nodes
 		Stack<Node> stack = new Stack<Node>();
 		
+		// put the start node on the stack
 		stack.push(start);
 		
+		// while the stack is not empty
 		while (!stack.isEmpty()) 
 		{
+			// set the current node to the top of the stack
 			Node current = stack.pop();
 			
+			// if the current node is the goal we create a path form the goal back to start
 			if (current.isGoal == true) 
 			{
 				while(current.isStart == false)
@@ -193,16 +208,19 @@ public class Graph {
 			}
 			
 
-			// gets neighbors of current Node
+			// sets neighbors of current Node
 			current.neighbors[0] = nodes[current.x - 1][current.y];
 			current.neighbors[1] = nodes[current.x + 1][current.y];
 			current.neighbors[2] = nodes[current.x][current.y - 1];
 			current.neighbors[3] = nodes[current.x][current.y + 1];
 
+			// go through each of the neighbors of the current node
 			for (Node neighborNode : current.neighbors) 
 			{
+				// if the neighbor hasn't been visited and isn't a wall
 				if (!neighborNode.visited && !neighborNode.isWall) 
 				{
+					// set the neighbor as visited and where it came from then add the neighbor to the stack
 					neighborNode.visited = true;
 					neighborNode.cameFrom = current;
 					stack.push(neighborNode);

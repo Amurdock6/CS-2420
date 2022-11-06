@@ -176,10 +176,13 @@ public class Graph {
 		Stack<Node> stack = new Stack<Node>();
 		
 		stack.push(start);
-		while (!stack.isEmpty()) {
+		
+		while (!stack.isEmpty()) 
+		{
 			Node current = stack.pop();
 			
-			if (current.isGoal == true) {
+			if (current.isGoal == true) 
+			{
 				while(current.isStart == false)
 				{
 					current.isOnPath = true;
@@ -189,26 +192,23 @@ public class Graph {
 				return 0;
 			}
 			
-			if (!current.visited) {
-				current.visited = true;
 
-				// gets neighbors of current Node
-				current.neighbors[0] = nodes[current.x - 1][current.y];
-				current.neighbors[1] = nodes[current.x + 1][current.y];
-				current.neighbors[2] = nodes[current.x][current.y - 1];
-				current.neighbors[3] = nodes[current.x][current.y + 1];
-				
-				for(Node neighborNode : current.neighbors)
+			// gets neighbors of current Node
+			current.neighbors[0] = nodes[current.x - 1][current.y];
+			current.neighbors[1] = nodes[current.x + 1][current.y];
+			current.neighbors[2] = nodes[current.x][current.y - 1];
+			current.neighbors[3] = nodes[current.x][current.y + 1];
+
+			for (Node neighborNode : current.neighbors) 
+			{
+				if (!neighborNode.visited && !neighborNode.isWall) 
 				{
-					if(!neighborNode.visited && !neighborNode.isWall)
-					{
-						neighborNode.visited = true;
-						neighborNode.cameFrom = current;
-						stack.push(neighborNode);
-					}
+					neighborNode.visited = true;
+					neighborNode.cameFrom = current;
+					stack.push(neighborNode);
 				}
-				
 			}
+
 		}
 		return 0;
 	}

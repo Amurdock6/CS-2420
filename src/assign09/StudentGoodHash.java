@@ -79,10 +79,31 @@ public class StudentGoodHash
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * 
+	 * For the hashCode here it takes the value of the the uid, 
+	 * the value of the first name squared, and
+	 * the value of the last name squared then adds them together and returns it.
+	 * 
+	 */
 	public int hashCode() 
 	{
-		// FILL IN and add method comment
+		// initialize variables
+		int totalValue = 0;
+		int totalValueString1 = 0;
+		int totalValueString2 = 0;
 		
-		return 0;
+		// get the value of each character in the first name and add them together
+		for (int i = 0; i < firstName.length(); i++)
+			totalValueString1 += firstName.charAt(i);
+		
+		// get the value of each character in the last name and add them togeter
+		for (int j = 0; j < lastName.length(); j++)
+			totalValueString2 += lastName.charAt(j);
+		
+		// get the final value
+		totalValue = uid + totalValueString1 * totalValueString1 + totalValueString2 * totalValueString2;
+		
+		return totalValue;
 	}
 }

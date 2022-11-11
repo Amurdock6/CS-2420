@@ -1,12 +1,51 @@
-11 20
-XXXXXXXXXXXXXXXXXXXX
-X    X        X....X
-X XX X XXXXXX X.XX.X
-X X      ....... X.X
-X X XX XX. XX XX X.X
-X      XG.  X   ...X
-X X XX XXXXXX XX.X X
-X X          ....X X
-X XX X XXXXXX.X XX X
-X    X   S....X    X
-XXXXXXXXXXXXXXXXXXXX
+50 50
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X       X X   X X XX  XXX X     X    XX X X    X X
+X XX    XX X XXX XX    X XX XX X  X XX  XX X X   X
+X X X  X   X  X   X X X        X    X     X X X  X
+X XXX  X      X     XX    X X  XX  XX     X    X X
+X X       X  X   X     X   X     X X   X X   XX XX
+XX X  XX X   X  XXX  XXX       X XX X      XX  XXX
+X    X  XX       X       X         X         X X X
+XX   XX XXX  X XX     X    X        XX  XX   X   X
+XX X XX  X X    XX            X         X     X  X
+X      X X X             X   XX  XX X   XX     X X
+X XX  XX    X          X     X      XX X    XX X X
+X X   X X   X    X X XXXX  X      X   XX         X
+X       X   X    XXX  X                   XX X   X
+X    XX       X   X    XXX      X X X       XXX XX
+XX  X    X XX  X X       XX      X  X    X  XX   X
+X   X    XXX X     X  X    XX  X  X XX     XX XX X
+X XX   X  X         XX X  X XX  X    X XX  X X  XX
+X   X   X   X X X   X X  X X X  G XX XX   XX   XXX
+X  X         X XXXG          XX X X   XX X       X
+X    XXXX  XX     XX X  X     XX  X X X X     X  X
+X           XX X X X X X  XX X G   X  X   X  X   X
+XX XX        XX    XX      XXX     X XXX   X  X  X
+X     XX XXX XX      X  X     X    X  X X  X     X
+X X   X   X     XX   X    X    XX  X      XX    XX
+XX       X  X XX  XX X X  X X  X   XX  X  X    XXX
+XX X XXXXX X     X         XXX       X.......XX  X
+X      XX    X   XX X....  XX X X......    X.XXX X
+X X X XXX         X X. X..........       X  .X X X
+XX X    XX       X  X..XXXX XXX   XX X X X...   XX
+X         X X X X    X..X X      XXX   X ..X X  XX
+X   X XXX X  XXXX    XX.....  XXXXX X  X..XX  X XX
+X X     X X            X  X.XX   X XX X..X.....  X
+XXX        X X   X   X     ....... X XX.XX.X X.. X
+XX X  X XX X  X XX  XXX  XX X    .XX XX..X.X X .XX
+X  X    XXX  X   X   X    XXX XX..X  X X...XX...XX
+X   X  X     XXXX X   X X   XXX.. X X XX    X.XXXX
+X    X XX             X  X  X...  X  X X   ...   X
+X     XXXX       X  XXXX   XX.    X        .X X XX
+X  X  XX X X    X   X  XX  X .XX     ....... XX XX
+X X  X X    X XX      XX    X.....X X.X     XX...X
+X   X  X X   X  X     X X     X  .XX .   XX X..X.X
+X    X       X X               X..XXX.........X .X
+X X X        X    X   X X   X XX. XX         X  .X
+XX XX      XXX       XXX   X...X.X   X X S.......X
+XX     X X       X X       X.X... X   X        X X
+XX X  G          XXX X X  X.. XX XX XX  X XXXX   X
+XX    XX G...XXX...XX... X..XX XXXXX  XXX XX    XX
+X        X X.....X....X.... X    XX   X X  XXX X X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

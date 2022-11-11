@@ -21,9 +21,9 @@ public class TestPathFinder {
 		 */
 		
 		// Run the pathfinder with a final argument of true to find the shortest path to the closest goal
-		PathFinder.solveMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\classic.txt", "C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\testOutput1.txt", true);
+		PathFinder.solveMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\problem5.txt", "C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\testOutput1.txt", true);
 		// Run the pathfinder with a final argument of false to find any path to any goal
-		PathFinder.solveMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\classic.txt", "C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\testOutput2.txt", false);
+		PathFinder.solveMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\problem5.txt", "C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3\\testOutput2.txt", false);
 
 	}
 }

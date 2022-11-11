@@ -18,7 +18,9 @@ public class MazeGen {
 	{
 		// Example usage:
 		// Creates a 10x10 maze with about 30% walls and 5 goals
-		randomMaze("assignment8_files/randomSmall.txt", 10, 0.3, 5);
+		//randomMaze("assignment8_files/randomSmall.txt", 10, 0.3, 5);
+		
+		randomMaze("C:\\Users\\todd-\\OneDrive\\Documents\\GitHub\\CS-2420\\src\\assign08Resources\\pacmanPy3/problem5.txt", 50, 0.3, 5);
 	}
 
 	/**

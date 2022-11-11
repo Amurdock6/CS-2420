@@ -143,8 +143,11 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public boolean isEmpty() 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if(size() == 0)
+			return true;
+		
+		else
+			return false;
 	}
 
 	/**

@@ -10,18 +10,53 @@ public class HashTable<K, V> implements Map<K, V>
 	// table for all of our entries
 	private ArrayList<LinkedList<MapEntry<K, V>>> table;
 	
-	// keep track of size
+	// keep track of number of entries
 	private int size = 0;
+	
+	// keep track of number of indices or buckets of the table
+	private int capacity = 100;
+	
+	// keep track of load factor
+	private double loadFactor = 0;
 	
 	/**
 	 * 
 	 * Constructor to create hashTable
+	 * 
 	 */
 	public HashTable()
 	{
 		table = new ArrayList<LinkedList<MapEntry<K, V>>>();
-		for(int i = 0; i < 100; i++)
+		for(int i = 0; i < capacity; i++)
 		   table.add(new LinkedList<MapEntry<K, V>>());
+	}
+	
+	/**
+	 * 
+	 * If the load factor gets too big grow the array and rehash all of the items in the old table
+	 * 
+	 */
+	public void growRehash()
+	{
+		
+		// double the capacity
+		capacity = capacity * 2;
+		
+		// create a new ArrayList that is temporary
+		ArrayList<LinkedList<MapEntry<K, V>>> tableTemp = new ArrayList<LinkedList<MapEntry<K, V>>>();
+		
+		// add linked lists to fill the capacity
+		for(int i = 0; i < capacity; i++)
+		   tableTemp.add(new LinkedList<MapEntry<K, V>>());
+		
+		// rehash all of the items in table 
+		for(MapEntry<K, V> e : this.entries())
+		{
+			put(e.getKey(), e.getValue());
+		}
+		
+		table = tableTemp;
+		
 	}
 	
 	/**

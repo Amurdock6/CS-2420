@@ -151,8 +151,7 @@ public class Graph {
 					current = current.cameFrom;
 				}
 				
-				//print out the number of nodes searched
-				System.out.println("Number of nodes searched, " + nodeCounter);
+				System.out.println(nodeCounter);
 				return nodeCounter;
 			}
 			
@@ -176,6 +175,7 @@ public class Graph {
 			}
 		}
 		
+		System.out.println(nodeCounter);
 		return nodeCounter;
 	}
 
@@ -219,8 +219,7 @@ public class Graph {
 					current = current.cameFrom;
 				}
 				
-				//print out the number of nodes searched
-				System.out.println("Number of nodes searched, " + nodeCounter);
+				System.out.println(nodeCounter);
 				return nodeCounter;
 			}
 			
@@ -246,6 +245,7 @@ public class Graph {
 
 		}
 		
+		System.out.println(nodeCounter);
 		return nodeCounter;
 	}
 

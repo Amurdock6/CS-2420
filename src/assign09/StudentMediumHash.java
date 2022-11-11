@@ -79,10 +79,13 @@ public class StudentMediumHash
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * 
+	 * medium hash just returns the uid
+	 * 
+	 */
 	public int hashCode() 
 	{
-		// FILL IN and add method comment
-		
-		return 0;
+		return uid;
 	}
 }

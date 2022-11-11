@@ -79,10 +79,13 @@ public class StudentBadHash
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * 
+	 * Return zero, really bad hash code
+	 * 
+	 */
 	public int hashCode() 
 	{
-		// FILL IN and add method comment
-		
 		return 0;
 	}
 }

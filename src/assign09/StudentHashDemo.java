@@ -6,9 +6,11 @@ package assign09;
  * @author Erin Parker
  * @version March 24, 2021
  */
-public class StudentHashDemo {
+public class StudentHashDemo 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		
 		StudentBadHash alan = new StudentBadHash(1019999, "Alan", "Turing");
 		StudentBadHash ada = new StudentBadHash(1004203, "Ada", "Lovelace");

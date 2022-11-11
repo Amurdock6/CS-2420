@@ -1,10 +1,29 @@
 package assign09;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V>
 {
 
+	// table for all of our entries
+	private ArrayList<LinkedList<MapEntry<K, V>>> table;
+	
+	// keep track of size
+	private int size = 0;
+	
+	/**
+	 * 
+	 * Constructor to create hashTable
+	 */
+	public HashTable()
+	{
+		table = new ArrayList<LinkedList<MapEntry<K, V>>>();
+		for(int i = 0; i < 100; i++)
+		   table.add(new LinkedList<MapEntry<K, V>>());
+	}
+	
 	/**
 	 * Removes all mappings from this map.
 	 * 
@@ -138,8 +157,7 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public int size() 
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 	
 }

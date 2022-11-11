@@ -11,7 +11,8 @@ import java.text.DecimalFormat;
  * @author Erin Parker & Todd Oldham & Alex Murdock
  * @version 11/10/2022
  */
-public class StudentGoodHash {
+public class StudentGoodHash 
+{
 
 	private int uid;
 	private String firstName;
@@ -24,7 +25,8 @@ public class StudentGoodHash {
 	 * @param firstName
 	 * @param lastName
 	 */
-	public StudentGoodHash(int uid, String firstName, String lastName) {
+	public StudentGoodHash(int uid, String firstName, String lastName) 
+	{
 		this.uid = uid;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -33,7 +35,8 @@ public class StudentGoodHash {
 	/**
 	 * @return the UID for this student object
 	 */
-	public int getUid() {
+	public int getUid() 
+	{
 		return this.uid;
 	}
 
@@ -41,21 +44,24 @@ public class StudentGoodHash {
 	 * @return the first name for this student object
 	 */
 	
-	public String getFirstName() {
+	public String getFirstName() 
+	{
 		return this.firstName;
 	}
  
 	/**
 	 * @return the last name for this student object
 	 */
-	public String getLastName() {
+	public String getLastName() 
+	{
 		return this.lastName;
 	}
 
 	/**
 	 * @return true if this student and 'other' have the same UID, first name, and last name; false otherwise
 	 */
-	public boolean equals(Object other) {
+	public boolean equals(Object other) 
+	{
 		if(!(other instanceof StudentGoodHash))
 			return false;
 
@@ -67,7 +73,8 @@ public class StudentGoodHash {
 	/**
 	 * @return a textual representation of this student
 	 */
-	public String toString() {
+	public String toString() 
+	{
 		DecimalFormat formatter = new DecimalFormat("0000000");
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}

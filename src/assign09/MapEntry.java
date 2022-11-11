@@ -9,7 +9,8 @@ package assign09;
  * @param <K> - placeholder for key type
  * @param <V> - placeholder for values type
  */
-public class MapEntry<K, V> {
+public class MapEntry<K, V> 
+{
 
 	private K key;
 	private V value;
@@ -20,7 +21,8 @@ public class MapEntry<K, V> {
 	 * @param key
 	 * @param value
 	 */
-	public MapEntry(K key, V value) {
+	public MapEntry(K key, V value) 
+	{
 		this.key = key;
 		this.value = value;
 	}
@@ -28,14 +30,16 @@ public class MapEntry<K, V> {
 	/**
 	 * @return the key of this MapEntry
 	 */
-	public K getKey() {
+	public K getKey() 
+	{
 		return this.key;
 	}
 
 	/**
 	 * @return the value of this MapEntry
 	 */
-	public V getValue() {
+	public V getValue() 
+	{
 		return this.value;
 	}
 	
@@ -44,7 +48,8 @@ public class MapEntry<K, V> {
 	 * 
 	 * @param value
 	 */
-	public void setValue(V value) {
+	public void setValue(V value) 
+	{
 		this.value = value;
 	}
 	
@@ -52,7 +57,8 @@ public class MapEntry<K, V> {
 	 * Overrides Objects's equals method to leverage the equals methods of the 
 	 * key and value members.
 	 */
-	public boolean equals(Object other) {
+	public boolean equals(Object other) 
+	{
 		if(!(other instanceof MapEntry<?, ?>))
 			return false;
 		

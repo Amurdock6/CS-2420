@@ -82,12 +82,15 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public boolean containsKey(K key) 
 	{
+		// set index variable
 		int index;
 		
-		index = key % table.size()
-				return table[index] != null
-				
-		return false;
+		// take the value of key divided by table length, use the remainder to determine index
+		index = (int)key % table.size();	
+		
+		// retrun true if the index of the list of the index of the table is not null otherwise false
+		return table.get(index).get((int)key) != null;
+
 	}
 
 	/**

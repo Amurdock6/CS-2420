@@ -5,13 +5,13 @@ import java.text.DecimalFormat;
 /**
  * This class provides a simple representation for a University of Utah student.
  * Object's hashCode method is overridden with a correct hash function for this
- * object, but one that does a poor job of distributing students in a hash
+ * object, but one that does a good job of distributing students in a hash
  * table.
  * 
  * @author Erin Parker & Todd Oldham & Alex Murdock
  * @version 11/10/2022
  */
-public class StudentBadHash {
+public class StudentGoodHash {
 
 	private int uid;
 	private String firstName;
@@ -24,7 +24,7 @@ public class StudentBadHash {
 	 * @param firstName
 	 * @param lastName
 	 */
-	public StudentBadHash(int uid, String firstName, String lastName) {
+	public StudentGoodHash(int uid, String firstName, String lastName) {
 		this.uid = uid;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -56,10 +56,10 @@ public class StudentBadHash {
 	 * @return true if this student and 'other' have the same UID, first name, and last name; false otherwise
 	 */
 	public boolean equals(Object other) {
-		if(!(other instanceof StudentBadHash))
+		if(!(other instanceof StudentGoodHash))
 			return false;
 
-		StudentBadHash rhs = (StudentBadHash) other;
+		StudentGoodHash rhs = (StudentGoodHash) other;
 
 		return this.uid == rhs.uid && this.firstName.equals(rhs.firstName) && this.lastName.equals(rhs.lastName);
 	}
@@ -72,7 +72,8 @@ public class StudentBadHash {
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
-	public int hashCode() {
+	public int hashCode() 
+	{
 		// FILL IN and add method comment
 		
 		return 0;

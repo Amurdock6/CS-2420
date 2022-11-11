@@ -67,8 +67,8 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public void clear() 
 	{
-		// TODO Auto-generated method stub
-		
+		table.clear();
+		size = 0;		
 	}
 
 	/**
@@ -82,7 +82,11 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public boolean containsKey(K key) 
 	{
-		// TODO Auto-generated method stub
+		int index;
+		
+		index = key % table.size()
+				return table[index] != null
+				
 		return false;
 	}
 

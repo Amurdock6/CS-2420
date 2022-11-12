@@ -86,6 +86,12 @@ public class StudentMediumHash
 	 */
 	public int hashCode() 
 	{
+		
+		if(uid == Integer.MIN_VALUE)
+			uid++;
+		
+		Math.abs(uid);
+		
 		return uid;
 	}
 }

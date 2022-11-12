@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/**
+ * This class implements the map interface and represents a map of keys to values. It cannot contain
+ * duplicate keys, and each key can map to at most one value.
+ * 
+ * @author Todd Oldham & Alex Murdock
+ * @version 11/12/2022
+ *
+ * @param <K> - placeholder for key type
+ * @param <V> - placeholder for value type
+ */
 public class HashTable<K, V> implements Map<K, V>
 {
 
@@ -88,8 +99,8 @@ public class HashTable<K, V> implements Map<K, V>
 		// take the value of key divided by table length, use the remainder to determine index
 		index = (int)key % table.size();	
 		
-		// retrun true if the index of the list of the index of the table is not null otherwise false
-		return table.get(index).get((int)key) != null;
+		// return true if the index of the list of the index of the table is not null otherwise false
+		return table.get(index).contains(key);
 
 	}
 
@@ -105,8 +116,7 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public boolean containsValue(V value) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return table.contains(value);
 	}
 
 	/**
@@ -120,8 +130,15 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public List<MapEntry<K, V>> entries() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// create a tableList
+		List<MapEntry<K,V>> tableList = null;
+		
+		// go through each index in the table
+		for(int i = 0; i < capacity; i++)
+			// add all items in the linked list at each index in the array
+			tableList.addAll(table.get(i));
+		
+		return tableList;
 	}
 
 	/**
@@ -136,8 +153,24 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public V get(K key) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// set index variable
+		int index;
+		
+		// take the value of key divided by table length, use the remainder to determine index
+		index = (int)key % table.size();
+		
+		// if the linked list doesn't contain the key return null
+		if(!table.get(index).contains(key))
+			return null;
+		
+		else
+		{
+			// get the index of the key in the linked list
+			int finalIndex = table.get(index).indexOf(key);
+			
+			// return the value of the item in the linked list at the index of the table we are searching for
+			return table.get(index).get(finalIndex).getValue();
+		}
 	}
 
 	/**
@@ -172,8 +205,48 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public V put(K key, V value) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		
+		// set index variable
+		int index;
+		
+		// take the value of key divided by table length, use the remainder to determine index
+		index = (int)key % table.size();
+		
+		if(!containsKey(key))
+		{
+			
+			// increase size
+			size++;
+			
+			// change the load factor magnitude
+			loadFactor = size / capacity;
+			
+			// if the load factor is too big rehash the table
+			if(loadFactor > 9)
+				growRehash();
+			
+			// add an item at the index
+			table.get(index).add(new MapEntry<K, V>(key, value));
+			
+			// return null since the key didn't exist
+			return null;
+		}
+		
+		else
+		{
+			// get the index of the key in the linked list
+			int finalIndex = table.get(index).indexOf(key);
+			
+			// get the old value from the item with the key
+			V oldValue = table.get(index).get(finalIndex).getValue();
+			
+			// set the value to the new value
+			table.get(index).get(finalIndex).setValue(value);
+			
+			// return the old value
+			return oldValue;
+		}
+			
 	}
 
 	/**
@@ -188,8 +261,34 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public V remove(K key) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		
+		// set index variable
+		int index;
+		
+		// take the value of key divided by table length, use the remainder to determine index
+		index = (int)key % table.size();
+		
+		if(!containsKey(key))
+			return null;
+		
+		else
+		{
+			
+			//reduce size
+			size--;
+			
+			// get the index of the key in the linked list
+			int finalIndex = table.get(index).indexOf(key);
+			
+			// get the old value from the item with the key
+			V oldValue = table.get(index).get(finalIndex).getValue();
+			
+			//
+			table.get(index).remove(finalIndex);
+			
+			// return the old value
+			return oldValue;
+		}
 	}
 
 	/**

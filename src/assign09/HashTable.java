@@ -107,8 +107,13 @@ public class HashTable<K, V> implements Map<K, V>
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();	
 		
-		// return true if the index of the list of the index of the table is not null otherwise false
-		return table.get(index).contains(key);
+		// go through each item in the linked list to see if the key matches the key provided
+		for(int j = 0; j < table.get(index).size(); j++)
+			if(table.get(index).get(j).getKey().equals(key))
+				return true;
+		
+		return false;
+		
 
 	}
 
@@ -124,7 +129,15 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public boolean containsValue(V value) 
 	{
-		return table.contains(value);
+		// go through each index in the table
+		for(int i = 0; i < capacity; i++)
+			// go through each item in the linked list at the table index
+			for(int j = 0; j < table.get(i).size(); j++)
+				// if the value of the linked list index matches the provided value return true
+				if(table.get(i).get(j).getValue().equals(value))
+					return true;
+		
+		return false;
 	}
 
 	/**

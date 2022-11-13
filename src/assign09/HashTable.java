@@ -183,18 +183,12 @@ public class HashTable<K, V> implements Map<K, V>
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
 		
-		// if the linked list doesn't contain the key return null
-		if(!table.get(index).contains(key))
-			return null;
+		// if the linked list contains the key return true
+		for(int j = 0; j < table.get(index).size(); j++)
+			if(table.get(index).get(j).getKey().equals(key))
+				return table.get(index).get(j).getValue();
 		
-		else
-		{
-			// get the index of the key in the linked list
-			int finalIndex = table.get(index).indexOf(key);
-			
-			// return the value of the item in the linked list at the index of the table we are searching for
-			return table.get(index).get(finalIndex).getValue();
-		}
+		return null;
 	}
 
 	/**
@@ -232,6 +226,7 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// set index variable
 		int index;
+		int finalIndex = 0;
 		
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
@@ -259,7 +254,9 @@ public class HashTable<K, V> implements Map<K, V>
 		else
 		{
 			// get the index of the key in the linked list
-			int finalIndex = table.get(index).indexOf(key);
+			for(int j = 0; j < table.get(index).size(); j++)
+				if(table.get(index).get(j).getKey().equals(key))
+					finalIndex = j;
 			
 			// get the old value from the item with the key
 			V oldValue = table.get(index).get(finalIndex).getValue();
@@ -288,6 +285,7 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// set index variable
 		int index;
+		int finalIndex = 0;
 		
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
@@ -302,7 +300,9 @@ public class HashTable<K, V> implements Map<K, V>
 			size--;
 			
 			// get the index of the key in the linked list
-			int finalIndex = table.get(index).indexOf(key);
+			for(int j = 0; j < table.get(index).size(); j++)
+				if(table.get(index).get(j).getKey().equals(key))
+					finalIndex = j;
 			
 			// get the old value from the item with the key
 			V oldValue = table.get(index).get(finalIndex).getValue();

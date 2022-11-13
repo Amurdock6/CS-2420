@@ -78,8 +78,16 @@ public class HashTable<K, V> implements Map<K, V>
 	@Override
 	public void clear() 
 	{
+		// clear the arrayList
 		table.clear();
-		size = 0;		
+		
+		// set size to zero
+		size = 0;
+		
+		// add in empty linked lists to the array list
+		for(int i = 0; i < capacity; i++)
+			   table.add(new LinkedList<MapEntry<K, V>>());
+		
 	}
 
 	/**
@@ -131,12 +139,13 @@ public class HashTable<K, V> implements Map<K, V>
 	public List<MapEntry<K, V>> entries() 
 	{
 		// create a tableList
-		List<MapEntry<K,V>> tableList = null;
+		ArrayList<MapEntry<K,V>> tableList = new ArrayList<MapEntry<K, V>>();
 		
 		// go through each index in the table
 		for(int i = 0; i < capacity; i++)
-			// add all items in the linked list at each index in the array
+			// go through each item in the linked list at the table index
 			for(int j = 0; j < table.get(i).size(); j++)
+				// if the index of the linked list has an item add it to the list
 				if(table.get(i).get(j) != null)
 					tableList.add(table.get(i).get(j));
 		

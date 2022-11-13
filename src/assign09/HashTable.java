@@ -53,20 +53,27 @@ public class HashTable<K, V> implements Map<K, V>
 		// double the capacity
 		capacity = capacity * 2;
 		
-		// create a new ArrayList that is temporary
-		ArrayList<LinkedList<MapEntry<K, V>>> tableTemp = new ArrayList<LinkedList<MapEntry<K, V>>>();
+		// create a new ArrayList that is temporary to keep track of the entries
+		ArrayList<LinkedList<MapEntry<K, V>>> tableTemp = table;
+		
+		// set table to a new array list
+		table = new ArrayList<LinkedList<MapEntry<K, V>>>();
 		
 		// add linked lists to fill the capacity
 		for(int i = 0; i < capacity; i++)
-		   tableTemp.add(new LinkedList<MapEntry<K, V>>());
+		   table.add(new LinkedList<MapEntry<K, V>>());
 		
 		// rehash all of the items in table 
-		for(MapEntry<K, V> e : this.entries())
-		{
-			put(e.getKey(), e.getValue());
-		}
 		
-		table = tableTemp;
+		// go through all the indices of table temp which was the old table
+		for(int i = 0; i < tableTemp.size(); i++)
+			// go through each item in each linked list in the table
+			for(int j = 0; j < tableTemp.get(i).size(); j++)
+				// if the item is not null
+				if(tableTemp.get(i).get(j) != null)
+					// add the item to the new table with twice the capacity
+					put(tableTemp.get(i).get(j).getKey(), tableTemp.get(i).get(j).getValue());
+		
 		
 	}
 	

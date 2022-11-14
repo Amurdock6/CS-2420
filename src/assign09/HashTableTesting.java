@@ -14,11 +14,11 @@ class HashTableTesting {
 		
 		HashTable<Integer, Integer> growRehash = new HashTable<Integer, Integer>();
 		
-		for(int i = 0; i < 900; i++)
+		for(int i = 0; i < 100000; i++)
 			growRehash.put(i + 1, 1);
 		
 		System.out.println(growRehash.size());
-		assertTrue(growRehash.size() == 900);
+		assertTrue(growRehash.size() == 100000);
 	}
 
 	@Test

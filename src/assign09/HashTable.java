@@ -30,6 +30,14 @@ public class HashTable<K, V> implements Map<K, V>
 	// keep track of load factor
 	private double loadFactor = 0;
 	
+	// COLLISIONS!
+	private int collisions = 0;
+	
+	public int getCollisions()
+	{
+		return collisions;
+	}
+	
 	/**
 	 * 
 	 * Constructor to create hashTable
@@ -131,8 +139,13 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// go through each item in the linked list to see if the key matches the key provided
 		for(int j = 0; j < table.get(index).size(); j++)
+		{
+			if(j > 0)
+				collisions++;
+			
 			if(table.get(index).get(j).getKey().equals(key))
 				return true;
+		}
 		
 		return false;
 		
@@ -155,9 +168,15 @@ public class HashTable<K, V> implements Map<K, V>
 		for(int i = 0; i < capacity; i++)
 			// go through each item in the linked list at the table index
 			for(int j = 0; j < table.get(i).size(); j++)
+			{
+				
+				if(j > 0)
+					collisions++;
+				
 				// if the value of the linked list index matches the provided value return true
 				if(table.get(i).get(j).getValue().equals(value))
 					return true;
+			}
 		
 		return false;
 	}
@@ -212,8 +231,14 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// if the linked list contains the key return true
 		for(int j = 0; j < table.get(index).size(); j++)
+		{
+			if(j > 0)
+				collisions++;
+			
+			
 			if(table.get(index).get(j).getKey().equals(key))
 				return table.get(index).get(j).getValue();
+		}
 		
 		return null;
 	}
@@ -278,6 +303,9 @@ public class HashTable<K, V> implements Map<K, V>
 			
 			// add an item at the index
 			table.get(index).add(new MapEntry<K, V>(key, value));
+			
+			if(table.get(index).size() > 1)
+				collisions ++;
 			
 			// return null since the key didn't exist
 			return null;

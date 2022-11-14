@@ -18,6 +18,7 @@ class HashTableTesting {
 			growRehash.put(i + 1, 1);
 		
 		System.out.println(growRehash.size());
+		System.out.println(growRehash.getCollisions());
 		assertTrue(growRehash.size() == 100000);
 	}
 

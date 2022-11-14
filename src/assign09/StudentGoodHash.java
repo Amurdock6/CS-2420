@@ -102,7 +102,7 @@ public class StudentGoodHash
 			totalValueString2 += lastName.charAt(j);
 		
 		// get the final value
-		totalValue = uid + totalValueString1 * totalValueString1 + totalValueString2 * totalValueString2;
+		totalValue = uid + (totalValueString1 * totalValueString1) + (totalValueString2 * totalValueString2);
 		
 		return totalValue;
 	}

@@ -2,13 +2,23 @@ package assign09;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 class HashTableTesting {
 
 	@Test
-	void testGrowRehash() {
-		fail("Not yet implemented");
+	void testGrowRehash() 
+	{
+		
+		HashTable<Integer, Integer> growRehash = new HashTable<Integer, Integer>();
+		
+		for(int i = 0; i < 900; i++)
+			growRehash.put(i + 1, 1);
+		
+		System.out.println(growRehash.size());
+		assertTrue(growRehash.size() == 900);
 	}
 
 	@Test
@@ -28,6 +38,10 @@ class HashTableTesting {
 		studentGpaTable.clear();
 		assertTrue(studentGpaTable.size() == 0);
 		assertTrue(studentGpaTable.isEmpty());
+		
+		studentGpaTable.put(alan, 3.2);
+		assertTrue(studentGpaTable.size() == 1);
+		assertTrue(studentGpaTable.containsKey(alan));
 	}
 
 	@Test

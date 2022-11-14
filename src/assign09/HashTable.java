@@ -50,18 +50,24 @@ public class HashTable<K, V> implements Map<K, V>
 	public void growRehash()
 	{
 		
-		// double the capacity
-		capacity = capacity * 2;
-		
 		// create a new ArrayList that is temporary to keep track of the entries
-		ArrayList<LinkedList<MapEntry<K, V>>> tableTemp = table;
+		ArrayList<LinkedList<MapEntry<K, V>>> tableTemp = new ArrayList<LinkedList<MapEntry<K, V>>>();
+		
+		tableTemp = table;
 		
 		// set table to a new array list
 		table = new ArrayList<LinkedList<MapEntry<K, V>>>();
 		
-		// add linked lists to fill the capacity
+		// double the capacity
+		capacity = capacity * 2;
+		
+		// add the empty linked lists to the new array list
+		table = new ArrayList<LinkedList<MapEntry<K, V>>>();
 		for(int i = 0; i < capacity; i++)
 		   table.add(new LinkedList<MapEntry<K, V>>());
+		
+		// set size to zero
+		size = 0;
 		
 		// rehash all of the items in table 
 		
@@ -73,6 +79,10 @@ public class HashTable<K, V> implements Map<K, V>
 				if(tableTemp.get(i).get(j) != null)
 					// add the item to the new table with twice the capacity
 					put(tableTemp.get(i).get(j).getKey(), tableTemp.get(i).get(j).getValue());
+		
+		size++;
+		
+		System.out.println(size());
 		
 		
 	}
@@ -248,7 +258,7 @@ public class HashTable<K, V> implements Map<K, V>
 			loadFactor = size / capacity;
 			
 			// if the load factor is too big rehash the table
-			if(loadFactor > 9)
+			if(loadFactor >= 9)
 				growRehash();
 			
 			// add an item at the index

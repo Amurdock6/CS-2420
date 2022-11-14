@@ -122,7 +122,12 @@ public class HashTable<K, V> implements Map<K, V>
 		int index;
 		
 		// take the value of key divided by table length, use the remainder to determine index
-		index = key.hashCode() % table.size();	
+		index = key.hashCode() % table.size();
+		
+		if(index == Integer.MIN_VALUE)
+			index++;
+		
+		Math.abs(index);
 		
 		// go through each item in the linked list to see if the key matches the key provided
 		for(int j = 0; j < table.get(index).size(); j++)
@@ -200,6 +205,11 @@ public class HashTable<K, V> implements Map<K, V>
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
 		
+		if(index == Integer.MIN_VALUE)
+			index++;
+		
+		Math.abs(index);
+		
 		// if the linked list contains the key return true
 		for(int j = 0; j < table.get(index).size(); j++)
 			if(table.get(index).get(j).getKey().equals(key))
@@ -247,6 +257,11 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
+		
+		if(index == Integer.MIN_VALUE)
+			index++;
+		
+		Math.abs(index);
 		
 		if(!containsKey(key))
 		{
@@ -306,6 +321,11 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		// take the value of key divided by table length, use the remainder to determine index
 		index = key.hashCode() % table.size();
+		
+		if(index == Integer.MIN_VALUE)
+			index++;
+		
+		Math.abs(index);
 		
 		if(!containsKey(key))
 			return null;

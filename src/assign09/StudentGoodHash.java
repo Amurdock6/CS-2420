@@ -104,11 +104,6 @@ public class StudentGoodHash
 		// get the final value
 		totalValue = uid + totalValueString1 * totalValueString1 + totalValueString2 * totalValueString2;
 		
-		if(totalValue == Integer.MIN_VALUE)
-			totalValue++;
-		
-		Math.abs(totalValue);
-		
 		return totalValue;
 	}
 }

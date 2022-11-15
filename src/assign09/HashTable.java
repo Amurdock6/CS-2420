@@ -90,9 +90,6 @@ public class HashTable<K, V> implements Map<K, V>
 		
 		size++;
 		
-		System.out.println(size());
-		
-		
 	}
 	
 	/**

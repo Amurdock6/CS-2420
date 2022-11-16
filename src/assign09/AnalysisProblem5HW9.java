@@ -1,9 +1,10 @@
 package assign09;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class analysisProblem5
+public class AnalysisProblem5HW9
 {
 	public static void main(Integer[] args)
 	{
@@ -16,10 +17,10 @@ public class analysisProblem5
 			// empty block
 		}
 		
-		for(int N = 100; N <= 2000; N += 100)
+		for(int N = 10000; N <= 200000; N += 10000)
 		{
 			long midpointTime, stopTime;
-			int timesToLoop = 10;
+			int timesToLoop = 10000;
 
 			Random rng = new Random();
 			// Generate students
@@ -27,13 +28,13 @@ public class analysisProblem5
 			for(int i=0; i < N; i++)
 				testVals.add(new MapEntry<Integer, Integer>(rng.nextInt(N), i + 1));
 
-			HashTable<Integer, Integer>problem5;
-			//HashMap<Integer, Integer> problem5;
+			//HashTable<Integer, Integer>problem5;
+			HashMap<Integer, Integer> problem5;
 
 			startTime = System.nanoTime();
 
-			problem5 = new HashTable<Integer, Integer>();
-			//problem5 = new HashMap<Integer, Integer>();
+			//problem5 = new HashTable<Integer, Integer>();
+			problem5 = new HashMap<Integer, Integer>();
 			
 			for (int i = 0; i < timesToLoop; i++)
 			{
@@ -46,7 +47,8 @@ public class analysisProblem5
 			// Run an loop to capture the cost of the overhead
 			for (long i = 0; i < timesToLoop; i++) 
 			{
-				problem5 = new HashTable<Integer, Integer>();
+				//problem5 = new HashTable<Integer, Integer>();
+				problem5 = new HashMap<Integer, Integer>();
 				for(int j = 0; j < testVals.size(); j++) 
 				{
 					

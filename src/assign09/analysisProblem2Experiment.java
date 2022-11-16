@@ -50,7 +50,7 @@ public class analysisProblem2Experiment
 				for(int j = 0; j < testVals.size(); j++) 
 				{
 					// subtract time to return collisions
-					problem2.getCollisions();
+					//problem2.getCollisions();
 				}
 				for(int j = 0; j < N; j++) {}
 			}

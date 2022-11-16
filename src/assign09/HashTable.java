@@ -132,7 +132,7 @@ public class HashTable<K, V> implements Map<K, V>
 		if(index == Integer.MIN_VALUE)
 			index++;
 		
-		Math.abs(index);
+		index = Math.abs(index);
 		
 		// go through each item in the linked list to see if the key matches the key provided
 		for(int j = 0; j < table.get(index).size(); j++)
@@ -224,7 +224,7 @@ public class HashTable<K, V> implements Map<K, V>
 		if(index == Integer.MIN_VALUE)
 			index++;
 		
-		Math.abs(index);
+		index = Math.abs(index);
 		
 		// if the linked list contains the key return true
 		for(int j = 0; j < table.get(index).size(); j++)
@@ -283,7 +283,7 @@ public class HashTable<K, V> implements Map<K, V>
 		if(index == Integer.MIN_VALUE)
 			index++;
 		
-		Math.abs(index);
+		index = Math.abs(index);
 		
 		if(!containsKey(key))
 		{
@@ -295,7 +295,7 @@ public class HashTable<K, V> implements Map<K, V>
 			loadFactor = size / capacity;
 			
 			// if the load factor is too big rehash the table
-			if(loadFactor >= 9)
+			if(loadFactor >= 100)
 				growRehash();
 			
 			// add an item at the index
@@ -350,7 +350,7 @@ public class HashTable<K, V> implements Map<K, V>
 		if(index == Integer.MIN_VALUE)
 			index++;
 		
-		Math.abs(index);
+		index = Math.abs(index);
 		
 		if(!containsKey(key))
 			return null;

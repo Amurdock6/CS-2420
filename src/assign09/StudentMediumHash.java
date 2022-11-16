@@ -81,26 +81,11 @@ public class StudentMediumHash
 
 	/**
 	 * 
-	 * medium hash just returns the uid
+	 * medium hash multiplies length of strings and subtracts uid
 	 * 
 	 */
 	public int hashCode() 
 	{	
-		// initialize variables
-		int totalValue = 0;
-		int totalValueString1 = 0;
-		int totalValueString2 = 0;
-		
-		// get the value of each character in the first name and add them together
-		for (int i = 0; i < firstName.length(); i++)
-			totalValueString1 += firstName.charAt(i);
-		
-		// get the value of each character in the last name and add them togeter
-		for (int j = 0; j < lastName.length(); j++)
-			totalValueString2 += lastName.charAt(j);
-		
-		// get the final value
-		totalValue = uid + totalValueString1 + totalValueString2;
-		return totalValue;
+		return (firstName.length() * lastName.length() - uid);
 	}
 }

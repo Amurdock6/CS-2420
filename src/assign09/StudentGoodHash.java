@@ -81,9 +81,7 @@ public class StudentGoodHash
 
 	/**
 	 * 
-	 * For the hashCode here it takes the value of the the uid, 
-	 * the value of the first name squared, and
-	 * the value of the last name squared then adds them together and returns it.
+	 * good hash just returns the uid
 	 * 
 	 */
 	public int hashCode() 

@@ -386,7 +386,7 @@ class HashTableTesting {
 		
 		int numberOfCollison = studentGpaTable.getCollisions();
 		
-		assertTrue(numberOfCollison == 1);
+		assertTrue(numberOfCollison == 0);
 	}
 	
 	@Test

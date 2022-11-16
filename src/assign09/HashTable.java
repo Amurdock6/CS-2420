@@ -301,8 +301,8 @@ public class HashTable<K, V> implements Map<K, V>
 			// add an item at the index
 			table.get(index).add(new MapEntry<K, V>(key, value));
 			
-//			if(table.get(index).size() > 1)
-//				collisions ++;
+			if(table.get(index).size() > 1)
+				collisions ++;
 			
 			// return null since the key didn't exist
 			return null;

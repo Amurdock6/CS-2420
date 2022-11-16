@@ -86,6 +86,21 @@ public class StudentMediumHash
 	 */
 	public int hashCode() 
 	{	
-		return uid;
+		// initialize variables
+		int totalValue = 0;
+		int totalValueString1 = 0;
+		int totalValueString2 = 0;
+		
+		// get the value of each character in the first name and add them together
+		for (int i = 0; i < firstName.length(); i++)
+			totalValueString1 += firstName.charAt(i);
+		
+		// get the value of each character in the last name and add them togeter
+		for (int j = 0; j < lastName.length(); j++)
+			totalValueString2 += lastName.charAt(j);
+		
+		// get the final value
+		totalValue = uid + totalValueString1 + totalValueString2;
+		return totalValue;
 	}
 }

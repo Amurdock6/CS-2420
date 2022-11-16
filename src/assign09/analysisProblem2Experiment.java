@@ -23,15 +23,15 @@ public class analysisProblem2Experiment
 
 			Random rng = new Random();
 			// Generate students
-			LinkedList<MapEntry<StudentBadHash, Integer>> testVals = new LinkedList<MapEntry<StudentBadHash, Integer>>();
+			LinkedList<MapEntry<StudentGoodHash, Integer>> testVals = new LinkedList<MapEntry<StudentGoodHash, Integer>>();
 			for(int i=0; i < N; i++)
-				testVals.add(new MapEntry<StudentBadHash, Integer>(new StudentBadHash(1 + rng.nextInt(N), "First", "Last"), i + 1));
+				testVals.add(new MapEntry<StudentGoodHash, Integer>(new StudentGoodHash(1 + rng.nextInt(N), "First", "Last"), i + 1));
 
-			HashTable<StudentBadHash, Integer> problem2;
+			HashTable<StudentGoodHash, Integer> problem2;
 
 			startTime = System.nanoTime();
 
-			problem2 = new HashTable<StudentBadHash, Integer>();
+			problem2 = new HashTable<StudentGoodHash, Integer>();
 			
 			for (int i = 0; i < timesToLoop; i++)
 			{
@@ -46,7 +46,7 @@ public class analysisProblem2Experiment
 			// Run an loop to capture the cost of the overhead
 			for (long i = 0; i < timesToLoop; i++) 
 			{
-				problem2 = new HashTable<StudentBadHash, Integer>();
+				problem2 = new HashTable<StudentGoodHash, Integer>();
 				for(int j = 0; j < testVals.size(); j++) 
 				{
 					// subtract time to return collisions
@@ -60,8 +60,7 @@ public class analysisProblem2Experiment
 				// Subtract the cost of running the loop
 				// from the cost of running the loop plus the real work.
 				// Average it over the number of runs.
-				double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime))
-						/ timesToLoop;
+				double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
 				System.out.println(N + "\t"+ averageTime);
 		}

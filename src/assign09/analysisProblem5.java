@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class analysisProblem5
 {
-	public static void main(String[] args)
+	public static void main(Integer[] args)
 	{
 	
 		// First, spin computing stuff until one second has gone by.
@@ -24,17 +24,17 @@ public class analysisProblem5
 
 			Random rng = new Random();
 			// Generate students
-			LinkedList<MapEntry<String, Integer>> testVals = new LinkedList<MapEntry<String, Integer>>();
+			LinkedList<MapEntry<Integer, Integer>> testVals = new LinkedList<MapEntry<Integer, Integer>>();
 			for(int i=0; i < N; i++)
-				testVals.add(new MapEntry(rng.nextInt(N).toString()), i + 1));
+				testVals.add(new MapEntry<Integer, Integer>(rng.nextInt(N), i + 1));
 
-			HashTable<String, Integer>problem5;
-			//HashMap<String, Integer> problem5;
+			HashTable<Integer, Integer>problem5;
+			//HashMap<Integer, Integer> problem5;
 
 			startTime = System.nanoTime();
 
-			problem5 = new HashTable<String, Integer>();
-			//problem5 = new HashMap<String, Integer>();
+			problem5 = new HashTable<Integer, Integer>();
+			//problem5 = new HashMap<Integer, Integer>();
 			
 			for (int i = 0; i < timesToLoop; i++)
 			{
@@ -47,7 +47,7 @@ public class analysisProblem5
 			// Run an loop to capture the cost of the overhead
 			for (long i = 0; i < timesToLoop; i++) 
 			{
-				problem5 = new HashTable<String, Integer>();
+				problem5 = new HashTable<Integer, Integer>();
 				for(int j = 0; j < testVals.size(); j++) 
 				{
 					

@@ -25,7 +25,7 @@ public class analysisProblem2Experiment
 			// Generate students
 			LinkedList<MapEntry<StudentBadHash, Integer>> testVals = new LinkedList<MapEntry<StudentBadHash, Integer>>();
 			for(int i=0; i < N; i++)
-				testVals.add(new MapEntry(new StudentBadHash(1 + rng.nextInt(N), "First", "Last"), i + 1));
+				testVals.add(new MapEntry<StudentBadHash, Integer>(new StudentBadHash(1 + rng.nextInt(N), "First", "Last"), i + 1));
 
 			HashTable<StudentBadHash, Integer> problem2;
 

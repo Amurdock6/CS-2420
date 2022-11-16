@@ -295,7 +295,7 @@ public class HashTable<K, V> implements Map<K, V>
 			loadFactor = size / capacity;
 			
 			// if the load factor is too big rehash the table
-			if(loadFactor >= 100)
+			if(loadFactor >= 9)
 				growRehash();
 			
 			// add an item at the index

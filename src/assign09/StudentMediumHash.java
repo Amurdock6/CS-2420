@@ -79,10 +79,13 @@ public class StudentMediumHash
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * 
+	 * medium hash multiplies length of strings and subtracts uid
+	 * 
+	 */
 	public int hashCode() 
-	{
-		// FILL IN and add method comment
-		
-		return 0;
+	{	
+		return (firstName.length() * lastName.length() - uid);
 	}
 }

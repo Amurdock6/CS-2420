@@ -79,10 +79,13 @@ public class StudentGoodHash
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * 
+	 * good hash just returns the uid
+	 * 
+	 */
 	public int hashCode() 
 	{
-		// FILL IN and add method comment
-		
-		return 0;
+		return uid;
 	}
 }

@@ -59,7 +59,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	@SuppressWarnings("unchecked")
 	public BinaryMaxHeap(List<? extends E> initialList)
 	{
-		backingArray = (E[]) new Object[initialList.size()];
+		backingArray = (E[]) new Object[10];
 		buildHeap(initialList);
 	}
 	
@@ -73,7 +73,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	public BinaryMaxHeap(List<? extends E> initialList, Comparator<? super E> comp)
 	{
 		cmp = comp;
-		backingArray = (E[]) new Object[initialList.size()];
+		backingArray = (E[]) new Object[10];
 		buildHeap(initialList);
 	}
 	
@@ -142,14 +142,14 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 			// Set the root which should be the max value to the last item in the heap
 			backingArray[0] = backingArray[size() - 1];
 			
+			// Percolate the item placed in the root down until order is restored
+			percolateDown(0);
+			
 			// reduce size
 			size--;
 			
 			// Set index that had an item to null
 			backingArray[size()] = null;
-			
-			// Percolate the item placed in the root down until order is restored
-			percolateDown(0);
 			
 			// Return the max value
 			return maxValue;

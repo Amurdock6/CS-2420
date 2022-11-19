@@ -6,6 +6,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 {
 	
 	private int size =  0;
+	private E backingArray[];
 	
 	
 	/**
@@ -125,7 +126,9 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	@Override
 	public void clear() 
 	{
-
+		size = 0;
+		
+		backingArray = new 
 	}
 
 	/** 
@@ -160,6 +163,31 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	}
 	
 	private void innerCompare()
+	{
+		
+	}
+	
+	private void grow()
+	{
+		
+	}
+	
+	private void leftChild()
+	{
+		
+	}
+	
+	private void rightChild()
+	{
+		
+	}
+	
+	private void parent()
+	{
+		
+	}
+	
+	private void grow()
 	{
 		
 	}

@@ -4,6 +4,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class represents a binary max heap and implements Priority Queue
+ * 
+ * @author Todd Oldahm and Alex Murdock
+ * @version 11/18/2022
+ */
+
 public class BinaryMaxHeap<E> implements PriorityQueue<E> 
 {
 	
@@ -53,7 +60,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	public BinaryMaxHeap(List<? extends E> initialList)
 	{
 		backingArray = (E[]) new Object[initialList.size()];
-		buildHeap();
+		buildHeap(initialList);
 	}
 	
 	/**
@@ -67,7 +74,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	{
 		cmp = comp;
 		backingArray = (E[]) new Object[initialList.size()];
-		buildHeap();
+		buildHeap(initialList);
 	}
 	
 	/**
@@ -212,10 +219,27 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 		
 	}
 	
-	
-	private void buildHeap()
+	/**
+	 * 
+	 * Used to create our heap in O(N) time by using percolate down in the constructors
+	 * 
+	 * @param initialList
+	 */
+	private void buildHeap(List<? extends E> initialList)
 	{
-		
+		// going through each item in the givenList
+		for(int i = 0; i < initialList.size(); i++)
+		{
+			// setting the backing array index to the corresponding item in the list
+			backingArray[i] = initialList.get(i);
+			
+			// get the last non leaf node
+			int percolateDownIndex = (size() / 2) - 1;
+			
+			// use the last non leaf node to percolate down to restore order in the complete tree
+			if(percolateDownIndex >= 0)
+				percolateDown(percolateDownIndex);
+		}
 	}
 	
 	/**

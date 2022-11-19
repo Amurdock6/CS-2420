@@ -233,6 +233,9 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 			// setting the backing array index to the corresponding item in the list
 			backingArray[i] = initialList.get(i);
 			
+			// increase size
+			size++;
+			
 			// get the last non leaf node
 			int percolateDownIndex = (size() / 2) - 1;
 			

@@ -1,5 +1,7 @@
 package assign10;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class BinaryMaxHeap<E> implements PriorityQueue<E> 
@@ -7,6 +9,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	
 	private int size =  0;
 	private E backingArray[];
+	private Comparator<? super E> cmp;
 	
 	
 	/**
@@ -16,9 +19,11 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * (i.e., E implements Comparable<? super E>)
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public BinaryMaxHeap()
 	{
 		
+		backingArray = (E[]) new Object[10];
 	}
 	
 	/**
@@ -27,9 +32,11 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * it is assumed that the elements are ordered using the provided Comparator object.
 	 * 
 	 */
-	public BinaryMaxHeap(Comparator<? super E>)
+	@SuppressWarnings("unchecked")
+	public BinaryMaxHeap(Comparator<? super E> comp)
 	{
-		
+		cmp = comp;
+		backingArray = (E[]) new Object[10];
 	}
 	
 	/**
@@ -42,9 +49,11 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * This constructor must use such an operation.
 	 * 
 	 */
-	public BinaryMaxHeap(List<? extends E>)
+	@SuppressWarnings("unchecked")
+	public BinaryMaxHeap(List<? extends E> initialList)
 	{
-		
+		backingArray = (E[]) new Object[initialList.size()];
+		buildHeap();
 	}
 	
 	/**
@@ -53,9 +62,12 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * Also, it is assumed that the elements are ordered using the provided Comparator object.
 	 * 
 	 */
-	public BinaryMaxHeap(List<? extends E>, Comparator<? super E>)
+	@SuppressWarnings("unchecked")
+	public BinaryMaxHeap(List<? extends E> initialList, Comparator<? super E> comp)
 	{
-		
+		cmp = comp;
+		backingArray = (E[]) new Object[initialList.size()];
+		buildHeap();
 	}
 	
 	/**
@@ -65,8 +77,20 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * @param item
 	 */
 	@Override
-	public void add(Object item) 
+	public void add(E item) 
 	{
+		
+		if(size() == backingArray.length - 1)
+			grow();
+		
+		// Set the index at size to the item
+		backingArray[size()] = item;
+		
+		// Increase size
+		size++;
+		
+		// Percolate the item added up until order is restored
+		percolateUp(size() - 1);
 		
 	}
 
@@ -80,7 +104,11 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	@Override
 	public E peek() throws NoSuchElementException 
 	{
-		return null;
+		// if there is nothing 
+		if(isEmpty())
+			throw new NoSuchElementException();
+		
+		return backingArray[0];
 	}
 
 	/**
@@ -93,7 +121,33 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	@Override
 	public E extractMax() throws NoSuchElementException 
 	{
-		return null;
+		E maxValue;
+		
+		// if there is nothing 
+		if(isEmpty())
+			throw new NoSuchElementException();
+		
+		else
+		{
+			// Place the max value in a placeholder
+			maxValue = backingArray[0];
+			
+			// Set the root which should be the max value to the last item in the heap
+			backingArray[0] = backingArray[size() - 1];
+			
+			// reduce size
+			size--;
+			
+			// Set index that had an item to null
+			backingArray[size()] = null;
+			
+			// Percolate the item placed in the root down until order is restored
+			percolateDown(0);
+			
+			// Return the max value
+			return maxValue;
+			
+		}
 	}
 
 	/**
@@ -123,12 +177,13 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	 * Empties this priority queue of items.
 	 * O(1)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void clear() 
 	{
 		size = 0;
 		
-		backingArray = new 
+		backingArray = (E[]) new Object[10];
 	}
 
 	/** 
@@ -143,7 +198,18 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	@Override
 	public Object[] toArray() 
 	{
-		return null;
+		// Create an object array
+		Object returnArray[] = new Object[size()];
+		
+		// Set the items in backing array to return array
+		for(int i = 0; i < size(); i++)
+		{
+			returnArray[i] = backingArray[i];
+		}
+		
+		// return the  object array
+		return returnArray;
+		
 	}
 	
 	
@@ -152,44 +218,177 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 		
 	}
 	
-	private void percolateUp()
+	/**
+	 * 
+	 * Given an index go up through the tree until the parent is bigger than the given item
+	 * 
+	 * @param index
+	 */
+	private void percolateUp(int index)
 	{
+		// while the index is not the root and the parent is smaller than the index
+		while(index > 0 && innerCompare(backingArray[index], backingArray[parent(index)]) > 0)
+		{
+			// swap the index and the parent items
+			swap(index, parent(index));
+			
+			// move up to the next level
+			index = parent(index);
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * Given an index go down through the tree until the children are smaller than the given item
+	 * 
+	 * @param index
+	 */
+	private void percolateDown(int index)
+	{
+		// While we are not on the lowest level
+		while(index <= (size() - 1) / 2)
+		{
+			// if the index has two children check both children
+			if(rightChild(index) < size())
+			{
+				// if the left child is bigger than the right child
+				if(innerCompare(backingArray[leftChild(index)], backingArray[rightChild(index)]) > 0)
+					// check if the left child is bigger than the parent, if yes swap
+					if(innerCompare(backingArray[leftChild(index)], backingArray[index]) > 0)
+					{
+						swap(leftChild(index), index);
+						index = leftChild(index);
+					}
+				
+					
+					// leave the loop order restored
+					else
+						break;
+				
+				// Right child is bigger than left child
+				else
+					// If the right child is bigger than the parent, swap items
+					if(innerCompare(backingArray[rightChild(index)], backingArray[index]) > 0)
+					{
+						swap(rightChild(index), index);
+						index = rightChild(index);
+					}
+					
+					// leave the loop order restored
+					else
+						break;
+			}
+			
+			// if the index only has one child check the left child
+			else
+				// if the leftChild is bigger than the parent, swap the items
+				if(innerCompare(backingArray[leftChild(index)], backingArray[index]) > 0)
+					swap(leftChild(index), index);
+				
+				else
+					// leave the loop order restored
+					break;
+				
+		}
+	}
+	
+	/**
+	 * 
+	 * Given two indices, swap the items at those locations in the array
+	 * 
+	 * @param index
+	 * @param parentIndex
+	 */
+	private void swap(int index, int parentIndex)
+	{
+		// Set the index item to a temporary holder
+		E temp = backingArray[index];
+		
+		// Set the index item to the parent item
+		backingArray[index] = backingArray[parentIndex];
+		
+		// Set the parent item to the index item in the temporary holder
+		backingArray[parentIndex] = temp;
+		
 		
 	}
 	
-	private void percolateDown()
+	/**
+	 * 
+	 * Use to see if we are using comparable or comparator
+	 * 
+	 * @param firstItem
+	 * @param secondItem
+	 * @return if the item is bigger or smaller
+	 */
+	@SuppressWarnings("unchecked")
+	private int innerCompare(E firstItem, E secondItem)
 	{
+		// If we have been given a comparator use it.
+		if(cmp != null)
+			return cmp.compare(firstItem, secondItem);
 		
+		// If we have not been given a comparator use comparable.
+		return((Comparable<? super E>)firstItem).compareTo(secondItem);
 	}
 	
-	private void innerCompare()
-	{
-		
-	}
-	
+	/**
+	 * 
+	 * When the array gets too big create a new array with the items that is twice as big as the old array
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
 	private void grow()
 	{
+		// Create temporary array with twice as many spaces as the first
+		E tempArray[] = (E[]) new Object[backingArray.length * 2]; 
+		
+		// Set each of the items up to the end of the backing array as the items in the temporary array
+		for(int i = 0; i < size(); i++)
+		{
+			tempArray[i] = backingArray[i];
+		}
+		
+		// set the backing array to the temporary  array
+		backingArray = tempArray;
 		
 	}
 	
-	private void leftChild()
+	/**
+	 * 
+	 * get the left child of any node
+	 * 
+	 * @param index
+	 * @return left child index
+	 */
+	private int leftChild(int index)
 	{
-		
+		return (index * 2 + 1);
 	}
 	
-	private void rightChild()
+	/**
+	 * 
+	 * get the right child of any node
+	 * 
+	 * @param index
+	 * @return right child index
+	 */
+	private int rightChild(int index)
 	{
-		
+		return (index * 2 + 2);
 	}
 	
-	private void parent()
+	/**
+	 * 
+	 * get the parent of any node
+	 * 
+	 * @param index
+	 * @return parent index
+	 */
+	private int parent(int index)
 	{
-		
-	}
-	
-	private void grow()
-	{
-		
+		return (index - 1) / 2;
 	}
 
 }

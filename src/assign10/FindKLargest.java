@@ -1,6 +1,8 @@
 package assign10;
 
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,7 +25,28 @@ public class FindKLargest
 	 */
 	public static <E extends Comparable<? super E>> List<E> findKLargestHeap(List<E> items, int k) throws IllegalArgumentException 
 	{
-		return null;
+		// If k is bigger than the size of the list
+		if(k > items.size())
+			throw new IllegalArgumentException();
+		
+		// If k is negative
+		else if(k < 0)
+			throw new IllegalArgumentException();
+		
+		// Create new binary heap
+		BinaryMaxHeap<E> klargest = new BinaryMaxHeap<E>(items);
+		
+		// create a list
+		List<E> biggestK = new LinkedList<E>();
+		
+		// for the number of k add the largest to the list
+		for(int i = 0; i < k; i++)
+		{
+			biggestK.add(klargest.extractMax());
+		}
+		
+		// return the list
+		return biggestK;
 	}
 
 	/**
@@ -37,7 +60,28 @@ public class FindKLargest
 	 */
 	public static <E> List<E> findKLargestHeap(List<E> items, int k, Comparator<? super E> cmp) throws IllegalArgumentException 
 	{
-		return null;
+		// If k is bigger than the size of the list
+		if(k > items.size())
+			throw new IllegalArgumentException();
+		
+		// If k is negative
+		else if(k < 0)
+			throw new IllegalArgumentException();
+		
+		// Create new binary heap
+		BinaryMaxHeap<E> klargest = new BinaryMaxHeap<E>(items, cmp);
+		
+		// create a list
+		List<E> biggestK = new LinkedList<E>();
+		
+		// for the number of k add the largest to the list
+		for(int i = 0; i < k; i++)
+		{
+			biggestK.add(klargest.extractMax());
+		}
+		
+		// return the list
+		return biggestK;
 	}
 
 	/**
@@ -51,7 +95,29 @@ public class FindKLargest
 	 */
 	public static <E extends Comparable<? super E>> List<E> findKLargestSort(List<E> items, int k) throws IllegalArgumentException 
 	{
-		return null;
+		
+		// If k is bigger than the size of the list
+		if(k > items.size())
+			throw new IllegalArgumentException();
+		
+		// If k is negative
+		else if(k < 0)
+			throw new IllegalArgumentException();
+		
+		// sort the list
+		Collections.sort(items);
+		
+		// create a list
+		List<E> biggestK = new LinkedList<E>();
+		
+		// for the number of k add the largest to the list
+		for(int i = 0; i < k; i++)
+		{
+			biggestK.add(items.get(items.size() - 1 - i));
+		}
+		
+		// return the list
+		return biggestK;
 	}
 
 	/**
@@ -65,6 +131,28 @@ public class FindKLargest
 	 */
 	public static <E> List<E> findKLargestSort(List<E> items, int k, Comparator<? super E> cmp) throws IllegalArgumentException 
 	{
-		return null;
+		
+		// If k is bigger than the size of the list
+		if(k > items.size())
+			throw new IllegalArgumentException();
+		
+		// If k is negative
+		else if(k < 0)
+			throw new IllegalArgumentException();
+		
+		// sort the list
+		Collections.sort(items, cmp);
+		
+		// create a list
+		List<E> biggestK = new LinkedList<E>();
+		
+		// for the number of k add the largest to the list
+		for(int i = 0; i < k; i++)
+		{
+			biggestK.add(items.get(items.size() - 1 - i));
+		}
+		
+		// return the list
+		return biggestK;
 	}
 }

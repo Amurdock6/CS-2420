@@ -15,10 +15,10 @@ public class AnalysisQuestion1
 			// empty block
 		}
 		
-		for(int N = 100; N <= 2000; N += 100)
+		for(int N = 1000; N <= 20000; N += 1000)
 		{
 			long midpointTime, stopTime;
-			int timesToLoop = 10;
+			int timesToLoop = 1000;
 
 			Random rng = new Random();
 
@@ -36,14 +36,11 @@ public class AnalysisQuestion1
 					//experiment1.peek();
 				}
 				
-//				for(int k = 0; k < N; k++)
-//				{
-//
-//					experiment1.extractMax();
-//				}
+				for(int k = 0; k < N; k++)
+				{
+					experiment1.extractMax();
+				}
 			}
-			
-			//System.out.println(problem2.getCollisions());
 
 			midpointTime = System.nanoTime();
 
@@ -53,7 +50,7 @@ public class AnalysisQuestion1
 				experiment1 = new BinaryMaxHeap<Integer>();
 				for(int j = 0; j < N; j++) 
 				{
-					//experiment1.add(rng.nextInt(N));
+					experiment1.add(rng.nextInt(N));
 				}
 				for(int j = 0; j < N; j++) 
 				{

@@ -142,14 +142,15 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 			// Set the root which should be the max value to the last item in the heap
 			backingArray[0] = backingArray[size() - 1];
 			
-			// Percolate the item placed in the root down until order is restored
-			percolateDown(0);
+			// Set index that had an item to null
+			backingArray[size()] = null;
 			
 			// reduce size
 			size--;
 			
-			// Set index that had an item to null
-			backingArray[size()] = null;
+			// Percolate the item placed in the root down until order is restored
+			if(size() > 1)
+				percolateDown(0);
 			
 			// Return the max value
 			return maxValue;
@@ -281,7 +282,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	private void percolateDown(int index)
 	{
 		// While we are not on the lowest level
-		while(index <= (size() - 1) / 2)
+		while(index <= (size() / 2) / - 1)
 		{
 			// if the index has two children check both children
 			if(rightChild(index) < size())

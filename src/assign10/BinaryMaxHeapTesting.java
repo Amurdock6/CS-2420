@@ -124,23 +124,33 @@ class BinaryMaxHeapTesting {
 		listTest.add(1);
 		listTest.add(2);
 		listTest.add(3);
+		listTest.add(12);
+		listTest.add(22);
+		listTest.add(5);
+		listTest.add(7);
+		listTest.add(14);
+		listTest.add(32);
+		listTest.add(9);
+		listTest.add(2);
+		listTest.add(4);
 		
 		BinaryMaxHeap<Integer> Test = new BinaryMaxHeap<Integer>(listTest);
 		
-		Test.add(12);
-		Test.add(22);
-		Test.add(5);
-		Test.add(7);
-		Test.add(14);
-		Test.add(32);
-		Test.add(9);
-		Test.add(2);
-		Test.add(4);
 		assertTrue(Test.extractMax() == 32);
 		assertTrue(Test.size() == 11);
 		assertTrue(Test.extractMax() == 22);
 		assertTrue(Test.size() == 10);
 		assertTrue(Test.extractMax() == 14);
+	}
+	
+	@Test
+	void testExtractMaxOneValue()
+	{
+		BinaryMaxHeap<Integer> Test = new BinaryMaxHeap<Integer>();
+		Test.add(32);
+		Test.add(22);
+		assertTrue(Test.extractMax() == 32);
+		assertTrue(Test.extractMax() == 22);
 	}
 
 	@Test

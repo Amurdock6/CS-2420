@@ -282,7 +282,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E>
 	private void percolateDown(int index)
 	{
 		// While we are not on the lowest level
-		while(index <= (size() / 2) / - 1)
+		while(index <= (size() / 2) - 1)
 		{
 			// if the index has two children check both children
 			if(rightChild(index) < size())

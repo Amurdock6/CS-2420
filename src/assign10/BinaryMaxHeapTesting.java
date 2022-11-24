@@ -135,7 +135,7 @@ class BinaryMaxHeapTesting {
 		listTest.add(4);
 		
 		BinaryMaxHeap<Integer> Test = new BinaryMaxHeap<Integer>(listTest);
-		
+				
 		assertTrue(Test.extractMax() == 32);
 		assertTrue(Test.size() == 11);
 		assertTrue(Test.extractMax() == 22);

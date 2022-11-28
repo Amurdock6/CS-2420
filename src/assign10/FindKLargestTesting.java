@@ -35,8 +35,6 @@ class FindKLargestTesting {
 		assertTrue(results.get(1) == 21);
 		assertTrue(results.get(2) == 20);
 		assertTrue(results.size() == 3);
-		
-		
 	}
 
 	@Test

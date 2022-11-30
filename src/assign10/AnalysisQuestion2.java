@@ -35,7 +35,7 @@ public class AnalysisQuestion2
 			
 			for (int i = 0; i < timesToLoop; i++)
 			{
-				//experiment2 = FindKLargest.findKLargestHeap(testVals, N);
+//				experiment2 = FindKLargest.findKLargestHeap(testVals, N);
 				experiment2 = FindKLargest.findKLargestSort(testVals, N);
 			}
 

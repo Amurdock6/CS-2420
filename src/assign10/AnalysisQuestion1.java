@@ -33,7 +33,7 @@ public class AnalysisQuestion1
 				for(int j = 0; j < N; j++)
 				{
 					experiment1.add(rng.nextInt(N));
-					//experiment1.peek();
+//					experiment1.peek();
 				}
 				
 				for(int k = 0; k < N; k++)

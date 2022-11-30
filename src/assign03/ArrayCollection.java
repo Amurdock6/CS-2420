@@ -1,7 +1,6 @@
 package assign03;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -219,7 +218,7 @@ public class ArrayCollection<T> implements Collection<T>
 			}
 			
 			// tells our code where we should delete the item from
-			int whereToDelete = data.length - location - 1;
+			int whereToDelete = data.length - location;
 
 			// move all the data from the right of the item one to the left
 			for (int i = whereToDelete; i < data.length - 1; i++)
@@ -261,20 +260,19 @@ public class ArrayCollection<T> implements Collection<T>
 		Object nextRemoveItem = arg0.iterator().next();
 		
 		// while the collection to be removed has more items
-		while(arg0.iterator().hasNext())
+		while(arg0.iterator().hasNext()) {
 			
-			// check if our collection has that item if it does have that item 
-			//remove it and change our variable to true
+			// check if our collection has that item if it does have that item remove it and change our variable to true
 			if(this.contains(nextRemoveItem))
 			{
 				this.remove(nextRemoveItem);
 				itemRemoved = true;
-				realItemsInArray--;
 			}
-		
-			// set next item
-			nextRemoveItem = arg0.iterator().next();
 			
+			// set next item
+			nextRemoveItem = arg0.iterator().next();	
+		}
+		
 		return itemRemoved;
 	}
 
@@ -282,7 +280,6 @@ public class ArrayCollection<T> implements Collection<T>
 	/**
 	 * Retains only the elements in this collection that are contained in the specified collection
 	 */
-	@SuppressWarnings("unused")
 	public boolean retainAll(Collection<?> arg0) {
 		// Compare to list one elment at a time. If there elments are diffrent delete it from the data collection. If they are the same skip.
 		
@@ -292,6 +289,7 @@ public class ArrayCollection<T> implements Collection<T>
 		// create next item and grab the current parameters item
 		Object nextRetainItem = this.iterator().next();
 		Object nextParamItem = arg0.iterator().next();
+		
 		// while the collection we are checking still has items
 		while (this.iterator().hasNext() == true && arg0.iterator().hasNext() == true) {
 			if (nextRetainItem == null) {
@@ -306,7 +304,7 @@ public class ArrayCollection<T> implements Collection<T>
 				itemNotRetained = true;
 			}
 			
-			// go to next item 
+			// go to next item
 			retainCounter++;
 			nextRetainItem = this.iterator().next();
 			nextParamItem = arg0.iterator().next();
@@ -314,6 +312,7 @@ public class ArrayCollection<T> implements Collection<T>
 		
 		// sets the counter back to zero so it does not screw up future remove methods
 		retainCounter = 0;
+		
 		return itemNotRetained;
 	}
 
@@ -350,6 +349,7 @@ public class ArrayCollection<T> implements Collection<T>
 	 * It must be here to complete the Collection interface.
 	 * We will not test this method.
 	 */
+	@SuppressWarnings("hiding")
 	public <T> T[] toArray(T[] arg0) {
 		return null;
 	}
@@ -362,7 +362,6 @@ public class ArrayCollection<T> implements Collection<T>
 	 * @param cmp - the comparator that defines item ordering
 	 * @return - the sorted list
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<T> toSortedList(Comparator<? super T> cmp)
 	{
 		ArrayList<T> sortedArrayList = new ArrayList<T>();
@@ -492,7 +491,7 @@ public class ArrayCollection<T> implements Collection<T>
 			data[itemToDelete] = null;
 			realItemsInArray--;
 			
-			// return our index to zero since we have found the place in the collection we want do remove
+			// return our index to zero since we have found the place in the collection we want to remove
 			counter = 0;
 			} else {
 				throw new IllegalStateException();

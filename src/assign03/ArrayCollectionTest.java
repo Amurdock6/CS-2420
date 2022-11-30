@@ -15,7 +15,6 @@ class ArrayCollectionTest {
 	private ArrayCollection arrayCollection;
 	private ArrayCollection bigArray;
 
-	@SuppressWarnings({ "rawtypes" })
 	@BeforeEach
 	void setUp() throws Exception 
 	{ 
@@ -226,36 +225,35 @@ class ArrayCollectionTest {
 	
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	void testRemoveAll() 
-//	{
-//		// create object
-//		Object testobj1 = "test1";
-//		Object testobj2 = "test2";
-//		Object testobj3 = "test3";
-//		Object testobj4 = "test4";
-//		Object testobj5 = "test5";
-//		
-//		// add the objects to the collections
-//		arrayCollection.add(testobj1);
-//		arrayCollection.add(testobj2);
-//		arrayCollection.add(testobj3);
-//		arrayCollection.add(testobj4);
-//		
-//		bigArray.add(testobj1);
-//		bigArray.add(testobj2);
-//		bigArray.add(testobj3);
-//		bigArray.add(testobj4);
-//		bigArray.add(testobj5);
-//		
-//		// remove all the objects
-//		arrayCollection.addAll(bigArray);
-//		
-//		assertTrue(arrayCollection.removeAll(bigArray));
-//	}
-
 	@SuppressWarnings("unchecked")
+	@Test
+	void testRemoveAll() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		// remove all the objects
+		arrayCollection.addAll(bigArray);
+		
+		assertTrue(arrayCollection.removeAll(bigArray));
+	}
+
 	@Test
 	void testRetainAll() 
 	{
@@ -278,10 +276,9 @@ class ArrayCollectionTest {
 		// retain only the objects that bigArray has
 		assertTrue(arrayCollection.retainAll(bigArray));
 		assertTrue(arrayCollection.size() == 1);
-
 	}
 
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	@Test
 	void testSize() 
 	{
@@ -311,30 +308,30 @@ class ArrayCollectionTest {
 		assertTrue(arrayCollection.size() == 0);
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	void testToArray() 
-//	{
-//		// create object
-//		Object testobj1 = "test1";
-//		Object testobj2 = "test2";
-//		Object testobj3 = "test3";
-//		Object testobj4 = "test4";
-//		Object testobj5 = "test5";
-//		
-//		// add the objects to the collections
-//		arrayCollection.add(testobj1);
-//		arrayCollection.add(testobj2);
-//		arrayCollection.add(testobj3);
-//		arrayCollection.add(testobj4);
-//		arrayCollection.add(testobj5);
-//		
-//		Object[] arrayCollectionToArray = arrayCollection.toArray();
-//		
-//		Object[] testToArray = {testobj1, testobj2, testobj3, testobj4, testobj5};
-//		
-//		assertTrue(arrayCollectionToArray.equals(testToArray));
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	void testToArray() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		arrayCollection.add(testobj5);
+		
+		Object[] arrayCollectionToArray = arrayCollection.toArray();
+		
+		Object[] testToArray = {testobj1, testobj2, testobj3, testobj4, testobj5};
+		
+		assertTrue(arrayCollectionToArray.equals(testToArray));
+	}
 
 	@SuppressWarnings("unchecked")
 	@Test

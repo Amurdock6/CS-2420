@@ -7,6 +7,12 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * File to revel the bugs in assignment 3 
+ * 
+ * @author Alex Murdock
+ *
+ */
 class BugReportJUnitTest {
 
 	private ArrayCollection<Object> arrayCollection;
@@ -53,19 +59,16 @@ class BugReportJUnitTest {
 		}
 
 		// will add all items from arrayCollection into arrayCollection2
+		arrayCollection.add(1);
+		assertTrue(arrayCollection.contains(1));
 		arrayCollection2.addAll(arrayCollection);
+		
 		// checks to make sure we have added all items correctly
 		assertTrue(arrayCollection2.containsAll(arrayCollection));
 		
-		
 		// removes all itesms out of arrayCollection2
 		arrayCollection2.removeAll(arrayCollection);
-		assertTrue(arrayCollection2.size() == 0);
-	}
-	
-	@Test
-	void hasNextOnEmptyList() {
-		assertFalse(arrayCollection.iterator().hasNext());
+		assertFalse(arrayCollection2.containsAll(arrayCollection));
 	}
 	
 	@Test
@@ -81,23 +84,33 @@ class BugReportJUnitTest {
 		
 		arrayCollection.clear();
 		
+		// will throw an error but that is what we want because next() should throw a NoSuchElementException() if there is not a next item in our arrayCollection.
 		assertTrue(arrayCollection.size() == 0);
-		assertFalse(arrayCollection.remove(1));
-		assertFalse(arrayCollection.removeAll(arrayCollection));
+		arrayCollection.remove(1);
+		arrayCollection.removeAll(arrayCollection);
 		assertTrue(arrayCollection.size() == 0);
-	}
-	
-	@Test
-	void test() {
-		
-	}
+	}	
 	
 	@Test
 	void retainAllOnSmallCollection() {
+		arrayCollection.add("1");
+		arrayCollection.add("2");
+		arrayCollection.add("3");
+		arrayCollection.add("4");
+		arrayCollection.add("5");
 		
+		arrayCollection2.add("1");
+		arrayCollection2.add("2");
+		arrayCollection2.add("3");
+		arrayCollection2.add("4");
+		arrayCollection2.add("6");
+		
+		arrayCollection.retainAll(arrayCollection2);
+		
+		assertTrue(arrayCollection.size() == 4);
+		assertTrue(arrayCollection.contains("1"));
 	}
 	
-	// recreates error 
 	@Test
 	void retainAllOnArrayCollectionOfOneItem() {
 		// create and add object into arrayCollection
@@ -108,11 +121,50 @@ class BugReportJUnitTest {
 		arrayCollection2.add(testobj1);
 		
 		// will check to make sure our first array retains only and all matching items that are present in arrayCollection2
-		assertTrue(arrayCollection.retainAll(arrayCollection2));
+		arrayCollection.retainAll(arrayCollection2);
+		
+		assertTrue(arrayCollection.contains(testobj1));
 	}
 	
+	@Test
+	void containsAllLargeCollection() {
+		for (int i = 0; i <= 1000; i++) {
+			arrayCollection.add(randomStringGen());
+		}
+		
+		arrayCollection2.addAll(arrayCollection);
+		
+		assertTrue(arrayCollection2.size() != 0);
+		assertTrue(arrayCollection.containsAll(arrayCollection2));
+	}
 	
+	@Test
+	void RemoveOnALargeCollection() {
+		for (int i = 0; i <= 1; i++) {
+			arrayCollection.add(randomStringGen());
+		}
+		
+		arrayCollection.add(1);
+		assertTrue(arrayCollection.contains(1));
+		arrayCollection.remove(1);
+		assertTrue(arrayCollection.contains(1) == false);
+	}
 	
+	@Test
+	void containsAllWithDiffrentTypes() {
+		Object testObj = "16";
+		
+		arrayCollection.add(1.1);
+		arrayCollection.add("test");
+		arrayCollection.add(2);
+		arrayCollection.add(testObj);
+		arrayCollection.add(null);
+		arrayCollection.add('a');
+		arrayCollection.add(true);
+		
+		arrayCollection2.addAll(arrayCollection);
+		assertTrue(arrayCollection2.containsAll(arrayCollection));
+	}
 
 
 }

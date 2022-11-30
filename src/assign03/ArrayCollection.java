@@ -158,7 +158,8 @@ public class ArrayCollection<T> implements Collection<T>
 		// double for each loop that will check to see if the valuse in our parameter collection those in our main collection
 		for (Object x : arg0) {
 			for (Object c : data) {
-				if (x == null) {
+				
+				if (x == null || c == null) {
 					return true;
 				} else if (c.equals(x)) {
 					return true;
@@ -201,7 +202,7 @@ public class ArrayCollection<T> implements Collection<T>
 	public boolean remove(Object arg0) {
 		// New variable for the location of the item to remove
 		int location = 0;
-
+		
 		// if our collection does not contain the item return false
 		if (this.contains(arg0) == false) {
 			return false;
@@ -213,13 +214,15 @@ public class ArrayCollection<T> implements Collection<T>
 				if (this.iterator().next() == arg0) {
 					break;
 				}
-
 				location++;
+				
 			}
 			
-			// tells our code where we should delete the item from
-			int whereToDelete = data.length - location;
 
+			
+			// tells our code where we should delete the item from
+			int whereToDelete = location;
+			
 			// move all the data from the right of the item one to the left
 			for (int i = whereToDelete; i < data.length - 1; i++)
 				data[i] = data[i + 1];
@@ -260,7 +263,7 @@ public class ArrayCollection<T> implements Collection<T>
 		Object nextRemoveItem = arg0.iterator().next();
 		
 		// while the collection to be removed has more items
-		while(arg0.iterator().hasNext() && size != 0) {
+		while(arg0.iterator().hasNext()) {
 			
 			// check if our collection has that item if it does have that item remove it and change our variable to true
 			if(this.contains(nextRemoveItem))
@@ -289,11 +292,10 @@ public class ArrayCollection<T> implements Collection<T>
 		// create next item and grab the current parameters item
 		Object nextRetainItem = this.iterator().next();
 		Object nextParamItem = arg0.iterator().next();
-		
 		// while the collection we are checking still has items
 		while (this.iterator().hasNext() == true && arg0.iterator().hasNext() == true) {
 			if (nextRetainItem == null) {
-
+				
 			} else if (!nextRetainItem.equals(nextParamItem)) {
 				// if the input collection does not contain the item in our collection
 				// remove that item
@@ -309,7 +311,6 @@ public class ArrayCollection<T> implements Collection<T>
 			nextRetainItem = this.iterator().next();
 			nextParamItem = arg0.iterator().next();
 		}
-		
 		// sets the counter back to zero so it does not screw up future remove methods
 		retainCounter = 0;
 		
@@ -423,9 +424,7 @@ public class ArrayCollection<T> implements Collection<T>
 //			System.out.println(numOfItems);
 			
 			// if next is less than the number of items then there are more items in the collection
-			if (size == 0) {
-				return false;
-			} else if (hasNext < numOfItems) {
+			if (hasNext < numOfItems) {
 				return true;
 			} else {
 				counter = 0;

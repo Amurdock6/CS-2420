@@ -253,7 +253,7 @@ class ArrayCollectionTest {
 		// remove all the objects
 		arrayCollection.addAll(bigArray);
 		
-		arrayCollection.removeAll(bigArray);
+		arrayCollection.removeAll(arrayCollection);
 		
 		assertTrue(arrayCollection.size() == 0);
 	}
@@ -278,7 +278,7 @@ class ArrayCollectionTest {
 		bigArray.add(testobj1);
 		
 		// retain only the objects that bigArray has
-		assertTrue(arrayCollection.retainAll(bigArray));
+		arrayCollection.retainAll(bigArray);
 		assertTrue(arrayCollection.size() == 1);
 	}
 

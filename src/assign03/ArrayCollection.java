@@ -260,7 +260,7 @@ public class ArrayCollection<T> implements Collection<T>
 		Object nextRemoveItem = arg0.iterator().next();
 		
 		// while the collection to be removed has more items
-		while(arg0.iterator().hasNext()) {
+		while(arg0.iterator().hasNext() && size != 0) {
 			
 			// check if our collection has that item if it does have that item remove it and change our variable to true
 			if(this.contains(nextRemoveItem))
@@ -418,13 +418,14 @@ public class ArrayCollection<T> implements Collection<T>
 		public boolean hasNext() {
 			// number of items in collection
 			int numOfItems = ArrayCollection.this.data.length;
-
-			// get the value of next
+			
 			int hasNext = counter;
-
-			// if next is less than the number of items then there are more items in the
-			// collection
-			if (hasNext < numOfItems) {
+//			System.out.println(numOfItems);
+			
+			// if next is less than the number of items then there are more items in the collection
+			if (size == 0) {
+				return false;
+			} else if (hasNext < numOfItems) {
 				return true;
 			} else {
 				counter = 0;

@@ -54,14 +54,42 @@ class BugReportJUnitTest {
 
 		// will add all items from arrayCollection into arrayCollection2
 		arrayCollection2.addAll(arrayCollection);
-		System.out.println(arrayCollection2.size());
 		// checks to make sure we have added all items correctly
 		assertTrue(arrayCollection2.containsAll(arrayCollection));
 		
 		
 		// removes all itesms out of arrayCollection2
 		arrayCollection2.removeAll(arrayCollection);
-		System.out.println(arrayCollection2.size());
+		assertTrue(arrayCollection2.size() == 0);
+	}
+	
+	@Test
+	void hasNextOnEmptyList() {
+		assertFalse(arrayCollection.iterator().hasNext());
+	}
+	
+	@Test
+	void removeAndRemoveAllAfterClear() {
+		// will add 1000 random items into our arrayCollection
+		for (int i = 0; i <= 1000; i++) {
+			arrayCollection.add(randomStringGen());
+		}
+		
+		arrayCollection.add(1);
+		
+		assertTrue(arrayCollection.size() != 0);
+		
+		arrayCollection.clear();
+		
+		assertTrue(arrayCollection.size() == 0);
+		assertFalse(arrayCollection.remove(1));
+		assertFalse(arrayCollection.removeAll(arrayCollection));
+		assertTrue(arrayCollection.size() == 0);
+	}
+	
+	@Test
+	void test() {
+		
 	}
 	
 	@Test
@@ -82,5 +110,9 @@ class BugReportJUnitTest {
 		// will check to make sure our first array retains only and all matching items that are present in arrayCollection2
 		assertTrue(arrayCollection.retainAll(arrayCollection2));
 	}
+	
+	
+	
+
 
 }

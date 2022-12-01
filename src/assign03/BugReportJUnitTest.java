@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * File to revel the bugs in assignment 3 
+ * File contaning JUnit test to reveal the bugs in assignment 3 
  * 
  * @author Alex Murdock
  *
@@ -30,7 +30,7 @@ class BugReportJUnitTest {
 		// creating a random string generator to make testing easier
 		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
 		
-		// ranodm int generator to give use random string length
+		// random int generator to give use random string length
 		Random rand = new Random(); // instance of random class
 		int upperbound = 25;
 		// generate random values from 0-24
@@ -50,27 +50,7 @@ class BugReportJUnitTest {
 		return sb.toString();
 	}
 	
-	
-	@Test
-	void addAllandRemoveAllOnALargeCollection() {
-		// will add 1000 random items into our arrayCollection
-		for (int i = 0; i <= 1000; i++) {
-			arrayCollection.add(randomStringGen());
-		}
-
-		// will add all items from arrayCollection into arrayCollection2
-		arrayCollection.add(1);
-		assertTrue(arrayCollection.contains(1));
-		arrayCollection2.addAll(arrayCollection);
-		
-		// checks to make sure we have added all items correctly
-		assertTrue(arrayCollection2.containsAll(arrayCollection));
-		
-		// removes all itesms out of arrayCollection2
-		arrayCollection2.removeAll(arrayCollection);
-		assertFalse(arrayCollection2.containsAll(arrayCollection));
-	}
-	
+	// Should throw a NoSuchElementException() but that is fine we want it to.
 	@Test
 	void removeAndRemoveAllAfterClear() {
 		// will add 1000 random items into our arrayCollection

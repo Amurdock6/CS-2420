@@ -17,10 +17,10 @@ import java.util.HashMap;
  */
 public class RandomPhraseGenerator 
 {
-	// The first thing we are going to do is intiate our HashMap
-	static HashMap<Integer, String> nonTerminals = new HashMap<>();
+	// The first thing we are going to do is intiate our HashMaps
+	static HashMap<Integer, String> nonTerminalsInSentence = new HashMap<>();
 	
-	// We will use i + 1 as our key when adding items to our HashMap 
+	// We will use i + 1 as our key when adding items to our nonTerminalsInSentence HashMap 
 	static int i = -1;
 	
 	/**
@@ -29,8 +29,7 @@ public class RandomPhraseGenerator
 	 */
 	public static void main(String[] args) {	
 
-		
-		// Then we will read the file and put the contents of it into our Data Structre
+		// Then we will read the file and start calling our methods to figure out some of the logic
 		try {
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
@@ -52,28 +51,44 @@ public class RandomPhraseGenerator
 	
 	
 	/**
-	 * This method will scan through the provided file and find all non-terminals.
-	 * @return list of non-terminals
+	 * This mehtod will find only data insdie of the curely braces
 	 */
 	public static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
 		// This will make it so we only print out content with in the angle brackets
 		if (fileData.equals("{")) {
 			// add logic for what to do when it finds angle brackets
-			while(!fileData.equals("}")) {
+			while (!fileData.equals("}")) {
 				fileData = fileReader.nextLine();
-				if(fileData.equals("}")) {
+				if (fileData.equals("}")) {
 					System.out.println("\n");
 				} else {
-					nonTerminals.put(i + 1, fileData);
-					i++;
+					
 					System.out.println(fileData);
-				}	
+				}
 			}
-			
+
 		}
 	}
 	
 	
-}
+	/**
+	 * 
+	 */
+	public static void parseLine(String lineToParse) {
+		for (int j = 0 ; j != lineToParse.length() ; j++) {
+		    char c = lineToParse.charAt(j);
+		    	
+		    }
+		    
+		}
+	}
+	
+	// need  
+
+
+	// create a method that will create a new HashMap when a new source of terminals are found for a specfic non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
+
+
+	// create a method that will take args[1] as a paramter and will output the given number of randomly genrated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything togther and makes a finished product. 
 
 

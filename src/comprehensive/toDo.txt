@@ -1,0 +1,24 @@
+Steps:
+1. Scan File.
+2. During the Scan check for the sentence we need to complete and store values that need to be replaced.
+3. Find the the terminal values we need to complete the list.
+4. Find any terminal values we need to fill in the rest of the values.
+5. Create a finished sentence with the coresponding values we have found and genreate as many of these as the args[1] pramater tells us too. 
+
+
+Need to Do:
+-We need to find away to store the sentence and decied what items in the sentence need to be replaced and what they need to be replaced with.
+
+-We need to make a method that will create a new HashMap when we need to store terminal values for a given non-terminal.
+
+-We need to find away to replace non-terminals with the appropiate replacement terminal in the sentence:
+	Idea1: We should make sometype of datastructe that is quick to add and look up items for each non-terminal we have in the sentence and then store the coresponding terminals in that datastructure. 
+
+
+Helpful Things I have found out:
+-We can tell if a non-terminal is a source to take terminals from and add to the sentence if it is on a line all by its self.
+
+-We can only take terminals under each non-terminal source if there is not a non-terminal contained in that line also.
+	exe: <a> exampleBad <-- is not a terminal we can use
+		 exampleGood <-- is a terminal we can use
+

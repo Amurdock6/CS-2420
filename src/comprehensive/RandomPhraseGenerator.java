@@ -20,13 +20,15 @@ public class RandomPhraseGenerator
 	// The first thing we are going to do is intiate our HashMap
 	static HashMap<Integer, String> nonTerminals = new HashMap<>();
 	
+	// We will use i + 1 as our key when adding items to our HashMap 
+	static int i = -1;
+	
 	/**
 	 * Main method for RandomPhraseGenerator
 	 * @param args
 	 */
 	public static void main(String[] args) {	
-		// We will use i + 1 as our key when adding items to our HashMap 
-		int i = -1;
+
 		
 		// Then we will read the file and put the contents of it into our Data Structre
 		try {
@@ -35,7 +37,7 @@ public class RandomPhraseGenerator
 
 			while (fileReader.hasNextLine()) {
 				String fileData = fileReader.nextLine();
-				System.out.println(fileData);	
+				getContentInCurleyBraces(fileReader, fileData);
 			}
 
 			fileReader.close();
@@ -53,10 +55,22 @@ public class RandomPhraseGenerator
 	 * This method will scan through the provided file and find all non-terminals.
 	 * @return list of non-terminals
 	 */
-	public String[] findNonTerminals() {
-		
-		
-		return null;
+	public static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
+		// This will make it so we only print out content with in the angle brackets
+		if (fileData.equals("{")) {
+			// add logic for what to do when it finds angle brackets
+			while(!fileData.equals("}")) {
+				fileData = fileReader.nextLine();
+				if(fileData.equals("}")) {
+					System.out.println("\n");
+				} else {
+					nonTerminals.put(i + 1, fileData);
+					i++;
+					System.out.println(fileData);
+				}	
+			}
+			
+		}
 	}
 	
 	

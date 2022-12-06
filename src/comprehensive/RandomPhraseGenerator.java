@@ -3,6 +3,7 @@ package comprehensive;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 																												     // (Arg0)      (Arg1)
@@ -14,16 +15,15 @@ import java.util.HashMap;
  * 
  * @author Todd Oldahm and Alex Murdock
  * @version 11/29/2022
+ * @param <E>
  */
 public class RandomPhraseGenerator 
 {
-	// The first thing we are going to do is initialize our HashMaps
-	static HashMap<Integer, String> nonTerminalsInSentence = new HashMap<>();
-	static HashMap<Integer, String> terminals = new HashMap<>();
+	// Lets do an ArrayList Data Structure. With HashMaps inside of it to list firstly our Phrase. And then all of the non-termials and there values.  
+	ArrayList<HashMap<Integer, String>> HashMaps = new ArrayList<HashMap<Integer, String>>();
 	
 	
-	
-	// We will use i + 1 as our key when adding items to our nonTerminalsInSentence HashMap 
+	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
 	
 	/**
@@ -92,6 +92,8 @@ public class RandomPhraseGenerator
 	}
 
 }
+	
+
 	// create a method that will create a new HashMap when a new source of terminals are found for a specfic non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
 
 

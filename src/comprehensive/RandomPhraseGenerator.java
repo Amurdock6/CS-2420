@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 																												     // (Arg0)      (Arg1)
 // PS to Todd you will run the file in the CMD line using this command "java comprehensive/RandomPhraseGenerator.java super_simple.g 5"
@@ -20,7 +21,7 @@ import java.util.HashMap;
 public class RandomPhraseGenerator 
 {
 	// The ArrayList will store 
-	ArrayList<ArrayList<String>> Terminals  = new ArrayList<ArrayList<String>>();			
+	ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-termial keys so for exe: 0 = "Noun" in our ArrayList so when ever we want to get a ranodm noun value we will call our first ArrayList and then 
 	// Get a random value from with in that ArrayList
@@ -87,7 +88,7 @@ public class RandomPhraseGenerator
 		// or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
-		char endOfStringChar = fileData.charAt(endOfString);
+		char endOfStringChar = fileData.charAt(endOfString - 1);
 
 		// Will use this to find out if non-termial is the start or not
 		StringBuilder sb = new StringBuilder();
@@ -212,9 +213,19 @@ public class RandomPhraseGenerator
 	
 	
 	
-	private int randomTermial(int sizeOfTermial) {
+	private String randomTermial(int indexOfNonTerminal) 
+	{
+		// Create random generator
+		Random terminalIndex = new Random();
 		
-		return 0;
+		// Get the indices available for the NonTerminal we are interested in
+		int randomValues = terminals.get(indexOfNonTerminal).size() - 1;
+		
+		// Get a random index for one of the options for the NonTerminal
+		int indexOfTerminal = terminalIndex.nextInt(randomValues);
+		
+		// Return the String associated with the random index to replace the NonTerminal
+		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
 	}
 
 }

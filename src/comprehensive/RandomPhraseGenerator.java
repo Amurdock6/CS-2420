@@ -80,30 +80,35 @@ public class RandomPhraseGenerator
 	}
 	
 	
-	/**
-	 * This method will find all non-terminals and add them into the appropate dataStructure
-	 */
+/**
+ * This method will find all non-terminals and add them into the appropate dataStructure along with ther terminal values
+ * @param fileData
+ */
 	private static void getNonTermialValues(String fileData) {
-		// Will use this to check for < and > bracket to help tell if it a non-terimal
-		// or not.
+		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terimal or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
 		char endOfStringChar = fileData.charAt(endOfString - 1);
 
-		// Will use this to find out if non-termial is the start or not
+		// Will use this to find out if non-terminal is the start or not
 		StringBuilder sb = new StringBuilder();
 
+		// This will tell us if we found a non-terminal
 		if (startOfStringChar == '<') {
 			
+			// Tells us where the non-terminal ends
 			int LeftAngle = fileData.indexOf('>');
 
-			// This is how we will build our strings to see if they are the Start
-			// non-termial or not
+			// This is how we will build our strings to see what they are called
 			for (int j = 0; j < LeftAngle; j++) {
-				sb.append(fileData.indent(j));
+				
+				// Checks to make sure there is no spaces in the non-terminal
+				if (fileData.indent(j) == " ") {
+					break;
+				} else {
+					sb.append(fileData.indent(j));
+				}
 			}
-			
-			// if all of these charters equal start then we will grab the line of text 
 
 		}
 	}

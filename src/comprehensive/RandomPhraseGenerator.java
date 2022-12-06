@@ -24,7 +24,7 @@ public class RandomPhraseGenerator
 	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-terminal keys
-	//for exe: 0 = "Noun" in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
+	// For exe: 0 = "Noun" in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
 	// Get a random value from within that ArrayList
 	static HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
 	
@@ -37,8 +37,8 @@ public class RandomPhraseGenerator
 	 * @param args command line parameters
 	 */
 	public static void main(String[] args) {	
-
 		// Try to read the file and extract non terminals and associated terminals
+		// Will read the file and start calling our methods to figure out some of the logic
 		try {
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
@@ -108,11 +108,7 @@ public class RandomPhraseGenerator
 				for (int j = 0; j < LeftAngle; j++) {
 					
 					// Checks to make sure there is no spaces in the non-terminal if there is then we will break this loop. If there isn't then we will keep building out the String.
-					if (fileData.charAt(j) == (' ')) {
-						break;
-					} else {
-						sb.append(fileData.indent(j));
-					}
+					sb.append(fileData.indent(j));
 				}
 				
 				// We will then add the completed String into our HashMap and give it a key.

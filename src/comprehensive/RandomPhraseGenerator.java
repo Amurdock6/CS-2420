@@ -22,9 +22,9 @@ public class RandomPhraseGenerator
 	// Lets do an ArrayList Data Structure. With HashMaps inside of it to list firstly our Phrase. And then all of the non-termials and there values.  
 	ArrayList<HashMap<Integer, String>> HashMaps = new ArrayList<HashMap<Integer, String>>();
 	
-	
 	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
+	
 	
 	/**
 	 * Main method for RandomPhraseGenerator
@@ -32,7 +32,7 @@ public class RandomPhraseGenerator
 	 */
 	public static void main(String[] args) {	
 
-		// Then we will read the file and start calling our methods to figure out some of the logic
+		// Will read the file and start calling our methods to figure out some of the logic
 		try {
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
@@ -56,7 +56,7 @@ public class RandomPhraseGenerator
 	/**
 	 * This mehtod will find only data insdie of the curely braces
 	 */
-	public static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
+	private static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
 		// This will make it so we only print out content with in the curely braces
 		if (fileData.equals("{")) {
 			// add logic for what to do when it finds angle brackets
@@ -78,17 +78,28 @@ public class RandomPhraseGenerator
 	/**
 	 * This method will find all non-terminals and add them into the appropate dataStructure
 	 */
-	public static void getNonTerminalValues(String fileData) {
-		//Use the Split method and store the array of Strings returned in a String array.
-	    String[] arr = fileData.split("");
-	    
-	    
-	    // need to add some logic to check for <> brackets and make sure there is no white space within those angle brackets.
-	    // then we need to see if the Non-Terminal is on a line of its own or not to detirmine if it containes values we can use for our final sentence
-	    
-	    //Printing the characters using for-each loop
-	    for(String character : arr)
-	      System.out.print(character);
+	private static void getNonTerminalValues(String fileData) {
+		// Will use this to check for < and > bracket to help tell if it a non-terimal or not.
+		char startOfStringChar = fileData.charAt(0);
+		int endOfString = fileData.length();
+		char endOfStringChar = fileData.charAt(endOfString);
+		
+		// Will use this to find out if non-termial is the start or not
+		StringBuilder sb = new StringBuilder();
+		
+		if(startOfStringChar == '<') {
+			int RightAngle = fileData.indexOf('<');
+			int LeftAngle = fileData.indexOf('>');
+			
+			// This is how we will build our strings to see if they are the Start non-termial or not
+			for(int j = RightAngle; j < LeftAngle; j++) {
+				sb.append(fileData.indent(j));
+			}
+			
+			
+			
+
+		}
 	}
 
 }

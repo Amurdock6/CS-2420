@@ -21,11 +21,11 @@ import java.util.Random;
 public class RandomPhraseGenerator 
 {
 	// The ArrayList will store 
-	ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
+	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-termial keys so for exe: 0 = "Noun" in our ArrayList so when ever we want to get a ranodm noun value we will call our first ArrayList and then 
 	// Get a random value from with in that ArrayList
-	HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
+	static HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
@@ -60,6 +60,9 @@ public class RandomPhraseGenerator
 	
 	/**
 	 * This mehtod will find only data insdie of the curely braces
+	 * 
+	 * @param fileReader
+	 * @param fileData
 	 */
 	private static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
 		// This will make it so we only print out content with in the curely braces
@@ -81,35 +84,47 @@ public class RandomPhraseGenerator
 	
 	
 /**
- * This method will find all non-terminals and add them into the appropate dataStructure along with ther terminal values
+ * This method will find all non-terminals and add them into the appropate dataStructure along with ther terminal values.
+ * 
  * @param fileData
  */
 	private static void getNonTermialValues(String fileData) {
 		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terimal or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
-		char endOfStringChar = fileData.charAt(endOfString - 1);
 
-		// Will use this to find out if non-terminal is the start or not
-		StringBuilder sb = new StringBuilder();
-
-		// This will tell us if we found a non-terminal
-		if (startOfStringChar == '<') {
+		for (int x = 0; x < endOfString; x++) {
+			// Will use this to find out what are no terminal is called by combing the chars into a String.
+			StringBuilder sb = new StringBuilder();
 			
-			// Tells us where the non-terminal ends
-			int LeftAngle = fileData.indexOf('>');
-
-			// This is how we will build our strings to see what they are called
-			for (int j = 0; j < LeftAngle; j++) {
+			// This will tell us if we found a non-terminal.
+			if (startOfStringChar == '<') {
 				
-				// Checks to make sure there is no spaces in the non-terminal
-				if (fileData.indent(j) == " ") {
-					break;
-				} else {
-					sb.append(fileData.indent(j));
+				// Tells us where the non-terminal ends.
+				int LeftAngle = fileData.indexOf('>');
+	
+				// This is how we will get each char of the non-terminal to add into our StringBuilder.
+				for (int j = 0; j < LeftAngle; j++) {
+					
+					// Checks to make sure there is no spaces in the non-terminal if there is then we will break this loop. If there isn't then we will keep building out the String.
+					if (fileData.charAt(j) == (' ')) {
+						break;
+					} else {
+						sb.append(fileData.indent(j));
+					}
 				}
+				
+				// We will then add the completed String into our HashMap and give it a key.
+				keysToNonTerminals.put(i + 1, sb.toString());
+				i++;
 			}
-
+			
+			// TODO need to then add every line after the non-terminal into the coresponing ArrayList unitl we reach a '}'
+			
+			
+			// TODO add logic for if the line does not start with '<'
+			
+			
 		}
 	}
 	

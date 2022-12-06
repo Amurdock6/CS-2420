@@ -19,8 +19,12 @@ import java.util.HashMap;
  */
 public class RandomPhraseGenerator 
 {
-	// Lets do an ArrayList Data Structure. With HashMaps inside of it to list firstly our Phrase. And then all of the non-termials and there values.  
-	ArrayList<HashMap<Integer, String>> HashMaps = new ArrayList<HashMap<Integer, String>>();
+	// The ArrayList will store 
+	ArrayList<ArrayList<String>> Terminals  = new ArrayList<ArrayList<String>>();			
+	
+	// We will use a HashMap to store our non-termial keys so for exe: 0 = "Noun" in our ArrayList so when ever we want to get a ranodm noun value we will call our first ArrayList and then 
+	// Get a random value from with in that ArrayList
+	HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
@@ -79,27 +83,34 @@ public class RandomPhraseGenerator
 	 * This method will find all non-terminals and add them into the appropate dataStructure
 	 */
 	private static void getNonTerminalValues(String fileData) {
-		// Will use this to check for < and > bracket to help tell if it a non-terimal or not.
+		// Will use this to check for < and > bracket to help tell if it a non-terimal
+		// or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
 		char endOfStringChar = fileData.charAt(endOfString);
-		
+
 		// Will use this to find out if non-termial is the start or not
 		StringBuilder sb = new StringBuilder();
-		
-		if(startOfStringChar == '<') {
-			int RightAngle = fileData.indexOf('<');
-			int LeftAngle = fileData.indexOf('>');
+
+		if (startOfStringChar == '<') {
 			
-			// This is how we will build our strings to see if they are the Start non-termial or not
-			for(int j = RightAngle; j < LeftAngle; j++) {
+			int LeftAngle = fileData.indexOf('>');
+
+			// This is how we will build our strings to see if they are the Start
+			// non-termial or not
+			for (int j = 0; j < LeftAngle; j++) {
 				sb.append(fileData.indent(j));
 			}
 			
-			
-			
+			// if all of these charters equal start then we will grab the line of text 
 
 		}
+	}
+	
+	
+	private int randomTermial(int sizeOfTermial) {
+		
+		return 0;
 	}
 
 }

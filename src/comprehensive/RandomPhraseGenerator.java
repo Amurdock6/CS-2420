@@ -17,15 +17,18 @@ import java.util.HashMap;
  */
 public class RandomPhraseGenerator 
 {
-	// The first thing we are going to do is intiate our HashMaps
+	// The first thing we are going to do is initialize our HashMaps
 	static HashMap<Integer, String> nonTerminalsInSentence = new HashMap<>();
+	static HashMap<Integer, String> terminals = new HashMap<>();
+	
+	
 	
 	// We will use i + 1 as our key when adding items to our nonTerminalsInSentence HashMap 
 	static int i = -1;
 	
 	/**
 	 * Main method for RandomPhraseGenerator
-	 * @param args
+	 * @param args command line parameters
 	 */
 	public static void main(String[] args) {	
 
@@ -54,7 +57,7 @@ public class RandomPhraseGenerator
 	 * This mehtod will find only data insdie of the curely braces
 	 */
 	public static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
-		// This will make it so we only print out content with in the angle brackets
+		// This will make it so we only print out content with in the curely braces
 		if (fileData.equals("{")) {
 			// add logic for what to do when it finds angle brackets
 			while (!fileData.equals("}")) {
@@ -62,7 +65,8 @@ public class RandomPhraseGenerator
 				if (fileData.equals("}")) {
 					System.out.println("\n");
 				} else {
-					
+					// This will check for Non-Terminal data points
+					getNonTerminalValues(fileData);
 					System.out.println(fileData);
 				}
 			}
@@ -72,21 +76,24 @@ public class RandomPhraseGenerator
 	
 	
 	/**
-	 * 
+	 * This method will find all non-terminals and add them into the appropate dataStructure
 	 */
-	public static void parseLine(String lineToParse) {
-		for (int j = 0 ; j != lineToParse.length() ; j++) {
-		    char c = lineToParse.charAt(j);
-		    	
-		    }
-		    
-		}
+	public static void getNonTerminalValues(String fileData) {
+		//Use the Split method and store the array of Strings returned in a String array.
+	    String[] arr = fileData.split("");
+	    
+	    
+	    // need to add some logic to check for <> brackets and make sure there is no white space within those angle brackets.
+	    // then we need to see if the Non-Terminal is on a line of its own or not to detirmine if it containes values we can use for our final sentence
+	    
+	    //Printing the characters using for-each loop
+	    for(String character : arr)
+	      System.out.print(character);
 	}
-	
-	// need  
 
-
+}
 	// create a method that will create a new HashMap when a new source of terminals are found for a specfic non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
+
 
 
 	// create a method that will take args[1] as a paramter and will output the given number of randomly genrated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything togther and makes a finished product. 

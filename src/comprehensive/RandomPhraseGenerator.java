@@ -20,11 +20,12 @@ import java.util.Random;
  */
 public class RandomPhraseGenerator 
 {
-	// The ArrayList will store 
+	// Our array list of array list will hold the terminals for each of our non terminals
 	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
-	// We will use a HashMap to store our non-termial keys so for exe: 0 = "Noun" in our ArrayList so when ever we want to get a ranodm noun value we will call our first ArrayList and then 
-	// Get a random value from with in that ArrayList
+	// We will use a HashMap to store our non-terminal keys
+	//for exe: 0 = "Noun" in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
+	// Get a random value from within that ArrayList
 	static HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 
@@ -37,14 +38,14 @@ public class RandomPhraseGenerator
 	 */
 	public static void main(String[] args) {	
 
-		// Will read the file and start calling our methods to figure out some of the logic
+		// Try to read the file and extract non terminals and associated terminals
 		try {
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
 
 			while (fileReader.hasNextLine()) {
 				String fileData = fileReader.nextLine();
-				getContentInCurleyBraces(fileReader, fileData);
+				getContentInCurlyBraces(fileReader, fileData);
 			}
 
 			fileReader.close();
@@ -59,13 +60,13 @@ public class RandomPhraseGenerator
 	
 	
 	/**
-	 * This mehtod will find only data insdie of the curely braces
+	 * This method will find only data inside of the curly braces
 	 * 
 	 * @param fileReader
 	 * @param fileData
 	 */
-	private static void getContentInCurleyBraces(Scanner fileReader, String fileData) {
-		// This will make it so we only print out content with in the curely braces
+	private static void getContentInCurlyBraces(Scanner fileReader, String fileData) {
+		// This will make it so we only print out content within the curly braces
 		if (fileData.equals("{")) {
 			// add logic for what to do when it finds angle brackets
 			while (!fileData.equals("}")) {
@@ -84,17 +85,17 @@ public class RandomPhraseGenerator
 	
 	
 /**
- * This method will find all non-terminals and add them into the appropate dataStructure along with ther terminal values.
+ * This method will find all non-terminals and add them into the appropriate dataStructure along with their terminal values.
  * 
  * @param fileData
  */
 	private static void getNonTermialValues(String fileData) {
-		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terimal or not.
+		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terminal or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
 
 		for (int x = 0; x < endOfString; x++) {
-			// Will use this to find out what are no terminal is called by combing the chars into a String.
+			// Will use this to find out what our non terminal is called by combing the chars into a String.
 			StringBuilder sb = new StringBuilder();
 			
 			// This will tell us if we found a non-terminal.
@@ -119,7 +120,7 @@ public class RandomPhraseGenerator
 				i++;
 			}
 			
-			// TODO need to then add every line after the non-terminal into the coresponing ArrayList unitl we reach a '}'
+			// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
 			
 			
 			// TODO add logic for if the line does not start with '<'
@@ -232,7 +233,13 @@ public class RandomPhraseGenerator
 	
 	
 	
-	
+	/**
+	 * 
+	 * This method takes a integer index value and gets a random terminal for the non terminal associated with the index
+	 * 
+	 * @param indexOfNonTerminal
+	 * @return
+	 */
 	private String randomTermial(int indexOfNonTerminal) 
 	{
 		// Create random generator
@@ -251,10 +258,10 @@ public class RandomPhraseGenerator
 }
 	
 
-	// create a method that will create a new HashMap when a new source of terminals are found for a specfic non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
+	// create a method that will create a new HashMap when a new source of terminals are found for a specific non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
 
 
 
-	// create a method that will take args[1] as a paramter and will output the given number of randomly genrated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything togther and makes a finished product. 
+	// create a method that will take args[1] as a parameter and will output the given number of randomly generated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything together and makes a finished product. 
 
 

@@ -82,7 +82,7 @@ public class RandomPhraseGenerator
 	/**
 	 * This method will find all non-terminals and add them into the appropate dataStructure
 	 */
-	private static void getNonTerminalValues(String fileData) {
+	private static void getNonTermialValues(String fileData) {
 		// Will use this to check for < and > bracket to help tell if it a non-terimal
 		// or not.
 		char startOfStringChar = fileData.charAt(0);

@@ -125,8 +125,13 @@ public class RandomPhraseGenerator
 
 				while (!fileData.equals("}")) {
 					// This will see at what index our new non-termial is at and then add all of our values into that
-					terminalValuesToAdd.add(fileData);
-					fileData = fileReader.nextLine();
+//					if (x == 0) {
+//						fileData = fileReader.nextLine();
+//					} else {
+//						x++;
+						terminalValuesToAdd.add(fileData);
+						fileData = fileReader.nextLine();
+//					}
 				}
 				
 				// This will add all of our new values to the main ArrayList
@@ -170,7 +175,7 @@ public class RandomPhraseGenerator
 		int randomValues = terminals.get(indexOfNonTerminal).size() - 1;
 		
 		// Get a random index for one of the options for the NonTerminal
-		int indexOfTerminal = terminalIndex.nextInt(randomValues);
+		int indexOfTerminal = terminalIndex.nextInt(randomValues) + 1;
 		
 		// Return the String associated with the random index to replace the NonTerminal
 		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
@@ -215,7 +220,6 @@ public class RandomPhraseGenerator
 	private static String buildPhrase()
 	{
 		// Get the index in our array list of array list for start
-//		System.out.println(keysToNonTerminals.keySet());
 		int startTerminals = keysToNonTerminals.get("<start>");
 		
 		// Get one of the random terminal phrases out of the start terminal array list
@@ -258,6 +262,9 @@ public class RandomPhraseGenerator
 
 		}
 		
+		
+//		System.out.println(finalPhrase + " This is the final Phrase");
+		
 		// Once the phrase is completed more non terminals may have been added. 
 		//Repeat buildPhrase until no more non terminals
 		while(NonTerminalTerminal(finalPhrase.toString()) != null)
@@ -265,7 +272,7 @@ public class RandomPhraseGenerator
 			buildPhrase();
 		}
 		
-//		System.out.println(finalPhrase.toString());
+		System.out.println(finalPhrase.toString());
 		return finalPhrase.toString();
 		
 	}

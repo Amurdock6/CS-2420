@@ -165,7 +165,7 @@ public class RandomPhraseGenerator
 	 * This method takes a integer index value and gets a random terminal for the non terminal associated with the index
 	 * 
 	 * @param indexOfNonTerminal
-	 * @return
+	 * @return terminal
 	 */
 	private static String randomTerminal(int indexOfNonTerminal) 
 	{
@@ -188,7 +188,7 @@ public class RandomPhraseGenerator
 	 * This method finds Non terminals in a supposed terminal value
 	 * 
 	 * @param fileData
-	 * @return
+	 * @return non terminal
 	 */
 	private static String NonTerminalTerminal(String NonTerminal, int nonTerminalCounter)
 	{
@@ -233,7 +233,13 @@ public class RandomPhraseGenerator
 	
 	
 	
-	
+	/**
+	 * 
+	 * This method takes in our final phrase and replaces non terminals until all the non terminals have been replaced
+	 * 
+	 * @param phrase
+	 * @return final phrase
+	 */
 	private static String buildPhrase(String phrase)
 	{
 		
@@ -249,12 +255,10 @@ public class RandomPhraseGenerator
 			// add characters while we don't have a non terminal
 			while(phrase.charAt(j) != '<')
 			{
-				//System.out.println(phrase.charAt(j) + "First spot");
 				finalPhrase.append(phrase.charAt(j));
-				System.out.println(j + "1");
 				j++;
 				
-				if(j == phrase.length())
+				if(j == phrase.length() && !finalPhrase.toString().contains("<"))
 				{
 					System.out.println(finalPhrase.toString());
 					return finalPhrase.toString();
@@ -265,12 +269,10 @@ public class RandomPhraseGenerator
 			// skip past the rest of the characters for the non terminal
 			while(phrase.charAt(j) != '>')				
 			{
-				System.out.println(j + "2");
 				j++;
 			}
 			
 			leftAngleCounter ++;
-			System.out.println(leftAngleCounter);
 			
 			// if there is a non terminal
 			if(NonTerminalTerminal(phrase, leftAngleCounter) != null)
@@ -281,35 +283,45 @@ public class RandomPhraseGenerator
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
 				
+				System.out.println(nextTerminal);
+				
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
 			}
 			
-			System.out.println(j + "3");
+			// one character after the right angle bracket
 			j++;
-			if(j != phrase.length())
-				if(phrase.charAt(j) == '<')
-					j--;
 			
+			// If there are still more characters in the phrase
 			if(j < phrase.length())
 			{
-				if(phrase.charAt(j) != '<');
-					// add the character after the terminal
+				if(phrase.charAt(j) != '<')
+					// add the character after the terminal / right angle bracket
 					finalPhrase.append(phrase.charAt(j));
+				
+				// If the character is left angle bracket j-- to account for for loop
+				if(phrase.charAt(j) == '<')
+					j--;
 			}
 		}
 		
 		// Once the phrase is completed more non terminals may have been added. 
 		// Repeat buildPhrase until no more non terminals
-//		while(NonTerminalTerminal(finalPhrase.toString(), leftAngleCounter) != null)
-//		{
-//			System.out.println("Recursion");
-//			buildPhrase(finalPhrase.toString());
-//		}
+		System.out.println(finalPhrase.toString() + " Before Recursion");
+		if(finalPhrase.toString().contains("<") != false)
+		{
+			System.out.println("Recursion");
+			buildPhrase(finalPhrase.toString());
+		}
 		
-		System.out.println(finalPhrase.toString());
-		return finalPhrase.toString();
+		else
+		{
+			System.out.println("Here");
+			System.out.println(finalPhrase.toString() + " Final");
+			return finalPhrase.toString();
+		}
 		
+		return null;
 	}
 
 }

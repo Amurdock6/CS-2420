@@ -161,7 +161,7 @@ public class RandomPhraseGenerator
 	 * @param indexOfNonTerminal
 	 * @return
 	 */
-	private String randomTermial(int indexOfNonTerminal) 
+	private String randomTerminal(int indexOfNonTerminal) 
 	{
 		// Create random generator
 		Random terminalIndex = new Random();
@@ -178,6 +178,8 @@ public class RandomPhraseGenerator
 	
 	
 	/**
+	 * 
+	 * This method finds Non terminals in a supposed terminal value
 	 * 
 	 * @param fileData
 	 * @return
@@ -206,6 +208,66 @@ public class RandomPhraseGenerator
 		return null;
 		
 	}
+	
+	
+	
+	
+	
+	private String buildPhrase()
+	{
+		// Get the index in our array list of array list for start
+		int startTerminals = keysToNonTerminals.get("start");
+		
+		// Get one of the random terminal phrases out of the start terminal array list
+		String Phrase = randomTerminal(startTerminals);
+		
+		// create a string builder for the final phrase
+		StringBuilder finalPhrase = new StringBuilder();
+		
+		// For all of the characters in the phrase we are trying to build
+		for(int j = 0; j < Phrase.length(); j++)
+		{
+			// add characters while we don't have a non terminal
+			while(Phrase.charAt(j) != '<')
+			{
+				finalPhrase.append(Phrase.charAt(j));
+				j++;
+			}
+			
+			// if there is a non terminal
+			if(NonTerminalTerminal(Phrase) != null)
+			{
+				// find the index of the non terminal in our array list of array lists
+				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(Phrase));
+				
+				// get a random terminal from the array list for the terminals
+				String nextTerminal = randomTerminal(nextNonTerminal);
+				
+				// add the random terminal to the final phrase after removing the non terminals
+				finalPhrase.append(nextTerminal);
+				
+				// skip past the rest of the characters for the non terminal
+				while(Phrase.charAt(j) != '>')
+				{
+					j++;
+				}
+				
+				j++;
+			}
+
+		}
+		
+		// Once the phrase is completed more non terminals may have been added. 
+		//Repeat buildPhrase until no more non terminals
+		while(NonTerminalTerminal(finalPhrase.toString()) != null)
+		{
+			buildPhrase();
+		}
+		
+		return finalPhrase.toString();
+		
+	}
+
 }
 	
 

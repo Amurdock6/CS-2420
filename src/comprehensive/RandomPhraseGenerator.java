@@ -55,8 +55,15 @@ public class RandomPhraseGenerator
 			e.printStackTrace();
 		}
 		
+		// Get the index in our array list of array list for start
+		System.out.println(keysToNonTerminals);
+		int startTerminals = keysToNonTerminals.get("<start>");
+		
+		// Get one of the random terminal phrases out of the start terminal array list
+		String phrase = randomTerminal(startTerminals);
+		
 //		System.out.println("number of random phrases to genarate " + args[1]);
-		buildPhrase();
+		buildPhrase(phrase);
 	}
 	
 	
@@ -211,7 +218,7 @@ public class RandomPhraseGenerator
 	
 	
 	
-	private static String buildPhrase()
+	private static String buildPhrase(String phrase)
 	{
 		
 		
@@ -222,34 +229,26 @@ public class RandomPhraseGenerator
 		// and use a counter in build phrase to go through all of them
 		// 4. If you have a better idea do that.
 		
-		
-		// Get the index in our array list of array list for start
-		System.out.println(keysToNonTerminals);
-		int startTerminals = keysToNonTerminals.get("<start>");
-		
-		// Get one of the random terminal phrases out of the start terminal array list
-		String Phrase = randomTerminal(startTerminals);
-		
 		// create a string builder for the final phrase
 		StringBuilder finalPhrase = new StringBuilder();
 		
 		// For all of the characters in the phrase we are trying to build
-		for(int j = 0; j < Phrase.length(); j++)
+		for(int j = 0; j < phrase.length(); j++)
 		{
 			// add characters while we don't have a non terminal
-			while(Phrase.charAt(j) != '<')
+			while(phrase.charAt(j) != '<')
 			{
-				finalPhrase.append(Phrase.charAt(j));
+				finalPhrase.append(phrase.charAt(j));
 //				System.out.println(Phrase.charAt(j) + " first j");
 				j++;
 				
 			}
 			
 			// if there is a non terminal
-			if(NonTerminalTerminal(Phrase) != null)
+			if(NonTerminalTerminal(phrase) != null)
 			{
 				// find the index of the non terminal in our array list of array lists	
-				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(Phrase));
+				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(phrase));
 				
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
@@ -258,10 +257,10 @@ public class RandomPhraseGenerator
 				finalPhrase.append(nextTerminal);
 				
 				// skip past the rest of the characters for the non terminal
-				while(Phrase.charAt(j) != '>')				
+				while(phrase.charAt(j) != '>')				
 				{
 					j++;
-					System.out.println(Phrase.charAt(j));
+					System.out.println(phrase.charAt(j));
 				}
 				
 				
@@ -273,7 +272,7 @@ public class RandomPhraseGenerator
 		// Repeat buildPhrase until no more non terminals
 		while(NonTerminalTerminal(finalPhrase.toString()) != null)
 		{
-			buildPhrase();
+			buildPhrase(finalPhrase.toString());
 		}
 		
 		System.out.println(finalPhrase.toString());

@@ -251,11 +251,12 @@ public class RandomPhraseGenerator
 			{
 				//System.out.println(phrase.charAt(j) + "First spot");
 				finalPhrase.append(phrase.charAt(j));
-				
+				System.out.println(j + "1");
 				j++;
 				
 				if(j == phrase.length())
 				{
+					System.out.println(finalPhrase.toString());
 					return finalPhrase.toString();
 				}
 				
@@ -264,6 +265,7 @@ public class RandomPhraseGenerator
 			// skip past the rest of the characters for the non terminal
 			while(phrase.charAt(j) != '>')				
 			{
+				System.out.println(j + "2");
 				j++;
 			}
 			
@@ -280,24 +282,28 @@ public class RandomPhraseGenerator
 				
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
-				
-				System.out.println(finalPhrase.toString());
-				
-				if(j < phrase.length())
-					if(phrase.charAt(j + 1) != '<');
-						// add the character after the terminal
-						finalPhrase.append(phrase.charAt(j + 1));
 			}
 			
+			System.out.println(j + "3");
 			j++;
+			if(phrase.charAt(j) == '<')
+				j--;
+			
+			if(j < phrase.length())
+			{
+				if(phrase.charAt(j) != '<');
+					// add the character after the terminal
+					finalPhrase.append(phrase.charAt(j));
+			}
 		}
 		
 		// Once the phrase is completed more non terminals may have been added. 
 		// Repeat buildPhrase until no more non terminals
-		while(NonTerminalTerminal(finalPhrase.toString(), leftAngleCounter) != null)
-		{
-			buildPhrase(finalPhrase.toString());
-		}
+//		while(NonTerminalTerminal(finalPhrase.toString(), leftAngleCounter) != null)
+//		{
+//			System.out.println("Recursion");
+//			buildPhrase(finalPhrase.toString());
+//		}
 		
 		System.out.println(finalPhrase.toString());
 		return finalPhrase.toString();

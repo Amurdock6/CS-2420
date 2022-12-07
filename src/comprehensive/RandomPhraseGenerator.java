@@ -213,6 +213,16 @@ public class RandomPhraseGenerator
 	
 	private static String buildPhrase()
 	{
+		
+		
+		// Some options for fixing NonTerminalTerminal(phrase)
+		// 1. we have a counter that counts non terminals and skip that many left brackets getting the next non terminal
+		// 2. we change the string in NonTerminalTerminal or in buildPhrase to remove characters up to the first Non terminal
+		// 3. we change NonTerminalTerminal to get all of the non terminals in a phrase and put them into an array or something
+		// and use a counter in build phrase to go through all of them
+		// 4. If you have a better idea do that.
+		
+		
 		// Get the index in our array list of array list for start
 		System.out.println(keysToNonTerminals);
 		int startTerminals = keysToNonTerminals.get("<start>");

@@ -253,7 +253,7 @@ public class RandomPhraseGenerator
 		for(int j = 0; j < phrase.length(); j++)
 		{
 			// add characters while we don't have a non terminal
-			while(phrase.charAt(j) != '<')
+			while(j < phrase.length() && phrase.charAt(j) != '<')
 			{
 				finalPhrase.append(phrase.charAt(j));
 				j++;
@@ -267,7 +267,7 @@ public class RandomPhraseGenerator
 			}
 			
 			// skip past the rest of the characters for the non terminal
-			while(phrase.charAt(j) != '>')				
+			while(j < phrase.length() && phrase.charAt(j) != '>')				
 			{
 				j++;
 			}

@@ -157,28 +157,34 @@ public class RandomPhraseGenerator
 	}
 	
 	
-	private static String NonTerminalTerminal(String fileData)
+	/**
+	 * 
+	 * @param fileData
+	 * @return
+	 */
+	private static String NonTerminalTerminal(String NonTerminal)
 	{
-	
-		int sizeOfString = fileData.length();
+		int sizeOfString = NonTerminal.length();
 		
 		StringBuilder nonTerminal = new StringBuilder();
 		
 		for(int j = 0; j < sizeOfString; j++)
 		{
-			if(fileData.charAt(j) == '<')
+			if(NonTerminal.charAt(j) == '<')
 			{
 				j++;
 				
-				while(fileData.charAt(j) != '>')
+				while(NonTerminal.charAt(j) != '>')
 				{
-					nonTerminal.append(fileData.charAt(j));
+					nonTerminal.append(NonTerminal.charAt(j));
 					j++;
+					
 				}
+				return nonTerminal.toString();
 			}
 		}
+		return null;
 		
-		return nonTerminal.toString();
 	}
 }
 	

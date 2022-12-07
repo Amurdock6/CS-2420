@@ -404,16 +404,16 @@ public class RandomPhraseGenerator
 		
 		StringBuilder nonTerminal = new StringBuilder();
 		
-		for(int i = 0; i < sizeOfString; i++)
+		for(int j = 0; j < sizeOfString; j++)
 		{
-			if(terminal.charAt(i) == '<')
+			if(terminal.charAt(j) == '<')
 			{
 				i++;
 				
-				while(terminal.charAt(i) != '>')
+				while(terminal.charAt(j) != '>')
 				{
-					nonTerminal.append(terminal.charAt(i));
-					i++;
+					nonTerminal.append(terminal.charAt(j));
+					j++;
 				}
 			}
 		}

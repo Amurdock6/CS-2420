@@ -194,19 +194,18 @@ public class RandomPhraseGenerator
 		{
 			if(NonTerminal.charAt(j) == '<')
 			{
-				j++;
 				
 				while(NonTerminal.charAt(j) != '>')
 				{
 					nonTerminal.append(NonTerminal.charAt(j));
 					j++;
-					
 				}
+				nonTerminal.append(NonTerminal.charAt(j));
 				return nonTerminal.toString();
 			}
 		}
-		return null;
 		
+		return null;
 	}
 	
 	
@@ -235,10 +234,11 @@ public class RandomPhraseGenerator
 				j++;
 			}
 			
+			
 			// if there is a non terminal
 			if(NonTerminalTerminal(Phrase) != null)
 			{
-				// find the index of the non terminal in our array list of array lists
+				// find the index of the non terminal in our array list of array lists	
 				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(Phrase));
 				
 				// get a random terminal from the array list for the terminals

@@ -107,6 +107,7 @@ public class RandomPhraseGenerator
 	
 				// This is how we will get each char of the non-terminal to add into our StringBuilder.
 				for (int j = 0; j < LeftAngle; j++) {
+					System.out.println(j);
 					sb.append(fileData.indent(j));
 				}
 				
@@ -118,6 +119,8 @@ public class RandomPhraseGenerator
 				} 
 				
 
+			} else {
+				NonTerminalTerminal(fileData);
 			}
 			
 			// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
@@ -154,22 +157,22 @@ public class RandomPhraseGenerator
 	}
 	
 	
-	private String NonTerminalTerminal(String terminal)
+	private static String NonTerminalTerminal(String fileData)
 	{
 	
-		int sizeOfString = terminal.length();
+		int sizeOfString = fileData.length();
 		
 		StringBuilder nonTerminal = new StringBuilder();
 		
 		for(int j = 0; j < sizeOfString; j++)
 		{
-			if(terminal.charAt(j) == '<')
+			if(fileData.charAt(j) == '<')
 			{
-				i++;
+				j++;
 				
-				while(terminal.charAt(j) != '>')
+				while(fileData.charAt(j) != '>')
 				{
-					nonTerminal.append(terminal.charAt(j));
+					nonTerminal.append(fileData.charAt(j));
 					j++;
 				}
 			}

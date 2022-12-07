@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-																												     // (Arg0)      (Arg1)
-// PS to Todd you will run the file in the CMD line using this command "java comprehensive/RandomPhraseGenerator.java super_simple.g 5"
-// Just open the cmd prompt and go to the src directory for all of our projects this semester and then you just need to run the above command.
+//  use this command "java comprehensive/RandomPhraseGenerator.java super_simple.g 5"
+
 
 /**
  * This class represents produces a random phrase given a grammar
@@ -258,11 +257,11 @@ public class RandomPhraseGenerator
 				finalPhrase.append(phrase.charAt(j));
 				j++;
 				
-				if(j == phrase.length() && !finalPhrase.toString().contains("<"))
-				{
-					System.out.println(finalPhrase.toString());
-					return finalPhrase.toString();
-				}
+//				if(j == phrase.length() && !finalPhrase.toString().contains("<"))
+//				{
+//					System.out.println(finalPhrase.toString());
+//					return finalPhrase.toString();
+//				}
 				
 			}
 			
@@ -282,7 +281,6 @@ public class RandomPhraseGenerator
 				
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
-				
 				System.out.println(nextTerminal);
 				
 				// add the random terminal to the final phrase after removing the non terminals
@@ -307,17 +305,15 @@ public class RandomPhraseGenerator
 		
 		// Once the phrase is completed more non terminals may have been added. 
 		// Repeat buildPhrase until no more non terminals
-		System.out.println(finalPhrase.toString() + " Before Recursion");
 		if(finalPhrase.toString().contains("<") != false)
 		{
-			System.out.println("Recursion");
 			buildPhrase(finalPhrase.toString());
 		}
 		
 		else
 		{
-			System.out.println("Here");
-			System.out.println(finalPhrase.toString() + " Final");
+			// Return final phrase when no more terminals
+			System.out.println(finalPhrase.toString());
 			return finalPhrase.toString();
 		}
 		

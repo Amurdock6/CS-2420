@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Random;
 
 																												     // (Arg0)      (Arg1)
@@ -45,7 +46,7 @@ public class RandomPhraseGenerator
 
 			while (fileReader.hasNextLine()) {
 				String fileData = fileReader.nextLine();
-				getContentInCurlyBraces(fileReader, fileData);
+				fileData = getContentInCurlyBraces(fileReader, fileData);
 			}
 
 			fileReader.close();
@@ -56,7 +57,7 @@ public class RandomPhraseGenerator
 		}
 		
 		System.out.println("number of random phrases to genarate " + args[1]);
-		System.out.println(keysToNonTerminals.values());	
+		keysToNonTerminals.values();	
 	}
 	
 	
@@ -65,74 +66,93 @@ public class RandomPhraseGenerator
 	 * 
 	 * @param fileReader
 	 * @param fileData
+	 * @return The line of text for the scanner to pick back up yet
 	 */
-	private static void getContentInCurlyBraces(Scanner fileReader, String fileData) {
+	private static String getContentInCurlyBraces(Scanner fileReader, String fileData) {
 		// This will make it so we only print out content within the curly braces
 		if (fileData.equals("{")) {
 			// add logic for what to do when it finds angle brackets
 			while (!fileData.equals("}")) {
 				fileData = fileReader.nextLine();
 				if (fileData.equals("}")) {
-					System.out.println("\n");
+//					System.out.println("\n");
 				} else {
-					// This will check for Non-Terminal data points
-					getNonTerminalValues(fileData);
 					System.out.println(fileData);
+					// This will check for Non-Terminal data points
+					fileData = getNonTerminalValues(fileReader, fileData);
 				}
 			}
 
 		}
+
+		// To let the other methods know what line to continue scanning at
+		return fileData;
 	}
+
 	
-	
-/**
- * This method will find all non-terminals and add them into the appropriate dataStructure along with their terminal values.
- * 
- * @param fileData
- */
-	private static void getNonTerminalValues(String fileData) {
+	/**
+	 * This method will find all non-terminals and add them into the appropriate
+	 * dataStructure along with their terminal values.
+	 * 
+	 * @param fileData
+	 * @return The line of text for the scanner to pick back up yet
+	 */
+	private static String getNonTerminalValues(Scanner fileReader, String fileData) {
 		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terminal or not.
 		char startOfStringChar = fileData.charAt(0);
-		int endOfString = fileData.length();
 
-//		for (int x = 0; x < endOfString; x++) {
-			// Will use this to find out what our non terminal is called by combing the chars into a String.
-			StringBuilder sb = new StringBuilder();
-			
-			// This will tell us if we found a non-terminal.
-			if (startOfStringChar == '<') {
-				
-				// Tells us where the non-terminal ends.
-				int LeftAngle = fileData.indexOf('>');
-	
-				// This is how we will get each char of the non-terminal to add into our StringBuilder.
-				for (int j = 0; j < LeftAngle; j++) {
-					System.out.println(j);
-					sb.append(fileData.indent(j));
+		// Will use this to find out what our non terminal is called by combing the chars into a String.
+		StringBuilder sb = new StringBuilder();
+
+		// This will tell us if we found a non-terminal.
+		if (startOfStringChar == '<') {
+
+			// Tells us where the non-terminal ends.
+			int LeftAngle = fileData.indexOf('>');
+
+			// This is how we will get each char of the non-terminal to add into our StringBuilder.
+			for (int j = 0; j < LeftAngle; j++) {
+				sb.append(fileData.indent(j));
+//				System.out.println(sb.toString());
+			}
+
+			ArrayList<String> terminalValuesToAdd = new ArrayList<String>();
+			// will check to make sure this non-terminal hasn't already been added
+			if (!keysToNonTerminals.containsValue(sb.toString())) {
+				// We will then add the completed String into our HashMap and give it a key.
+				keysToNonTerminals.put(i + 1, sb.toString());
+				i++;
+
+				while (!fileData.equals("}")) {
+					// This will see at what index our new non-termial is at and then add all of our values into that
+					terminalValuesToAdd.add(fileData);
+					fileData = fileReader.nextLine();
 				}
 				
-				// will check to make sure this non-terminal hasn't already been added
-				if (!keysToNonTerminals.containsValue(sb.toString())) {
-					// We will then add the completed String into our HashMap and give it a key.
-					keysToNonTerminals.put(i + 1, sb.toString());
-					i++;
-				} 
-				
+				// This will add all of our new values to the main ArrayList
+				terminals.add(terminalValuesToAdd);
 
-			} else {
-				NonTerminalTerminal(fileData);
+			} else if (keysToNonTerminals.containsValue(sb.toString())) {
+				// if the non-terminal already exist then we will just add the new values we found into its existing index
+
 			}
-			
-			// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
-			
-			
-			// TODO add logic for if the line does not start with '<'
-			// changes
-			
-			// To check that everything was added correctly
-					
-//		}
+
+		} else {
+			// TODO create a method that will find detecet if there is other Non-Terminals in a line of text
+		}
+		
+		System.out.println(terminals.toString());
+		
+		// To let the other methods know what line to continue scanning at
+		return fileData;
 	}
+
+	// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
+
+	// TODO add logic for if the line does not start with '<' changes
+
+	// To check that everything was added correctly
+
 
 	/**
 	 * 

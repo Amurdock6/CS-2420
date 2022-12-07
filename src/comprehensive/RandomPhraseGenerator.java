@@ -270,6 +270,7 @@ public class RandomPhraseGenerator
 			}
 			
 			leftAngleCounter ++;
+			System.out.println(leftAngleCounter);
 			
 			// if there is a non terminal
 			if(NonTerminalTerminal(phrase, leftAngleCounter) != null)
@@ -286,8 +287,9 @@ public class RandomPhraseGenerator
 			
 			System.out.println(j + "3");
 			j++;
-			if(phrase.charAt(j) == '<')
-				j--;
+			if(j != phrase.length())
+				if(phrase.charAt(j) == '<')
+					j--;
 			
 			if(j < phrase.length())
 			{

@@ -230,9 +230,10 @@ public class RandomPhraseGenerator
 			while(Phrase.charAt(j) != '<')
 			{
 				finalPhrase.append(Phrase.charAt(j));
+//				System.out.println(Phrase.charAt(j) + " first j");
 				j++;
+				
 			}
-			
 			
 			// if there is a non terminal
 			if(NonTerminalTerminal(Phrase) != null)
@@ -247,14 +248,15 @@ public class RandomPhraseGenerator
 				finalPhrase.append(nextTerminal);
 				
 				// skip past the rest of the characters for the non terminal
-				while(Phrase.charAt(j) != '>')
+				while(Phrase.charAt(j) != '>')				
 				{
 					j++;
+					System.out.println(Phrase.charAt(j));
 				}
 				
-				j++;
+				
 			}
-
+			System.out.println(j);
 		}
 		
 		// Once the phrase is completed more non terminals may have been added. 

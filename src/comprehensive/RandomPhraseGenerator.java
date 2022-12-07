@@ -56,6 +56,7 @@ public class RandomPhraseGenerator
 		}
 		
 		System.out.println("number of random phrases to genarate " + args[1]);
+		System.out.println(keysToNonTerminals.values());	
 	}
 	
 	
@@ -94,7 +95,7 @@ public class RandomPhraseGenerator
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();
 
-		for (int x = 0; x < endOfString; x++) {
+//		for (int x = 0; x < endOfString; x++) {
 			// Will use this to find out what our non terminal is called by combing the chars into a String.
 			StringBuilder sb = new StringBuilder();
 			
@@ -106,14 +107,17 @@ public class RandomPhraseGenerator
 	
 				// This is how we will get each char of the non-terminal to add into our StringBuilder.
 				for (int j = 0; j < LeftAngle; j++) {
-					
-					// Checks to make sure there is no spaces in the non-terminal if there is then we will break this loop. If there isn't then we will keep building out the String.
 					sb.append(fileData.indent(j));
 				}
 				
-				// We will then add the completed String into our HashMap and give it a key.
-				keysToNonTerminals.put(i + 1, sb.toString());
-				i++;
+				// will check to make sure this non-terminal hasent already been added
+				if (!keysToNonTerminals.containsValue(sb.toString())) {
+					// We will then add the completed String into our HashMap and give it a key.
+					keysToNonTerminals.put(i + 1, sb.toString());
+					i++;
+				} 
+				
+
 			}
 			
 			// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
@@ -122,177 +126,11 @@ public class RandomPhraseGenerator
 			// TODO add logic for if the line does not start with '<'
 			// changes
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		}
+			// To check that everything was added correctly
+					
+//		}
 	}
-	
-	/* changes */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * This method takes a integer index value and gets a random terminal for the non terminal associated with the index
@@ -314,89 +152,8 @@ public class RandomPhraseGenerator
 		// Return the String associated with the random index to replace the NonTerminal
 		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
 	}
-
-
 	
-
-	// create a method that will create a new HashMap when a new source of terminals are found for a specific non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
-
-
-
-	// create a method that will take args[1] as a parameter and will output the given number of randomly generated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything together and makes a finished product. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 	private String NonTerminalTerminal(String terminal)
 	{
 	
@@ -421,3 +178,12 @@ public class RandomPhraseGenerator
 		return nonTerminal.toString();
 	}
 }
+	
+
+	// create a method that will create a new HashMap when a new source of terminals are found for a specific non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
+
+
+
+	// create a method that will take args[1] as a parameter and will output the given number of randomly generated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything together and makes a finished product. 
+
+

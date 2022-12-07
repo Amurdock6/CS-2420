@@ -75,7 +75,7 @@ public class RandomPhraseGenerator
 					System.out.println("\n");
 				} else {
 					// This will check for Non-Terminal data points
-					getNonTermialValues(fileData);
+					getNonTerminalValues(fileData);
 					System.out.println(fileData);
 				}
 			}
@@ -89,7 +89,7 @@ public class RandomPhraseGenerator
  * 
  * @param fileData
  */
-	private static void getNonTermialValues(String fileData) {
+	private static void getNonTerminalValues(String fileData) {
 		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terminal or not.
 		char startOfStringChar = fileData.charAt(0);
 		int endOfString = fileData.length();

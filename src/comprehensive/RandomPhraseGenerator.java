@@ -284,9 +284,6 @@ public class RandomPhraseGenerator
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
 				
-				System.out.println(finalPhrase.toString());
-				System.out.println(j);
-				
 				if(phrase.charAt(j) != '<');
 					// add the character after the terminal
 					finalPhrase.append(phrase.charAt(j));

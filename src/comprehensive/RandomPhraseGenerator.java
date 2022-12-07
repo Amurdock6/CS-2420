@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Random;
 
 																												     // (Arg0)      (Arg1)
@@ -27,7 +26,7 @@ public class RandomPhraseGenerator
 	// We will use a HashMap to store our non-terminal keys
 	// For exe: 0 = "Noun" in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
 	// Get a random value from within that ArrayList
-	static HashMap<Integer, String> keysToNonTerminals  = new HashMap<Integer, String>();
+	static HashMap<String, Integer> keysToNonTerminals  = new HashMap<String, Integer>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
@@ -56,8 +55,10 @@ public class RandomPhraseGenerator
 			e.printStackTrace();
 		}
 		
-		System.out.println("number of random phrases to genarate " + args[1]);
-		keysToNonTerminals.values();	
+//		System.out.println("number of random phrases to genarate " + args[1]);
+//		keysToNonTerminals.values();
+		
+		buildPhrase();
 	}
 	
 	
@@ -77,7 +78,7 @@ public class RandomPhraseGenerator
 				if (fileData.equals("}")) {
 //					System.out.println("\n");
 				} else {
-					System.out.println(fileData);
+//					System.out.println(fileData);
 					// This will check for Non-Terminal data points
 					fileData = getNonTerminalValues(fileReader, fileData);
 				}
@@ -111,16 +112,15 @@ public class RandomPhraseGenerator
 			int LeftAngle = fileData.indexOf('>');
 
 			// This is how we will get each char of the non-terminal to add into our StringBuilder.
-			for (int j = 0; j < LeftAngle; j++) {
-				sb.append(fileData.indent(j));
-//				System.out.println(sb.toString());
+			for (int j = 0; j < LeftAngle + 1; j++) {
+				sb.append(fileData.charAt(j));
 			}
 
 			ArrayList<String> terminalValuesToAdd = new ArrayList<String>();
 			// will check to make sure this non-terminal hasn't already been added
-			if (!keysToNonTerminals.containsValue(sb.toString())) {
+			if (!keysToNonTerminals.containsKey(sb.toString())) {
 				// We will then add the completed String into our HashMap and give it a key.
-				keysToNonTerminals.put(i + 1, sb.toString());
+				keysToNonTerminals.put(sb.toString(), i + 1);
 				i++;
 
 				while (!fileData.equals("}")) {
@@ -132,7 +132,7 @@ public class RandomPhraseGenerator
 				// This will add all of our new values to the main ArrayList
 				terminals.add(terminalValuesToAdd);
 
-			} else if (keysToNonTerminals.containsValue(sb.toString())) {
+			} else if (keysToNonTerminals.containsKey(sb.toString())) {
 				// if the non-terminal already exist then we will just add the new values we found into its existing index
 
 			}
@@ -141,7 +141,7 @@ public class RandomPhraseGenerator
 			// TODO create a method that will find detecet if there is other Non-Terminals in a line of text
 		}
 		
-		System.out.println(terminals.toString());
+//		System.out.println(terminals.toString());
 		
 		// To let the other methods know what line to continue scanning at
 		return fileData;
@@ -161,7 +161,7 @@ public class RandomPhraseGenerator
 	 * @param indexOfNonTerminal
 	 * @return
 	 */
-	private String randomTerminal(int indexOfNonTerminal) 
+	private static String randomTerminal(int indexOfNonTerminal) 
 	{
 		// Create random generator
 		Random terminalIndex = new Random();
@@ -213,10 +213,11 @@ public class RandomPhraseGenerator
 	
 	
 	
-	private String buildPhrase()
+	private static String buildPhrase()
 	{
 		// Get the index in our array list of array list for start
-		int startTerminals = keysToNonTerminals.get("start");
+//		System.out.println(keysToNonTerminals.keySet());
+		int startTerminals = keysToNonTerminals.get("<start>");
 		
 		// Get one of the random terminal phrases out of the start terminal array list
 		String Phrase = randomTerminal(startTerminals);
@@ -264,6 +265,7 @@ public class RandomPhraseGenerator
 			buildPhrase();
 		}
 		
+//		System.out.println(finalPhrase.toString());
 		return finalPhrase.toString();
 		
 	}

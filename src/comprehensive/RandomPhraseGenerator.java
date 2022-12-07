@@ -315,7 +315,7 @@ public class RandomPhraseGenerator
 		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
 	}
 
-}
+
 	
 
 	// create a method that will create a new HashMap when a new source of terminals are found for a specific non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
@@ -325,3 +325,99 @@ public class RandomPhraseGenerator
 	// create a method that will take args[1] as a parameter and will output the given number of randomly generated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything together and makes a finished product. 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private String NonTerminalTerminal(String terminal)
+	{
+	
+		int sizeOfString = terminal.length();
+		
+		StringBuilder nonTerminal = new StringBuilder();
+		
+		for(int i = 0; i < sizeOfString; i++)
+		{
+			if(terminal.charAt(i) == '<')
+			{
+				i++;
+				
+				while(terminal.charAt(i) != '>')
+				{
+					nonTerminal.append(terminal.charAt(i));
+					i++;
+				}
+			}
+		}
+		
+		return nonTerminal.toString();
+	}
+}

@@ -103,7 +103,8 @@ public class RandomPhraseGenerator
 	 * @param fileData
 	 * @return The line of text for the scanner to pick back up yet
 	 */
-	private static String getNonTerminalValues(Scanner fileReader, String fileData) {
+	private static String getNonTerminalValues(Scanner fileReader, String fileData)
+	{
 		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terminal or not.
 		char startOfStringChar = fileData.charAt(0);
 
@@ -114,10 +115,10 @@ public class RandomPhraseGenerator
 		if (startOfStringChar == '<') {
 
 			// Tells us where the non-terminal ends.
-			int LeftAngle = fileData.indexOf('>');
+			int RightAngle = fileData.indexOf('>');
 
 			// This is how we will get each char of the non-terminal to add into our StringBuilder.
-			for (int j = 0; j < LeftAngle + 1; j++) {
+			for (int j = 0; j < RightAngle + 1; j++) {
 				sb.append(fileData.charAt(j));
 			}
 
@@ -189,25 +190,40 @@ public class RandomPhraseGenerator
 	 * @param fileData
 	 * @return
 	 */
-	private static String NonTerminalTerminal(String NonTerminal)
+	private static String NonTerminalTerminal(String NonTerminal, int nonTerminalCounter)
 	{
+		// Get the size of the string being entered
 		int sizeOfString = NonTerminal.length();
 		
+		// Create a string builder for the non terminal
 		StringBuilder nonTerminal = new StringBuilder();
 		
+		// Left Angle bracket counter
+		int LeftAngleBracketCounter = 0;
+		
+		// Go through the entered phrase getting a specified non terminal out of it
 		for(int j = 0; j < sizeOfString; j++)
 		{
+			// When we find a left angle bracket
 			if(NonTerminal.charAt(j) == '<')
 			{
+				// Increase the number of non terminals in the phrase
+				LeftAngleBracketCounter ++;
 				
-				while(NonTerminal.charAt(j) != '>')
+				// If we are at the non terminal that we want
+				if(LeftAngleBracketCounter == nonTerminalCounter)
 				{
+					// get the characters for that non terminal 
+					while(NonTerminal.charAt(j) != '>')
+					{
+						nonTerminal.append(NonTerminal.charAt(j));
+						j++;
+					}
 					nonTerminal.append(NonTerminal.charAt(j));
-					j++;
+					// return the non terminal
+					return nonTerminal.toString();
 				}
-				nonTerminal.append(NonTerminal.charAt(j));
 				
-				return nonTerminal.toString();
 			}
 		}
 		
@@ -221,16 +237,11 @@ public class RandomPhraseGenerator
 	private static String buildPhrase(String phrase)
 	{
 		
-		
-		// Some options for fixing NonTerminalTerminal(phrase)
-		// 1. we have a counter that counts non terminals and skip that many left brackets getting the next non terminal
-		// 2. we change the string in NonTerminalTerminal or in buildPhrase to remove characters up to the first Non terminal
-		// 3. we change NonTerminalTerminal to get all of the non terminals in a phrase and put them into an array or something
-		// and use a counter in build phrase to go through all of them
-		// 4. If you have a better idea do that.
-		
 		// create a string builder for the final phrase
 		StringBuilder finalPhrase = new StringBuilder();
+		
+		// Left angle bracket counter
+		int leftAngleCounter = 0;
 		
 		// For all of the characters in the phrase we are trying to build
 		for(int j = 0; j < phrase.length(); j++)
@@ -238,17 +249,34 @@ public class RandomPhraseGenerator
 			// add characters while we don't have a non terminal
 			while(phrase.charAt(j) != '<')
 			{
+				//System.out.println(phrase.charAt(j) + "First spot");
 				finalPhrase.append(phrase.charAt(j));
-//				System.out.println(Phrase.charAt(j) + " first j");
+				
 				j++;
+				
+				if(j == phrase.length())
+				{
+					System.out.println(finalPhrase.toString());
+					return finalPhrase.toString();
+				}
 				
 			}
 			
+			// skip past the rest of the characters for the non terminal
+			while(phrase.charAt(j) != '>')				
+			{
+				j++;
+			}
+			
+			j++;
+			
+			leftAngleCounter ++;
+			
 			// if there is a non terminal
-			if(NonTerminalTerminal(phrase) != null)
+			if(NonTerminalTerminal(phrase, leftAngleCounter) != null)
 			{
 				// find the index of the non terminal in our array list of array lists	
-				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(phrase));
+				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(phrase, leftAngleCounter));
 				
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
@@ -256,21 +284,18 @@ public class RandomPhraseGenerator
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
 				
-				// skip past the rest of the characters for the non terminal
-				while(phrase.charAt(j) != '>')				
-				{
-					j++;
-					System.out.println(phrase.charAt(j));
-				}
+				System.out.println(finalPhrase.toString());
+				System.out.println(j);
 				
-				
+				if(phrase.charAt(j) != '<');
+					// add the character after the terminal
+					finalPhrase.append(phrase.charAt(j));
 			}
-			System.out.println(j);
 		}
 		
 		// Once the phrase is completed more non terminals may have been added. 
 		// Repeat buildPhrase until no more non terminals
-		while(NonTerminalTerminal(finalPhrase.toString()) != null)
+		while(NonTerminalTerminal(finalPhrase.toString(), leftAngleCounter) != null)
 		{
 			buildPhrase(finalPhrase.toString());
 		}

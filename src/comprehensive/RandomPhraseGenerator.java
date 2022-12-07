@@ -110,7 +110,7 @@ public class RandomPhraseGenerator
 					sb.append(fileData.indent(j));
 				}
 				
-				// will check to make sure this non-terminal hasent already been added
+				// will check to make sure this non-terminal hasn't already been added
 				if (!keysToNonTerminals.containsValue(sb.toString())) {
 					// We will then add the completed String into our HashMap and give it a key.
 					keysToNonTerminals.put(i + 1, sb.toString());
@@ -165,7 +165,7 @@ public class RandomPhraseGenerator
 		{
 			if(terminal.charAt(j) == '<')
 			{
-				i++;
+				j++;
 				
 				while(terminal.charAt(j) != '>')
 				{

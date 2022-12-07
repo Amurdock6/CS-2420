@@ -256,7 +256,6 @@ public class RandomPhraseGenerator
 				
 				if(j == phrase.length())
 				{
-					System.out.println(finalPhrase.toString());
 					return finalPhrase.toString();
 				}
 				
@@ -267,8 +266,6 @@ public class RandomPhraseGenerator
 			{
 				j++;
 			}
-			
-			j++;
 			
 			leftAngleCounter ++;
 			
@@ -284,10 +281,15 @@ public class RandomPhraseGenerator
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
 				
-				if(phrase.charAt(j) != '<');
-					// add the character after the terminal
-					finalPhrase.append(phrase.charAt(j));
+				System.out.println(finalPhrase.toString());
+				
+				if(j < phrase.length())
+					if(phrase.charAt(j + 1) != '<');
+						// add the character after the terminal
+						finalPhrase.append(phrase.charAt(j + 1));
 			}
+			
+			j++;
 		}
 		
 		// Once the phrase is completed more non terminals may have been added. 

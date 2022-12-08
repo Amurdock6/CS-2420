@@ -161,8 +161,10 @@ public class RandomPhraseGenerator
 		// Will find all of the Non-Terminal values in our phrase and then replace them with terminal values.
 		while (leftAngleBracketLocation != -1) {
 			// This will append everything up to the first Non-Terminal.
-			finalPhrase.append(phrase, start, leftAngleBracketLocation);
-
+			if (start != leftAngleBracketLocation) {
+				finalPhrase.append(phrase, start, leftAngleBracketLocation);
+			}
+			
 			// This will append the non-terminal and tell us what non-terminal we have so we can find the coresponding terminal value for it.
 			NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation + 1);
 			
@@ -183,6 +185,9 @@ public class RandomPhraseGenerator
 			// Find the next Non-Terminal value
 			leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex + 1);
 			rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex + 1);
+			
+			// This will set phrase equal to what we currently have
+//			phrase = finalPhrase.toString();
 		}
 		
 		// This will complete the rest of the phrase after the final non-terminal is added.
@@ -203,6 +208,7 @@ public class RandomPhraseGenerator
 		// This will find the value in our keysToNonTerminals.
 		int indexVal = keysToNonTerminals.get(nonterminal);
 		
+		System.out.println(randomTerminal(indexVal) + " terminal value");
 		// We then use that key to grab a termial value from our ArrayList that coresponds with the non-terminal.
 		return randomTerminal(indexVal);
 	}	

@@ -19,8 +19,7 @@ public class RandomPhraseGenerator
 	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-terminal keys
-	// For exe:"Noun" = 0 in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
-	// Get a random value from within that ArrayList
+	// For exe:"Noun" = 0 in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then  Get a random value from within that ArrayList
 	static HashMap<String, Integer> keysToNonTerminals  = new HashMap<String, Integer>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 

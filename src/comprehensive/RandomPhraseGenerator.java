@@ -55,14 +55,18 @@ public class RandomPhraseGenerator
 		}
 		
 		// Get the index in our array list of array list for start
-		System.out.println(keysToNonTerminals);
+//		System.out.println(keysToNonTerminals);
 		int startTerminals = keysToNonTerminals.get("<start>");
 		
 		// Get one of the random terminal phrases out of the start terminal array list
 		String phrase = randomTerminal(startTerminals);
 		
 //		System.out.println("number of random phrases to genarate " + args[1]);
-		buildPhrase(phrase);
+		int z = 0;
+		while (z < Integer.parseInt(args[1])) {
+			buildPhrase(phrase);
+			z++;
+		}
 	}
 	
 	
@@ -142,21 +146,10 @@ public class RandomPhraseGenerator
 
 			}
 
-		} else {
-			// TODO create a method that will find detecet if there is other Non-Terminals in a line of text
 		}
-		
-//		System.out.println(terminals.toString());
-		
 		// To let the other methods know what line to continue scanning at
 		return fileData;
 	}
-
-	// TODO need to then add every line after the non-terminal into the corresponding ArrayList until we reach a '}'
-
-	// TODO add logic for if the line does not start with '<' changes
-
-	// To check that everything was added correctly
 
 
 	/**
@@ -240,8 +233,7 @@ public class RandomPhraseGenerator
 	 * @return final phrase
 	 */
 	private static String buildPhrase(String phrase)
-	{
-		
+	{		
 		// create a string builder for the final phrase
 		StringBuilder finalPhrase = new StringBuilder();
 		
@@ -281,7 +273,7 @@ public class RandomPhraseGenerator
 				
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
-				System.out.println(nextTerminal);
+//				System.out.println(nextTerminal);
 				
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);
@@ -321,12 +313,3 @@ public class RandomPhraseGenerator
 	}
 
 }
-	
-
-	// create a method that will create a new HashMap when a new source of terminals are found for a specific non-terminal. exe: we find terminal values for the <Noun> non-terminal we will make a new HashMap to store all of those Noun terminals in. 
-
-
-
-	// create a method that will take args[1] as a parameter and will output the given number of randomly generated phases based off of the value of args[1]. This will be the last method to be called most likely as it glues everything together and makes a finished product. 
-
-

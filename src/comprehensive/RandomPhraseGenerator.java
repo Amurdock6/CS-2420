@@ -202,82 +202,55 @@ public class RandomPhraseGenerator
 	
 	/**
 	 * 
-	 * This method takes in our final phrase and replaces non terminals until all the non terminals have been replaced
+	 * This method takes in our final phrase and replaces Non-Terminals until all the Non-Terminals have been replaced
 	 * 
 	 * @param phrase
 	 * @return final phrase
 	 */
-	private static String buildPhrase(String phrase)
-	{		
+	private static String buildPhrase(String phrase) {
+		// Create a string builder for the final phrase and for any Non-Terminals we find.
+		StringBuilder finalPhrase = new StringBuilder();
+		StringBuilder NonTerminal = new StringBuilder();
 
-//		
-//		// Left angle bracket counter
-//		int leftAngleCounter = 0;
-//		
-//		// For all of the characters in the phrase we are trying to build
-//		for(int j = 0; j < phrase.length(); j++)
-//		{
-			
-			
-//			// add characters while we don't have a non terminal
-//			while(j < phrase.length() && phrase.charAt(j) != '<')
-//			{
-//				finalPhrase.append(phrase.charAt(j));
-//				j++;
-//			}
-//			
-//			// skip past the rest of the characters for the non terminal
-//			while(j < phrase.length() && phrase.charAt(j) != '>')				
-//			{
-//				j++;
-//			}
-//			
-			
-			// Create a string builder for the final phrase and for any Non-Terminals we find.
-			StringBuilder finalPhrase = new StringBuilder();
-			StringBuilder NonTerminal = new StringBuilder();
-			
-			int start = 0;
-			int leftAngleIndex = 0;
-			int rightAngleIndex = 0;
-			int end = phrase.length();
-			
-			// Will find index of the current "<" bracket.
-			int leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
-			System.out.println(leftAngleBracketLocation);
+		int start = 0;
+		int leftAngleIndex = 0;
+		int rightAngleIndex = 0;
+		int end = phrase.length();
 
-			// Will find the index of the current ">" bracket.
-			int rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
+		// Will find index of the current "<" bracket.
+		int leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
+		System.out.println(leftAngleBracketLocation);
+
+		// Will find the index of the current ">" bracket.
+		int rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
+
+		// Will find all of the Non-Terminal values in our phrase and then replace them with terminal values.
+		while (leftAngleBracketLocation != -1) {
+			// This will append everything up to the first Non-Terminal.
+			finalPhrase.append(phrase, start, leftAngleBracketLocation);
+
+			// This will append the non-terminal and tell us what non-terminal we have so we can find the coresponding terminal value for it.
+			NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation);
+			
+			// This should replace the non-terminal with a terminal value
+			finalPhrase.append(findTerminalValue(NonTerminal.toString()), leftAngleBracketLocation, rightAngleBracketLocation);
 
 			
-			// Will find all of the Non-Terminal values in our phrase and then replace them with terminal values.
-			while (leftAngleBracketLocation != -1) {
-				// This will allow us to keep finding non-terminals unitl there is no more non-terminals.
-				leftAngleIndex = leftAngleBracketLocation;
-				rightAngleIndex = rightAngleBracketLocation;
-				
-				leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
-				rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
-					
-				
-				// This will append everything up to the first Non-Terminal.
-				finalPhrase.append(phrase, start, leftAngleBracketLocation);
+			// This will allow us to keep finding non-terminals unitl there is no more non-terminals.
+			leftAngleIndex = leftAngleBracketLocation;
+			rightAngleIndex = rightAngleBracketLocation;
+		}
 
-				// This will append the non terminal and then replace it with a coresponding terminal value.
-				NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation);
-//				System.out.println(NonTerminal.toString());
-				// add logic to find terminal and replace the non-terminal with it
-				
-			}
-			
-			// This will append the rest of our phrase.
-			finalPhrase.append(phrase, rightAngleBracketLocation, end);
-			
-			System.out.println(finalPhrase.toString());
-			return finalPhrase.toString();
+		// This will append the rest of our phrase.
+		finalPhrase.append(phrase, rightAngleBracketLocation, end);
+
+		System.out.println(finalPhrase.toString());
+		return finalPhrase.toString();
 	}	
 	
-	private static String replaceNonTerminal(String nonterminal) {
+	
+	
+	private static String findTerminalValue(String nonterminal) {
 		
 		return null;
 	}

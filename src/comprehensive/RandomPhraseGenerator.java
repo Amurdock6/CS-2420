@@ -208,8 +208,9 @@ public class RandomPhraseGenerator
 			leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex + 1);
 			rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex + 1);
 		}
-		finalPhrase.append(phrase, rightAngleIndex + 1, end);
 		
+		// This will complete the rest of the phrase after the final non-terminal is added.
+		finalPhrase.append(phrase, rightAngleIndex + 1, end);
 		
 		System.out.println(finalPhrase.toString());
 		return finalPhrase.toString();

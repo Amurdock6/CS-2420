@@ -30,12 +30,12 @@ public class RandomPhraseGenerator
 	 * Main method for RandomPhraseGenerator
 	 * @param args command line parameters
 	 */
-	public static void main(String[] args) 
+	public static void main(String grammar, int phrasesGenerated) 
 	{	
 		// Try to read the file and extract non terminals and associated terminals
 		try 
 		{
-			File inputedFile = new File(args[0]);
+			File inputedFile = new File(grammar);
 			Scanner fileReader = new Scanner(inputedFile);
 
 			while (fileReader.hasNextLine()) 
@@ -56,13 +56,13 @@ public class RandomPhraseGenerator
 		// Get the index in our array list of array list for start
 		int startTerminals = keysToNonTerminals.get("<start>");
 		
-		// Get one of the random terminal phrases out of the start terminal array list
-		String phrase = randomTerminal(startTerminals);
-		
 		// Build as many phrases as command line tells us to.
-		int z = Integer.parseInt(args[1]);
+		int z = phrasesGenerated;
 		for (int p = 0; p < z;) 
 		{
+			// Get one of the random terminal phrases out of the start terminal array list
+			String phrase = randomTerminal(startTerminals);
+			
 			finalPhrase(phrase);
 			p++;
 		}

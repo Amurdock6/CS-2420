@@ -40,12 +40,7 @@ public class ComprehensiveExperiment1
 			{
 				for(int j = 0; j < N; j++)
 				{
-
-				}
-				
-				for(int k = 0; k < N; k++)
-				{
-
+					RandomPhraseGenerator.main("src/comprehensive/test" + N + ".g", 1);
 				}
 			}
 
@@ -54,10 +49,6 @@ public class ComprehensiveExperiment1
 			// Run an loop to capture the cost of the overhead
 			for (long i = 0; i < timesToLoop; i++) 
 			{
-				for(int j = 0; j < N; j++) 
-				{
-					
-				}
 				for(int j = 0; j < N; j++) 
 				{
 					

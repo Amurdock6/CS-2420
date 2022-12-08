@@ -7,15 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-//  use this command "java comprehensive/RandomPhraseGenerator.java super_simple.g 5"
-
-
 /**
- * This class represents produces a random phrase given a grammar
+ * This class produces a random phrase given a grammar
  * 
- * @author Todd Oldahm and Alex Murdock
+ * @author Todd Oldham and Alex Murdock
  * @version 11/29/2022
- * @param <E>
  */
 public class RandomPhraseGenerator 
 {
@@ -23,7 +19,7 @@ public class RandomPhraseGenerator
 	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-terminal keys
-	// For exe: 0 = "Noun" in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
+	// For exe:"Noun" = 0 in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then 
 	// Get a random value from within that ArrayList
 	static HashMap<String, Integer> keysToNonTerminals  = new HashMap<String, Integer>();
 	

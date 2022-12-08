@@ -59,7 +59,8 @@ public class RandomPhraseGenerator
 		
 //		System.out.println("number of random phrases to genarate " + args[1]);
 		int z = 0;
-		while (z < Integer.parseInt(args[1])) {
+		while (z < Integer.parseInt(args[1])) 
+		{
 			buildPhrase(phrase);
 			z++;
 		}
@@ -269,7 +270,6 @@ public class RandomPhraseGenerator
 				
 				// get a random terminal from the array list for the terminals
 				String nextTerminal = randomTerminal(nextNonTerminal);
-//				System.out.println(nextTerminal);
 				
 				// add the random terminal to the final phrase after removing the non terminals
 				finalPhrase.append(nextTerminal);

@@ -55,11 +55,10 @@ public class RandomPhraseGenerator
 		String phrase = randomTerminal(startTerminals);
 		
 		// Build as many phrases as the input value
-		int z = 0;
-		while (z < Integer.parseInt(args[1])) 
-		{
+		int z = Integer.parseInt(args[1]);
+		for (int p = 0; p < z;) {
 			buildPhrase(phrase);
-			z++;
+			p++;
 		}
 	}
 
@@ -163,43 +162,43 @@ public class RandomPhraseGenerator
 	 * @param fileData
 	 * @return non terminal
 	 */
-	private static String NonTerminalTerminal(String NonTerminal, int nonTerminalCounter)
-	{
-		// Get the size of the string being entered
-		int sizeOfString = NonTerminal.length();
-		
-		// Create a string builder for the non terminal
-		StringBuilder nonTerminal = new StringBuilder();
-		
-		// Left Angle bracket counter
-		int LeftAngleBracketCounter = 0;
-		
-		// Go through the entered phrase getting a specified non terminal out of it
-		for(int j = 0; j < sizeOfString; j++)
-		{
-			// When we find a left angle bracket
-			if(NonTerminal.charAt(j) == '<')
-			{
-				// Increase the number of non terminals in the phrase
-				LeftAngleBracketCounter ++;
-				
-				// If we are at the non terminal that we want
-				if(LeftAngleBracketCounter == nonTerminalCounter)
-				{
-					// get the characters for that non terminal 
-					while(NonTerminal.charAt(j) != '>')
-					{
-						nonTerminal.append(NonTerminal.charAt(j));
-						j++;
-					}
-					nonTerminal.append(NonTerminal.charAt(j));
-					// return the non terminal
-					return nonTerminal.toString();
-				}
-			}
-		}
-		return null;
-	}
+//	private static String NonTerminalTerminal(String NonTerminal, int nonTerminalCounter)
+//	{
+//		// Get the size of the string being entered
+//		int sizeOfString = NonTerminal.length();
+//		
+//		// Create a string builder for the non terminal
+//		StringBuilder nonTerminal = new StringBuilder();
+//		
+//		// Left Angle bracket counter
+//		int LeftAngleBracketCounter = 0;
+//		
+//		// Go through the entered phrase getting a specified non terminal out of it
+//		for(int j = 0; j < sizeOfString; j++)
+//		{
+//			// When we find a left angle bracket
+//			if(NonTerminal.charAt(j) == '<')
+//			{
+//				// Increase the number of non terminals in the phrase
+//				LeftAngleBracketCounter ++;
+//				
+//				// If we are at the non terminal that we want
+//				if(LeftAngleBracketCounter == nonTerminalCounter)
+//				{
+//					// get the characters for that non terminal 
+//					while(NonTerminal.charAt(j) != '>')
+//					{
+//						nonTerminal.append(NonTerminal.charAt(j));
+//						j++;
+//					}
+//					nonTerminal.append(NonTerminal.charAt(j));
+//					// return the non terminal
+//					return nonTerminal.toString();
+//				}
+//			}
+//		}
+//		return null;
+//	}
 	
 	/**
 	 * 
@@ -210,73 +209,122 @@ public class RandomPhraseGenerator
 	 */
 	private static String buildPhrase(String phrase)
 	{		
-		// create a string builder for the final phrase
-		StringBuilder finalPhrase = new StringBuilder();
-		
-		// Left angle bracket counter
-		int leftAngleCounter = 0;
-		
-		// For all of the characters in the phrase we are trying to build
-		for(int j = 0; j < phrase.length(); j++)
-		{
-			// add characters while we don't have a non terminal
-			while(j < phrase.length() && phrase.charAt(j) != '<')
-			{
-				finalPhrase.append(phrase.charAt(j));
-				j++;
-			}
+
+//		
+//		// Left angle bracket counter
+//		int leftAngleCounter = 0;
+//		
+//		// For all of the characters in the phrase we are trying to build
+//		for(int j = 0; j < phrase.length(); j++)
+//		{
 			
-			// skip past the rest of the characters for the non terminal
-			while(j < phrase.length() && phrase.charAt(j) != '>')				
-			{
-				j++;
-			}
 			
-			leftAngleCounter ++;
+//			// add characters while we don't have a non terminal
+//			while(j < phrase.length() && phrase.charAt(j) != '<')
+//			{
+//				finalPhrase.append(phrase.charAt(j));
+//				j++;
+//			}
+//			
+//			// skip past the rest of the characters for the non terminal
+//			while(j < phrase.length() && phrase.charAt(j) != '>')				
+//			{
+//				j++;
+//			}
+//			
 			
-			// if there is a non terminal
-			if(NonTerminalTerminal(phrase, leftAngleCounter) != null)
-			{
-				// find the index of the non terminal in our array list of array lists	
-				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(phrase, leftAngleCounter));
+			// Create a string builder for the final phrase and for any Non-Terminals we find.
+			StringBuilder finalPhrase = new StringBuilder();
+			StringBuilder NonTerminal = new StringBuilder();
+			
+			int start = 0;
+			int leftAngleIndex = 0;
+			int rightAngleIndex = 0;
+			int end = phrase.length();
+			
+			// Will find index of the current "<" bracket.
+			int leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
+			System.out.println(leftAngleBracketLocation);
+
+			// Will find the index of the current ">" bracket.
+			int rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
+
+			
+			// Will find all of the Non-Terminal values in our phrase and then replace them with terminal values.
+			while (leftAngleBracketLocation != -1) {
+				// This will allow us to keep finding non-terminals unitl there is no more non-terminals.
+				leftAngleIndex = leftAngleBracketLocation;
+				rightAngleIndex = rightAngleBracketLocation;
 				
-				// get a random terminal from the array list for the terminals
-				String nextTerminal = randomTerminal(nextNonTerminal);
+				leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
+				rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
+					
 				
-				// add the random terminal to the final phrase after removing the non terminals
-				finalPhrase.append(nextTerminal);
+				// This will append everything up to the first Non-Terminal.
+				finalPhrase.append(phrase, start, leftAngleBracketLocation);
+
+				// This will append the non terminal and then replace it with a coresponding terminal value.
+				NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation);
+//				System.out.println(NonTerminal.toString());
+				// add logic to find terminal and replace the non-terminal with it
+				
 			}
 			
-			// one character after the right angle bracket
-			j++;
+			// This will append the rest of our phrase.
+			finalPhrase.append(phrase, rightAngleBracketLocation, end);
 			
-			// If there are still more characters in the phrase
-			if(j < phrase.length())
-			{
-				if(phrase.charAt(j) != '<')
-					// add the character after the terminal / right angle bracket
-					finalPhrase.append(phrase.charAt(j));
-				
-				// If the character is left angle bracket j-- to account for for loop
-				if(phrase.charAt(j) == '<')
-					j--;
-			}
-		}
-		
-		// Once the phrase is completed more non terminals may have been added. 
-		// Repeat buildPhrase until no more non terminals
-		if(finalPhrase.toString().contains("<") != false)
-		{
-			buildPhrase(finalPhrase.toString());
-		}
-		
-		else
-		{
-			// Return final phrase when no more terminals
 			System.out.println(finalPhrase.toString());
 			return finalPhrase.toString();
-		}
+	}	
+	
+	private static String replaceNonTerminal(String nonterminal) {
 		
 		return null;
 	}
+			
+			
+			
+			
+//			System.out.println(finalPhrase);
+//			
+//			// if there is a non terminal
+//			if(NonTerminalTerminal(phrase, leftAngleCounter) != null)
+//			{
+//				// find the index of the non terminal in our array list of array lists	
+//				int nextNonTerminal = keysToNonTerminals.get(NonTerminalTerminal(phrase, leftAngleCounter));
+//				
+//				// get a random terminal from the array list for the terminals
+//				String nextTerminal = randomTerminal(nextNonTerminal);
+//				
+//				// add the random terminal to the final phrase after removing the non terminals
+//				finalPhrase.append(nextTerminal);
+//			}
+//			
+//			// one character after the right angle bracket
+//			j++;
+//			
+//			// If there are still more characters in the phrase
+//			if(j < phrase.length())
+//			{
+//				if(phrase.charAt(j) != '<')
+//					// add the character after the terminal / right angle bracket
+//					finalPhrase.append(phrase.charAt(j));
+//				
+//				// If the character is left angle bracket j-- to account for for loop
+//				if(phrase.charAt(j) == '<')
+//					j--;
+//			}
+//		}
+//		
+//		// Once the phrase is completed more non terminals may have been added.
+//		// Repeat buildPhrase until no more non terminals
+//		if (finalPhrase.toString().contains("<") != false) {
+//			buildPhrase(finalPhrase.toString());
+//		}
+//		else 
+//		{
+//			// Return final phrase when no more terminals
+//
+//		}
+//		
 }

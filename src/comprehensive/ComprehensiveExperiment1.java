@@ -17,10 +17,10 @@ public class ComprehensiveExperiment1
 			// empty block
 		}
 		
-		for(int N = 1000; N <= 20000; N += 1000)
+		for(int N = 10; N <= 200; N += 10)
 		{
 			long midpointTime, stopTime;
-			int timesToLoop = 1000;
+			int timesToLoop = 100;
 
 			try 
 			{

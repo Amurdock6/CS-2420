@@ -261,14 +261,14 @@ public class RandomPhraseGenerator
 		// If we have no non-terminals in our text then we will simply return the phrase we were given
 		if(phrase.indexOf("<", 0) == -1) 
 		{
-			System.out.println(phrase);
+			//System.out.println(phrase);
 			return phrase;
 		}
 		
 		// Otherwise build phrase until no more non terminals exist
 		String finalPhrase = buildPhrase(phrase);
 		
-		System.out.println(finalPhrase);
+		//System.out.println(finalPhrase);
 		return finalPhrase;
 	}
 }

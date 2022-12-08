@@ -17,14 +17,14 @@ public class ComprehensiveExperiment2
 			// empty block
 		}
 		
-		for(int N = 1000; N <= 20000; N += 1000)
+		for(int N = 10; N <= 200; N += 10)
 		{
 			long midpointTime, stopTime;
-			int timesToLoop = 1000;
+			int timesToLoop = 100;
 
 			try 
 			{
-				FileWriter write = new FileWriter(new File("src/comprehensive/test" + N + ".g"));
+				FileWriter write = new FileWriter(new File("src/comprehensive/test" + N + "2.g"));
 				write.write(gen(1, N));
 				write.close();
 			} 
@@ -40,12 +40,7 @@ public class ComprehensiveExperiment2
 			{
 				for(int j = 0; j < N; j++)
 				{
-
-				}
-				
-				for(int k = 0; k < N; k++)
-				{
-
+					RandomPhraseGenerator.main("src/comprehensive/test" + N + ".g", 1);
 				}
 			}
 
@@ -54,10 +49,6 @@ public class ComprehensiveExperiment2
 			// Run an loop to capture the cost of the overhead
 			for (long i = 0; i < timesToLoop; i++) 
 			{
-				for(int j = 0; j < N; j++) 
-				{
-					
-				}
 				for(int j = 0; j < N; j++) 
 				{
 					

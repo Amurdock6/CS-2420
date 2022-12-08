@@ -11,7 +11,7 @@ import java.util.Random;
  * This class produces a random phrase given a grammar
  * 
  * @author Todd Oldham and Alex Murdock
- * @version 11/29/2022
+ * @version 12/8/2022
  */
 public class RandomPhraseGenerator 
 {
@@ -19,7 +19,8 @@ public class RandomPhraseGenerator
 	static ArrayList<ArrayList<String>> terminals  = new ArrayList<ArrayList<String>>();			
 	
 	// We will use a HashMap to store our non-terminal keys
-	// For exe:"Noun" = 0 in our ArrayList so when ever we want to get a random noun value we will call our first ArrayList and then  Get a random value from within that ArrayList
+	// For exe:"Noun" = 0 in our ArrayList so when ever we want to get a random noun value 
+	//we will call our first ArrayList and then  Get a random value from within that ArrayList
 	static HashMap<String, Integer> keysToNonTerminals  = new HashMap<String, Integer>();
 	
 	// We will use i + 1 as our key when adding items to a HashMap 
@@ -29,20 +30,25 @@ public class RandomPhraseGenerator
 	 * Main method for RandomPhraseGenerator
 	 * @param args command line parameters
 	 */
-	public static void main(String[] args) {	
+	public static void main(String[] args) 
+	{	
 		// Try to read the file and extract non terminals and associated terminals
-		try {
+		try 
+		{
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
 
-			while (fileReader.hasNextLine()) {
+			while (fileReader.hasNextLine()) 
+			{
 				String fileData = fileReader.nextLine();
 				fileData = getContentInCurlyBraces(fileReader, fileData);
 			}
 
 			fileReader.close();
 
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
 			System.out.println("An error occurred when trying to open the file.");
 			e.printStackTrace();
 		}
@@ -53,9 +59,10 @@ public class RandomPhraseGenerator
 		// Get one of the random terminal phrases out of the start terminal array list
 		String phrase = randomTerminal(startTerminals);
 		
-		// Build as many phrases as cmd line tells us to.
+		// Build as many phrases as command line tells us to.
 		int z = Integer.parseInt(args[1]);
-		for (int p = 0; p < z;) {
+		for (int p = 0; p < z;) 
+		{
 			finalPhrase(phrase);
 			p++;
 		}
@@ -68,20 +75,24 @@ public class RandomPhraseGenerator
 	 * @param fileData
 	 * @return The line of text for the scanner to pick back up yet
 	 */
-	private static String getContentInCurlyBraces(Scanner fileReader, String fileData) {
+	private static String getContentInCurlyBraces(Scanner fileReader, String fileData) 
+	{
 		// This will make it so we only print out content within the curly braces
-		if (fileData.equals("{")) {
-			// Get subsequent lines in the file
-			while (!fileData.equals("}")) {
+		if (fileData.equals("{")) 
+		{
+			// Get subsequent lines in the file until we reach right curly brace
+			while (!fileData.equals("}")) 
+			{
 				fileData = fileReader.nextLine();
-				// If the line is a right curly brace don't do anything
-				if (!fileData.equals("}")) {
+				// If the line isn't a right curly brace extract data
+				if (!fileData.equals("}")) 
+				{
 					// This will check for Non-Terminal data points
 					fileData = getNonTerminalValues(fileReader, fileData);
 				}
 			}
 		}
-		// To let the other methods know what line to continue scanning at
+		// return the line we are at in the file
 		return fileData;
 	}
 
@@ -97,29 +108,34 @@ public class RandomPhraseGenerator
 		// This will check for '<' and '>' brackets to help tell if the value we are looking at is a non-terminal or not.
 		char startOfStringChar = fileData.charAt(0);
 
-		// Will use this to find out what our non terminal is called by combing the chars into a String.
+		// Create a string builder to build our non terminal.
 		StringBuilder sb = new StringBuilder();
 
 		// This will tell us if we found a non-terminal.
-		if (startOfStringChar == '<') {
+		if (startOfStringChar == '<') 
+		{
 
 			// Tells us where the non-terminal ends.
 			int RightAngle = fileData.indexOf('>');
 
 			// This is how we will get each char of the non-terminal to add into our StringBuilder.
-			for (int j = 0; j < RightAngle + 1; j++) {
+			for (int j = 0; j < RightAngle + 1; j++) 
+			{
 				sb.append(fileData.charAt(j));
 			}
 
 			ArrayList<String> terminalValuesToAdd = new ArrayList<String>();
+			
 			// will check to make sure this non-terminal hasn't already been added
-			if (!keysToNonTerminals.containsKey(sb.toString())) {
+			if (!keysToNonTerminals.containsKey(sb.toString())) 
+			{
 				// We will then add the completed String into our HashMap and give it a key.
 				keysToNonTerminals.put(sb.toString(), i + 1);
 				i++;
 
-				while (!fileData.equals("}")) {
-					// This will see at what index our new non-termial is at and then add all of our values into that
+				while (!fileData.equals("}"))
+				{
+					// This will see at what index our new non-terminal is at and then add all of our values into that
 						terminalValuesToAdd.add(fileData);
 						fileData = fileReader.nextLine();
 				}
@@ -134,12 +150,13 @@ public class RandomPhraseGenerator
 	
 	
 	/**
-	 * This method will take a line of text and find all the non-terminals contained wihtin it and replace them with a terminal value.
+	 * This method will take a line of text and find all the non-terminals contained within it and replace them with a terminal value.
 	 * 
 	 * @param phrase
 	 * @return completedPhrase
 	 */
-	private static String buildPhrase(String phrase) {
+	private static String buildPhrase(String phrase) 
+	{
 		// Create a string builder for the completedPhrase and for any Non-Terminals we find.
 		StringBuilder completedPhrase = new StringBuilder();
 		StringBuilder nonTerminal = new StringBuilder();
@@ -160,7 +177,7 @@ public class RandomPhraseGenerator
 			// This will append everything up to the first Non-Terminal.
 			completedPhrase.append(phrase, start, leftAngleBracketLocation);
 		
-			// This will append the non-terminal and tell us what non-terminal we have so we can find the coresponding terminal value for it.
+			// This will append the non-terminal and tell us what non-terminal we have so we can find the corresponding terminal value for it.
 			nonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation + 1);
 			
 			// This should replace the non-terminal with a terminal value
@@ -168,8 +185,10 @@ public class RandomPhraseGenerator
 			
 			nonTerminal.setLength(0);
 			
-			// If our new terminal value sill contains a non-terminal then we will keep finding a replacemnt until we have no more non-termianls
-			if (terminalValue.contains("<")) {
+			// If our new terminal value sill contains a non-terminal 
+			//then we will keep finding a replacement until we have no more non-terminals
+			if (terminalValue.contains("<")) 
+			{
 				terminalValue = buildPhrase(terminalValue);
 			}
 			
@@ -178,7 +197,7 @@ public class RandomPhraseGenerator
 			// This will set our NonTerminal StringBuilder back to 0 so we are not building Non-Terminals on top of each other.
 			nonTerminal.setLength(0);
 		
-			// This will allow us to keep finding non-terminals unitl there is no more non-terminals.
+			// This will allow us to keep finding non-terminals until there are no more non-terminals.
 			leftAngleIndex = leftAngleBracketLocation;
 			rightAngleIndex = rightAngleBracketLocation;
 
@@ -196,18 +215,18 @@ public class RandomPhraseGenerator
 		return completedPhrase.toString();
 	}
 	
-	
 	/**
-	 * This method will take in a non-terminal then find the coresponding terminal value and return it.
+	 * This method will take in a non-terminal then find the corresponding terminal value and return it.
 	 * 
 	 * @param nonterminal
 	 * @return terminal value
 	 */
-	private static String findTerminalValue(String nonterminal) {
+	private static String findTerminalValue(String nonterminal) 
+	{
 		// This will find the value in our keysToNonTerminals.
 		int indexVal = keysToNonTerminals.get(nonterminal);
 		
-		// We then use that key to grab a termial value from our ArrayList that coresponds with the non-terminal.
+		// We then use that key to grab a terminal value from our ArrayList that corresponds with the non-terminal.
 		return randomTerminal(indexVal);
 	}	
 	
@@ -233,16 +252,20 @@ public class RandomPhraseGenerator
 	}
 	
 	/**
-	 * This method will build our finalPhrase and give us an end prodcut.
+	 * This method will build our finalPhrase and give us an end product.
 	 * 
 	 * @return completed finalPhrase
 	 */
-	private static String finalPhrase(String phrase) {
-		// If we have no non-termials in our text then we will simply return the phrase we were given
-		if(phrase.indexOf("<", 0) == -1) {
+	private static String finalPhrase(String phrase) 
+	{
+		// If we have no non-terminals in our text then we will simply return the phrase we were given
+		if(phrase.indexOf("<", 0) == -1) 
+		{
 			System.out.println(phrase);
 			return phrase;
 		}
+		
+		// Otherwise build phrase until no more non terminals exist
 		String finalPhrase = buildPhrase(phrase);
 		
 		System.out.println(finalPhrase);

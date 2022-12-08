@@ -116,13 +116,10 @@ public class RandomPhraseGenerator
 		{
 
 			// Tells us where the non-terminal ends.
-			int RightAngle = fileData.indexOf('>');
+			int RightAngle = fileData.indexOf(">");
 
 			// This is how we will get each char of the non-terminal to add into our StringBuilder.
-			for (int j = 0; j < RightAngle + 1; j++) 
-			{
-				sb.append(fileData.charAt(j));
-			}
+			sb.append(fileData, fileData.indexOf("<"), RightAngle + 1);
 
 			ArrayList<String> terminalValuesToAdd = new ArrayList<String>();
 			

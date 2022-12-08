@@ -26,14 +26,12 @@ public class RandomPhraseGenerator
 	// We will use i + 1 as our key when adding items to a HashMap 
 	static int i = -1;
 	
-	
 	/**
 	 * Main method for RandomPhraseGenerator
 	 * @param args command line parameters
 	 */
 	public static void main(String[] args) {	
 		// Try to read the file and extract non terminals and associated terminals
-		// Will read the file and start calling our methods to figure out some of the logic
 		try {
 			File inputedFile = new File(args[0]);
 			Scanner fileReader = new Scanner(inputedFile);
@@ -51,13 +49,12 @@ public class RandomPhraseGenerator
 		}
 		
 		// Get the index in our array list of array list for start
-//		System.out.println(keysToNonTerminals);
 		int startTerminals = keysToNonTerminals.get("<start>");
 		
 		// Get one of the random terminal phrases out of the start terminal array list
 		String phrase = randomTerminal(startTerminals);
 		
-//		System.out.println("number of random phrases to genarate " + args[1]);
+		// Build as many phrases as the input value
 		int z = 0;
 		while (z < Integer.parseInt(args[1])) 
 		{
@@ -65,8 +62,7 @@ public class RandomPhraseGenerator
 			z++;
 		}
 	}
-	
-	
+
 	/**
 	 * This method will find only data inside of the curly braces
 	 * 
@@ -77,25 +73,20 @@ public class RandomPhraseGenerator
 	private static String getContentInCurlyBraces(Scanner fileReader, String fileData) {
 		// This will make it so we only print out content within the curly braces
 		if (fileData.equals("{")) {
-			// add logic for what to do when it finds angle brackets
+			// Get subsequent lines in the file
 			while (!fileData.equals("}")) {
 				fileData = fileReader.nextLine();
-				if (fileData.equals("}")) {
-//					System.out.println("\n");
-				} else {
-//					System.out.println(fileData);
+				// If the line is a right curly brace don't do anything
+				if (!fileData.equals("}")) {
 					// This will check for Non-Terminal data points
 					fileData = getNonTerminalValues(fileReader, fileData);
 				}
 			}
-
 		}
-
 		// To let the other methods know what line to continue scanning at
 		return fileData;
 	}
 
-	
 	/**
 	 * This method will find all non-terminals and add them into the appropriate
 	 * dataStructure along with their terminal values.
@@ -137,17 +128,11 @@ public class RandomPhraseGenerator
 				
 				// This will add all of our new values to the main ArrayList
 				terminals.add(terminalValuesToAdd);
-
-			} else if (keysToNonTerminals.containsKey(sb.toString())) {
-				// if the non-terminal already exist then we will just add the new values we found into its existing index
-
 			}
-
 		}
 		// To let the other methods know what line to continue scanning at
 		return fileData;
 	}
-
 
 	/**
 	 * 
@@ -170,7 +155,6 @@ public class RandomPhraseGenerator
 		// Return the String associated with the random index to replace the NonTerminal
 		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
 	}
-	
 	
 	/**
 	 * 
@@ -212,15 +196,10 @@ public class RandomPhraseGenerator
 					// return the non terminal
 					return nonTerminal.toString();
 				}
-				
 			}
 		}
-		
 		return null;
 	}
-	
-	
-	
 	
 	/**
 	 * 
@@ -245,13 +224,6 @@ public class RandomPhraseGenerator
 			{
 				finalPhrase.append(phrase.charAt(j));
 				j++;
-				
-//				if(j == phrase.length() && !finalPhrase.toString().contains("<"))
-//				{
-//					System.out.println(finalPhrase.toString());
-//					return finalPhrase.toString();
-//				}
-				
 			}
 			
 			// skip past the rest of the characters for the non terminal
@@ -307,5 +279,4 @@ public class RandomPhraseGenerator
 		
 		return null;
 	}
-
 }

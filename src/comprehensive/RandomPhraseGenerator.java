@@ -133,6 +133,7 @@ public class RandomPhraseGenerator
 		return fileData;
 	}
 
+	
 	/**
 	 * 
 	 * This method takes a integer index value and gets a random terminal for the non terminal associated with the index
@@ -155,54 +156,12 @@ public class RandomPhraseGenerator
 		return terminals.get(indexOfNonTerminal).get(indexOfTerminal);
 	}
 	
-	/**
-	 * 
-	 * This method finds Non terminals in a supposed terminal value
-	 * 
-	 * @param fileData
-	 * @return non terminal
-	 */
-//	private static String NonTerminalTerminal(String NonTerminal, int nonTerminalCounter)
-//	{
-//		// Get the size of the string being entered
-//		int sizeOfString = NonTerminal.length();
-//		
-//		// Create a string builder for the non terminal
-//		StringBuilder nonTerminal = new StringBuilder();
-//		
-//		// Left Angle bracket counter
-//		int LeftAngleBracketCounter = 0;
-//		
-//		// Go through the entered phrase getting a specified non terminal out of it
-//		for(int j = 0; j < sizeOfString; j++)
-//		{
-//			// When we find a left angle bracket
-//			if(NonTerminal.charAt(j) == '<')
-//			{
-//				// Increase the number of non terminals in the phrase
-//				LeftAngleBracketCounter ++;
-//				
-//				// If we are at the non terminal that we want
-//				if(LeftAngleBracketCounter == nonTerminalCounter)
-//				{
-//					// get the characters for that non terminal 
-//					while(NonTerminal.charAt(j) != '>')
-//					{
-//						nonTerminal.append(NonTerminal.charAt(j));
-//						j++;
-//					}
-//					nonTerminal.append(NonTerminal.charAt(j));
-//					// return the non terminal
-//					return nonTerminal.toString();
-//				}
-//			}
-//		}
-//		return null;
-//	}
 	
 	/**
+	 *
 	 * 
-	 * This method takes in our final phrase and replaces Non-Terminals until all the Non-Terminals have been replaced
+	 * This method takes in our final phrase and replaces Non-Terminals until all
+	 * the Non-Terminals have been replaced creating a completed finial phrase
 	 * 
 	 * @param phrase
 	 * @return final phrase
@@ -219,7 +178,6 @@ public class RandomPhraseGenerator
 
 		// Will find index of the current "<" bracket.
 		int leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex);
-		System.out.println(leftAngleBracketLocation);
 
 		// Will find the index of the current ">" bracket.
 		int rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex);
@@ -230,29 +188,44 @@ public class RandomPhraseGenerator
 			finalPhrase.append(phrase, start, leftAngleBracketLocation);
 
 			// This will append the non-terminal and tell us what non-terminal we have so we can find the coresponding terminal value for it.
-			NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation);
+			NonTerminal.append(phrase, leftAngleBracketLocation, rightAngleBracketLocation + 1);
 			
 			// This should replace the non-terminal with a terminal value
-			finalPhrase.append(findTerminalValue(NonTerminal.toString()), leftAngleBracketLocation, rightAngleBracketLocation);
+			String terminalValue = findTerminalValue(NonTerminal.toString());
+			finalPhrase.append(terminalValue);
 
-			
+			// This will set our NonTerminal StringBuilder back to 0 so we are not building Non-Terminals on top of each other.
+			NonTerminal.setLength(0);
+		
 			// This will allow us to keep finding non-terminals unitl there is no more non-terminals.
 			leftAngleIndex = leftAngleBracketLocation;
 			rightAngleIndex = rightAngleBracketLocation;
+
+			// Update the start and end indices for the finalPhrase StringBuilder
+			start = rightAngleBracketLocation + 1;
+
+			// Find the next Non-Terminal value
+			leftAngleBracketLocation = phrase.indexOf("<", leftAngleIndex + 1);
+			rightAngleBracketLocation = phrase.indexOf(">", rightAngleIndex + 1);
 		}
-
-		// This will append the rest of our phrase.
-		finalPhrase.append(phrase, rightAngleBracketLocation, end);
-
+		finalPhrase.append(phrase, rightAngleIndex + 1, end);
+		
+		
 		System.out.println(finalPhrase.toString());
 		return finalPhrase.toString();
-	}	
+	}
 	
 	
 	
-	private static String findTerminalValue(String nonterminal) {
+	private static String findTerminalValue(String nonterminal) {		
+//		System.out.println(nonterminal);
+		// This will find the value in our keysToNonTerminals.
+		int indexVal = keysToNonTerminals.get(nonterminal);
 		
-		return null;
+		// We then use that key to grab a termial value from our ArrayList that coresponds with the non-terminal.
+		String terminalVal = randomTerminal(indexVal); 
+		
+		return terminalVal;
 	}
 			
 			

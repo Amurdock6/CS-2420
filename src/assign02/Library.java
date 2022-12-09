@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**

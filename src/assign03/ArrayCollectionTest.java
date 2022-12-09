@@ -15,7 +15,6 @@ class ArrayCollectionTest {
 	private ArrayCollection arrayCollection;
 	private ArrayCollection bigArray;
 
-	@SuppressWarnings({ "rawtypes" })
 	@BeforeEach
 	void setUp() throws Exception 
 	{ 
@@ -88,9 +87,11 @@ class ArrayCollectionTest {
 		bigArray.add(testobj5);
 		
 		arrayCollection.add(testobj1);
+		System.out.println(arrayCollection.size());
 		
 		// add all objects
 		arrayCollection.addAll(bigArray);
+		System.out.println(arrayCollection.size());
 		
 		// make sure that it adds objects not already in the collection
 		assertTrue(arrayCollection.size() == 5);
@@ -226,36 +227,37 @@ class ArrayCollectionTest {
 	
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	void testRemoveAll() 
-//	{
-//		// create object
-//		Object testobj1 = "test1";
-//		Object testobj2 = "test2";
-//		Object testobj3 = "test3";
-//		Object testobj4 = "test4";
-//		Object testobj5 = "test5";
-//		
-//		// add the objects to the collections
-//		arrayCollection.add(testobj1);
-//		arrayCollection.add(testobj2);
-//		arrayCollection.add(testobj3);
-//		arrayCollection.add(testobj4);
-//		
-//		bigArray.add(testobj1);
-//		bigArray.add(testobj2);
-//		bigArray.add(testobj3);
-//		bigArray.add(testobj4);
-//		bigArray.add(testobj5);
-//		
-//		// remove all the objects
-//		arrayCollection.addAll(bigArray);
-//		
-//		assertTrue(arrayCollection.removeAll(bigArray));
-//	}
-
 	@SuppressWarnings("unchecked")
+	@Test
+	void testRemoveAll() 
+	{
+		// create object
+		Object testobj1 = "test1";
+		Object testobj2 = "test2";
+		Object testobj3 = "test3";
+		Object testobj4 = "test4";
+		Object testobj5 = "test5";
+		
+		// add the objects to the collections
+		arrayCollection.add(testobj1);
+		arrayCollection.add(testobj2);
+		arrayCollection.add(testobj3);
+		arrayCollection.add(testobj4);
+		
+		bigArray.add(testobj1);
+		bigArray.add(testobj2);
+		bigArray.add(testobj3);
+		bigArray.add(testobj4);
+		bigArray.add(testobj5);
+		
+		// remove all the objects
+		arrayCollection.addAll(bigArray);
+		
+		arrayCollection.removeAll(arrayCollection);
+		
+		assertTrue(arrayCollection.size() == 0);
+	}
+
 	@Test
 	void testRetainAll() 
 	{
@@ -276,12 +278,11 @@ class ArrayCollectionTest {
 		bigArray.add(testobj1);
 		
 		// retain only the objects that bigArray has
-		assertTrue(arrayCollection.retainAll(bigArray));
+		arrayCollection.retainAll(bigArray);
 		assertTrue(arrayCollection.size() == 1);
-
 	}
 
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	@Test
 	void testSize() 
 	{

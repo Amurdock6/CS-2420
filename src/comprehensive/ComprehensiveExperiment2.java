@@ -20,7 +20,7 @@ public class ComprehensiveExperiment2
 		for(int N = 10; N <= 200; N += 10)
 		{
 			long midpointTime, stopTime;
-			int timesToLoop = 100;
+			int timesToLoop = 1000;
 
 			try 
 			{

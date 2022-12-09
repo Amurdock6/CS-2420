@@ -40,7 +40,7 @@ public class ComprehensiveExperiment2
 			{
 				for(int j = 0; j < N; j++)
 				{
-					RandomPhraseGenerator.main("src/comprehensive/test" + N + ".g", 1);
+					RandomPhraseGenerator.main("src/comprehensive/test" + N + "2.g", 1);
 				}
 			}
 

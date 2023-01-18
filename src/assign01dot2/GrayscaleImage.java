@@ -100,6 +100,7 @@ public class GrayscaleImage {
         } else {
         	 throw new IllegalArgumentException("isn't a vaild point");
         }
+    	
        return Double.NaN;
     }
 

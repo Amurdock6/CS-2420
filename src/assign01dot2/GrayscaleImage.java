@@ -173,7 +173,7 @@ public class GrayscaleImage {
     	
     	// Then we will convert our 2D array into a GrayscaleImage
     	GrayscaleImage normalizedImage = new GrayscaleImage(normalizedImage2DArray);
-    	System.out.println(normalizedImage.averageBrightness());
+//    	System.out.println(normalizedImage.averageBrightness());
     	
         return normalizedImage;
     }
@@ -214,8 +214,25 @@ public class GrayscaleImage {
      * @throws IllegalArgumentException if the specified rectangle goes outside the bounds of the original image
      */
     public GrayscaleImage cropped(int startRow, int startCol, int width, int height){
-        //STUDENT: FILL ME IN
-        return null;
+    	// First we make a 2D array that is the same size as the origonal image.
+    	System.out.println(startRow - height);
+    	System.out.println(startCol - width);
+    	System.out.println(startRow);
+    	
+    	double[][] croppedImage2DArray = new double[startRow + height][startCol + width];
+    	
+    	for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				System.out.println(imageData[startCol - x].length);
+				croppedImage2DArray[y][x] = imageData[startRow - y][startCol - x];
+			}
+		}
+    	
+    	
+    	// Then we will convert our 2D array into a GrayscaleImage
+    	GrayscaleImage normalizedImage = new GrayscaleImage(croppedImage2DArray);
+    			
+        return normalizedImage;
     }
 
     /**

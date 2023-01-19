@@ -49,20 +49,20 @@ class GrayscaleImageTest {
         assertEquals(bigZero.averageBrightness(), 0);
     }
 
-    @Test
-    void normalized() {
-        var smallNorm = smallSquare.normalized();
-        assertEquals(smallNorm.averageBrightness(), 127, 127*.001);
-        var scale = 127/2.5;
-        var expectedNorm = new GrayscaleImage(new double[][]{{scale, 2*scale},{3*scale, 4*scale}});
-        for(var row = 0; row < 2; row++){
-            for(var col = 0; col < 2; col++){
-                assertEquals(smallNorm.getPixel(col, row), expectedNorm.getPixel(col, row),
-                        expectedNorm.getPixel(col, row)*.001,
-                        "pixel at row: " + row + " col: " + col + " incorrect");
-            }
-        }
-    }
+	@Test
+	void normalized() {
+		var smallNorm = smallSquare.normalized();
+		System.out.println(smallNorm.averageBrightness());
+		assertEquals(smallNorm.averageBrightness(), 127, 127 * .001);
+		var scale = 127 / 2.5;
+		var expectedNorm = new GrayscaleImage(new double[][] { { scale, 2 * scale }, { 3 * scale, 4 * scale } });
+		for (var row = 0; row < 2; row++) {
+			for (var col = 0; col < 2; col++) {
+				assertEquals(smallNorm.getPixel(col, row), expectedNorm.getPixel(col, row),
+						expectedNorm.getPixel(col, row) * .001, "pixel at row: " + row + " col: " + col + " incorrect");
+			}
+		}
+	}
 
     @Test
     void mirrored() {

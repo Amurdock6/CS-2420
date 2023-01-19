@@ -160,20 +160,22 @@ public class GrayscaleImage {
      * @return a GrayScale image with pixel data uniformly rescaled so that its averageBrightness() is 127
      */
     public GrayscaleImage normalized(){
-    	// First we make a 2D array that is the same size as the origonal image.
-    	double[][] normalizedImage2DArray = new double[imageData[0].length][imageData.length];
-    	
-        // Here we will copy every pixel from the old image into our new 2D array and multiply it by 127.
+        double scaleFactor = 127 / averageBrightness();
+        
+        // First we make a 2D array that is the same size as the original image.
+    	double[][] normalized2DArray = new double[imageData[0].length][imageData.length];
+        
+    	// Then we will set the brightness of the specified pixel below.
     	for (int y = 0; y < imageData[0].length; y++) {
 			for (int x = 0; x < imageData.length; x++) {
-//				System.out.println(imageData[x][y] * 127 *.001);
-				normalizedImage2DArray[y][x] = imageData[y][x] * 127;
+				 double newPixelValue = getPixel(y, x) * scaleFactor;
+				 normalized2DArray[y][x] = newPixelValue;
 			}
 		}
     	
-    	// Then we will convert our 2D array into a GrayscaleImage
-    	GrayscaleImage normalizedImage = new GrayscaleImage(normalizedImage2DArray);
-//    	System.out.println(normalizedImage.averageBrightness());
+    	// We will then turn the 2DArray into a GrayscaleImage
+    	GrayscaleImage normalizedImage = new GrayscaleImage(normalized2DArray);
+    	System.out.println(normalizedImage.averageBrightness());
     	
         return normalizedImage;
     }
@@ -186,11 +188,11 @@ public class GrayscaleImage {
      * @return a new GrayscaleImage that is a mirrored version of the this
      */
     public GrayscaleImage mirrored(){
-    	// First we make a 2D array that is the same size as the origonal image.
+    	// First we make a 2D array that is the same size as the original image.
     	double[][] mirroredImage2DArray = new double[imageData[0].length][imageData.length];
     	
-        // Here we will copy the initial data from the image and flip it on the x axis.
-    	for (int y = 0; y < imageData[0].length; y++) {
+		// Here we will copy the initial data from the image and flip it on the x axis.
+		for (int y = 0; y < imageData[0].length; y++) {
 			for (int x = 0; x < imageData.length; x++) {
 				mirroredImage2DArray[y][imageData.length - x - 1] = imageData[y][x];
 			}
@@ -214,41 +216,71 @@ public class GrayscaleImage {
      * @throws IllegalArgumentException if the specified rectangle goes outside the bounds of the original image
      */
     public GrayscaleImage cropped(int startRow, int startCol, int width, int height){
-    	// First we make a 2D array that is the same size as the origonal image.
-    	System.out.println(startRow - height);
-    	System.out.println(startCol - width);
-    	System.out.println(startRow);
-    	
-    	double[][] croppedImage2DArray = new double[startRow + height][startCol + width];
-    	
-    	for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				System.out.println(imageData[startCol - x].length);
-				croppedImage2DArray[y][x] = imageData[startRow - y][startCol - x];
+        // We will first check to make sure that the portion of the image we want to crop actually exist.
+    	if(startRow < 0 || startCol < 0)
+            throw new IllegalArgumentException("Specified rectangle goes outside the bounds of the original image");
+
+    	// Then we will create a 2D array to store the new data for the cropped image.
+        double[][] croppedImage2DArray = new double[width][height];
+        
+        
+        // Then we will set the values in our croppedImage2DArray
+        for(int row = 0; row < height; row++){
+            for(int col = 0; col < width; col++){
+            	croppedImage2DArray[row][col] = imageData[startRow + row][startCol + col];
+            }
+        }
+        GrayscaleImage croppedImage = new GrayscaleImage(croppedImage2DArray);
+        
+        return croppedImage;
+    }
+    
+
+	/**
+	 * Returns a new "centered" square image (new width == new height) For example,
+	 * if the width is 20 pixels greater than the height, this should return a
+	 * height x height image, with 10 pixels removed from the left and right edges
+	 * of the image If the number of pixels to be removed is odd, remove 1 fewer
+	 * pixel from the left or top part (note this convention should be
+	 * SIMPLER/EASIER to implement than the alternative) The original image should
+	 * not be changed
+	 * 
+	 * @return a new, square, GrayscaleImage
+	 */
+	public GrayscaleImage squarified() {
+		// Here we will set our width and height variables equal to the current size of the image
+		// We will also intilize our newWidth, newHeight and removePixel variables
+		int height = imageData[0].length;
+		int width = imageData.length;
+		int newWidth, newHeight;
+		int removePixel;
+
+		// Then we will go through and check our height and width of the current image and set our newWidth and newHeight variables appropitaly so we can get a squared image
+		if (height > width) {
+			newWidth = width;
+			newHeight = width;
+			removePixel = (height - width) / 2;
+		} else {
+			newWidth = height;
+			newHeight = height;
+			removePixel = (width - height) / 2;
+		}
+
+		// We will then create a 2D array that has the the new dimensions we decided upon to be squared.
+		double[][] squarifiedImage2DArray = new double[newHeight][newWidth];
+
+		// Then we will go through and set all of the pixels that we want to keep to make our image squared into our 2D Array.
+		for (int row = removePixel; row < newHeight + removePixel; row++) {
+			for (int col = removePixel; col < newWidth + removePixel; col++) {
+				squarifiedImage2DArray[row - removePixel][col - removePixel] = imageData[row][col];
 			}
 		}
-    	
-    	
-    	// Then we will convert our 2D array into a GrayscaleImage
-    	GrayscaleImage normalizedImage = new GrayscaleImage(croppedImage2DArray);
-    			
-        return normalizedImage;
-    }
 
-    /**
-     * Returns a new "centered" square image (new width == new height)
-     * For example, if the width is 20 pixels greater than the height,
-     * this should return a height x height image, with 10 pixels removed from the left and right
-     * edges of the image
-     * If the number of pixels to be removed is odd, remove 1 fewer pixel from the left or top part
-     * (note this convention should be SIMPLER/EASIER to implement than the alternative)
-     * The original image should not be changed
-     * @return a new, square, GrayscaleImage
-     */
-    public GrayscaleImage squarified(){
-        //STUDENT: FILL ME IN
-        return null;
-    }
+		// Then we create our GrayscaleImage based off of the data in our 2D Array.
+		GrayscaleImage squarifiedImage = new GrayscaleImage(squarifiedImage2DArray);
 
+		return squarifiedImage;
+	}
 
 }
+

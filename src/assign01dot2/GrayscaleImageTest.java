@@ -2,7 +2,7 @@ package assign01dot2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GrayscaleImageTest {
@@ -22,7 +22,11 @@ class GrayscaleImageTest {
         assertEquals(smallSquare.getPixel(1,0), 2);
         assertEquals(smallSquare.getPixel(0,1), 3);
         assertEquals(smallSquare.getPixel(1,1), 4);
-
+    }
+    
+    @Test
+    void testPixelsThatDontExist() {
+    	assertThrows(IllegalArgumentException.class, () -> { smallSquare.getPixel(7, 10); });
     }
 
     @Test
@@ -30,6 +34,12 @@ class GrayscaleImageTest {
         assertEquals(smallSquare, smallSquare);
         var equivalent = new GrayscaleImage(new double[][]{{1,2},{3,4}});
         assertEquals(smallSquare, equivalent);
+    }
+    
+    @Test
+    void testDosentEqual() {
+    	 var notEquivalent = new GrayscaleImage(new double[][]{{3,4, 6},{3,4,7}});
+    	 equals(!notEquivalent.equals(smallSquare));
     }
 
     @Test

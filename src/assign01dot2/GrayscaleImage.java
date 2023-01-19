@@ -4,7 +4,6 @@ package assign01dot2;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -89,20 +88,15 @@ public class GrayscaleImage {
      * @return the brightness value at the specified coordinates
      * @throws IllegalArgumentException if x, y are not within the image width/height
      */
-    public double getPixel(int x, int y) {
-//    	System.out.println(ImageIO.);
-    	
-    	double pixel = imageData.getRGB(x,y);
-    	
-    	
-    	if(imageData[x][y] != -1) {
-//    		int color = image.getRGB(x, y);
-        } else {
-        	 throw new IllegalArgumentException("isn't a vaild point");
-        }
-    	
-       return Double.NaN;
-    }
+	public double getPixel(int x, int y) {
+
+		// Will check to make sure our x and y values are contained in the image.
+		if (imageData.length < x || imageData.length < y) {
+			throw new IllegalArgumentException("isn't a vaild point");
+		}
+		
+		return imageData[y][x];
+	}
 
     /**
      * Two images are equal if they have the same size and each corresponding pixel
@@ -111,15 +105,30 @@ public class GrayscaleImage {
      * @return
      */
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if(!(other instanceof GrayscaleImage)){
             return false;
         }
 
         GrayscaleImage otherImage = (GrayscaleImage)other;
 
-        //STUDENT: implement equals to return true only when all pixels are exactly equal
-        return this == otherImage; //<-- This is an incorrect implementation!
+        
+		// Will check to make sure our images have the same dimesions as each other.
+		if (otherImage.imageData.length != imageData.length || otherImage.imageData[0].length != imageData[0].length) {
+			return false;
+		}
+        
+        // This will iterator over every pixel in both our images and will check to make sure each pixel is the same.
+		for (int y = 0; y < imageData[0].length; y++) {
+			for (int x = 0; x < imageData.length; x++) {
+				if (otherImage.imageData[y][x] != imageData[y][x]) {
+					return false;
+				}
+			}
+		}
+        
+		// If we make it through all of the above code then our images are the same.
+        return true;
     }
 
 
@@ -127,9 +136,20 @@ public class GrayscaleImage {
      * Computes the average of all values in image data
      * @return the average of the imageData array
      */
-    public double averageBrightness(){
-        //STUDENT FILL ME IN WITH A CORRECT IMPLEMENTATION
-        return Double.NaN;
+    public double averageBrightness() {
+        double initialPixelValues = 0;
+    	int pixels = 0;
+        
+        // Will grab the value of each pixel in the image and then add it into our initialPixelValues variable
+    	for (int y = 0; y < imageData[0].length; y++) {
+			for (int x = 0; x < imageData.length; x++) {
+				initialPixelValues += imageData[y][x];
+				pixels++;
+			}
+		}
+    	
+    	// To get our average we will simply divided the combined value of all the pixels in the image by the number of pixels that are in the image.
+        return initialPixelValues / pixels;
     }
 
     /**
@@ -140,8 +160,22 @@ public class GrayscaleImage {
      * @return a GrayScale image with pixel data uniformly rescaled so that its averageBrightness() is 127
      */
     public GrayscaleImage normalized(){
-        //STUDENT FILL ME IN WITH A CORRECT IMPLEMENTATION
-        return null;
+    	// First we make a 2D array that is the same size as the origonal image.
+    	double[][] normalizedImage2DArray = new double[imageData[0].length][imageData.length];
+    	
+        // Here we will copy every pixel from the old image into our new 2D array and multiply it by 127.
+    	for (int y = 0; y < imageData[0].length; y++) {
+			for (int x = 0; x < imageData.length; x++) {
+//				System.out.println(imageData[x][y] * 127 *.001);
+				normalizedImage2DArray[y][x] = imageData[y][x] * 127;
+			}
+		}
+    	
+    	// Then we will convert our 2D array into a GrayscaleImage
+    	GrayscaleImage normalizedImage = new GrayscaleImage(normalizedImage2DArray);
+    	System.out.println(normalizedImage.averageBrightness());
+    	
+        return normalizedImage;
     }
 
 
@@ -152,8 +186,20 @@ public class GrayscaleImage {
      * @return a new GrayscaleImage that is a mirrored version of the this
      */
     public GrayscaleImage mirrored(){
-        //STUDENT: FILL ME IN WITH A CORRECT IMPLEMENTATION
-        return null;
+    	// First we make a 2D array that is the same size as the origonal image.
+    	double[][] mirroredImage2DArray = new double[imageData[0].length][imageData.length];
+    	
+        // Here we will copy the initial data from the image and flip it on the x axis.
+    	for (int y = 0; y < imageData[0].length; y++) {
+			for (int x = 0; x < imageData.length; x++) {
+				mirroredImage2DArray[y][imageData.length - x - 1] = imageData[y][x];
+			}
+		}
+      	
+    	// Then we will convert our 2D array into a GrayscaleImage
+    	GrayscaleImage normalizedImage = new GrayscaleImage(mirroredImage2DArray);
+    			
+        return normalizedImage;
     }
 
     /**

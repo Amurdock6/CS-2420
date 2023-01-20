@@ -163,19 +163,19 @@ public class GrayscaleImage {
     	// First we make a 2D array that is the same size as the original image.
     	double[][] normalized2DArray = new double[imageData[0].length][imageData.length];
     	
-        double scaleFactor = 127 / averageBrightness();
+    	// Then we figure out what we need to multiple the pixel by to make sure our average brightness is equal to 127
+    	double scaleFactor = 127 / averageBrightness();
         
     	// Then we will set the brightness of the specified pixel below.
     	for (int y = 0; y < imageData[0].length; y++) {
 			for (int x = 0; x < imageData.length; x++) {
 				 double newPixelValue = getPixel(y, x) * scaleFactor;
-				 normalized2DArray[y][x] = newPixelValue;
+				 normalized2DArray[x][y] = newPixelValue;
 			}
 		}
     	
     	// We will then turn the 2DArray into a GrayscaleImage
     	GrayscaleImage normalizedImage = new GrayscaleImage(normalized2DArray);
-    	System.out.println(normalizedImage.averageBrightness());
     	
         return normalizedImage;
     }

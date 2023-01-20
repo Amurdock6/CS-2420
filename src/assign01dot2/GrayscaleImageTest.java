@@ -9,11 +9,27 @@ class GrayscaleImageTest {
 
     private GrayscaleImage smallSquare;
     private GrayscaleImage smallWide;
+    private GrayscaleImage image1;
+    private GrayscaleImage image2;
+    private GrayscaleImage image3;
+    private GrayscaleImage image4;
+    private GrayscaleImage image5;
+    private GrayscaleImage image6; 
+    private GrayscaleImage image7;  
+    private GrayscaleImage image8; 
 
     @BeforeEach
     void setUp() {
         smallSquare = new GrayscaleImage(new double[][]{{1,2},{3,4}});
         smallWide = new GrayscaleImage(new double[][]{{1,2,3},{4,5,6}});
+        image1 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
+        image2 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
+        image3 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 8}});
+        image4 = new GrayscaleImage(new double[][] {{1, 2}, {4, 5}});
+        image5 = new GrayscaleImage(new double[][] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}});
+        image6 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
+        image7 = new GrayscaleImage(new double[][] {{10, 15, 20}, {30, 40, 50}, {60, 70, 80}});
+        image8 = new GrayscaleImage(new double[][] {{100, 100, 100}, {100, 100, 100}, {100, 100, 100}});
     }
 
     @Test
@@ -56,13 +72,6 @@ class GrayscaleImageTest {
     	 var notEquivalent = new GrayscaleImage(new double[][]{{3,4, 6},{3,4,7}});
     	 equals(!notEquivalent.equals(smallSquare));
     }
-    
-    private GrayscaleImage image1 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
-    private GrayscaleImage image2 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
-    private GrayscaleImage image3 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 8}});
-    private GrayscaleImage image4 = new GrayscaleImage(new double[][] {{1, 2}, {4, 5}});
-    private GrayscaleImage image5 = new GrayscaleImage(new double[][] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}});
-    
 
     @Test
     public void testEqualsMultiple() {
@@ -114,10 +123,7 @@ class GrayscaleImageTest {
 		var expectedNorm = new GrayscaleImage(new double[][] { { scale, 2 * scale }, { 3 * scale, 4 * scale } });
 		for (var row = 0; row < 2; row++) {
 			for (var col = 0; col < 2; col++) {
-				System.out.println(smallNorm.getPixel(col, row));
-				System.out.println(expectedNorm.getPixel(col, row));
-				assertEquals(smallNorm.getPixel(col, row), expectedNorm.getPixel(col, row),
-						expectedNorm.getPixel(col, row) * .001, "pixel at row: " + row + " col: " + col + " incorrect");
+				assertEquals(smallNorm.getPixel(col, row), expectedNorm.getPixel(col, row), expectedNorm.getPixel(col, row) * .001, "pixel at row: " + row + " col: " + col + " incorrect");
 			}
 		}
 	}
@@ -132,10 +138,6 @@ class GrayscaleImageTest {
 		assertEquals(expectedNormNomralize.averageBrightness(), 127, 127 * .001);
 		assertEquals(smallNorm.averageBrightness(), expectedNorm.averageBrightness());
 	}
-	
-    private GrayscaleImage image6 = new GrayscaleImage(new double[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
-    private GrayscaleImage image7 = new GrayscaleImage(new double[][] {{10, 15, 20}, {30, 40, 50}, {60, 70, 80}});
-    private GrayscaleImage image8 = new GrayscaleImage(new double[][] {{100, 100, 100}, {100, 100, 100}, {100, 100, 100}});
 
     @Test
     public void testNormalized() {

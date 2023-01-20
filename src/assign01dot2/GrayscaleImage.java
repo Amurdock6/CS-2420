@@ -159,11 +159,11 @@ public class GrayscaleImage {
      * The original image should not be modified
      * @return a GrayScale image with pixel data uniformly rescaled so that its averageBrightness() is 127
      */
-    public GrayscaleImage normalized(){
-        double scaleFactor = 127 / averageBrightness();
-        
-        // First we make a 2D array that is the same size as the original image.
+    public GrayscaleImage normalized() {
+    	// First we make a 2D array that is the same size as the original image.
     	double[][] normalized2DArray = new double[imageData[0].length][imageData.length];
+    	
+        double scaleFactor = 127 / averageBrightness();
         
     	// Then we will set the brightness of the specified pixel below.
     	for (int y = 0; y < imageData[0].length; y++) {

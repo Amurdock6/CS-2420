@@ -15,8 +15,6 @@ public class SinglyLinkedList<E> implements List<E>
 	/**
 	 * 
 	 * Nested Node class is how we are going to add, get, remove, etc.. from the list
-	 * 
-	 * @author Todd Oldham and Alex Murdock
 	 *
 	 * @param <E>
 	 */
@@ -259,7 +257,7 @@ public class SinglyLinkedList<E> implements List<E>
 		// run through the list looking for the element
 		for(int i = 0; i < size(); i++)
 			// if the element of the node we are checking is the element return the value of the index of that element
-			if(getNodeAtIndex(i).element == element)
+			if(getNodeAtIndex(i).element.equals(element))
 				return i;
 		
 		// if the element isn't found return -1
@@ -345,17 +343,15 @@ public class SinglyLinkedList<E> implements List<E>
 	 * 
 	 * This iterator iterates through our linked list and has hasNext, next, and remove methods
 	 * 
-	 * @author Todd Oldham and Alex Murdock
+	 * @author Alex Murdock
 	 *
 	 */
 	private class LinkedListIterator implements Iterator<E>
 	{
-		
-		private int index = 0;
 		private Node currentNode = head;
 		private Node previousNode = null;
-		private Node beforePrevious = null;
-		private int nextHasBeenCalled = 0;
+	    private Node beforePreviousNode = null;
+	    private boolean removeCalled = false;
 		
 		/**
 		 * Iterator for going through items in a collection takes in a collection to iterate through
@@ -371,7 +367,7 @@ public class SinglyLinkedList<E> implements List<E>
 		@Override
 		public boolean hasNext() 
 		{
-			return index < size();
+			 return currentNode != null;
 		}
 
 		
@@ -385,36 +381,16 @@ public class SinglyLinkedList<E> implements List<E>
 		 * 
 		 */
 		@Override
-		public E next() 
-		{
-			if(!hasNext())
+		public E next() {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
-			
-			else
-			{
-				//next has been called set to 1
-				nextHasBeenCalled = 1;
-				
-				// increase the index
-				index++;
-				
-				if(index == 2)
-					beforePrevious = head;
-				
-				if(index >= 3)
-					beforePrevious = beforePrevious.next;
-				
-				// Set the previous node to what the current node was
-				previousNode = currentNode;
-				
-				// Set the current node to the next node
-				currentNode = currentNode.next;
-				
-				
-				// return the element from what the current node was
-				return previousNode.element;
 			}
-				
+
+			removeCalled = false;
+			beforePreviousNode = previousNode;
+			previousNode = currentNode;
+			currentNode = currentNode.next;
+			return previousNode.element;
 		}
 
 		/**
@@ -426,43 +402,29 @@ public class SinglyLinkedList<E> implements List<E>
 		 * @throws IllegalStateException
 		 * 
 		 */
-		@Override
-		public void remove() 
-		{
-			if(nextHasBeenCalled == 1)
-			{
-				// reset if next has been called
-				nextHasBeenCalled = 0;
-				
-				// if the item to remove is the first item
-				if(index == 1)
-				{
-					// set the head to the next item
-					head = head.next;
-					
-					// reduce the index
-					index--;
-					
-					// reduce the size
-					size--;
-				}
-				
-				else
-				{
-					// set the reference from before remove to the item after remove
-					beforePrevious.next = beforePrevious.next.next;
-					
-					// reduce index
-					index --;
-					
-					// reduce size
-					size--;
-				}
-				
-			}
-			
-			else
-				throw new IllegalStateException();
-		}
+	    @Override
+	    public void remove() {
+	    	if (removeCalled || previousNode == null) {
+	            throw new IllegalStateException();
+	        }
+	    	
+	        removeCalled = true;
+	        size--;
+	        
+	        if (beforePreviousNode == null) {
+	            // Removing the head
+	            head = currentNode;
+	        } else {
+	            beforePreviousNode.next = currentNode;
+	        }
+	        
+	        if (currentNode == null) {
+	            // Removed the tail
+	            currentNode = beforePreviousNode;
+	        }
+	        
+	        // Update previousNode to the node before currentNode
+	        previousNode = beforePreviousNode;
+	    }
 	}
 }
